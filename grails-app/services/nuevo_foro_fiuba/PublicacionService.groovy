@@ -50,8 +50,8 @@ class PublicacionService {
       return publicacionInstance.obtenerVista(usuarioInstance)
     }
 
-    def modificarPuntajeMinimo (Publicacion publicacion, Integer puntaje){
-      publicacion.setPuntajeRequeridoParaComentar(puntaje)
+    def modificarPromedioRequeridoParaComentar (Publicacion publicacion, Integer promedio){
+      publicacion.setPromedioRequeridoParaComentar(promedio)
     }
 
     def agregarCalificacion (Publicacion publicacion, Calificacion calificacion){

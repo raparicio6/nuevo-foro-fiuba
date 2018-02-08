@@ -26,6 +26,29 @@ class UsuarioController {
       usuarioService.crearInstancia(nombre, apellido, nombreUsuario)
     }
 
+    def listaUsuarios(long id, Integer max, Integer promedioMin, Integer promedioMax, long idMateria){
+      if (!promedioMin)
+         promedioMin=0
+      if (!promedioMax)
+         promedioMax=5
+      def usuarios = Usuario.list().findAll {usuario -> usuario.promedioCalificaciones >= promedioMin && usuario.promedioCalificaciones <= promedioMax}
+      if (idMateria){
+        usuarios= usuarios.findAll { usuario -> idMateria in usuarioService.materiasCursadas(usuario) }
+      }
+      Usuario usuarioInstance = Usuario.get(id)
+      params.max = Math.min(max ?: 10, 100)
+      [usuarioInstanceList: usuarios, usuarioInstanceTotal: usuarios.size() , usuarioInstance: usuarioInstance, materias: Materia.list(), catedras: Catedra.list()]
+    }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ESTOS DE ABAJO PODRIAN IR EN OTRO CONTROLADOR
+
+    def verMaterias (long id){
+      def usuarioInstance = Usuario.get(id)
+      def cursadas = usuarioInstance.cursadas
+      [usuario:usuarioInstance, cursadas:cursadas]
+    }
+
     def comentar(long id, long idUsuario, long idComentario, String textoComentario){
       def usuarioLogin = Usuario.get(idUsuario)
       def publicacionInstance = Publicacion.get(id)
@@ -35,9 +58,9 @@ class UsuarioController {
           try{
             usuarioService.comentarPublicacion(usuarioLogin,comentario,publicacionInstance)
           }
-          catch (PuntajeInsuficienteException a){
+          catch (PromedioInsuficienteException a){
             comentarioService.eliminarComentario(comentario)
-            flash.message = "Puntaje del usuario insuficiente"
+            flash.message = "El promedio de calificaciones del usuario es insuficiente para comentar esta publicacion"
           }
           catch (PublicacionCerradaException b){
             comentarioService.eliminarComentario(comentario)
@@ -51,62 +74,12 @@ class UsuarioController {
           try{
             usuarioService.comentarComentario(usuarioLogin,comentario,comentarioInstance)
           }
-          catch (PuntajeInsuficienteException c){
-            comentarioService.eliminarComentario(comentario)
-            flash.message = "Puntaje del usuario insuficiente"
-          }
           catch (PublicacionCerradaException d){
             comentarioService.eliminarComentario(comentario)
             flash.message = "No se puede comentar una publicacion cerrada"
           }
           comentarioService.agregarComentario(comentarioInstance,comentario)
           redirect(controller:"comentario", action: "verComentario", id: comentarioInstance.id, params: [idUsuario:idUsuario])
-      }
-    }
-
-    def listaUsuarios(long id, Integer max, Integer puntajeMin, Integer puntajeMax, long idMateria){
-      if (!puntajeMin)
-         puntajeMin=0
-      if (!puntajeMax)
-         puntajeMax=5
-      def usuarios = Usuario.list().findAll {usuario -> usuario.puntajeActual >= puntajeMin && usuario.puntajeActual <= puntajeMax}
-      if (idMateria){
-        usuarios= usuarios.findAll { usuario -> idMateria in usuarioService.materiasCursadas(usuario) }
-      }
-      Usuario usuarioInstance = Usuario.get(id)
-      params.max = Math.min(max ?: 10, 100)
-      [usuarioInstanceList: usuarios, usuarioInstanceTotal: usuarios.size() , usuarioInstance: usuarioInstance, materias: Materia.list(), catedras: Catedra.list()]
-    }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//ESTOS DE ABAJO PODRIAN IR EN OTRO CONTROLADOR
-
-    def verMaterias (long id){
-      def usuarioInstance = Usuario.get(id)
-      def cursadas = usuarioInstance.cursadas
-      [usuario:usuarioInstance, cursadas:cursadas]
-    }
-
-    def eliminarComentario(long id, long idUsuario){
-      def usuarioLogin = Usuario.get(idUsuario)
-      def comentarioInstance = Comentario.get(id)
-      comentarioService.eliminarComentario(comentarioInstance)
-      if (comentarioInstance.publicacionComentada){
-        redirect(controller: "publicacion", action: "verPublicacion", id: comentarioInstance.publicacionComentada.id, params: [idUsuario:idUsuario])
-      }
-      else{
-        redirect(controller:"comentario", action: "verComentario", id: comentarioInstance.comentarioComentado.id,  params: [idUsuario:idUsuario])
-      }
-    }
-
-    def modificarTextoComentario(long id, long idUsuario,String nuevoTexto){
-      def usuarioLogin = Usuario.get(idUsuario)
-      def comentarioInstance = Comentario.get(id)
-      comentarioService.modificarTexto(comentarioInstance, nuevoTexto)
-      if (comentarioInstance.publicacionComentada){
-         redirect(controller:"comentario", action: "verComentario", id: comentarioInstance.id,  params: [idUsuario:idUsuario])
-      }
-      else{
-         redirect(controller:"comentario", action: "verSubComentario", id: comentarioInstance.id,  params: [idUsuario:idUsuario])
       }
     }
 

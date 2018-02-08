@@ -41,8 +41,8 @@ class BootStrap {
       publicacion.comentarios += [comentario]
       comentario.comentarios += [comentario2]
       usuarioLogin = Usuario.get(1)
-      usuario.setPuntajeActual(3)
-      usuario2.setPuntajeActual(3)
+      usuario.setPromedioCalificaciones(3)
+      usuario2.setPromedioCalificaciones(3)
       Cursada cursada2 = new Cursada (usuario, catedra2)
       cursada2.save(failOnError:true)
       usuario.setCursadas(usuario.cursadas+=[cursada2])

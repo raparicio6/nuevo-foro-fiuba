@@ -47,7 +47,7 @@
 
       <br/>
 
-      <g:form controller="usuario" action="modificarTextoComentario" id="${comentario.id}" params="[idUsuario:"${usuario.id}"]">
+      <g:form action="modificarTextoComentario" id="${comentario.id}" params="[idUsuario:"${usuario.id}"]">
         <div class="row">
           <div class="col-md-12">
             <div class="col-md-7" style="padding-right:0px; padding-left:0px">
@@ -67,7 +67,7 @@
                     </div>
                     <div class="col-md-5 col-md-offset-4">
                       <g:if test="${modificar}">
-                        <g:form controller="usuario" action="eliminarComentario" id="${comentario.id}" params="[idUsuario:"${usuario.id}"]">
+                        <g:form action="eliminarComentario" id="${comentario.id}" params="[idUsuario:"${usuario.id}"]">
                           <g:actionSubmit action="eliminarComentario" value="Eliminar comentario" class="btn btn-danger pull-right" style="margin-top:10px;" />
                         </g:form>
                       </g:if>
@@ -97,7 +97,7 @@
         </div>
       </g:form>
 
-    <g:if test="${!subComentario}">
+    <g:if test="${!subcomentario}">
       <div class="row">
         <div class="col-md-12">
           <div class="col-md-2">

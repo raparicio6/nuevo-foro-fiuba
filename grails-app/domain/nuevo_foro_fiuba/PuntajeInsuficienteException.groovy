@@ -1,9 +1,9 @@
 package nuevo_foro_fiuba
 
-class PuntajeInsuficienteException extends Exception{
+class PromedioInsuficienteException extends Exception{
 
     static constraints = {
     }
 
-    PuntajeInsuficienteException(){}
+    PromedioInsuficienteException(){}
 }

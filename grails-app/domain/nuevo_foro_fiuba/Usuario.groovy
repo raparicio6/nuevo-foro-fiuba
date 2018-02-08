@@ -9,7 +9,7 @@ class Usuario {
 	Set <Comentario> comentarios
 	Set <MensajePrivado> mensajes
 	Set <Cursada> cursadas
-	Integer puntajeActual
+	Integer promedioCalificaciones
 
 
 	static hasMany = [
@@ -27,7 +27,7 @@ class Usuario {
 		comentarios blank:false, nullable: false
 		cursadas blank:false, nullable: false
 		mensajes blank:false, nullable: false
-		puntajeActual blank:false, nullable: false
+		promedioCalificaciones blank:false, nullable: false
 		}
 
 // ------------------------------------------------------------------------- //
@@ -41,7 +41,7 @@ class Usuario {
 		this.mensajes = []
 		this.comentarios = []
 		this.cursadas = []
-		this.puntajeActual = 0
+		this.promedioCalificaciones = 0
 	}
 
 
@@ -50,8 +50,8 @@ class Usuario {
 		if (publicacionAComentar.estaCerrada()){
 			throw new PublicacionCerradaException()//no se puede comentar una publicacion cerrada
 		}
-		if (publicacionAComentar.obtenerPuntajeActual() > this.puntajeActual){
-			throw new PuntajeInsuficienteException()
+		if (publicacionAComentar.obtenerPromedioRequeridoParaComentar() > this.promedioCalificaciones){
+			throw new PromedioInsuficienteException()
 		}
 		this.comentarios+=[comentario]
 	}

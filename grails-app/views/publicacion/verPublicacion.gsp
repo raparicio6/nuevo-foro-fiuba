@@ -113,17 +113,17 @@
               <div class="col-md-9" style="padding-left:0px; padding-right:0px">
                 <ul class="list-group">
                   <li class="list-group-item">
-                    Puntaje m&iacute;nimo para comentar:
+                    Promedio de calificaciones m&iacute;nimo para comentar:
                       <g:if test="${modificar}">
-                        <g:form action="modificarPuntajeMinimo" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
-                          <g:field type="number" name="puntaje" value="${publicacion.puntajeRequeridoParaComentar}" min="0" max="5"/>
+                        <g:form action="modificarPromedioRequeridoParaComentar" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
+                          <g:field type="number" name="promedio" value="${publicacion.promedioRequeridoParaComentar}" min="0" max="5"/>
                             <button type="submit" title="Guardar" style="background-color: Transparent;border: none;">
                               <span class="glyphicon glyphicon-ok"></span>
                             </button>
                         </g:form>
                       </g:if>
                       <g:else>
-                        ${publicacion.puntajeRequeridoParaComentar}
+                        ${publicacion.promedioRequeridoParaComentar}
                       </g:else>
                   </li>
                   <li class="list-group-item">
@@ -140,14 +140,14 @@
                         </g:form>
                       </g:if>
                       <g:else>
-                        ${publicacion.catedraRelacionada.materia.nombre} + ", " + "catedra " + ${publicacion.catedraRelacionada.profesor.nombre}
+                        ${publicacion.catedraRelacionada.materia.nombre}, catedra ${publicacion.catedraRelacionada.profesor.nombre}
                       </g:else>
                   </li>
                   <li class="list-group-item">
                     Estado: ${publicacion.estado}
                   </li>
                   <li class="list-group-item">
-                    Puntaje actual del usuario creador: ${publicacion.usuarioCreador.puntajeActual}
+                    Promedio de calificaciones del usuario creador: ${publicacion.usuarioCreador.promedioCalificaciones}
                   </li>
                 </ul>
               </div>
@@ -205,7 +205,7 @@
                 <tr>
                   <th>Usuario que calific&oacute;</th>
                   <th>Tipo de calificaci&oacute;n</th>
-                  <th>Puntaje del usuario que calific&oacute;</th>
+                  <th>Promedio de calificaciones del usuario que calific&oacute;</th>
                 </tr>
               </thead>
               <tbody>
@@ -213,7 +213,7 @@
                   <tr>
                     <td>${calificacion.usuario.nombre}</td>
                     <td>${calificacion.puntaje.tipo}</td>
-                    <td>${calificacion.usuario.puntajeActual}</td>
+                    <td>${calificacion.usuario.promedioCalificaciones}</td>
                   </tr>
                 </g:each>
               </tbody>

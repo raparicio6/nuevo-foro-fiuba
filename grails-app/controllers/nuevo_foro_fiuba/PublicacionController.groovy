@@ -58,6 +58,7 @@ class PublicacionController {
     def modificarTexto(long id, String nuevoTexto, long idUsuario){
       def usuarioLogin = Usuario.get(idUsuario)
       def publicacionInstance = Publicacion.get(id)
+      // usuarioService.modificarTextoPublicacion(usuarioLogin, publicacionInstance, nuevoTexto)
       publicacionService.modificarTexto(publicacionInstance, nuevoTexto)
       redirect(action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
@@ -87,9 +88,9 @@ class PublicacionController {
       redirect(action: "listaPublicaciones", max: 10, params: [id:idUsuario])
     }
 
-    def modificarPuntajeMinimo (long id, long idUsuario, Integer puntaje){
+    def modificarPromedioRequeridoParaComentar (long id, long idUsuario, Integer promedio){
       def publicacionInstance = Publicacion.get(id)
-      publicacionService.modificarPuntajeMinimo(publicacionInstance, puntaje)
+      publicacionService.modificarPromedioRequeridoParaComentar(publicacionInstance, promedio)
       redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 
@@ -106,7 +107,7 @@ class PublicacionController {
       def usuarioInstance = Usuario.get(idUsuario)
       def calificacion = calificacionService.crearCalificacion(usuarioInstance, puntajeService.crearPuntaje(tipo, usuarioInstance), publicacionInstance,null)
       publicacionService.agregarCalificacion(publicacionInstance, calificacion)
-      usuarioService.actualizarPuntajeActual(publicacionInstance.usuarioCreador)
+      usuarioService.actualizarPromedioCalificaciones(publicacionInstance.usuarioCreador)
       redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 

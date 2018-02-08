@@ -17,10 +17,6 @@ class UsuarioService {
       usuarioReceptor.setMensaje(mensaje)
     }
 
-    def modificarPuntaje(Usuario usuario, Puntaje puntaje){
-      usuario.modificarPuntaje(puntaje)
-    }
-
     def agregarComentario (Usuario usuario, Comentario comentario){
       usuario.setComentarios(usuario.getComentarios() + [comentario])
     }
@@ -49,14 +45,18 @@ class UsuarioService {
       usuario.puntuarPublicacion(publicacion, calificacion)
     }
 
-    def actualizarPuntajeActual(Usuario usuario){
+    def actualizarPromedioCalificaciones(Usuario usuario){
       def publicaciones = usuario.getPublicaciones()
       def calificaciones = publicaciones.collect {publicacion -> publicacion.calificaciones}
       calificaciones = calificaciones.flatten()
       def contador = 0
-      def puntajeAcumulado = calificaciones.collect {calificacion -> contador += Puntaje.getSignoTipo(calificacion.puntaje.tipo) * calificacion.puntaje.numero}
-      usuario.setPuntajeActual(contador.intdiv(calificaciones.size()))
+      calificaciones.collect {calificacion -> contador += Puntaje.getSignoTipo(calificacion.puntaje.tipo) * calificacion.puntaje.numero}
+      usuario.setPromedioCalificaciones(contador.intdiv(calificaciones.size()))
       //siempre va a tener al menos una calificacion
+    }
+
+    def modificarTextoPublicacion (Usuario usuario,Publicacion publicacion, String nuevoTexto){
+      usuario.modificarTextoPublicacion(publicacion, nuevoTexto)
     }
 
 }

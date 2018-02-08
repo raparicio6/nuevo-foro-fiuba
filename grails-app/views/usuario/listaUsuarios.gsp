@@ -19,9 +19,9 @@
 
 		<h1>Filtrar usuarios</h1>
 		<g:form controller="usuario" action="listaUsuarios" id="${usuarioInstance.id}" params="[max:'10']">
-			<div>Puntaje minimo: <g:field type="number" min="0" max="5" name="puntajeMin"/></div>
-			<div>Puntaje maximo: <g:field type="number" min="0" max="5" name="puntajeMax"/></div>
-			<div>Materia: <g:select  name="idMateria" from="${materias}" optionValue ="nombre" optionKey = "id" /></div>
+			<div>Promedio de calificaciones minimo: <g:field type="number" min="0" max="5" name="promedioMin"/></div>
+			<div>Promedio de calificaciones maximo: <g:field type="number" min="0" max="5" name="promedioMax"/></div>
+			<div>Materia cursada: <g:select  name="idMateria" from="${materias}" optionValue ="nombre" optionKey = "id" noSelection="${['null':'Elegir materia...']}"/></div>
 		<div><g:submitButton name="Filtrar" value="Filtrar"/></div>
 		</g:form>
 
@@ -30,7 +30,7 @@
 				<thead>
 					<tr>
             <g:sortableColumn property="nombre" title="${message(code: 'usuario.nombre.label', default: 'Nombre')}" />
-            <g:sortableColumn property="puntajeActual" title="${message(code: 'usuario.puntaje.label', default: 'Puntaje')}" />
+            <g:sortableColumn property="promedioCalificaciones" title="${message(code: 'usuario.promedioCalificaciones.label', default: 'Promedio de calificaciones')}" />
             <g:sortableColumn property="cursadas.size()" title="${message(code: 'usuario.cursadas.size().label', default: 'Materias cursadas')}"/>
 					</tr>
 				</thead>
@@ -38,7 +38,7 @@
 				<g:each in="${usuarioInstanceList}" status="i" var="usuarioInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						<td>${fieldValue(bean: usuarioInstance, field: "nombre")}</td>
-            <td>${fieldValue(bean: usuarioInstance, field: "puntajeActual")}</td>
+            <td>${fieldValue(bean: usuarioInstance, field: "promedioCalificaciones")}</td>
             <td><g:link action="verMaterias" id="${usuarioInstance.id}">${"Ver"}</g:link></td>
 					</tr>
 				</g:each>

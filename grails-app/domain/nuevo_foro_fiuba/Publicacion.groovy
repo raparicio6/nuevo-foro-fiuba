@@ -11,7 +11,7 @@ class Publicacion {
 	Usuario usuarioCreador
 	Materia materiaRelacionada
 	Catedra catedraRelacionada
-	Integer puntajeRequeridoParaComentar
+	Integer promedioRequeridoParaComentar
 	Set <Materia> materiasNecesariasParaComentar
 	Set <Comentario> comentarios
 	Archivo archivoAdjunto
@@ -30,7 +30,7 @@ class Publicacion {
 		usuarioCreador blank: false, nullable:false
 		materiaRelacionada blank:false, nullable:true
 		catedraRelacionada blank:false, nullable:true
-		puntajeRequeridoParaComentar blank:false, nullable:false
+		promedioRequeridoParaComentar blank:false, nullable:false
 		materiasNecesariasParaComentar blank:false, nullable:false
 		comentarios blank:false, nullable:false
 		archivoAdjunto blank:false, nullable:true
@@ -44,8 +44,8 @@ class Publicacion {
 		this.usuarioCreador = usuarioCreador
 		this.materiaRelacionada = materiaRelacionada
 		this.catedraRelacionada = catedraRelacionada
-		puntajeRequeridoParaComentar = 0
-		materiasNecesariasParaComentar = []
+		this.promedioRequeridoParaComentar = 0
+		this.materiasNecesariasParaComentar = []
 		this.comentarios = []
 		this.archivoAdjunto = null
 		this.estado = EstadoPublicacion.abierta
@@ -66,8 +66,8 @@ class Publicacion {
 		return 0
 	}
 
-	Integer obtenerPuntajeActual(){
-		return this.puntajeRequeridoParaComentar
+	Integer obtenerPromedioRequeridoParaComentar(){
+		return this.promedioRequeridoParaComentar
 	}
 
 	def cerrar(){

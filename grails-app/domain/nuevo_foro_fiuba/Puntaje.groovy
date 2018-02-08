@@ -12,7 +12,7 @@ class Puntaje {
     static constraints = {}
 
     def calcular (Usuario usuario){
-      this.numero =  usuario.getPuntajeActual() + (0**usuario.getPuntajeActual())
+      this.numero =  usuario.getPromedioCalificaciones() + (0**usuario.getPromedioCalificaciones())
     }
 
     Puntaje (TipoPuntaje tipo, Integer numero) {

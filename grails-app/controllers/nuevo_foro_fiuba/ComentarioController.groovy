@@ -27,4 +27,28 @@ class ComentarioController {
         render (view:"verComentario", model:[comentario: comentarioInstance, usuario: usuarioInstance, subcomentario:"1"])
     }
 
+    def modificarTextoComentario(long id, long idUsuario,String nuevoTexto){
+      def usuarioLogin = Usuario.get(idUsuario)
+      def comentarioInstance = Comentario.get(id)
+      comentarioService.modificarTexto(comentarioInstance, nuevoTexto)
+      if (comentarioInstance.publicacionComentada){
+         redirect(controller:"comentario", action: "verComentario", id: comentarioInstance.id,  params: [idUsuario:idUsuario])
+      }
+      else{
+         redirect(controller:"comentario", action: "verSubComentario", id: comentarioInstance.id,  params: [idUsuario:idUsuario])
+      }
+    }
+
+    def eliminarComentario(long id, long idUsuario){
+      def usuarioLogin = Usuario.get(idUsuario)
+      def comentarioInstance = Comentario.get(id)
+      comentarioService.eliminarComentario(comentarioInstance)
+      if (comentarioInstance.publicacionComentada){
+        redirect(controller: "publicacion", action: "verPublicacion", id: comentarioInstance.publicacionComentada.id, params: [idUsuario:idUsuario])
+      }
+      else{
+        redirect(controller:"comentario", action: "verComentario", id: comentarioInstance.comentarioComentado.id,  params: [idUsuario:idUsuario])
+      }
+    }
+
 }
