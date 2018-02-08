@@ -113,12 +113,13 @@
               <div class="col-md-9" style="padding-left:0px; padding-right:0px">
                 <ul class="list-group">
                   <li class="list-group-item">
-                      Puntaje m&iacute;nimo para comentar:
+                    Puntaje m&iacute;nimo para comentar:
                       <g:if test="${modificar}">
-                      <g:form action="modificarPuntajeMinimo" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
-                        <g:field type="number" name="puntaje" value="${publicacion.puntajeRequeridoParaComentar}" min="0" max="5"/>
-                          <g:submitButton name=" " style="background-color: Transparent;border: none;"/>
-                          <span class="glyphicon glyphicon-ok"></span>
+                        <g:form action="modificarPuntajeMinimo" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
+                          <g:field type="number" name="puntaje" value="${publicacion.puntajeRequeridoParaComentar}" min="0" max="5"/>
+                            <button type="submit" title="Guardar" style="background-color: Transparent;border: none;">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </button>
                         </g:form>
                       </g:if>
                       <g:else>
@@ -133,8 +134,9 @@
                       <g:if test="${modificar}">
                         <g:form controller="publicacion" action="modificarCatedra" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
                           <g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", " + "catedra " + it.profesor.nombre}}" optionKey="id" value="${publicacion.catedraRelacionada.id}"/>
-                          <g:submitButton name=" " style="background-color: Transparent;border: none;"/>
-                          <span class="glyphicon glyphicon-ok"></span>
+                          <button type="submit" title="Guardar" style="background-color: Transparent;border: none;">
+                            <span class="glyphicon glyphicon-ok"></span>
+                          </button>
                         </g:form>
                       </g:if>
                       <g:else>
