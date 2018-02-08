@@ -10,7 +10,7 @@ class ComentarioService {
     Comentario crearComentario(String texto, Usuario usuarioCreador,Publicacion publicacionComentada, Comentario comentarioComentado){
       Comentario comentario = new Comentario (texto, usuarioCreador, publicacionComentada, comentarioComentado)
       comentario.save(failOnError : true)
-      return comentario
+      comentario
     }
 
     def agregarComentario (Comentario comentarioAComentar, Comentario comentario){

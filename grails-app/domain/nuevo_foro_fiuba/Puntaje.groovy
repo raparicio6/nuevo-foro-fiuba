@@ -10,14 +10,15 @@ class Puntaje {
     TipoPuntaje tipo
 
     static constraints = {}
+// ------------------------------------------------------------------------- //
 
-    def calcular (Usuario usuario){
-      this.numero =  usuario.getPromedioCalificaciones() + (0**usuario.getPromedioCalificaciones())
+    Puntaje(TipoPuntaje tipo, Integer numero) {
+      this.tipo = tipo
+      this.numero = numero
     }
-
-    Puntaje (TipoPuntaje tipo, Integer numero) {
-        this.tipo = tipo
-        this.numero = numero
+// ------------------------------------------------------------------------- //
+    def calcular (Usuario usuario){
+      this.setNumero(usuario.getPromedioCalificaciones() + (0**usuario.getPromedioCalificaciones()))
     }
 
     static Integer getSignoTipo(TipoPuntaje tipo){
@@ -26,5 +27,4 @@ class Puntaje {
         if (tipo == TipoPuntaje.noMeGusta)
           return -1
     }
-
 }

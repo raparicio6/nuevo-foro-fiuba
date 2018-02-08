@@ -1,4 +1,5 @@
 package nuevo_foro_fiuba
+
 import grails.gorm.transactions.Transactional
 
 @Transactional
@@ -30,7 +31,8 @@ class ComentarioController {
     def modificarTextoComentario(long id, long idUsuario,String nuevoTexto){
       def usuarioLogin = Usuario.get(idUsuario)
       def comentarioInstance = Comentario.get(id)
-      comentarioService.modificarTexto(comentarioInstance, nuevoTexto)
+      usuarioService.modificarTextoComentario(usuarioLogin, comentarioInstance, nuevoTexto)
+      // comentarioService.modificarTexto(comentarioInstance, nuevoTexto)
       if (comentarioInstance.publicacionComentada){
          redirect(controller:"comentario", action: "verComentario", id: comentarioInstance.id,  params: [idUsuario:idUsuario])
       }
@@ -39,9 +41,11 @@ class ComentarioController {
       }
     }
 
+//VER
     def eliminarComentario(long id, long idUsuario){
       def usuarioLogin = Usuario.get(idUsuario)
       def comentarioInstance = Comentario.get(id)
+      usuarioService.eliminarComentario(usuarioLogin, comentarioInstance)
       comentarioService.eliminarComentario(comentarioInstance)
       if (comentarioInstance.publicacionComentada){
         redirect(controller: "publicacion", action: "verPublicacion", id: comentarioInstance.publicacionComentada.id, params: [idUsuario:idUsuario])

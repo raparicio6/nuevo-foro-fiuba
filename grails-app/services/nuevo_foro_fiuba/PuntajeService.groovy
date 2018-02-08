@@ -12,7 +12,7 @@ class PuntajeService {
       Puntaje puntaje = new Puntaje (tipo, 0)
       puntaje.calcular(usuario)
       puntaje.save(failOnError:true)
-      return puntaje
+      puntaje
     }
 
 

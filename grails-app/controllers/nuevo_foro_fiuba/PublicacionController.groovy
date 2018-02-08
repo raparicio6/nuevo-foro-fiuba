@@ -1,6 +1,6 @@
 package nuevo_foro_fiuba
-import grails.gorm.transactions.Transactional
 import nuevo_foro_fiuba.Puntaje.TipoPuntaje
+import grails.gorm.transactions.Transactional
 
 @Transactional
 class PublicacionController {
@@ -44,22 +44,24 @@ class PublicacionController {
     def cerrarPublicacion (Long id, long idUsuario){
       def usuarioLogin = Usuario.get(idUsuario)
       def publicacionInstance = Publicacion.get(id)
-      publicacionService.cerrarPublicacion(publicacionInstance)
+      usuarioService.cerrarPublicacion(usuarioLogin, publicacionInstance)
+      // publicacionService.cerrarPublicacion(publicacionInstance)
       redirect(action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 
-    def reabrirPublicacion (Long id, long idUsuario){
+    def abrirPublicacion (Long id, long idUsuario){
       def usuarioLogin = Usuario.get(idUsuario)
       def publicacionInstance = Publicacion.get(id)
-      publicacionService.reabrirPublicacion(publicacionInstance)
+      usuarioService.abrirPublicacion(usuarioLogin, publicacionInstance)
+      // publicacionService.abrirPublicacion(publicacionInstance)
       redirect(action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 
     def modificarTexto(long id, String nuevoTexto, long idUsuario){
       def usuarioLogin = Usuario.get(idUsuario)
       def publicacionInstance = Publicacion.get(id)
-      // usuarioService.modificarTextoPublicacion(usuarioLogin, publicacionInstance, nuevoTexto)
-      publicacionService.modificarTexto(publicacionInstance, nuevoTexto)
+      usuarioService.modificarTextoPublicacion(usuarioLogin, publicacionInstance, nuevoTexto)
+      // publicacionService.modificarTexto(publicacionInstance, nuevoTexto)
       redirect(action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 
@@ -67,7 +69,8 @@ class PublicacionController {
       def usuarioLogin = Usuario.get(idUsuario)
       def publicacionInstance = Publicacion.get(id)
       def materiaInstance = Materia.get(idMateria)
-      publicacionService.modificarMateria(publicacionInstance, materiaInstance)
+      usuarioService.modificarMateriaPublicacion(usuarioLogin, publicacionInstance, materiaInstance)
+      // publicacionService.modificarMateria(publicacionInstance, materiaInstance)
       redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 
@@ -75,13 +78,16 @@ class PublicacionController {
       def usuarioLogin = Usuario.get(idUsuario)
       def publicacionInstance = Publicacion.get(id)
       def catedraInstance = Catedra.get(idCatedra)
-      publicacionService.modificarCatedra(publicacionInstance, catedraInstance)
+      usuarioService.modificarCatedraPublicacion(usuarioLogin, publicacionInstance, catedraInstance)
+      // publicacionService.modificarCatedra(publicacionInstance, catedraInstance)
       redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 
+//VER
     def eliminarPublicacion(long id, long idUsuario){
       def usuarioLogin = Usuario.get(idUsuario)
       def publicacionInstance = Publicacion.get(id)
+      usuarioService.eliminarPublicacion(usuarioLogin, publicacionInstance)
       publicacionInstance.comentarios.collect {comentario -> comentarioService.eliminarComentario(comentario)}
       publicacionInstance.calificaciones.collect {calificacion -> calificacionService.eliminarCalificacion(calificacion)}
       publicacionService.eliminarPublicacion(publicacionInstance)
@@ -89,8 +95,10 @@ class PublicacionController {
     }
 
     def modificarPromedioRequeridoParaComentar (long id, long idUsuario, Integer promedio){
+      def usuarioLogin = Usuario.get(idUsuario)
       def publicacionInstance = Publicacion.get(id)
-      publicacionService.modificarPromedioRequeridoParaComentar(publicacionInstance, promedio)
+      usuarioService.modificarPromedioRequeridoParaComentar(usuarioLogin, publicacionInstance, promedio)
+      // publicacionService.modificarPromedioRequeridoParaComentar(publicacionInstance, promedio)
       redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 
@@ -106,7 +114,7 @@ class PublicacionController {
       def publicacionInstance = Publicacion.get(id)
       def usuarioInstance = Usuario.get(idUsuario)
       def calificacion = calificacionService.crearCalificacion(usuarioInstance, puntajeService.crearPuntaje(tipo, usuarioInstance), publicacionInstance,null)
-      publicacionService.agregarCalificacion(publicacionInstance, calificacion)
+      usuarioService.calificar(usuarioInstance, publicacionInstance, calificacion)
       usuarioService.actualizarPromedioCalificaciones(publicacionInstance.usuarioCreador)
       redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }

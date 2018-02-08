@@ -11,12 +11,12 @@ class Opcion {
 
     static constraints = {
     	nombre blank:false, nullable: false
-    	cantidadVotos blank:false, nullable: false
+    	votos blank:false, nullable: false
     }
 
-    Opcion (String nombre){
+    Opcion(String nombre){
     	this.nombre = nombre
-		this.votos = []
+			this.votos = []
     }
 
 }

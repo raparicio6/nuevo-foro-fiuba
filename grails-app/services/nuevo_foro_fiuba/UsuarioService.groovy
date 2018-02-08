@@ -59,4 +59,40 @@ class UsuarioService {
       usuario.modificarTextoPublicacion(publicacion, nuevoTexto)
     }
 
+    def modificarTextoComentario (Usuario usuario,Comentario comentario, String nuevoTexto){
+      usuario.modificarTextoComentario(comentario, nuevoTexto)
+    }
+
+    def eliminarComentario(Usuario usuario, Comentario comentario){
+      usuario.eliminarComentario(comentario)
+    }
+
+    def cerrarPublicacion (Usuario usuario, Publicacion publicacion){
+      usuario.cerrarPublicacion(publicacion)
+    }
+
+    def abrirPublicacion (Usuario usuario, Publicacion publicacion){
+      usuario.abrirPublicacion(publicacion)
+    }
+
+    def modificarMateriaPublicacion (Usuario usuario, Publicacion publicacion, Materia materia){
+      usuario.modificarMateriaPublicacion(publicacion, materia)
+    }
+
+    def modificarCatedraPublicacion (Usuario usuario, Publicacion publicacion, Catedra catedra){
+      usuario.modificarCatedraPublicacion(publicacion, catedra)
+    }
+
+    def eliminarPublicacion (Usuario usuario, Publicacion publicacion){
+      usuario.eliminarPublicacion(publicacion)
+    }
+
+    def modificarPromedioRequeridoParaComentar(Usuario usuario, Publicacion publicacion, Integer promedio){
+      usuario.modificarPromedioRequeridoParaComentar(publicacion, promedio)
+    }
+
+    def calificar(Usuario usuario, Publicacion publicacion, Calificacion calificacion){
+      usuario.calificar(publicacion, calificacion)
+    }
+
 }

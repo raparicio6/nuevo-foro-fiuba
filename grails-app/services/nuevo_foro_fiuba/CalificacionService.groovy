@@ -10,7 +10,7 @@ class CalificacionService {
     Calificacion crearCalificacion(Usuario usuario, Puntaje puntaje, Publicacion publicacion,Comentario comentario){
         Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, comentario)
         calificacion.save(failOnError:true)
-        return calificacion
+        calificacion
     }
 
     def eliminarCalificacion (Calificacion calificacion){

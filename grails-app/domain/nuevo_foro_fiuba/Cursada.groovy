@@ -8,7 +8,7 @@ class Cursada {
     static constraints = {
     }
 
-    Cursada (Usuario usuario, Catedra catedra) {
+    Cursada(Usuario usuario, Catedra catedra) {
         this.usuario = usuario
         this.catedra = catedra
     }

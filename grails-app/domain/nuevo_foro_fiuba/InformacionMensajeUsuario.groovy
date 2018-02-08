@@ -2,16 +2,23 @@ package nuevo_foro_fiuba
 
 class InformacionMensajeUsuario {
 
-    MensajePrivado mensajePrivado
-    Usuario emisor
-    Usuario receptor
-
-    static constraints = {
+    enum RolUsuario{
+      emisor,receptor
     }
 
-    InformacionMensajeUsuario (Usuario emisor, Usuario receptor, MensajePrivado mensajePrivado) {
-        this.emisor = emisor
-        this.receptor = receptor
+    Usuario usuario
+    MensajePrivado mensajePrivado
+    RolUsuario rolUsuario
+
+    static constraints = {
+      usuario blank:false, nullable:false
+      mensajePrivado blank:false, nullable:false
+      rolUsuario blank:false, nullable:false
+    }
+
+    InformacionMensajeUsuario(Usuario usuario, MensajePrivado mensajePrivado, RolUsuario rolUsuario) {
+        this.usuario = usuario
         this.mensajePrivado = mensajePrivado
+        this.rolUsuario = rolUsuario
     }
 }

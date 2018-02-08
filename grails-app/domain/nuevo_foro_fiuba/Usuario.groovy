@@ -11,7 +11,6 @@ class Usuario {
 	Set <Cursada> cursadas
 	Integer promedioCalificaciones
 
-
 	static hasMany = [
 		publicaciones: Publicacion,
 		comentarios: Comentario,
@@ -64,11 +63,50 @@ class Usuario {
 	}
 
 	Boolean esDueñoDeLaPublicacion(Publicacion publicacion){
-		return (publicacion.getUsuarioCreador().getId() == this.id)
+		(publicacion.getUsuarioCreador().getId() == this.id)
 	}
 
 	Boolean esDueñoDelComentario(Comentario comentario){
-		return (comentario.getUsuarioCreador().getId() == this.id)
+		(comentario.getUsuarioCreador().getId() == this.id)
 	}
 
+	def modificarTextoPublicacion(Publicacion publicacion, String nuevoTexto){
+		publicacion.modificarTexto(nuevoTexto)
+	}
+
+	def modificarTextoComentario(Comentario comentario, String nuevoTexto){
+		comentario.modificarTexto(nuevoTexto)
+	}
+
+	def eliminarComentario(Comentario comentario){
+		this.comentarios.removeAll {it.id==comentario.getId()}
+	}
+
+	def cerrarPublicacion(Publicacion publicacion){
+		publicacion.cerrar()
+	}
+
+	def abrirPublicacion(Publicacion publicacion){
+		publicacion.abrir()
+	}
+
+	def modificarMateriaPublicacion(Publicacion publicacion, Materia materia){
+		publicacion.cambiarMateria(materia)
+	}
+
+	def modificarCatedraPublicacion(Publicacion publicacion, Catedra catedra){
+		publicacion.cambiarCatedra(catedra)
+	}
+
+	def eliminarPublicacion(Publicacion publicacion){
+		this.publicaciones.removeAll {it.id==publicacion.getId()}
+	}
+
+	def modificarPromedioRequeridoParaComentar(Publicacion publicacion, Integer promedio){
+		publicacion.modificarPromedioRequeridoParaComentar(promedio)
+	}
+
+	def calificar(publicacion, calificacion){
+		publicacion.agregarCalificacion(calificacion)
+	}
 }

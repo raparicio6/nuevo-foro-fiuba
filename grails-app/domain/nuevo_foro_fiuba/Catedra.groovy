@@ -12,7 +12,7 @@ class Catedra {
 		descripcion blank: true, nullable: true
     }
 
-	Catedra (Materia materia, Profesor profesor, String descripcion){
+	Catedra(Materia materia, Profesor profesor, String descripcion){
 		this.materia = materia
 		this.profesor = profesor
 		this.descripcion = descripcion

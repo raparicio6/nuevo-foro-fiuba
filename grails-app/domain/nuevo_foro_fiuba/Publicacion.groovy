@@ -1,6 +1,5 @@
 package nuevo_foro_fiuba
 
-
 class Publicacion {
 
 	enum EstadoPublicacion {
@@ -38,8 +37,9 @@ class Publicacion {
 		encuesta blank:false, nullable:true
 		calificaciones blank:false, nullable:false
     }
+// ------------------------------------------------------------------------- //
 
-	Publicacion (String texto, Usuario usuarioCreador, Materia materiaRelacionada, Catedra catedraRelacionada){
+	Publicacion(String texto, Usuario usuarioCreador, Materia materiaRelacionada, Catedra catedraRelacionada){
 		this.texto = texto
 		this.usuarioCreador = usuarioCreador
 		this.materiaRelacionada = materiaRelacionada
@@ -52,34 +52,41 @@ class Publicacion {
 		this.encuesta = null
 		this.calificaciones = []
 	}
+// ------------------------------------------------------------------------- //
 
-	String obtenerVista(Usuario usuario){
-		if (usuario.id == this.id){
-			return "verPublicacion"
-		}
-		return "verPublicacion2"
-	}
-
-	Integer estaCerrada(){
-		if (this.estado==EstadoPublicacion.cerrada)
-			return 1
-		return 0
+	Boolean estaCerrada(){
+		this.estado==EstadoPublicacion.cerrada
 	}
 
 	Integer obtenerPromedioRequeridoParaComentar(){
-		return this.promedioRequeridoParaComentar
+		this.promedioRequeridoParaComentar
 	}
 
 	def cerrar(){
-		this.estado=EstadoPublicacion.cerrada
+		this.setEstado(EstadoPublicacion.cerrada)
 	}
 
 	def abrir(){
-		this.estado=EstadoPublicacion.abierta
+		this.setEstado(EstadoPublicacion.abierta)
 	}
 
 	def agregarCalificacion(Calificacion calificacion){
-		this.calificaciones += [calificacion]
+		this.setCalificaciones(this.calificaciones+[calificacion])
 	}
 
+	def modificarTexto(String nuevoTexto){
+		this.setTexto(nuevoTexto)
+	}
+
+	def cambiarMateria(Materia materia){
+		this.setMateriaRelacionada(materia)
+	}
+
+	def cambiarCatedra(Catedra catedra){
+		this.setCatedraRelacionada(catedra)
+	}
+
+	def modificarPromedioRequeridoParaComentar(Integer promedio){
+		this.setPromedioRequeridoParaComentar(promedio)
+	}
 }

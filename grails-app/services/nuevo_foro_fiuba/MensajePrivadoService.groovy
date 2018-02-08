@@ -10,7 +10,7 @@ class MensajePrivadoService {
     MensajePrivado crearMensaje (String texto, Usuario usuarioCreador, String usuarioReceptor, MensajePrivado mensajeAlCualSeResponde, Archivo archivo){
         MensajePrivado mensaje = new MensajePrivado(texto, usuarioCreador, receptor, mensajeAlCualSeResponde, archivo)
         mensaje.save()
-        return mensaje
+        mensaje
     }
 
     def crearInformacion(Usuario emisor, Usuario receptor, MensajePrivado mensajePrivado) {

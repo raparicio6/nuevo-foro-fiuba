@@ -89,8 +89,8 @@
                           </g:form>
                         </g:if>
                         <g:if test="${publicacion.estado==EstadoPublicacion.cerrada}">
-                          <g:form action="reabrirPublicacion" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
-                            <g:actionSubmit action="reabrirPublicacion" value="Reabrir publicacion" class="btn btn-danger" style="margin-top:10px" />
+                          <g:form action="abrirPublicacion" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
+                            <g:actionSubmit action="abrirPublicacion" value="Abrir publicacion" class="btn btn-danger" style="margin-top:10px" />
                           </g:form>
                         </g:if>
                       </g:if>

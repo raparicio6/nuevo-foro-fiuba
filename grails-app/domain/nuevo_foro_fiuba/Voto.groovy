@@ -7,7 +7,7 @@ class Voto {
     static constraints = {
     }
 
-    Voto (Usuario usuario){
+    Voto(Usuario usuario){
         this.usuario = usuario
     }
 }

@@ -11,7 +11,7 @@ class PublicacionService {
     Publicacion crearPublicacion(String texto, Usuario usuarioCreador, Materia materiaRelacionada, Catedra catedraRelacionada){
       Publicacion publicacion = new Publicacion (texto, usuarioCreador, materiaRelacionada, catedraRelacionada)
       publicacion.save(failOnError: true)
-      return publicacion
+      publicacion
     }
 
     def adjuntarArchivo(Publicacion publicacion, Archivo archivoAdjunto){
@@ -22,7 +22,7 @@ class PublicacionService {
       publicacion.setEstado(EstadoPublicacion.cerrada)
     }
 
-    def reabrirPublicacion (Publicacion publicacion){
+    def abrirPublicacion (Publicacion publicacion){
       publicacion.setEstado(EstadoPublicacion.abierta)
     }
 
@@ -46,15 +46,8 @@ class PublicacionService {
       publicacion.delete(failOnError: true)
     }
 
-    String obtenerVista(publicacionInstance, usuarioInstance){
-      return publicacionInstance.obtenerVista(usuarioInstance)
-    }
-
     def modificarPromedioRequeridoParaComentar (Publicacion publicacion, Integer promedio){
       publicacion.setPromedioRequeridoParaComentar(promedio)
     }
 
-    def agregarCalificacion (Publicacion publicacion, Calificacion calificacion){
-      publicacion.setCalificaciones( publicacion.getCalificaciones() + [calificacion])
-    }
 }
