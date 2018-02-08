@@ -54,7 +54,7 @@ class UsuarioService {
       def calificaciones = publicaciones.collect {publicacion -> publicacion.calificaciones}
       calificaciones = calificaciones.flatten()
       def contador = 0
-      def puntajeAcumulado = calificaciones.collect {calificacion -> contador += calificacion.puntaje.signo * calificacion.puntaje.numero}
+      def puntajeAcumulado = calificaciones.collect {calificacion -> contador += Puntaje.getSignoTipo(calificacion.puntaje.tipo) * calificacion.puntaje.numero}
       usuario.setPuntajeActual(contador.intdiv(calificaciones.size()))
       //siempre va a tener al menos una calificacion
     }

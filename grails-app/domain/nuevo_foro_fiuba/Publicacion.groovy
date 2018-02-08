@@ -3,8 +3,8 @@ package nuevo_foro_fiuba
 
 class Publicacion {
 
-	enum Estado {
-		cerrado, abierto
+	enum EstadoPublicacion {
+		cerrada, abierta
 	}
 
 	String texto
@@ -15,10 +15,9 @@ class Publicacion {
 	Set <Materia> materiasNecesariasParaComentar
 	Set <Comentario> comentarios
 	Archivo archivoAdjunto
-	Estado estado
+	EstadoPublicacion estado
 	Encuesta encuesta
 	Set <Calificacion> calificaciones
-
 
 	static hasMany = [
 		comentarios: Comentario,
@@ -40,7 +39,6 @@ class Publicacion {
 		calificaciones blank:false, nullable:false
     }
 
-
 	Publicacion (String texto, Usuario usuarioCreador, Materia materiaRelacionada, Catedra catedraRelacionada){
 		this.texto = texto
 		this.usuarioCreador = usuarioCreador
@@ -50,7 +48,7 @@ class Publicacion {
 		materiasNecesariasParaComentar = []
 		this.comentarios = []
 		this.archivoAdjunto = null
-		this.estado = Estado.abierto
+		this.estado = EstadoPublicacion.abierta
 		this.encuesta = null
 		this.calificaciones = []
 	}
@@ -63,7 +61,7 @@ class Publicacion {
 	}
 
 	Integer estaCerrada(){
-		if (this.estado==Estado.cerrado)
+		if (this.estado==EstadoPublicacion.cerrada)
 			return 1
 		return 0
 	}
@@ -73,11 +71,11 @@ class Publicacion {
 	}
 
 	def cerrar(){
-		this.estado=Estado.cerrado
+		this.estado=EstadoPublicacion.cerrada
 	}
 
 	def abrir(){
-		this.estado=Estado.abierto
+		this.estado=EstadoPublicacion.abierta
 	}
 
 	def agregarCalificacion(Calificacion calificacion){

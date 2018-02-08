@@ -1,4 +1,5 @@
 package nuevo_foro_fiuba
+import nuevo_foro_fiuba.Puntaje.TipoPuntaje
 
 import grails.gorm.transactions.Transactional
 
@@ -7,8 +8,8 @@ class PuntajeService {
 
   def serviceMethod() {}
 
-   Puntaje crearPuntaje (Integer signo,Usuario usuario){
-      Puntaje puntaje = new Puntaje (signo, 0)
+   Puntaje crearPuntaje (TipoPuntaje tipo, Usuario usuario){
+      Puntaje puntaje = new Puntaje (tipo, 0)
       puntaje.calcular(usuario)
       puntaje.save(failOnError:true)
       return puntaje

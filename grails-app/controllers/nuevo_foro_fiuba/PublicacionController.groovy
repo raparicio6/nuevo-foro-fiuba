@@ -1,5 +1,6 @@
 package nuevo_foro_fiuba
 import grails.gorm.transactions.Transactional
+import nuevo_foro_fiuba.Puntaje.TipoPuntaje
 
 @Transactional
 class PublicacionController {
@@ -93,17 +94,17 @@ class PublicacionController {
     }
 
     def puntuarPositivo(long id, long idUsuario){
-      puntuarPublicacion(1, id, idUsuario)
+      puntuarPublicacion(TipoPuntaje.meGusta, id, idUsuario)
     }
 
     def puntuarNegativo(long id, long idUsuario){
-      puntuarPublicacion(-1, id, idUsuario)
+      puntuarPublicacion(TipoPuntaje.noMeGusta, id, idUsuario)
     }
 
-    def puntuarPublicacion(Integer signo, long id, long idUsuario){
+    def puntuarPublicacion(TipoPuntaje tipo, long id, long idUsuario){
       def publicacionInstance = Publicacion.get(id)
       def usuarioInstance = Usuario.get(idUsuario)
-      def calificacion = calificacionService.crearCalificacion(usuarioInstance, puntajeService.crearPuntaje(signo, usuarioInstance), publicacionInstance,null)
+      def calificacion = calificacionService.crearCalificacion(usuarioInstance, puntajeService.crearPuntaje(tipo, usuarioInstance), publicacionInstance,null)
       publicacionService.agregarCalificacion(publicacionInstance, calificacion)
       usuarioService.actualizarPuntajeActual(publicacionInstance.usuarioCreador)
       redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])

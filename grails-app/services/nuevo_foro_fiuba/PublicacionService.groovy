@@ -1,11 +1,10 @@
 package nuevo_foro_fiuba
-import nuevo_foro_fiuba.Publicacion.Estado
+import nuevo_foro_fiuba.Publicacion.EstadoPublicacion
 
 import grails.gorm.transactions.Transactional
 
 @Transactional
 class PublicacionService {
-
 
     def serviceMethod() {}
 
@@ -20,11 +19,11 @@ class PublicacionService {
     }
 
     def cerrarPublicacion (Publicacion publicacion){
-      publicacion.setEstado(Estado.cerrado)
+      publicacion.setEstado(EstadoPublicacion.cerrada)
     }
 
     def reabrirPublicacion (Publicacion publicacion){
-      publicacion.setEstado(Estado.abierto)
+      publicacion.setEstado(EstadoPublicacion.abierta)
     }
 
     def agregarComentario (Publicacion publicacion, Comentario comentario){

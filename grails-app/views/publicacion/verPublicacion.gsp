@@ -1,4 +1,4 @@
-<%@ page import = "nuevo_foro_fiuba.Publicacion.Estado" %>
+<%@ page import = "nuevo_foro_fiuba.Publicacion.EstadoPublicacion" %>
   <!doctype html>
 
   <html>
@@ -83,12 +83,12 @@
                     </div>
                     <div class="col-md-4">
                       <g:if test="${modificar}">
-                        <g:if test="${publicacion.estado==Estado.abierto}">
+                        <g:if test="${publicacion.estado==EstadoPublicacion.abierta}">
                           <g:form action="cerrarPublicacion" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
                             <g:actionSubmit action="cerrarPublicacion" value="Cerrar publicaci&oacute;n" class="btn btn-danger " style="margin-top:10px; margin-left:5px" />
                           </g:form>
                         </g:if>
-                        <g:if test="${publicacion.estado==Estado.cerrado}">
+                        <g:if test="${publicacion.estado==EstadoPublicacion.cerrada}">
                           <g:form action="reabrirPublicacion" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
                             <g:actionSubmit action="reabrirPublicacion" value="Reabrir publicacion" class="btn btn-danger" style="margin-top:10px" />
                           </g:form>
@@ -180,7 +180,7 @@
                     <td>${comentario.texto}</td>
                     <td>${comentario.fechaHora}</td>
                     <td>
-                      <g:link controller="comentario" action="verComentario" id="${comentario.id}" params="[idUsuario:"${usuario.id}"]">
+                      <g:link controller="comentario" action="verComentario" id="${comentario.id}" params="[idUsuario:"${usuario.id}"]" title="Ver">
                         <span class="glyphicon glyphicon-zoom-in"></span>
                       </g:link>
                     </td>
@@ -204,7 +204,7 @@
               <thead>
                 <tr>
                   <th>Usuario que calific&oacute;</th>
-                  <th>Calificaci&oacute;n</th>
+                  <th>Tipo de calificaci&oacute;n</th>
                   <th>Puntaje del usuario que calific&oacute;</th>
                 </tr>
               </thead>
@@ -212,7 +212,7 @@
                 <g:each in="${publicacion.calificaciones}" var="calificacion">
                   <tr>
                     <td>${calificacion.usuario.nombre}</td>
-                    <td>${calificacion.puntaje.signo}</td>
+                    <td>${calificacion.puntaje.tipo}</td>
                     <td>${calificacion.usuario.puntajeActual}</td>
                   </tr>
                 </g:each>
