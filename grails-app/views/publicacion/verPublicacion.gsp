@@ -142,6 +142,10 @@
                   <li class="list-group-item">
                     Promedio de calificaciones del usuario creador: ${publicacion.usuarioCreador.promedioCalificaciones}
                   </li>
+                  <li class="list-group-item">
+                    Materias requeridas para comentar:
+                    <g:field name="a" type="checkbox"/>
+                  </li>
                 </ul>
               </div>
             </div>

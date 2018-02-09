@@ -20,6 +20,14 @@
                 <li><a class="home navbar-brand" href="${createLink(uri: '/')}">
                   Volver al inicio
                 </a></li>
+                <li>
+                  <g:if test="${comentario.publicacionComentada}">
+                    <g:link controller="Publicacion" action="verPublicacion" id="${comentario.publicacionComentada.id}" params="[idUsuario:"${usuario.id}"]">${"Volver"}</g:link>
+                  </g:if>
+                  <g:else>
+                    <g:link action="verComentario" id="${comentario.comentarioComentado.id}" params="[idUsuario:"${usuario.id}"]">${"Volver"}</g:link>
+                  </g:else>
+                </li>
                 <li><a>
                   ${usuario.nombre}
                 </a></li>

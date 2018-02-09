@@ -2,14 +2,14 @@ package nuevo_foro_fiuba
 
 class MensajePrivado {
 
-	enum Estado {
+	enum EstadoMensajePrivado {
 		vigente, eliminado
 	}
 
 	String texto
 	MensajePrivado mensajeAlCualSeResponde
 	Archivo archivo
-	Estado estado
+	EstadoMensajePrivado estado
 
     static constraints = {
     	texto blank: false, nullable:false
@@ -22,6 +22,6 @@ class MensajePrivado {
     	this.texto = texto
 			this.mensajeAlcualSeResponde = mensajeAlCualSeResponde
     	this.archivo = archivo
-			this.estado = Estado.vigente
+			this.estado = EstadoMensajePrivado.vigente
     }
 }

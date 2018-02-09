@@ -16,21 +16,19 @@ HECHO
 	7)Con el fin de limitar el origen de los usuarios que hacen comentarios sobre mi publicación, como usuario creador de la publicación, quiero poder establecer un filtro a partir del puntaje del usuario que quiere hacer un comentario. 
 		
 	8)Con el fin de dar un feedback sobre una publicación, como usuario que no subió la publicación, quiero poder ponerle un puntaje al usuario que subió la misma. 
-
+	
+	9)Con el fin de dar un feedback sobre un comentario en una publicación, como usuario que subió la publicación, quiero poder ponerle un puntaje al usuario que subió el comentario. 
 
 ***********************************************************************************************************************************************************************
 EN PROGRESO
 
-	1)Con el fin de dar un feedback sobre un comentario en una publicación, como usuario que subió la publicación, quiero poder ponerle un puntaje al usuario que subió el comentario. 
+	1)Con el fin de limitar el origen de los usuarios que hacen comentarios sobre mi publicación, como usuario creador de la publicación, quiero poder establecer un filtro a partir de las materias cursadas por el usuario que quiere hacer un comentario.
 	
 
 ***********************************************************************************************************************************************************************
 AUN SIN HACER	
 
-	
-	
-	1)Con el fin de limitar el origen de los usuarios que hacen comentarios sobre mi publicación, como usuario creador de la publicación, quiero poder establecer un filtro a partir de las materias cursadas por el usuario que quiere hacer un comentario. 
-
-	2)Con el fin de compartir archivos externos, como usuario , quiero poder adjuntar archivos a publicaciones y mensajes privados. 
+	 
+	1)Con el fin de compartir archivos externos, como usuario , quiero poder adjuntar archivos a publicaciones y mensajes privados. 
 	
 

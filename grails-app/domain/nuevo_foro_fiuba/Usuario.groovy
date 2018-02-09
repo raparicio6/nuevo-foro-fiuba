@@ -90,6 +90,10 @@ class Usuario {
 		this.publicaciones.removeAll {it.id==publicacion.getId()}
 	}
 
+	def eliminarComentario(Comentario comentario){
+		this.comentarios.removeAll {it.id==comentario.getId()}
+	}
+
 	def modificarPromedioRequeridoParaComentar(Publicacion publicacion, Integer promedio){
 		publicacion.modificarPromedioRequeridoParaComentar(promedio)
 	}

@@ -5,6 +5,8 @@ class BootStrap {
 
     Usuario usuarioLogin
 
+
+
     def init = { servletContext ->
       Usuario usuario = new Usuario ("NombreUsuario_", "ApellidoUsuario_", "NickUsuario_")
       usuario.save(failOnError:true)
@@ -49,6 +51,11 @@ class BootStrap {
       Cursada cursada3 = new Cursada (usuario2, catedra3)
       cursada3.save(failOnError:true)
       usuario2.setCursadas(usuario2.cursadas+=[cursada3])
+      Puntaje puntaje = new Puntaje (TipoPuntaje.meGusta,4)
+      puntaje.save(failOnError:true)
+      Calificacion calificacion = new Calificacion (usuario2, puntaje, publicacion, null)
+      calificacion.save(failOnError:true)
+      publicacion.agregarCalificacion(calificacion)
     }
     def destroy = {
     }
