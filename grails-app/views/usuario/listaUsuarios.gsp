@@ -39,7 +39,7 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						<td>${fieldValue(bean: usuarioInstance, field: "nombre")}</td>
             <td>${fieldValue(bean: usuarioInstance, field: "promedioCalificaciones")}</td>
-            <td><g:link action="verMaterias" id="${usuarioInstance.id}">${"Ver"}</g:link></td>
+            <td><g:link action="verMateriasCursadas" id="${usuarioInstance.id}">${"Ver"}</g:link></td>
 					</tr>
 				</g:each>
 				</tbody>

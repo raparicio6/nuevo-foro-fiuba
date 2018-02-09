@@ -25,4 +25,8 @@ class ComentarioService {
       comentario.comentarios.collect {subcomentario -> subcomentario.delete(failOnError: true)}
       comentario.delete(failOnError: true)
     }
+
+    def esSubComentario(Comentario comentario){
+      comentario.esSubComentario()
+    }
 }

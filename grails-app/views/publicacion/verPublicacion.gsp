@@ -51,7 +51,7 @@
 
       <br/>
 
-      <g:form controller="publicacion" action="modificarTexto" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
+      <g:form controller="publicacion" action="modificarTextoPublicacion" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
         <div class="row">
           <div class="col-md-12">
             <div class="col-md-7" style="padding-right:0px; padding-left:0px">
@@ -71,8 +71,8 @@
                     </div>
                     <div class="col-md-4">
                       <g:if test="${!modificar}">
-                        <g:form action="puntuarPublicacion" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
-                          <g:actionSubmit action="puntuarNegativo" value="No me gusta" class="btn btn-danger pull-right" style="margin-top:10px;" />
+                        <g:form action="calificarPublicacion" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
+                          <g:actionSubmit action="calificarNegativo" value="No me gusta" class="btn btn-danger pull-right" style="margin-top:10px;" />
                         </g:form>
                       </g:if>
                       <g:else>
@@ -83,20 +83,13 @@
                     </div>
                     <div class="col-md-4">
                       <g:if test="${modificar}">
-                        <g:if test="${publicacion.estado==EstadoPublicacion.abierta}">
-                          <g:form action="cerrarPublicacion" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
-                            <g:actionSubmit action="cerrarPublicacion" value="Cerrar publicaci&oacute;n" class="btn btn-danger " style="margin-top:10px; margin-left:5px" />
-                          </g:form>
-                        </g:if>
-                        <g:if test="${publicacion.estado==EstadoPublicacion.cerrada}">
-                          <g:form action="abrirPublicacion" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
-                            <g:actionSubmit action="abrirPublicacion" value="Abrir publicacion" class="btn btn-danger" style="margin-top:10px" />
-                          </g:form>
-                        </g:if>
+                        <g:form action="cambiarEstado" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
+                          <g:actionSubmit action="cambiarEstado" value="Cambiar estado" class="btn btn-danger " style="margin-top:10px; margin-left:5px" />
+                        </g:form>
                       </g:if>
                       <g:else>
-                        <g:form action="puntuarPublicacion" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
-                          <g:actionSubmit action="puntuarPositivo" value="Me gusta" class="btn btn-danger pull-right" style="margin-top:10px;" />
+                        <g:form action="calificarPublicacion" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
+                          <g:actionSubmit action="calificarPositivo" value="Me gusta" class="btn btn-danger pull-right" style="margin-top:10px;" />
                         </g:form>
                       </g:else>
                     </div>

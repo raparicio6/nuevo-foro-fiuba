@@ -23,10 +23,6 @@ class UsuarioController {
       [usuarioInstance: usuarioInstance]
     }
 
-    def crearUsuario (String nombre, String apellido, String nombreUsuario){
-      usuarioService.crearInstancia(nombre, apellido, nombreUsuario)
-    }
-
     def listaUsuarios(long id, Integer max, Integer promedioMin, Integer promedioMax, long idMateria){
       if (!promedioMin)
          promedioMin=0
@@ -41,10 +37,7 @@ class UsuarioController {
       [usuarioInstanceList: usuarios, usuarioInstanceTotal: usuarios.size() , usuarioInstance: usuarioInstance, materias: Materia.list(), catedras: Catedra.list()]
     }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//ESTOS DE ABAJO PODRIAN IR EN OTRO CONTROLADOR
-
-    def verMaterias (long id){
+    def verMateriasCursadas (long id){
       def usuarioInstance = Usuario.get(id)
       def cursadas = usuarioInstance.cursadas
       [usuario:usuarioInstance, cursadas:cursadas]

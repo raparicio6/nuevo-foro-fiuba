@@ -41,10 +41,6 @@ class UsuarioService {
       return usuario.esDueñoDelComentario(comentario)
     }
 
-    def puntuarPublicacion(Usuario usuario, Publicacion publicacion, Calificacion calificacion){
-      usuario.puntuarPublicacion(publicacion, calificacion)
-    }
-
     def actualizarPromedioCalificaciones(Usuario usuario){
       def publicaciones = usuario.getPublicaciones()
       def calificaciones = publicaciones.collect {publicacion -> publicacion.calificaciones}
@@ -55,24 +51,16 @@ class UsuarioService {
       //siempre va a tener al menos una calificacion
     }
 
-    def modificarTextoPublicacion (Usuario usuario,Publicacion publicacion, String nuevoTexto){
-      usuario.modificarTextoPublicacion(publicacion, nuevoTexto)
-    }
-
-    def modificarTextoComentario (Usuario usuario,Comentario comentario, String nuevoTexto){
-      usuario.modificarTextoComentario(comentario, nuevoTexto)
+    def modificarTexto (Usuario usuario,def objetoAModificar, String nuevoTexto){
+      usuario.modificarTexto(objetoAModificar, nuevoTexto)
     }
 
     def eliminarComentario(Usuario usuario, Comentario comentario){
       usuario.eliminarComentario(comentario)
     }
 
-    def cerrarPublicacion (Usuario usuario, Publicacion publicacion){
-      usuario.cerrarPublicacion(publicacion)
-    }
-
-    def abrirPublicacion (Usuario usuario, Publicacion publicacion){
-      usuario.abrirPublicacion(publicacion)
+    def cambiarEstado (Usuario usuario, Publicacion publicacion){
+      usuario.cambiarEstado(publicacion)
     }
 
     def modificarMateriaPublicacion (Usuario usuario, Publicacion publicacion, Materia materia){

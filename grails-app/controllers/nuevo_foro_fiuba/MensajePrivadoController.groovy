@@ -24,7 +24,7 @@ class MensajePrivadoController {
         def mensajeInstance = MensajePrivado.get(idMensaje)
         def usuarioInstance = Usuario.get(idUsuario)
         def infoInstance = InformacionMensajeUsuario.get(idInformacion)
-        if ()
+        // if ()
     }
 
     def listaMensajes (long idUsuario) {

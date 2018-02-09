@@ -97,7 +97,7 @@
         </div>
       </g:form>
 
-    <g:if test="${!subcomentario}">
+    <g:if test="${!subComentario}">
       <div class="row">
         <div class="col-md-12">
           <div class="col-md-2">
@@ -122,7 +122,7 @@
                     <td>${comentarioInstance.texto}</td>
                     <td>${comentarioInstance.fechaHora}</td>
                     <td>
-                      <g:link controller="comentario" action="verSubComentario" id="${comentarioInstance.id}" params="[idUsuario:"${usuario.id}"]">
+                      <g:link controller="comentario" action="verComentario" id="${comentarioInstance.id}" params="[idUsuario:"${usuario.id}"]">
                         <span class="glyphicon glyphicon-zoom-in"></span>
                       </g:link>
                     </td>

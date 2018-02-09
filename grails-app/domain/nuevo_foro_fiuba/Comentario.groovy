@@ -32,10 +32,14 @@ class Comentario {
 		this.comentarioComentado =  comentarioComentado
 		this.comentarios = []
 		this.calificaciones = []
-		this.fechaHora = new Date().format( 'yyyyMMdd hh:mm:ss' )
+		this.fechaHora = new Date().format( 'dd/MM/yyyy hh:mm' )
 	}
 // ------------------------------------------------------------------------- //
 	def modificarTexto(String nuevoTexto){
 		this.setTexto(nuevoTexto)
+	}
+
+	def esSubComentario(){
+		this.comentarioComentado
 	}
 }

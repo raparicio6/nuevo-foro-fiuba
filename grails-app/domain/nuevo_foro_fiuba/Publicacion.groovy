@@ -62,12 +62,11 @@ class Publicacion {
 		this.promedioRequeridoParaComentar
 	}
 
-	def cerrar(){
-		this.setEstado(EstadoPublicacion.cerrada)
-	}
-
-	def abrir(){
-		this.setEstado(EstadoPublicacion.abierta)
+	def cambiarEstado(){
+		if (this.estado == EstadoPublicacion.abierta)
+			this.setEstado(EstadoPublicacion.cerrada)
+		else
+			this.setEstado(EstadoPublicacion.abierta)
 	}
 
 	def agregarCalificacion(Calificacion calificacion){

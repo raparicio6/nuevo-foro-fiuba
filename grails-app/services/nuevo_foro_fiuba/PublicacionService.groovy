@@ -14,18 +14,6 @@ class PublicacionService {
       publicacion
     }
 
-    def adjuntarArchivo(Publicacion publicacion, Archivo archivoAdjunto){
-        publicacion.setArchivoAdjunto(archivoAdjunto)
-    }
-
-    def cerrarPublicacion (Publicacion publicacion){
-      publicacion.setEstado(EstadoPublicacion.cerrada)
-    }
-
-    def abrirPublicacion (Publicacion publicacion){
-      publicacion.setEstado(EstadoPublicacion.abierta)
-    }
-
     def agregarComentario (Publicacion publicacion, Comentario comentario){
       publicacion.setComentarios(publicacion.getComentarios() + [comentario])
     }

@@ -52,14 +52,14 @@ class Usuario {
 		if (publicacionAComentar.obtenerPromedioRequeridoParaComentar() > this.promedioCalificaciones){
 			throw new PromedioInsuficienteException()
 		}
-		this.comentarios+=[comentario]
+		this.setComentarios(this.comentarios+[comentario])
 	}
 
 	def comentarComentario(Comentario comentario, Comentario comentarioAComentar){
 		if (comentarioAComentar.publicacionComentada.estaCerrada()){
 			throw new PublicacionCerradaException() //no se puede comentar una publicacion cerrada
 		}
-		this.comentarios+=[comentario]
+		this.setComentarios(this.comentarios+[comentario])
 	}
 
 	Boolean esDueñoDeLaPublicacion(Publicacion publicacion){
@@ -70,24 +70,12 @@ class Usuario {
 		(comentario.getUsuarioCreador().getId() == this.id)
 	}
 
-	def modificarTextoPublicacion(Publicacion publicacion, String nuevoTexto){
-		publicacion.modificarTexto(nuevoTexto)
+	def modificarTexto(def objetoAModificar, String nuevoTexto){
+		objetoAModificar.modificarTexto(nuevoTexto)
 	}
 
-	def modificarTextoComentario(Comentario comentario, String nuevoTexto){
-		comentario.modificarTexto(nuevoTexto)
-	}
-
-	def eliminarComentario(Comentario comentario){
-		this.comentarios.removeAll {it.id==comentario.getId()}
-	}
-
-	def cerrarPublicacion(Publicacion publicacion){
-		publicacion.cerrar()
-	}
-
-	def abrirPublicacion(Publicacion publicacion){
-		publicacion.abrir()
+	def cambiarEstado(Publicacion publicacion){
+		publicacion.cambiarEstado()
 	}
 
 	def modificarMateriaPublicacion(Publicacion publicacion, Materia materia){

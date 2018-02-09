@@ -21,47 +21,30 @@ class PublicacionController {
       else{
         publicaciones=Publicacion.list().findAll {publicacion -> publicacion.catedraRelacionada.id == idCatedra}
       }
-      Usuario usuarioInstance = Usuario.get(id)
+      def usuarioInstance = Usuario.get(id)
       params.max = Math.min(max ?: 10, 100)
       [publicacionInstanceList: publicaciones, publicacionInstanceTotal: publicaciones.size(), usuarioInstance: usuarioInstance, materias: Materia.list(), catedras: Catedra.list()]
-    }
-
-    def filtrarPublicacionPorMateria(long idUsuario, long idMateria){
-        flash.message=Publicacion.list().findAll{publicacion -> publicacion.materiaRelacionada.id == idMateria}
-        redirect (action:"listaPublicaciones", id: idUsuario)
     }
 
     def verPublicacion (long id, long idUsuario){
       def publicacionInstance = Publicacion.get(id)
       def usuarioInstance = Usuario.get(idUsuario)
-      if (usuarioService.usuarioEsDueñoDeLaPublicacion(usuarioInstance, publicacionInstance))
-        [publicacion: publicacionInstance, materias: Materia.list(), catedras: Catedra.list(), usuario: usuarioInstance, modificar:"1"] //--> groovy !null==true
-      else
-        [publicacion: publicacionInstance, materias: Materia.list(), catedras: Catedra.list(), usuario: usuarioInstance]
-        // EL ATRIBUTO MODIFICAR DEFINE SI EL USUARIO QUE INGRESA A LA PUBLICACION PUEDE VER LOS BOTONES ELIMINAR,CAMBIAR ESTADO, ETC
+      def esDueño = usuarioService.usuarioEsDueñoDeLaPublicacion(usuarioInstance, publicacionInstance)
+      [publicacion: publicacionInstance, materias: Materia.list(), catedras: Catedra.list(), usuario: usuarioInstance, modificar:esDueño] //--> groovy !null==true
+      // EL ATRIBUTO MODIFICAR DEFINE SI EL USUARIO QUE INGRESA A LA PUBLICACION PUEDE VER LOS BOTONES ELIMINAR,CAMBIAR ESTADO, ETC
     }
 
-    def cerrarPublicacion (Long id, long idUsuario){
+    def cambiarEstado (Long id, long idUsuario){
       def usuarioLogin = Usuario.get(idUsuario)
       def publicacionInstance = Publicacion.get(id)
-      usuarioService.cerrarPublicacion(usuarioLogin, publicacionInstance)
-      // publicacionService.cerrarPublicacion(publicacionInstance)
+      usuarioService.cambiarEstado(usuarioLogin, publicacionInstance)
       redirect(action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 
-    def abrirPublicacion (Long id, long idUsuario){
+    def modificarTextoPublicacion(long id, String nuevoTexto, long idUsuario){
       def usuarioLogin = Usuario.get(idUsuario)
       def publicacionInstance = Publicacion.get(id)
-      usuarioService.abrirPublicacion(usuarioLogin, publicacionInstance)
-      // publicacionService.abrirPublicacion(publicacionInstance)
-      redirect(action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
-    }
-
-    def modificarTexto(long id, String nuevoTexto, long idUsuario){
-      def usuarioLogin = Usuario.get(idUsuario)
-      def publicacionInstance = Publicacion.get(id)
-      usuarioService.modificarTextoPublicacion(usuarioLogin, publicacionInstance, nuevoTexto)
-      // publicacionService.modificarTexto(publicacionInstance, nuevoTexto)
+      usuarioService.modificarTexto(usuarioLogin, publicacionInstance, nuevoTexto)
       redirect(action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 
@@ -70,7 +53,6 @@ class PublicacionController {
       def publicacionInstance = Publicacion.get(id)
       def materiaInstance = Materia.get(idMateria)
       usuarioService.modificarMateriaPublicacion(usuarioLogin, publicacionInstance, materiaInstance)
-      // publicacionService.modificarMateria(publicacionInstance, materiaInstance)
       redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 
@@ -79,7 +61,13 @@ class PublicacionController {
       def publicacionInstance = Publicacion.get(id)
       def catedraInstance = Catedra.get(idCatedra)
       usuarioService.modificarCatedraPublicacion(usuarioLogin, publicacionInstance, catedraInstance)
-      // publicacionService.modificarCatedra(publicacionInstance, catedraInstance)
+      redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
+    }
+
+    def modificarPromedioRequeridoParaComentar (long id, long idUsuario, Integer promedio){
+      def usuarioLogin = Usuario.get(idUsuario)
+      def publicacionInstance = Publicacion.get(id)
+      usuarioService.modificarPromedioRequeridoParaComentar(usuarioLogin, publicacionInstance, promedio)
       redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 
@@ -94,23 +82,15 @@ class PublicacionController {
       redirect(action: "listaPublicaciones", max: 10, params: [id:idUsuario])
     }
 
-    def modificarPromedioRequeridoParaComentar (long id, long idUsuario, Integer promedio){
-      def usuarioLogin = Usuario.get(idUsuario)
-      def publicacionInstance = Publicacion.get(id)
-      usuarioService.modificarPromedioRequeridoParaComentar(usuarioLogin, publicacionInstance, promedio)
-      // publicacionService.modificarPromedioRequeridoParaComentar(publicacionInstance, promedio)
-      redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
+    def calificarPositivo(long id, long idUsuario){
+      calificarPublicacion(TipoPuntaje.meGusta, id, idUsuario)
     }
 
-    def puntuarPositivo(long id, long idUsuario){
-      puntuarPublicacion(TipoPuntaje.meGusta, id, idUsuario)
+    def calificarNegativo(long id, long idUsuario){
+      calificarPublicacion(TipoPuntaje.noMeGusta, id, idUsuario)
     }
 
-    def puntuarNegativo(long id, long idUsuario){
-      puntuarPublicacion(TipoPuntaje.noMeGusta, id, idUsuario)
-    }
-
-    def puntuarPublicacion(TipoPuntaje tipo, long id, long idUsuario){
+    def calificarPublicacion(TipoPuntaje tipo, long id, long idUsuario){
       def publicacionInstance = Publicacion.get(id)
       def usuarioInstance = Usuario.get(idUsuario)
       def calificacion = calificacionService.crearCalificacion(usuarioInstance, puntajeService.crearPuntaje(tipo, usuarioInstance), publicacionInstance,null)
