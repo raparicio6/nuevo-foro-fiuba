@@ -94,12 +94,12 @@ class Usuario {
 		publicacion.modificarPromedioRequeridoParaComentar(promedio)
 	}
 
-	def calificar(Publicacion publicacion, Calificacion calificacion){
-		def calificaciones = publicacion.calificaciones.collect {calificacionInstance -> calificacionInstance.usuario.getId()}
+	def calificar(def calificable, Calificacion calificacion){
+		def calificaciones = calificable.calificaciones.collect {calificacionInstance -> calificacionInstance.usuario.getId()}
 		def calificacionesUsuario = calificaciones.findAll {idUsuario -> idUsuario == this.id}
 		if (calificacionesUsuario.size()>1)
 			throw new UsuarioYaCalificoException()
 		else
-			publicacion.agregarCalificacion(calificacion)
+			calificable.agregarCalificacion(calificacion)
 	}
 }

@@ -44,6 +44,8 @@ class UsuarioService {
     def actualizarPromedioCalificaciones(Usuario usuario){
       def publicaciones = usuario.getPublicaciones()
       def calificaciones = publicaciones.collect {publicacion -> publicacion.calificaciones}
+      def comentarios = usuario.getComentarios()
+      calificaciones += comentarios.collect {comentario -> comentario.calificaciones}
       calificaciones = calificaciones.flatten()
       def contador = 0
       calificaciones.collect {calificacion -> contador += Puntaje.getSignoTipo(calificacion.puntaje.tipo) * calificacion.puntaje.numero}
@@ -79,8 +81,8 @@ class UsuarioService {
       usuario.modificarPromedioRequeridoParaComentar(publicacion, promedio)
     }
 
-    def calificar(Usuario usuario, Publicacion publicacion, Calificacion calificacion){
-      usuario.calificar(publicacion, calificacion)
+    def calificar(Usuario usuario, def calificable, Calificacion calificacion){
+      usuario.calificar(calificable, calificacion)
     }
 
 }

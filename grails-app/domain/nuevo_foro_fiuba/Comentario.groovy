@@ -42,4 +42,8 @@ class Comentario {
 	def esSubComentario(){
 		this.comentarioComentado
 	}
+
+	def agregarCalificacion(Calificacion calificacion){
+		this.setCalificaciones(this.calificaciones+[calificacion])
+	}
 }

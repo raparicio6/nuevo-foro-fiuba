@@ -153,6 +153,36 @@
         <div class="col-md-12">
           <div class="col-md-2">
             <h3>
+                <span class="label label-default">Calificaciones:</span>
+            </h3>
+          </div>
+          <div class="col-md-6">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Usuario que calific&oacute;</th>
+                  <th>Tipo de calificaci&oacute;n</th>
+                  <th>Promedio de calificaciones del usuario que calific&oacute;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <g:each in="${publicacion.calificaciones}" var="calificacion">
+                  <tr>
+                    <td>${calificacion.usuario.nombre}</td>
+                    <td>${calificacion.puntaje.tipo}</td>
+                    <td>${calificacion.usuario.promedioCalificaciones}</td>
+                  </tr>
+                </g:each>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-2">
+            <h3>
                 <span class="label label-default">Comentarios:</span>
             </h3>
           </div>
@@ -177,36 +207,6 @@
                         <span class="glyphicon glyphicon-zoom-in"></span>
                       </g:link>
                     </td>
-                  </tr>
-                </g:each>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-2">
-            <h3>
-                <span class="label label-default">Calificaciones:</span>
-            </h3>
-          </div>
-          <div class="col-md-6">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Usuario que calific&oacute;</th>
-                  <th>Tipo de calificaci&oacute;n</th>
-                  <th>Promedio de calificaciones del usuario que calific&oacute;</th>
-                </tr>
-              </thead>
-              <tbody>
-                <g:each in="${publicacion.calificaciones}" var="calificacion">
-                  <tr>
-                    <td>${calificacion.usuario.nombre}</td>
-                    <td>${calificacion.puntaje.tipo}</td>
-                    <td>${calificacion.usuario.promedioCalificaciones}</td>
                   </tr>
                 </g:each>
               </tbody>
