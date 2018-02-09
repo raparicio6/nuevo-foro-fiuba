@@ -10,7 +10,8 @@ class BootStrap {
       usuario.save(failOnError:true)
       Usuario usuario2 = new Usuario ("NombreUsuario2_", "ApellidoUsuario2_", "NickUsuario2_")
       usuario2.save(failOnError:true)
-      usuarioLogin = usuario2
+      Usuario usuario3 = new Usuario ("NombreUsuario3_", "ApellidoUsuario3_", "NickUsuario3_")
+      usuario3.save(failOnError:true)
       Materia materia = new Materia ('NombreMateria_', 'DescripcionMateria_')
       materia.save(failOnError:true)
       Materia materia2 = new Materia ('NombreMateria2_', 'DescripcionMateria2_')
@@ -42,18 +43,12 @@ class BootStrap {
       comentario.comentarios += [comentario2]
       usuarioLogin = Usuario.get(1)
       usuario.setPromedioCalificaciones(3)
-      usuario2.setPromedioCalificaciones(3)
       Cursada cursada2 = new Cursada (usuario, catedra2)
       cursada2.save(failOnError:true)
       usuario.setCursadas(usuario.cursadas+=[cursada2])
       Cursada cursada3 = new Cursada (usuario2, catedra3)
       cursada3.save(failOnError:true)
       usuario2.setCursadas(usuario2.cursadas+=[cursada3])
-      Puntaje puntaje = new Puntaje (TipoPuntaje.meGusta,4)
-      puntaje.save(failOnError:true)
-      Calificacion calificacion = new Calificacion (usuario2, puntaje, publicacion, null)
-      calificacion.save(failOnError:true)
-      publicacion.agregarCalificacion(calificacion)
     }
     def destroy = {
     }

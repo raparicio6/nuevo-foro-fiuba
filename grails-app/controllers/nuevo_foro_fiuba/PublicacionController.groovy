@@ -94,8 +94,14 @@ class PublicacionController {
       def publicacionInstance = Publicacion.get(id)
       def usuarioInstance = Usuario.get(idUsuario)
       def calificacion = calificacionService.crearCalificacion(usuarioInstance, puntajeService.crearPuntaje(tipo, usuarioInstance), publicacionInstance,null)
-      usuarioService.calificar(usuarioInstance, publicacionInstance, calificacion)
-      usuarioService.actualizarPromedioCalificaciones(publicacionInstance.usuarioCreador)
+      try{
+        usuarioService.calificar(usuarioInstance, publicacionInstance, calificacion)
+        usuarioService.actualizarPromedioCalificaciones(publicacionInstance.usuarioCreador)
+      }
+      catch (UsuarioYaCalificoException e){
+        calificacionService.eliminarCalificacion(calificacion)
+        flash.message = "No se puede calificar dos veces la misma publicacion"
+      }
       redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }
 

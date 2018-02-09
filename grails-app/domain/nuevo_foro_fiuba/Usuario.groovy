@@ -26,7 +26,7 @@ class Usuario {
 		comentarios blank:false, nullable: false
 		cursadas blank:false, nullable: false
 		mensajes blank:false, nullable: false
-		promedioCalificaciones blank:false, nullable: false
+		promedioCalificaciones blank:false, nullable: false, min:0
 		}
 
 // ------------------------------------------------------------------------- //
@@ -94,7 +94,12 @@ class Usuario {
 		publicacion.modificarPromedioRequeridoParaComentar(promedio)
 	}
 
-	def calificar(publicacion, calificacion){
-		publicacion.agregarCalificacion(calificacion)
+	def calificar(Publicacion publicacion, Calificacion calificacion){
+		def calificaciones = publicacion.calificaciones.collect {calificacionInstance -> calificacionInstance.usuario.getId()}
+		def calificacionesUsuario = calificaciones.findAll {idUsuario -> idUsuario == this.id}
+		if (calificacionesUsuario.size()>1)
+			throw new UsuarioYaCalificoException()
+		else
+			publicacion.agregarCalificacion(calificacion)
 	}
 }
