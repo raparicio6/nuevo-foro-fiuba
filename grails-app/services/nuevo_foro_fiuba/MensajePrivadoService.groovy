@@ -7,14 +7,14 @@ class MensajePrivadoService {
 
     def serviceMethod() {}
 
-    MensajePrivado crearMensaje (String texto, Usuario usuarioCreador, String usuarioReceptor, MensajePrivado mensajeAlCualSeResponde, Archivo archivo){
-        MensajePrivado mensaje = new MensajePrivado(texto, usuarioCreador, receptor, mensajeAlCualSeResponde, archivo)
-        mensaje.save()
+    MensajePrivado crearMensaje (String texto, MensajePrivado mensajeAlCualSeResponde, Archivo archivo){
+        MensajePrivado mensaje = new MensajePrivado(texto, mensajeAlCualSeResponde, archivo)
+        mensaje.save(failOnError:true)
         mensaje
     }
 
     def crearInformacion(Usuario emisor, Usuario receptor, MensajePrivado mensajePrivado) {
         InformacionMensajeUsuario informacion = new InformacionMensajeUsuario(emisor, receptor, mensajePrivado)
-        informacion.save()
+        informacion.save(failOnError:true)
     }
 }

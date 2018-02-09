@@ -13,8 +13,8 @@ class UsuarioService {
       return usuario
     }
 
-    def enviarMensaje (MensajePrivado mensaje, Usuario usuarioReceptor){
-      usuarioReceptor.setMensaje(mensaje)
+    def enviarMensaje(Usuario emisor, Usuario receptor, InformacionMensajeUsuario infoEmisor, InformacionMensajeUsuario infoReceptor){
+      emisor.enviarMensaje(receptor, infoEmisor, infoReceptor)
     }
 
     def agregarComentario (Usuario usuario, Comentario comentario){

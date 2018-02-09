@@ -7,14 +7,14 @@ class Usuario {
 	String nombreUsuario
 	Set <Publicacion> publicaciones
 	Set <Comentario> comentarios
-	Set <MensajePrivado> mensajes
+	Set <InformacionMensajeUsuario> mensajes
 	Set <Cursada> cursadas
 	Integer promedioCalificaciones
 
 	static hasMany = [
 		publicaciones: Publicacion,
 		comentarios: Comentario,
-		mensajes: MensajePrivado,
+		mensajes: InformacionMensajeUsuario,
 		cursadas: Cursada,
 	]
 
@@ -103,7 +103,14 @@ class Usuario {
 		def calificacionesUsuario = calificaciones.findAll {idUsuario -> idUsuario == this.id}
 		if (calificacionesUsuario.size()>1)
 			throw new UsuarioYaCalificoException()
-		else
-			calificable.agregarCalificacion(calificacion)
+	}
+
+	def enviarMensaje(Usuario receptor, InformacionMensajeUsuario infoEmisor, InformacionMensajeUsuario infoReceptor){
+		this.guardarMensaje(infoEmisor)
+		receptor.guardarMensaje(infoReceptor)
+	}
+
+	def guardarMensaje(InformacionMensajeUsuario informacion){
+		this.setMensajes(this.mensajes + [informacion])
 	}
 }
