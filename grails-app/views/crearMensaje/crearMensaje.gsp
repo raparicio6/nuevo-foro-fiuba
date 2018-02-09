@@ -59,7 +59,7 @@ div {
         </div>
 
         <div>
-            <g:submitButton type="submit" value="Enviar Mensaje"/>
+            <g:submitButton name="crearMensaje" class="btn btn-danger pull-right" style="margin-top:5px;"/>
         </div>
     </g:form>
 
