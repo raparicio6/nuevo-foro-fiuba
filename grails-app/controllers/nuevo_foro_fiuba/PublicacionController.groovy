@@ -14,12 +14,7 @@ class PublicacionController {
 
     def listaPublicaciones(long id,Integer max,Integer idCatedra) {
       def publicaciones
-      if (!idCatedra){
-        publicaciones=Publicacion.list()
-      }
-      else{
-        publicaciones=Publicacion.list().findAll {publicacion -> publicacion.catedraRelacionada.id == idCatedra}
-      }
+      publicaciones = (!idCatedra) ? Publicacion.list() : Publicacion.list().findAll {publicacion -> publicacion.catedraRelacionada.id == idCatedra}
       def usuarioInstance = Usuario.get(id)
       params.max = Math.min(max ?: 10, 100)
       [publicacionInstanceList: publicaciones, publicacionInstanceTotal: publicaciones.size(), usuarioInstance: usuarioInstance, materias: Materia.list(), catedras: Catedra.list()]
@@ -33,7 +28,7 @@ class PublicacionController {
       // EL ATRIBUTO MODIFICAR DEFINE SI EL USUARIO QUE INGRESA A LA PUBLICACION PUEDE VER LOS BOTONES ELIMINAR,CAMBIAR ESTADO, ETC
     }
 
-    def cambiarEstado (Long id, long idUsuario){
+    def cambiarEstado (long id, long idUsuario){
       def usuarioLogin = Usuario.get(idUsuario)
       def publicacionInstance = Publicacion.get(id)
       usuarioService.cambiarEstado(usuarioLogin, publicacionInstance)

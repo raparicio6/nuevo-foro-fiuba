@@ -9,7 +9,7 @@ class Comentario {
 	Comentario comentarioComentado
 	Set <Comentario> comentarios
 	Set <Calificacion> calificaciones
-	Date fechaHora
+	Date fechaHoraCreacion
 
 	static hasMany = [
 		comentarios: Comentario
@@ -22,7 +22,7 @@ class Comentario {
 		comentarioComentado blank:false, nullable:true
 		comentarios blank:false, nullable:false
 		calificaciones blank:false, nullable:false
-		fechaHora blank:false, nullable:false
+		fechaHoraCreacion blank:false, nullable:false
 	}
 // ------------------------------------------------------------------------- //
 
@@ -34,7 +34,7 @@ class Comentario {
 		this.comentarios = []
 		this.calificaciones = []
 		String dia = new Date().format( 'dd/MM/yyyy hh:mm' )
-		this.fechaHora = Date.parse('dd/MM/yyyy hh:mm', dia);
+		this.fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', dia);
 	}
 // ------------------------------------------------------------------------- //
 	def modificarTexto(String nuevoTexto){
@@ -46,6 +46,10 @@ class Comentario {
 	}
 
 	def agregarCalificacion(Calificacion calificacion){
-		this.setCalificaciones(this.calificaciones+[calificacion])
+		this.calificaciones << calificacion
+	}
+
+	def agregarComentario(Comentario comentario){
+		this.comentarios << comentario
 	}
 }

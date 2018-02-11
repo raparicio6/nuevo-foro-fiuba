@@ -18,6 +18,7 @@ class Publicacion {
 	EstadoPublicacion estado
 	Encuesta encuesta
 	Set <Calificacion> calificaciones
+	Date fechaHoraCreacion
 
 	static hasMany = [
 		comentarios: Comentario,
@@ -37,6 +38,7 @@ class Publicacion {
 		estado blank: false, nullable:false
 		encuesta blank:false, nullable:true
 		calificaciones blank:false, nullable:false
+		fechaHoraCreacion blank:false, nullable:false
     }
 // ------------------------------------------------------------------------- //
 
@@ -52,6 +54,8 @@ class Publicacion {
 		this.estado = EstadoPublicacion.ABIERTA
 		this.encuesta = null
 		this.calificaciones = []
+		String dia = new Date().format( 'dd/MM/yyyy hh:mm' )
+		this.fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', dia);
 	}
 // ------------------------------------------------------------------------- //
 
@@ -64,14 +68,15 @@ class Publicacion {
 	}
 
 	def cambiarEstado(){
-		if (this.estado == EstadoPublicacion.ABIERTA)
-			this.setEstado(EstadoPublicacion.CERRADA)
-		else
-			this.setEstado(EstadoPublicacion.ABIERTA)
+		this.setEstado((this.estado == EstadoPublicacion.ABIERTA) ? EstadoPublicacion.CERRADA : EstadoPublicacion.ABIERTA)
 	}
 
 	def agregarCalificacion(Calificacion calificacion){
-		this.setCalificaciones(this.calificaciones+[calificacion])
+		this.calificaciones << calificacion
+	}
+
+	def agregarComentario(Comentario comentario){
+		this.comentarios << comentario
 	}
 
 	def modificarTexto(String nuevoTexto){

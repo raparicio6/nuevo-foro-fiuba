@@ -13,8 +13,8 @@ class ComentarioService {
       comentario
     }
 
-    def agregarComentario (Comentario comentarioAComentar, Comentario comentario){
-      comentarioAComentar.setComentarios(comentarioAComentar.getComentarios() + [comentario])
+    def agregarComentario (Comentario comentarioAComentar, Comentario comentario){      
+      comentarioAComentar.agregarComentario(comentario)
     }
 
     def modificarTexto (Comentario comentario, String nuevoTexto){

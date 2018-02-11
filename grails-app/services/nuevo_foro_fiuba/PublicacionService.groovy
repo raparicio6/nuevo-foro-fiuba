@@ -12,8 +12,8 @@ class PublicacionService {
       publicacion
     }
 
-    def agregarComentario (Publicacion publicacion, Comentario comentario){
-      publicacion.setComentarios(publicacion.getComentarios() + [comentario])
+    def agregarComentario (Publicacion publicacion, Comentario comentario){      
+      publicacion.agregarComentario(comentario)
     }
 
     def modificarTexto (Publicacion publicacion, String nuevoTexto){

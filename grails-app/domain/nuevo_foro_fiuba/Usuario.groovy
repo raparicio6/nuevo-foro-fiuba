@@ -43,23 +43,24 @@ class Usuario {
 		this.promedioCalificaciones = 3.5
 	}
 
-
 // ------------------------------------------------------------------------- //
 	def comentarPublicacion(Comentario comentario, Publicacion publicacionAComentar){
-		if (publicacionAComentar.estaCerrada()){
-			throw new PublicacionCerradaException()//no se puede comentar una publicacion cerrada
-		}
-		if (publicacionAComentar.obtenerPromedioRequeridoParaComentar() > this.promedioCalificaciones){
+		//no se puede comentar una publicacion cerrada
+		if (publicacionAComentar.estaCerrada())
+			throw new PublicacionCerradaException()
+
+		if (publicacionAComentar.obtenerPromedioRequeridoParaComentar() > this.promedioCalificaciones)
 			throw new PromedioInsuficienteException()
-		}
-		this.setComentarios(this.comentarios+[comentario])
+
+		this.comentarios << comentario
 	}
 
 	def comentarComentario(Comentario comentario, Comentario comentarioAComentar){
-		if (comentarioAComentar.publicacionComentada.estaCerrada()){
-			throw new PublicacionCerradaException() //no se puede comentar una publicacion cerrada
-		}
-		this.setComentarios(this.comentarios+[comentario])
+		//no se puede comentar una publicacion cerrada
+		if (comentarioAComentar.publicacionComentada.estaCerrada())
+			throw new PublicacionCerradaException()
+
+		this.comentarios << comentario
 	}
 
 	Boolean esDueñoDeLaPublicacion(Publicacion publicacion){
@@ -111,6 +112,7 @@ class Usuario {
 	}
 
 	def guardarMensaje(InformacionMensajeUsuario informacion){
-		this.setMensajes(this.mensajes + [informacion])
+		this.mensajes << informacion
 	}
+
 }

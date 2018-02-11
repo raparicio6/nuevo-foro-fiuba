@@ -103,13 +103,22 @@
               <div class="col-md-9" style="padding-left:0px; padding-right:0px">
                 <ul class="list-group">
                   <li class="list-group-item">
-                    Usuario Creador: ${comentario.usuarioCreador.nombre}
+                    Usuario Creador:
+                    <span class="label label-info">
+                      ${comentario.usuarioCreador.nombre}
+                    </span>
                   </li>
                   <li class="list-group-item">
-                    Fecha y hora: ${comentario.fechaHora}
+                    Fecha y hora de creaci&oacute;n:
+                    <span class="label label-info">
+                      ${comentario.fechaHoraCreacion}
+                    </span>
                   </li>
                   <li class="list-group-item">
-                    Promedio de calificaciones del usuario que comenta: ${comentario.usuarioCreador.promedioCalificaciones}
+                    Promedio de calificaciones del usuario que comenta:
+                    <span class="label label-info">
+                      ${comentario.usuarioCreador.promedioCalificaciones}
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -162,7 +171,7 @@
                 <tr>
                   <th>Nombre usuario</th>
                   <th>Mensaje</th>
-                  <th>Hora</th>
+                  <th>Fecha y hora de creaci&oacute;n</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -171,7 +180,7 @@
                   <tr>
                     <td>${comentarioInstance.usuarioCreador.nombre}</td>
                     <td>${comentarioInstance.texto}</td>
-                    <td>${comentarioInstance.fechaHora}</td>
+                    <td>${comentarioInstance.fechaHoraCreacion}</td>
                     <td>
                       <g:link controller="comentario" action="verComentario" id="${comentarioInstance.id}" params="[idUsuario:"${usuario.id}"]">
                         <span class="glyphicon glyphicon-zoom-in"></span>

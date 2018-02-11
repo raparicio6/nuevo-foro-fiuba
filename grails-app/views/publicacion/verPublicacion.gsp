@@ -118,7 +118,10 @@
                       </g:else>
                   </li>
                   <li class="list-group-item">
-                    Usuario Creador: ${publicacion.usuarioCreador.nombre}
+                    Usuario Creador:
+                    <span class="label label-info">
+                      ${publicacion.usuarioCreador.nombre}
+                    </span>
                   </li>
                   <li class="list-group-item">
                       Materia:
@@ -135,14 +138,26 @@
                       </g:else>
                   </li>
                   <li class="list-group-item">
-                    Estado: ${publicacion.estado}
+                    Estado:
+                    <span class="label label-info">
+                       ${publicacion.estado}
+                    </span>
                   </li>
                   <li class="list-group-item">
-                    Promedio de calificaciones del usuario creador: ${publicacion.usuarioCreador.promedioCalificaciones}
+                    Promedio de calificaciones del usuario creador:
+                    <span class="label label-info">
+                      ${publicacion.usuarioCreador.promedioCalificaciones}
+                    </span>
                   </li>
                   <li class="list-group-item">
                     Materias requeridas para comentar:
                     <g:field name="a" type="checkbox"/>
+                  </li>
+                  <li class="list-group-item">
+                    Fecha y hora de creaci&oacute;n:
+                    <span class="label label-info">
+                      ${publicacion.fechaHoraCreacion}
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -194,7 +209,7 @@
                 <tr>
                   <th>Nombre usuario</th>
                   <th>Mensaje</th>
-                  <th>Hora</th>
+                  <th>Fecha y hora de creaci&oacute;n</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -203,7 +218,7 @@
                   <tr>
                     <td>${comentario.usuarioCreador.nombre}</td>
                     <td>${comentario.texto}</td>
-                    <td>${comentario.fechaHora}</td>
+                    <td>${comentario.fechaHoraCreacion}</td>
                     <td>
                       <g:link controller="comentario" action="verComentario" id="${comentario.id}" params="[idUsuario:"${usuario.id}"]" title="Ver">
                         <span class="glyphicon glyphicon-zoom-in"></span>

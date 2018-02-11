@@ -9,16 +9,12 @@ class UsuarioService {
 
     Usuario crearUsuario(String nombre, String apellido, String nombreUsuario){
       Usuario usuario = new Usuario(nombre, apellido, nombreUsuario)
-      usuario.save()
+      usuario.save(failOnError: true)
       return usuario
     }
 
     def enviarMensaje(Usuario emisor, Usuario receptor, InformacionMensajeUsuario infoEmisor, InformacionMensajeUsuario infoReceptor){
       emisor.enviarMensaje(receptor, infoEmisor, infoReceptor)
-    }
-
-    def agregarComentario (Usuario usuario, Comentario comentario){
-      usuario.setComentarios(usuario.getComentarios() + [comentario])
     }
 
     def comentarPublicacion (Usuario usuario, Comentario comentario, Publicacion publicacionAComentar){
@@ -49,6 +45,7 @@ class UsuarioService {
       calificaciones = calificaciones.flatten()
       def contador = 0
       calificaciones.collect {calificacion -> contador += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * calificacion.puntaje.numero}
+      // la siguiente linea crashea porque ahora el promedio es float, no mas integer
       usuario.setPromedioCalificaciones(contador.intdiv(calificaciones.size()))
       //siempre va a tener al menos una calificacion
     }
