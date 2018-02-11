@@ -82,11 +82,11 @@ class PublicacionController {
     }
 
     def calificarPositivo(long id, long idUsuario){
-      calificarPublicacion(Puntaje.TipoPuntaje.MEGUSTA, id, idUsuario)
+      calificarPublicacion(Puntaje.TipoPuntaje.ME_GUSTA, id, idUsuario)
     }
 
     def calificarNegativo(long id, long idUsuario){
-      calificarPublicacion(Puntaje.TipoPuntaje.NOMEGUSTA, id, idUsuario)
+      calificarPublicacion(Puntaje.TipoPuntaje.NO_ME_GUSTA, id, idUsuario)
     }
 
     def calificarPublicacion(Puntaje.TipoPuntaje tipo, long id, long idUsuario){

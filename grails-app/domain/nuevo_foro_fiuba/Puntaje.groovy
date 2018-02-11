@@ -1,32 +1,30 @@
 package nuevo_foro_fiuba
 
 class Puntaje { // VALUE OBJECT
-  
+
     enum TipoPuntaje  {
-      MEGUSTA,
-      NOMEGUSTA,
+      ME_GUSTA,
+      NO_ME_GUSTA,
 
       static Integer getProporcion(TipoPuntaje tipo){
-          if (tipo == TipoPuntaje.MEGUSTA)
+          if (tipo == TipoPuntaje.ME_GUSTA)
             return 1
-          if (tipo == TipoPuntaje.NOMEGUSTA)
+          if (tipo == TipoPuntaje.NO_ME_GUSTA)
             return -1
       }
     }
 
-    Integer numero
+    Float numero
     TipoPuntaje tipo
 
     static constraints = {}
 // ------------------------------------------------------------------------- //
 
-    Puntaje(TipoPuntaje tipo, Integer numero) {
+    Puntaje(final TipoPuntaje tipo, final Float numero) {
       this.tipo = tipo
       this.numero = numero
     }
 // ------------------------------------------------------------------------- //
-    def calcular (Usuario usuario){
-      this.setNumero(usuario.getPromedioCalificaciones() + (0**usuario.getPromedioCalificaciones()))
-    }
+
 
 }

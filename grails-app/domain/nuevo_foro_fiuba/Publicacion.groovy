@@ -11,7 +11,7 @@ class Publicacion {
 	Usuario usuarioCreador
 	Materia materiaRelacionada
 	Catedra catedraRelacionada
-	Integer promedioRequeridoParaComentar
+	Float promedioRequeridoParaComentar
 	Set <Materia> materiasNecesariasParaComentar
 	Set <Comentario> comentarios
 	Archivo archivoAdjunto
@@ -59,7 +59,7 @@ class Publicacion {
 		this.estado==EstadoPublicacion.CERRADA
 	}
 
-	Integer obtenerPromedioRequeridoParaComentar(){
+	Float obtenerPromedioRequeridoParaComentar(){
 		this.promedioRequeridoParaComentar
 	}
 
@@ -86,7 +86,7 @@ class Publicacion {
 		this.setCatedraRelacionada(catedra)
 	}
 
-	def modificarPromedioRequeridoParaComentar(Integer promedio){
+	def modificarPromedioRequeridoParaComentar(Float promedio){
 		this.setPromedioRequeridoParaComentar(promedio)
 	}
 }

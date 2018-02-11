@@ -42,11 +42,11 @@ class ComentarioController {
     }
 
     def calificarPositivo(long id, long idUsuario){
-      calificarComentario(Puntaje.TipoPuntaje.MEGUSTA, id, idUsuario)
+      calificarComentario(Puntaje.TipoPuntaje.ME_GUSTA, id, idUsuario)
     }
 
     def calificarNegativo(long id, long idUsuario){
-      calificarComentario(Puntaje.TipoPuntaje.NOMEGUSTA, id, idUsuario)
+      calificarComentario(Puntaje.TipoPuntaje.NO_ME_GUSTA, id, idUsuario)
     }
 
     def calificarComentario(Puntaje.TipoPuntaje tipo, long id, long idUsuario){

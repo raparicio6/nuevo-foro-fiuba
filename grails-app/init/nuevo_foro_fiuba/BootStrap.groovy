@@ -38,15 +38,14 @@ class BootStrap {
       comentario2.save(failOnError:true)
       publicacion.comentarios += [comentario]
       comentario.comentarios += [comentario2]
-      usuario.setPromedioCalificaciones(3)
+      usuario.setPromedioCalificaciones(4)
       Cursada cursada2 = new Cursada (usuario, catedra2)
       cursada2.save(failOnError:true)
       usuario.setCursadas(usuario.cursadas+=[cursada2])
       Cursada cursada3 = new Cursada (usuario2, catedra3)
       cursada3.save(failOnError:true)
       usuario2.setCursadas(usuario2.cursadas+=[cursada3])
-      Puntaje puntaje = new Puntaje (Puntaje.TipoPuntaje.MEGUSTA,4)
-      puntaje.save(failOnError:true)
+      Puntaje puntaje = new Puntaje (Puntaje.TipoPuntaje.ME_GUSTA, 3.5)      
       Calificacion calificacion = new Calificacion (usuario2, puntaje, publicacion, null)
       calificacion.save(failOnError:true)
       publicacion.agregarCalificacion(calificacion)

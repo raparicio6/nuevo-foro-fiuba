@@ -9,7 +9,7 @@ class Usuario {
 	Set <Comentario> comentarios
 	Set <InformacionMensajeUsuario> mensajes
 	Set <Cursada> cursadas
-	Integer promedioCalificaciones
+	Float promedioCalificaciones
 
 	static hasMany = [
 		publicaciones: Publicacion,
@@ -26,7 +26,7 @@ class Usuario {
 		comentarios blank:false, nullable: false
 		cursadas blank:false, nullable: false
 		mensajes blank:false, nullable: false
-		promedioCalificaciones blank:false, nullable: false, min:0
+		promedioCalificaciones blank:false, nullable: false, min:0F
 		}
 
 // ------------------------------------------------------------------------- //
@@ -40,7 +40,7 @@ class Usuario {
 		this.mensajes = []
 		this.comentarios = []
 		this.cursadas = []
-		this.promedioCalificaciones = 0
+		this.promedioCalificaciones = 3.5
 	}
 
 

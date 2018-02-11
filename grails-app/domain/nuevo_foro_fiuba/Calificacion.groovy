@@ -7,6 +7,8 @@ class Calificacion {
 	Comentario comentario
 	Puntaje puntaje
 
+		static embedded = ['puntaje']
+
     static constraints = {
     	usuario blank: false, nullable: false
 			publicacion blank:false, nullable:true
