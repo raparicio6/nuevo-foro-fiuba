@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    <meta name="layout" content="main2"/>
+    <meta name="layout" content="mainPantallas"/>
     <title>Nuevo foro fiuba</title>
 
 </head>

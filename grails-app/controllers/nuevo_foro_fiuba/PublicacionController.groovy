@@ -92,9 +92,9 @@ class PublicacionController {
         usuarioService.calificar(usuarioInstance, publicacionInstance, calificacion)
         usuarioService.actualizarPromedioCalificaciones(publicacionInstance.usuarioCreador)
       }
-      catch (UsuarioYaCalificoException usuarioCalificoException){
+      catch (UsuarioYaCalificoException){
         calificacionService.eliminarCalificacion(calificacion)
-        flash.message = usuarioCalificoException.MENSAJE
+        flash.message = UsuarioYaCalificoException.MENSAJE
       }
       redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
     }

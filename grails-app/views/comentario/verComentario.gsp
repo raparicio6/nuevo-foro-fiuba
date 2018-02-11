@@ -3,10 +3,9 @@
 <html>
 
   <head>
-    <meta name="layout" content="main2" />
+    <meta name="layout" content="mainPantallas" />
     <title>Comentario</title>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
   </head>
 
   <body>

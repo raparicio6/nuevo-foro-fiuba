@@ -4,7 +4,7 @@ class Publicacion {
 
 	enum EstadoPublicacion {
 		CERRADA,
-		ABIERTA,
+		ABIERTA,		
 	}
 
 	String texto
