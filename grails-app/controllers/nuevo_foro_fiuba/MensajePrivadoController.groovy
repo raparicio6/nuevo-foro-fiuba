@@ -1,7 +1,6 @@
 package nuevo_foro_fiuba
 
 import grails.gorm.transactions.Transactional
-import nuevo_foro_fiuba.InformacionMensajeUsuario.RolUsuario
 
 @Transactional
 class MensajePrivadoController {
@@ -18,8 +17,8 @@ class MensajePrivadoController {
       def usuarioCreadorInstance = Usuario.get(idUsuarioCreador)
       def usuarioReceptorInstance = Usuario.get(idUsuarioReceptor)
       MensajePrivado mensajePrivado = mensajePrivadoService.crearMensaje(texto, mensajeAlCualResponde, archivoAdjunto)
-      InformacionMensajeUsuario informacionEmisor = mensajePrivadoService.crearInformacion(usuarioCreadorInstance, mensaje, RolUsuario.emisor)
-      InformacionMensajeUsuario informacionReceptor = mensajePrivadoService.crearInformacion(usuarioReceptorInstance, mensaje, RolUsuario.receptor)
+      InformacionMensajeUsuario informacionEmisor = mensajePrivadoService.crearInformacion(usuarioCreadorInstance, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
+      InformacionMensajeUsuario informacionReceptor = mensajePrivadoService.crearInformacion(usuarioReceptorInstance, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
       usuarioService.enviarMensaje(usuarioCreadorInstance, usuarioReceptorInstance, informacionEmisor, informacionReceptor)
     }
 

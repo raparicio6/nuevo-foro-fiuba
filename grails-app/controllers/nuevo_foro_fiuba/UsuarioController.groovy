@@ -52,13 +52,13 @@ class UsuarioController {
           try{
             usuarioService.comentarPublicacion(usuarioLogin,comentario,publicacionInstance)
           }
-          catch (PromedioInsuficienteException a){
+          catch (PromedioInsuficienteException promedioInsException){
             comentarioService.eliminarComentario(comentario)
-            flash.message = "El promedio de calificaciones del usuario es insuficiente para comentar esta publicacion"
+            flash.message = promedioInsException.MENSAJE
           }
-          catch (PublicacionCerradaException b){
+          catch (PublicacionCerradaException publicacionCerradaException){
             comentarioService.eliminarComentario(comentario)
-            flash.message = "No se puede comentar una publicacion cerrada"
+            flash.message = publicacionCerradaException.MENSAJE
           }
           publicacionService.agregarComentario(publicacionInstance,comentario)
           redirect(controller:"publicacion", action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
@@ -68,9 +68,9 @@ class UsuarioController {
           try{
             usuarioService.comentarComentario(usuarioLogin,comentario,comentarioInstance)
           }
-          catch (PublicacionCerradaException d){
+          catch (PublicacionCerradaException publicacionCerradaException){
             comentarioService.eliminarComentario(comentario)
-            flash.message = "No se puede comentar una publicacion cerrada"
+            flash.message = publicacionCerradaException.MENSAJE
           }
           comentarioService.agregarComentario(comentarioInstance,comentario)
           redirect(controller:"comentario", action: "verComentario", id: comentarioInstance.id, params: [idUsuario:idUsuario])

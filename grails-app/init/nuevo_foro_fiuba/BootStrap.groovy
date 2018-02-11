@@ -1,11 +1,6 @@
 package nuevo_foro_fiuba
-import nuevo_foro_fiuba.Puntaje.TipoPuntaje
 
 class BootStrap {
-
-    Usuario usuarioLogin
-
-
 
     def init = { servletContext ->
       Usuario usuario = new Usuario ("NombreUsuario_", "ApellidoUsuario_", "NickUsuario_")
@@ -43,7 +38,6 @@ class BootStrap {
       comentario2.save(failOnError:true)
       publicacion.comentarios += [comentario]
       comentario.comentarios += [comentario2]
-      usuarioLogin = Usuario.get(1)
       usuario.setPromedioCalificaciones(3)
       Cursada cursada2 = new Cursada (usuario, catedra2)
       cursada2.save(failOnError:true)
@@ -51,7 +45,7 @@ class BootStrap {
       Cursada cursada3 = new Cursada (usuario2, catedra3)
       cursada3.save(failOnError:true)
       usuario2.setCursadas(usuario2.cursadas+=[cursada3])
-      Puntaje puntaje = new Puntaje (TipoPuntaje.meGusta,4)
+      Puntaje puntaje = new Puntaje (Puntaje.TipoPuntaje.MEGUSTA,4)
       puntaje.save(failOnError:true)
       Calificacion calificacion = new Calificacion (usuario2, puntaje, publicacion, null)
       calificacion.save(failOnError:true)

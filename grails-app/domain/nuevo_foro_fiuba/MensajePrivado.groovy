@@ -3,7 +3,8 @@ package nuevo_foro_fiuba
 class MensajePrivado {
 
 	enum EstadoMensajePrivado {
-		vigente, eliminado
+		VIGENTE,
+		ELIMINADO,
 	}
 
 	String texto
@@ -22,6 +23,6 @@ class MensajePrivado {
     	this.texto = texto
 			this.mensajeAlCualSeResponde = mensajeAlCualSeResponde
 			this.archivo = archivo
-			this.estado = EstadoMensajePrivado.vigente
+			this.estado = EstadoMensajePrivado.VIGENTE
     }
 }

@@ -1,5 +1,6 @@
 package nuevo_foro_fiuba
 
+
 class Comentario {
 
 	String texto
@@ -8,7 +9,7 @@ class Comentario {
 	Comentario comentarioComentado
 	Set <Comentario> comentarios
 	Set <Calificacion> calificaciones
-	String fechaHora
+	Date fechaHora
 
 	static hasMany = [
 		comentarios: Comentario
@@ -32,7 +33,8 @@ class Comentario {
 		this.comentarioComentado =  comentarioComentado
 		this.comentarios = []
 		this.calificaciones = []
-		this.fechaHora = new Date().format( 'dd/MM/yyyy hh:mm' )
+		String dia = new Date().format( 'dd/MM/yyyy hh:mm' )
+		this.fechaHora = Date.parse('dd/MM/yyyy hh:mm', dia);
 	}
 // ------------------------------------------------------------------------- //
 	def modificarTexto(String nuevoTexto){

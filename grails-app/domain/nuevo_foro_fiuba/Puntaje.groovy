@@ -1,9 +1,17 @@
 package nuevo_foro_fiuba
 
-class Puntaje {
-
+class Puntaje { // VALUE OBJECT
+  
     enum TipoPuntaje  {
-      meGusta, noMeGusta
+      MEGUSTA,
+      NOMEGUSTA,
+
+      static Integer getProporcion(TipoPuntaje tipo){
+          if (tipo == TipoPuntaje.MEGUSTA)
+            return 1
+          if (tipo == TipoPuntaje.NOMEGUSTA)
+            return -1
+      }
     }
 
     Integer numero
@@ -21,10 +29,4 @@ class Puntaje {
       this.setNumero(usuario.getPromedioCalificaciones() + (0**usuario.getPromedioCalificaciones()))
     }
 
-    static Integer getSignoTipo(TipoPuntaje tipo){
-        if (tipo == TipoPuntaje.meGusta)
-          return 1
-        if (tipo == TipoPuntaje.noMeGusta)
-          return -1
-    }
 }

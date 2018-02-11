@@ -1,6 +1,4 @@
 package nuevo_foro_fiuba
-import nuevo_foro_fiuba.Publicacion.EstadoPublicacion
-
 import grails.gorm.transactions.Transactional
 
 @Transactional

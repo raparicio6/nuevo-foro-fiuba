@@ -3,7 +3,8 @@ package nuevo_foro_fiuba
 class Publicacion {
 
 	enum EstadoPublicacion {
-		cerrada, abierta
+		CERRADA,
+		ABIERTA,
 	}
 
 	String texto
@@ -48,14 +49,14 @@ class Publicacion {
 		this.materiasNecesariasParaComentar = []
 		this.comentarios = []
 		this.archivoAdjunto = null
-		this.estado = EstadoPublicacion.abierta
+		this.estado = EstadoPublicacion.ABIERTA
 		this.encuesta = null
 		this.calificaciones = []
 	}
 // ------------------------------------------------------------------------- //
 
 	Boolean estaCerrada(){
-		this.estado==EstadoPublicacion.cerrada
+		this.estado==EstadoPublicacion.CERRADA
 	}
 
 	Integer obtenerPromedioRequeridoParaComentar(){
@@ -63,10 +64,10 @@ class Publicacion {
 	}
 
 	def cambiarEstado(){
-		if (this.estado == EstadoPublicacion.abierta)
-			this.setEstado(EstadoPublicacion.cerrada)
+		if (this.estado == EstadoPublicacion.ABIERTA)
+			this.setEstado(EstadoPublicacion.CERRADA)
 		else
-			this.setEstado(EstadoPublicacion.abierta)
+			this.setEstado(EstadoPublicacion.ABIERTA)
 	}
 
 	def agregarCalificacion(Calificacion calificacion){

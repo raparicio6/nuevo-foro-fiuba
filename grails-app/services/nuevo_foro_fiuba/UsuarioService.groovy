@@ -48,7 +48,7 @@ class UsuarioService {
       calificaciones += comentarios.collect {comentario -> comentario.calificaciones}
       calificaciones = calificaciones.flatten()
       def contador = 0
-      calificaciones.collect {calificacion -> contador += Puntaje.getSignoTipo(calificacion.puntaje.tipo) * calificacion.puntaje.numero}
+      calificaciones.collect {calificacion -> contador += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * calificacion.puntaje.numero}
       usuario.setPromedioCalificaciones(contador.intdiv(calificaciones.size()))
       //siempre va a tener al menos una calificacion
     }

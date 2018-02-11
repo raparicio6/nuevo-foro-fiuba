@@ -1,6 +1,5 @@
 package nuevo_foro_fiuba
 
-import nuevo_foro_fiuba.Puntaje.TipoPuntaje
 import grails.gorm.transactions.Transactional
 
 @Transactional
@@ -43,14 +42,14 @@ class ComentarioController {
     }
 
     def calificarPositivo(long id, long idUsuario){
-      calificarComentario(TipoPuntaje.meGusta, id, idUsuario)
+      calificarComentario(Puntaje.TipoPuntaje.MEGUSTA, id, idUsuario)
     }
 
     def calificarNegativo(long id, long idUsuario){
-      calificarComentario(TipoPuntaje.noMeGusta, id, idUsuario)
+      calificarComentario(Puntaje.TipoPuntaje.NOMEGUSTA, id, idUsuario)
     }
 
-    def calificarComentario(TipoPuntaje tipo, long id, long idUsuario){
+    def calificarComentario(Puntaje.TipoPuntaje tipo, long id, long idUsuario){
       def comentarioInstance = Comentario.get(id)
       def usuarioInstance = Usuario.get(idUsuario)
       def calificacion = calificacionService.crearCalificacion(usuarioInstance, puntajeService.crearPuntaje(tipo, usuarioInstance), null,comentarioInstance)
@@ -58,9 +57,9 @@ class ComentarioController {
         usuarioService.calificar(usuarioInstance, comentarioInstance, calificacion)
         usuarioService.actualizarPromedioCalificaciones(comentarioInstance.usuarioCreador)
       }
-      catch (UsuarioYaCalificoException e){
+      catch (UsuarioYaCalificoException usuarioCalificoException){
         calificacionService.eliminarCalificacion(calificacion)
-        flash.message = "No se puede calificar dos veces el mismo comentario"
+        flash.message = usuarioCalificoException.MENSAJE
       }
       redirect (action: "verComentario", id: comentarioInstance.id, params: [idUsuario:idUsuario])
     }
