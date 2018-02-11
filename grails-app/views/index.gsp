@@ -1,26 +1,22 @@
 <!doctype html>
 <html>
 <head>
-
     <meta name="layout" content="mainPantallas"/>
-    <title>Nuevo foro fiuba</title>
-
+    <title>Iniciar sesi&oacute;n</title>
 </head>
 <body>
+    <div class="container">
 
-    <div role="presentation">
-      <div class="grails-logo-container">
-        <asset:image src="Logo.jpg" class="grails-logo"/>
+      <br/>
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <g:form controller="usuario" action="seleccionarUsuario" max="10">
+            <g:actionSubmit  action="seleccionarUsuario" value="Iniciar sesion" class="btn btn-warning"  />
+          </g:form>
+        </div>
       </div>
-    </div>
 
-    <div id="content" role="main">
-      <h1>
-        <g:form controller="usuario" action="seleccionarUsuario" max="10">
-          <g:actionSubmit  action="seleccionarUsuario" value="Iniciar sesion" />
-        </g:form>
-      </h1>
-    </div>
-
+  </div>
 </body>
 </html>

@@ -57,9 +57,9 @@ class ComentarioController {
         usuarioService.calificar(usuarioInstance, comentarioInstance, calificacion)
         usuarioService.actualizarPromedioCalificaciones(comentarioInstance.usuarioCreador)
       }
-      catch (UsuarioYaCalificoException){
+      catch (UsuarioYaCalificoException e){
         calificacionService.eliminarCalificacion(calificacion)
-        flash.message = UsuarioYaCalificoException.MENSAJE
+        flash.message = e.MENSAJE
       }
       redirect (action: "verComentario", id: comentarioInstance.id, params: [idUsuario:idUsuario])
     }

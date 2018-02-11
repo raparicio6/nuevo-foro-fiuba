@@ -22,10 +22,7 @@
                 </a></li>
                 <li>
                   <g:link action="listaPublicaciones" max="10" id="${usuario.id}">${"Volver al listado"}</g:link>
-                </li>
-                <li><a>
-                  ${usuario.nombre}
-                </a></li>
+                </li>                
               </ul>
             </div>
           </div>

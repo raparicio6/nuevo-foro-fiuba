@@ -20,19 +20,23 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-md-12 text-center">
+      <div class="col-md-12">
         <div class="jumbotron" style="background:#b22c49; margin-bottom:0px;">
-          <h1>
-           Nuevo Foro Fiuba</h1>
+          <div class="row">
+          <div class="col-md-4 col-md-offset-1">
+            <asset:image src="Logo.png" class="grails-logo" style="width:275px; height:175px;"/>
+          </div>
+          <div class="col-md-7">
+            <h1><span class="label label">Nuevo Foro Fiuba</span></h1>
+          </div>
+          </div>
         </div>
       </div>
     </div>
 
   </div>
 
-  <g:layoutBody/>
-
-  <!-- <div class="footer" role="contentinfo"></div> -->
+  <g:layoutBody/>   
 
   <div id="spinner" class="spinner" style="display:none;">
     <g:message code="spinner.alt" default="Loading&hellip;" />

@@ -52,13 +52,13 @@ class UsuarioController {
           try{
             usuarioService.comentarPublicacion(usuarioLogin,comentario,publicacionInstance)
           }
-          catch (PromedioInsuficienteException){
+          catch (PromedioInsuficienteException e){
             comentarioService.eliminarComentario(comentario)
-            flash.message = PromedioInsuficienteException.MENSAJE
+            flash.message = e.MENSAJE
           }
-          catch (PublicacionCerradaException){
+          catch (PublicacionCerradaException e){
             comentarioService.eliminarComentario(comentario)
-            flash.message = PublicacionCerradaException.MENSAJE
+            flash.message = e.MENSAJE
           }
           publicacionService.agregarComentario(publicacionInstance,comentario)
           redirect(controller:"publicacion", action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
@@ -68,9 +68,9 @@ class UsuarioController {
           try{
             usuarioService.comentarComentario(usuarioLogin,comentario,comentarioInstance)
           }
-          catch (PublicacionCerradaException){
+          catch (PublicacionCerradaException e){
             comentarioService.eliminarComentario(comentario)
-            flash.message = PublicacionCerradaException.MENSAJE
+            flash.message = e.MENSAJE
           }
           comentarioService.agregarComentario(comentarioInstance,comentario)
           redirect(controller:"comentario", action: "verComentario", id: comentarioInstance.id, params: [idUsuario:idUsuario])
