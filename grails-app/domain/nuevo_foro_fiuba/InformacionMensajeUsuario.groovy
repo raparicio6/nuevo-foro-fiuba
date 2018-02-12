@@ -12,9 +12,9 @@ class InformacionMensajeUsuario {
     RolUsuarioMensaje rolUsuario
 
     static constraints = {
-      usuario blank:false, nullable:false
-      mensajePrivado blank:false, nullable:false
-      rolUsuario blank:false, nullable:false
+      usuario nullable:false
+      mensajePrivado nullable:false
+      rolUsuario nullable:false
     }
 
     InformacionMensajeUsuario(Usuario usuario, MensajePrivado mensajePrivado, RolUsuarioMensaje rolUsuario) {

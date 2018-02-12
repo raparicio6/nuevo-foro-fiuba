@@ -6,6 +6,8 @@ class Cursada {
     Catedra catedra
 
     static constraints = {
+      usuario nullable:false
+      catedra nullable:false
     }
 
     Cursada(Usuario usuario, Catedra catedra) {

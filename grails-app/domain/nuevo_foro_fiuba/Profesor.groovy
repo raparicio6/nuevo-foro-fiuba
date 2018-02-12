@@ -11,7 +11,7 @@ class Profesor {
 
     static constraints = {
     	nombre blank:false, nullable:false
-    	catedras blank:false, nullable:false
+    	catedras nullable:false
     }
 
     Profesor(String nombre){

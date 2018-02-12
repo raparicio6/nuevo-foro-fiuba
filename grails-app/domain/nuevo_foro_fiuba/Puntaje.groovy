@@ -14,13 +14,16 @@ class Puntaje { // VALUE OBJECT
       }
     }
 
-    Float numero
+    Integer numero
     TipoPuntaje tipo
 
-    static constraints = {}
+    static constraints = {
+      numero nullable:false
+      tipo nullable:false
+    }
 // ------------------------------------------------------------------------- //
 
-    Puntaje(final TipoPuntaje tipo, final Float numero) {
+    Puntaje(final TipoPuntaje tipo, Integer numero) {
       this.tipo = tipo
       this.numero = numero
     }

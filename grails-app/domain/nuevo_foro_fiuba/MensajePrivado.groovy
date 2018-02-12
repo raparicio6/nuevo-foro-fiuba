@@ -14,9 +14,9 @@ class MensajePrivado {
 
     static constraints = {
     	texto blank: false, nullable:false
-			mensajeAlCualSeResponde blank: false, nullable:true
-			archivo blank: false, nullable:true
-			estado blank:false, nullable:false
+			mensajeAlCualSeResponde nullable:true
+			archivo nullable:true
+			estado nullable:false
 		}
 
     MensajePrivado(String texto, MensajePrivado mensajeAlCualSeResponde, Archivo archivo){

@@ -13,7 +13,4 @@ class CalificacionService {
         calificacion
     }
 
-    def eliminarCalificacion (Calificacion calificacion){
-      calificacion.delete(failOnError: true)
-    }
 }

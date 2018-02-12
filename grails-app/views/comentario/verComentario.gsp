@@ -175,7 +175,7 @@
                 </tr>
               </thead>
               <tbody>
-                <g:each in="${comentario.comentarios}" var="comentarioInstance">
+                <g:each in="${comentarios}" var="comentarioInstance">
                   <tr>
                     <td>${comentarioInstance.usuarioCreador.nombre}</td>
                     <td>${comentarioInstance.texto}</td>
@@ -197,7 +197,7 @@
 
       <div class="row">
         <div class="col-md-5 col-md-offset-2">
-          <g:form controller="usuario" action="comentar" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.id}"]">
+          <g:form action="comentar" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.id}"]">
             <g:textArea style="height:50px" class="form-control" name="textoComentario" placeholder="Ingrese un comentario" />
             <g:submitButton name="Comentar" value="Comentar" class="btn btn-danger pull-right" style="margin-top:5px;" />
           </g:form>

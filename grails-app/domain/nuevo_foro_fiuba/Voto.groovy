@@ -5,6 +5,7 @@ class Voto {
     Usuario usuario
 
     static constraints = {
+      usuario nullable: false
     }
 
     Voto(Usuario usuario){

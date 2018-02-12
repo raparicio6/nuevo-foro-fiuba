@@ -4,7 +4,8 @@ class Publicacion {
 
 	enum EstadoPublicacion {
 		CERRADA,
-		ABIERTA,		
+		ABIERTA,
+		ELIMINADA
 	}
 
 	String texto
@@ -28,17 +29,17 @@ class Publicacion {
 
 	static constraints = {
 		texto blank: true, nullable:false
-		usuarioCreador blank: false, nullable:false
-		materiaRelacionada blank:false, nullable:true
-		catedraRelacionada blank:false, nullable:true
-		promedioRequeridoParaComentar blank:false, nullable:false
-		materiasNecesariasParaComentar blank:false, nullable:false
-		comentarios blank:false, nullable:false
-		archivoAdjunto blank:false, nullable:true
-		estado blank: false, nullable:false
-		encuesta blank:false, nullable:true
-		calificaciones blank:false, nullable:false
-		fechaHoraCreacion blank:false, nullable:false
+		usuarioCreador nullable:false
+		materiaRelacionada nullable:true
+		catedraRelacionada nullable:true
+		promedioRequeridoParaComentar nullable:false
+		materiasNecesariasParaComentar nullable:false
+		comentarios nullable:false
+		archivoAdjunto nullable:true
+		estado nullable:false
+		encuesta nullable:true
+		calificaciones nullable:false
+		fechaHoraCreacion nullable:false
     }
 // ------------------------------------------------------------------------- //
 
@@ -61,10 +62,6 @@ class Publicacion {
 
 	Boolean estaCerrada(){
 		this.estado==EstadoPublicacion.CERRADA
-	}
-
-	Float obtenerPromedioRequeridoParaComentar(){
-		this.promedioRequeridoParaComentar
 	}
 
 	def cambiarEstado(){
@@ -93,5 +90,9 @@ class Publicacion {
 
 	def modificarPromedioRequeridoParaComentar(Float promedio){
 		this.setPromedioRequeridoParaComentar(promedio)
+	}
+
+	def eliminar(){
+		this.setEstado(EstadoPublicacion.ELIMINADA)
 	}
 }

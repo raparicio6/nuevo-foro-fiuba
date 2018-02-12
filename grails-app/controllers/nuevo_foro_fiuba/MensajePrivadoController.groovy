@@ -6,7 +6,6 @@ import grails.gorm.transactions.Transactional
 class MensajePrivadoController {
 
     def mensajePrivadoService
-    def usuarioService
 
     def index(long id) {
       def usuarioInstance = Usuario.get(id)
@@ -16,20 +15,7 @@ class MensajePrivadoController {
     def enviarMensaje (long idUsuarioCreador, long  idUsuarioReceptor, String texto, MensajePrivado mensajeAlCualResponde, Archivo archivoAdjunto){
       def usuarioCreadorInstance = Usuario.get(idUsuarioCreador)
       def usuarioReceptorInstance = Usuario.get(idUsuarioReceptor)
-      MensajePrivado mensajePrivado = mensajePrivadoService.crearMensaje(texto, mensajeAlCualResponde, archivoAdjunto)
-      InformacionMensajeUsuario informacionEmisor = mensajePrivadoService.crearInformacion(usuarioCreadorInstance, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
-      InformacionMensajeUsuario informacionReceptor = mensajePrivadoService.crearInformacion(usuarioReceptorInstance, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
-      usuarioService.enviarMensaje(usuarioCreadorInstance, usuarioReceptorInstance, informacionEmisor, informacionReceptor)
+      mensajePrivadoService.enviarMensaje(usuarioCreadorInstance, usuarioReceptorInstance, texto, mensajeAlCualResponde, archivoAdjunto)
     }
 
-    def verMensaje (long idUsuario, long idMensaje, long idInformacion) {
-        def mensajeInstance = MensajePrivado.get(idMensaje)
-        def usuarioInstance = Usuario.get(idUsuario)
-        def infoInstance = InformacionMensajeUsuario.get(idInformacion)
-        // if ()
-    }
-
-    def listaMensajes (long idUsuario) {
-
-    }
 }

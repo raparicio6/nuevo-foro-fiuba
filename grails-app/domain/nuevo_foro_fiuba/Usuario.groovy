@@ -22,11 +22,11 @@ class Usuario {
 		nombre blank: false, nullable: false
 		apellido blank: false, nullable: false
 		nombreUsuario blank: false, nullable: false, unique: true
-		publicaciones blank:false, nullable: false
-		comentarios blank:false, nullable: false
-		cursadas blank:false, nullable: false
-		mensajes blank:false, nullable: false
-		promedioCalificaciones blank:false, nullable: false, min:0F
+		publicaciones nullable: false
+		comentarios nullable: false
+		cursadas nullable: false
+		mensajes nullable: false
+		promedioCalificaciones nullable: false, min:0F
 		}
 
 // ------------------------------------------------------------------------- //
@@ -40,7 +40,7 @@ class Usuario {
 		this.mensajes = []
 		this.comentarios = []
 		this.cursadas = []
-		this.promedioCalificaciones = 3.5
+		this.promedioCalificaciones = 2.5
 	}
 
 // ------------------------------------------------------------------------- //
@@ -48,19 +48,18 @@ class Usuario {
 		//no se puede comentar una publicacion cerrada
 		if (publicacionAComentar.estaCerrada())
 			throw new PublicacionCerradaException()
-
-		if (publicacionAComentar.obtenerPromedioRequeridoParaComentar() > this.promedioCalificaciones)
+		if (publicacionAComentar.getPromedioRequeridoParaComentar() > this.promedioCalificaciones)
 			throw new PromedioInsuficienteException()
-
 		this.comentarios << comentario
+		publicacionAComentar.agregarComentario(comentario)
 	}
 
 	def comentarComentario(Comentario comentario, Comentario comentarioAComentar){
 		//no se puede comentar una publicacion cerrada
 		if (comentarioAComentar.publicacionComentada.estaCerrada())
 			throw new PublicacionCerradaException()
-
 		this.comentarios << comentario
+		comentarioAComentar.agregarComentario(comentario)
 	}
 
 	Boolean esDueñoDeLaPublicacion(Publicacion publicacion){
@@ -69,10 +68,6 @@ class Usuario {
 
 	Boolean esDueñoDelComentario(Comentario comentario){
 		(comentario.getUsuarioCreador().getId() == this.id)
-	}
-
-	def modificarTexto(def objetoAModificar, String nuevoTexto){
-		objetoAModificar.modificarTexto(nuevoTexto)
 	}
 
 	def cambiarEstado(Publicacion publicacion){
@@ -88,12 +83,13 @@ class Usuario {
 	}
 
 	def eliminarPublicacion(Publicacion publicacion){
-		this.publicaciones.removeAll {it.id==publicacion.getId()}
+		this.publicaciones.removeAll {it==publicacion}
 	}
 
-	def eliminarComentario(Comentario comentario){
-		this.comentarios.removeAll {it.id==comentario.getId()}
-	}
+	// def eliminarComentario(Comentario comentario){
+	// 	this.comentarios.removeAll {it==comentario}
+	// 	comentario.eliminar()
+	// }
 
 	def modificarPromedioRequeridoParaComentar(Publicacion publicacion, Integer promedio){
 		publicacion.modificarPromedioRequeridoParaComentar(promedio)
@@ -104,6 +100,8 @@ class Usuario {
 		def calificacionesUsuario = calificaciones.findAll {idUsuario -> idUsuario == this.id}
 		if (calificacionesUsuario.size()>1)
 			throw new UsuarioYaCalificoException()
+		else
+			calificable.agregarCalificacion(calificacion)
 	}
 
 	def enviarMensaje(Usuario receptor, InformacionMensajeUsuario infoEmisor, InformacionMensajeUsuario infoReceptor){

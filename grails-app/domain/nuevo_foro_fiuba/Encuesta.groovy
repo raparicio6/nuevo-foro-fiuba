@@ -9,7 +9,7 @@ class Encuesta {
 	]
 
   static constraints = {
-	 opciones blank: false, nullable: false
+	 opciones nullable: false
   }
 
 	Encuesta(Set<Opcion> opciones){

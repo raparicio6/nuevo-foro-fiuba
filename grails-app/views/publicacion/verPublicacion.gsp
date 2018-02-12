@@ -22,7 +22,7 @@
                 </a></li>
                 <li>
                   <g:link action="listaPublicaciones" max="10" id="${usuario.id}">${"Volver al listado"}</g:link>
-                </li>                
+                </li>
               </ul>
             </div>
           </div>
@@ -210,7 +210,7 @@
                 </tr>
               </thead>
               <tbody>
-                <g:each in="${publicacion.comentarios}" var="comentario">
+                <g:each in="${comentarios}" var="comentario">
                   <tr>
                     <td>${comentario.usuarioCreador.nombre}</td>
                     <td>${comentario.texto}</td>
@@ -232,7 +232,7 @@
 
       <div class="row">
         <div class="col-md-5 col-md-offset-2">
-          <g:form controller="usuario" action="comentar" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
+          <g:form action="comentar" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
             <g:textArea name="textoComentario" style="height:50px" class="form-control" placeHolder="Ingrese un comentario" />
             <g:submitButton name="Comentar" class="btn btn-danger pull-right" style="margin-top:5px;" />
           </g:form>

@@ -7,8 +7,8 @@ class Catedra {
 	String descripcion
 
     static constraints = {
-		materia blank: false, nullable: false
-		profesor blank: false, nullable: false
+		materia  nullable: false
+		profesor nullable: false
 		descripcion blank: true, nullable: true
     }
 

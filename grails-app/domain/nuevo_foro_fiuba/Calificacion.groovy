@@ -2,18 +2,25 @@ package nuevo_foro_fiuba
 
 class Calificacion {
 
+	enum EstadoCalificacion{
+		VIGENTE,
+		ELIMINADA
+	}
+
 	Usuario usuario
 	Publicacion publicacion
 	Comentario comentario
 	Puntaje puntaje
+	EstadoCalificacion estado
 
 		static embedded = ['puntaje']
 
     static constraints = {
-    	usuario blank: false, nullable: false
-			publicacion blank:false, nullable:true
-			comentario blank:false, nullable:true
-			puntaje blank:false, nullable:false
+    	usuario nullable: false
+			publicacion  nullable:true
+			comentario  nullable:true
+			puntaje  nullable:false
+			estado nullable:false
 		}
 
 	Calificacion(Usuario usuario, Puntaje puntaje, Publicacion publicacion, Comentario comentario) {
@@ -21,6 +28,11 @@ class Calificacion {
 		this.publicacion = publicacion
     this.comentario = comentario
 		this.puntaje = puntaje
+		this.estado = EstadoCalificacion.VIGENTE
+	}
+
+	def eliminar(){
+		this.setEstado(EstadoCalificacion.ELIMINADA)
 	}
 
 }

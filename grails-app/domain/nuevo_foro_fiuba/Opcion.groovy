@@ -11,7 +11,7 @@ class Opcion {
 
     static constraints = {
     	nombre blank:false, nullable: false
-    	votos blank:false, nullable: false
+    	votos nullable: false
     }
 
     Opcion(String nombre){

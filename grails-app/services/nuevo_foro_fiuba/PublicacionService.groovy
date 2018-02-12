@@ -12,28 +12,61 @@ class PublicacionService {
       publicacion
     }
 
-    def agregarComentario (Publicacion publicacion, Comentario comentario){      
-      publicacion.agregarComentario(comentario)
+    Boolean usuarioEsDueñoDeLaPublicacion(Usuario usuario, Publicacion publicacion){
+      usuario.esDueñoDeLaPublicacion(publicacion)
     }
 
-    def modificarTexto (Publicacion publicacion, String nuevoTexto){
-      publicacion.setTexto(nuevoTexto)
+    def cambiarEstado (Usuario usuario, Publicacion publicacion){
+      usuario.cambiarEstado(publicacion)
     }
 
-    def modificarMateria (Publicacion publicacion, Materia nuevaMateria){
-      publicacion.setMateriaRelacionada(nuevaMateria)
+    def modificarTexto (Usuario usuario,def objetoAModificar, String nuevoTexto){
+      objetoAModificar.modificarTexto(nuevoTexto)
     }
 
-    def modificarCatedra (Publicacion publicacion, Catedra nuevaCatedra){
-      publicacion.setCatedraRelacionada(nuevaCatedra)
+    def modificarMateriaPublicacion (Usuario usuario, Publicacion publicacion, Materia materia){
+      usuario.modificarMateriaPublicacion(publicacion, materia)
     }
 
-    def eliminarPublicacion (Publicacion publicacion){
-      publicacion.delete(failOnError: true)
+    def modificarCatedraPublicacion (Usuario usuario, Publicacion publicacion, Catedra catedra){
+      usuario.modificarCatedraPublicacion(publicacion, catedra)
     }
 
-    def modificarPromedioRequeridoParaComentar (Publicacion publicacion, Integer promedio){
-      publicacion.setPromedioRequeridoParaComentar(promedio)
+    def modificarPromedioRequeridoParaComentar(Usuario usuario, Publicacion publicacion, Integer promedio){
+      usuario.modificarPromedioRequeridoParaComentar(publicacion, promedio)
+    }
+
+    def eliminarPublicacion (Usuario usuario, Publicacion publicacionInstance){
+      publicacionInstance.comentarios.collect {comentario -> comentario.comentarios.collect { subcomentario -> subcomentario.eliminar()}}
+      publicacionInstance.comentarios.collect {comentario2 -> comentario2.eliminar()}
+      publicacionInstance.calificaciones.collect {calificacion -> calificacion.eliminar()}
+      publicacionInstance.eliminar()
+    }
+
+    def calificarPublicacion(Usuario usuario, Publicacion publicacion, Puntaje.TipoPuntaje tipo){
+      def promedioCalificaciones = (usuario.getPromedioCalificaciones()).toInteger()
+      Integer numeroPuntaje = promedioCalificaciones + 0**promedioCalificaciones
+      Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)
+      puntaje.save(failOnError:true)
+      Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, null)
+      calificacion.save(failOnError:true)
+      usuario.calificar(publicacion, calificacion)
+      def usuarioCalificado = publicacion.getUsuarioCreador()
+      def publicaciones = usuarioCalificado.getPublicaciones()
+      def calificaciones = publicaciones.collect {publicacionInstance -> publicacionInstance.calificaciones}
+      def comentarios = usuarioCalificado.getComentarios()
+      calificaciones += comentarios.collect {comentarioInstance -> comentarioInstance.calificaciones}
+      calificaciones = calificaciones.flatten()
+      def contador = 0
+      calificaciones.collect {calificacionInstance -> contador += Puntaje.TipoPuntaje.getProporcion(calificacionInstance.puntaje.tipo) * calificacionInstance.puntaje.numero}
+      promedioCalificaciones = (contador/calificaciones.size()).toFloat()
+      usuarioCalificado.setPromedioCalificaciones(promedioCalificaciones)
+    }
+
+    def comentarPublicacion (Usuario usuario, String textoComentario, Publicacion publicacionAComentar){
+      Comentario comentario = new Comentario(textoComentario, usuario, publicacionAComentar, null)
+      comentario.save()
+      usuario.comentarPublicacion(comentario, publicacionAComentar)
     }
 
 }
