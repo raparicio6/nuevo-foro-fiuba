@@ -36,25 +36,23 @@ div {
 
 <head>
     <meta name="layout" content="mainPantallas"/>
-    <title>Crear Mensaje</title>
+    <title>Ver Mensaje</title>
 
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
 </head>
 
 <body>
-    <g:form action="enviarMensaje" params="[idUsuarioCreador:"${usuarioInstance.id}"]">
-        <div>
-            <h1>Receptor</h1>
-            <g:select  name="idUsuarioReceptor" from="${usuarios}" optionValue ="nombre" optionKey = "id" />
-        </div>
         <div>
             <h1>Texto</h1>
-            <g:textArea name="texto" placeholder="Contenido del mensaje..."/>
-            <g:textArea name="archivoAdjunto" placeholder="Path del archivo..."/>
+            <g:textArea name="texto" value="${mensaje.texto}" disabled="true"/>
         </div>
         <div>
-            <g:submitButton name="Enviar" value="Enviar mensaje"/>
+            <h1>Responder mensaje</h1>
+            <g:form action="enviarMensaje" params="[idUsuarioCreador:"${usuario.id}", idUsuarioReceptor:"${informacion.usuario.id}", mensajeAlCualResponde:"${mensaje.id}"]">
+              <g:textArea name="texto" placeholder="Escriba una respuesta..."/>
+              <g:textArea name="archivoAdjunto" placeholder="Path del archivo..."/>
+              <g:submitButton name="enviarMensaje" value="Responder"/>
+            </g:form>
         </div>
-    </g:form>
 </body>
 </html>

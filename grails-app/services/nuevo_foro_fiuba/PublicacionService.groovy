@@ -48,24 +48,15 @@ class PublicacionService {
     Integer numeroPuntaje = promedioCalificaciones + 0**promedioCalificaciones
     Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)
     Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, null)
-    calificacion.save(failOnError:true)
     usuario.calificar(publicacion, calificacion)
-    def usuarioCalificado = publicacion.getUsuarioCreador()
-    def publicaciones = usuarioCalificado.getPublicaciones()
-    def calificaciones = publicaciones.collect {publicacionInstance -> publicacionInstance.calificaciones}
-    def comentarios = usuarioCalificado.getComentarios()
-    calificaciones += comentarios.collect {comentarioInstance -> comentarioInstance.calificaciones}
-    calificaciones = calificaciones.flatten()
-    def contador = 0
-    calificaciones.collect {calificacionInstance -> contador += Puntaje.TipoPuntaje.getProporcion(calificacionInstance.puntaje.tipo) * calificacionInstance.puntaje.numero}
-    promedioCalificaciones = (contador/calificaciones.size()).toFloat()
-    usuarioCalificado.setPromedioCalificaciones(promedioCalificaciones)
+    calificacion.save(failOnError:true)
+    publicacion.getUsuarioCreador().actualizarPromedioCalificaciones()
   }
 
   def comentarPublicacion (Usuario usuario, String textoComentario, Publicacion publicacionAComentar){
     Comentario comentario = new Comentario(textoComentario, usuario, publicacionAComentar, null)
-    comentario.save(failOnError:true)
     usuario.comentarPublicacion(comentario, publicacionAComentar)
+    comentario.save(failOnError:true)
   }
 
 }

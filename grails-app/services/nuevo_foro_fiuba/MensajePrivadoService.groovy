@@ -13,14 +13,14 @@ class MensajePrivadoService {
     mensaje
   }
 
-  def enviarMensaje(Usuario emisor, Usuario receptor, String texto, MensajePrivado mensajeAlCualResponde, Archivo archivoAdjunto){
-    MensajePrivado mensaje = new MensajePrivado(texto, mensajeAlCualResponde, archivoAdjunto)
-    mensaje.save(failOnError:true)
-    InformacionMensajeUsuario infoEmisor = new InformacionMensajeUsuario (emisor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
-    infoEmisor.save(failOnError:true)
-    InformacionMensajeUsuario infoReceptor = new InformacionMensajeUsuario (receptor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
-    infoReceptor.save(failOnError:true)
+  def enviarMensaje(Usuario emisor, Usuario receptor, String texto, MensajePrivado mensajeAlCualResponde, String archivoAdjunto){
+    MensajePrivado mensaje = new MensajePrivado(texto, null, null)
+    InformacionMensajeUsuario infoEmisor = new InformacionMensajeUsuario (receptor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
+    InformacionMensajeUsuario infoReceptor = new InformacionMensajeUsuario (emisor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
     emisor.enviarMensaje(receptor, infoEmisor, infoReceptor)
+    mensaje.save(failOnError:true)
+    infoEmisor.save(failOnError:true)
+    infoReceptor.save(failOnError:true)
   }
 
 }

@@ -77,6 +77,7 @@ class Publicacion {
 	}
 
 	def agregarComentario(Comentario comentario){
+		// println(this.comentarios)
 		this.comentarios << comentario
 	}
 
