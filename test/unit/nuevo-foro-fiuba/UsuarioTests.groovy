@@ -10,10 +10,6 @@ class UsuarioTests {
         usuario = new Usuario(nombre: 'Homero', apellido: 'Simpson', nombreUsuario: 'HSimpson')
     }
 
-    void usuarioCreaUnaPublicacionY() {
-        fail "Implement me"
-    }
-
     void 'test soy un usuario que quiere comentar en una publicacion pero no tiene el promedido suficiente' () {
         Publicacion publicacion = new Publicacion(usuarioCreador: usuario, promedioRequeridoParaComentar: 4)
         Comentario comentario = new Comentario()
@@ -36,6 +32,15 @@ class UsuarioTests {
         assert shouldFail(PromedioInsuficienteException) {
             usuario.esDueñoDeLaPublicacion(publicacion)
         } == true
+    }
+
+    void 'test soy un usuario que quiere comentar en una publicacion eliminada' () {
+        Publicacion publicacion = new Publicacion(usuarioCreador: usuario, promedioRequeridoParaComentar: 4)
+        Comentario comentario = new Comentario()
+        publicaion.eliminar()
+        assert shouldFail(PublicacionEliminadaException) {
+            usuario.comentarPublicacion(comentario, publicacion)
+        }
     }
 
 }
