@@ -1,11 +1,10 @@
 package nuevo_foro_fiuba
 
-
 class Comentario {
 
 	enum EstadoComentario {
 		VIGENTE,
-		ELIMINADO
+		ELIMINADO,
 	}
 
 	String texto

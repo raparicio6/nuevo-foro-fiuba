@@ -12,17 +12,17 @@ class MensajePrivado {
 	Archivo archivo
 	EstadoMensajePrivado estado
 
-    static constraints = {
-    	texto blank: false, nullable:false
-			mensajeAlCualSeResponde nullable:true
-			archivo nullable:true
-			estado nullable:false
-		}
+  static constraints = {
+  	texto blank: false, nullable:false
+		mensajeAlCualSeResponde nullable:true
+		archivo nullable:true
+		estado nullable:false
+	}
 
-    MensajePrivado(String texto, MensajePrivado mensajeAlCualSeResponde, Archivo archivo){
-    	this.texto = texto
-			this.mensajeAlCualSeResponde = mensajeAlCualSeResponde
-			this.archivo = archivo
-			this.estado = EstadoMensajePrivado.VIGENTE
-    }
+  MensajePrivado(String texto, MensajePrivado mensajeAlCualSeResponde, Archivo archivo){
+  	this.texto = texto
+		this.mensajeAlCualSeResponde = mensajeAlCualSeResponde
+		this.archivo = archivo
+		this.estado = EstadoMensajePrivado.VIGENTE
+  }
 }

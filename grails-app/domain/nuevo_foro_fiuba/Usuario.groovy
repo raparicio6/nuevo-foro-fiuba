@@ -27,7 +27,7 @@ class Usuario {
 		cursadas nullable: false
 		mensajes nullable: false
 		promedioCalificaciones nullable: false, min:0F
-		}
+	}
 
 // ------------------------------------------------------------------------- //
 
@@ -82,15 +82,6 @@ class Usuario {
 		publicacion.cambiarCatedra(catedra)
 	}
 
-	def eliminarPublicacion(Publicacion publicacion){
-		this.publicaciones.removeAll {it==publicacion}
-	}
-
-	// def eliminarComentario(Comentario comentario){
-	// 	this.comentarios.removeAll {it==comentario}
-	// 	comentario.eliminar()
-	// }
-
 	def modificarPromedioRequeridoParaComentar(Publicacion publicacion, Integer promedio){
 		publicacion.modificarPromedioRequeridoParaComentar(promedio)
 	}
@@ -98,7 +89,8 @@ class Usuario {
 	def calificar(def calificable, Calificacion calificacion){
 		def calificaciones = calificable.calificaciones.collect {calificacionInstance -> calificacionInstance.usuario.getId()}
 		def calificacionesUsuario = calificaciones.findAll {idUsuario -> idUsuario == this.id}
-		if (calificacionesUsuario.size()>1)
+		//println(calificacionesUsuario.size().toString())
+		if (calificacionesUsuario.size()>1) // CORREGIR
 			throw new UsuarioYaCalificoException()
 		else
 			calificable.agregarCalificacion(calificacion)
@@ -111,6 +103,10 @@ class Usuario {
 
 	def guardarMensaje(InformacionMensajeUsuario informacion){
 		this.mensajes << informacion
+	}
+
+	def agregarCursada(Cursada cursada){
+		this.cursadas << cursada
 	}
 
 }

@@ -4,7 +4,7 @@ class Calificacion {
 
 	enum EstadoCalificacion{
 		VIGENTE,
-		ELIMINADA
+		ELIMINADA,
 	}
 
 	Usuario usuario
@@ -13,15 +13,15 @@ class Calificacion {
 	Puntaje puntaje
 	EstadoCalificacion estado
 
-		static embedded = ['puntaje']
+	static embedded = ['puntaje']
 
-    static constraints = {
-    	usuario nullable: false
-			publicacion  nullable:true
-			comentario  nullable:true
-			puntaje  nullable:false
-			estado nullable:false
-		}
+  static constraints = {
+  	usuario nullable: false
+		publicacion  nullable:true
+		comentario  nullable:true
+		puntaje  nullable:false
+		estado nullable:false
+	}
 
 	Calificacion(Usuario usuario, Puntaje puntaje, Publicacion publicacion, Comentario comentario) {
 		this.usuario = usuario

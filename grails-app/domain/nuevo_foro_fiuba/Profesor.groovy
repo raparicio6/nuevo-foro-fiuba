@@ -9,15 +9,14 @@ class Profesor {
 		catedras: Catedra
 	]
 
-    static constraints = {
-    	nombre blank:false, nullable:false
-    	catedras nullable:false
-    }
+  static constraints = {
+  	nombre blank:false, nullable:false
+    catedras nullable:false
+  }
 
-    Profesor(String nombre){
-    	this.nombre = nombre
-    	this.catedras = []
-    }
-
+  Profesor(String nombre){
+  	this.nombre = nombre
+    this.catedras = []
+  }
 
 }

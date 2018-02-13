@@ -5,12 +5,12 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class CalificacionService {
 
-    def serviceMethod() {}
+  def serviceMethod() {}
 
-    Calificacion crearCalificacion(Usuario usuario, Puntaje puntaje, Publicacion publicacion,Comentario comentario){
-        Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, comentario)
-        calificacion.save(failOnError:true)
-        calificacion
-    }
+  Calificacion crearCalificacion(Usuario usuario, Puntaje puntaje, Publicacion publicacion,Comentario comentario){
+    Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, comentario)
+    calificacion.save(failOnError:true)
+    calificacion
+  }
 
 }

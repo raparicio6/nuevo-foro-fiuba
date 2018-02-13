@@ -7,10 +7,10 @@ class Puntaje { // VALUE OBJECT
       NO_ME_GUSTA,
 
       static Integer getProporcion(TipoPuntaje tipo){
-          if (tipo == TipoPuntaje.ME_GUSTA)
-            return 1
-          if (tipo == TipoPuntaje.NO_ME_GUSTA)
-            return -1
+        if (tipo == TipoPuntaje.ME_GUSTA)
+          return 1
+        if (tipo == TipoPuntaje.NO_ME_GUSTA)
+          return -1
       }
     }
 
@@ -23,7 +23,7 @@ class Puntaje { // VALUE OBJECT
     }
 // ------------------------------------------------------------------------- //
 
-    Puntaje(final TipoPuntaje tipo, Integer numero) {
+    Puntaje(final TipoPuntaje tipo, final Integer numero) {
       this.tipo = tipo
       this.numero = numero
     }

@@ -9,14 +9,14 @@ class Opcion {
 		votos: Voto
 	]
 
-    static constraints = {
-    	nombre blank:false, nullable: false
-    	votos nullable: false
-    }
+  static constraints = {
+  	nombre blank:false, nullable: false
+    votos nullable: false
+  }
 
-    Opcion(String nombre){
-    	this.nombre = nombre
-			this.votos = []
-    }
+  Opcion(String nombre){
+  	this.nombre = nombre
+		this.votos = []
+  }
 
 }

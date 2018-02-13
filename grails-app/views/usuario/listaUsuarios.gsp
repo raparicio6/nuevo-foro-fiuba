@@ -25,7 +25,7 @@
 								<ul class="dropdown-menu">
 									<li> <g:link controller="${"prueba"}" id="${usuarioInstance.id}">${"[ZONA PRUEBA]"}</g:link> </li>
 									<li> <g:link controller="publicacion" action="listaPublicaciones" max="10" id="${usuarioInstance.id}">${"Ver publicaciones"}</g:link> </li>
-									<li> <g:link controller="${"crearMensaje"}" id="${usuarioInstance.id}">${"Chat"}</g:link> </li>
+									<li> <g:link controller="${"crearMensaje"}" id="${usuarioInstance.id}">${"Crear mensaje privado"}</g:link> </li>
 									<li> <g:link controller="${"usuario"}" action="listaUsuarios" id="${usuarioInstance.id}">${"Buscar usuarios"}</g:link> </li>
 									<li> <g:link controller="${"usuario"}">${"Cerrar sesion"}</g:link> </li>
 								</ul>
