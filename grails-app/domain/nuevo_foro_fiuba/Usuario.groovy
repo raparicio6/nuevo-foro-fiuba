@@ -48,6 +48,8 @@ class Usuario {
 		//no se puede comentar una publicacion cerrada
 		if (publicacionAComentar.estaCerrada())
 			throw new PublicacionCerradaException()
+		if (publicaionAComentar.estaEliminada())
+			throw new PublicacionEliminadaException()
 		if (publicacionAComentar.getPromedioRequeridoParaComentar() > this.promedioCalificaciones)
 			throw new PromedioInsuficienteException()
 		this.comentarios << comentario
