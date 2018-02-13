@@ -64,7 +64,7 @@
 				<g:each in="${usuarioInstanceList}" status="i" var="usuarioInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						<td>${fieldValue(bean: usuarioInstance, field: "nombre")}</td>
-            <td>${fieldValue(bean: usuarioInstance, field: "promedioCalificaciones")}</td>
+            <td>${usuarioInstance.promedioCalificaciones.round(2)}</td>
             <td><g:link action="verMateriasCursadas" id="${usuarioInstance.id}">${"Ver"}</g:link></td>
 					</tr>
 				</g:each>

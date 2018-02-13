@@ -142,7 +142,7 @@
                   <li class="list-group-item">
                     Promedio de calificaciones del usuario creador:
                     <span class="label label-info">
-                      ${publicacion.usuarioCreador.promedioCalificaciones}
+                      ${publicacion.usuarioCreador.promedioCalificaciones.round(2)}
                     </span>
                   </li>
                   <li class="list-group-item">
@@ -183,7 +183,7 @@
                   <tr>
                     <td>${calificacion.usuario.nombre}</td>
                     <td>${calificacion.puntaje.tipo}</td>
-                    <td>${calificacion.usuario.promedioCalificaciones}</td>
+                    <td>${calificacion.usuario.promedioCalificaciones.round(2)}</td>
                   </tr>
                 </g:each>
               </tbody>
