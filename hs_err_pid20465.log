@@ -1,0 +1,923 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007fb079022738, pid=20465, tid=0x00007fb03cc4d700
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_131-b11) (build 1.8.0_131-b11)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.131-b11 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# j  nuevo_foro_fiuba.Usuario_$$_jvst5a4_c.isDirty(Ljava/lang/String;)Z+0
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fb089938800):  JavaThread "http-nio-8080-exec-7" daemon [_thread_in_Java, id=20546, stack(0x00007fb03cb4d000,0x00007fb03cc4e000)]
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x0000000000001fa0
+
+Registers:
+RAX=0x0000000084000000, RBX=0x0000000000000048, RCX=0x0000000000001fa0, RDX=0x0000000000000004
+RSP=0x00007fb03cc433d0, RBP=0x00007fb03cc43410, RSI=0x0000000000000024, RDI=0x00007fb089938800
+R8 =0x0000000000000000, R9 =0x0000000000000023, R10=0x00007fb08f06cc00, R11=0x0000000000000002
+R12=0x0000000000000000, R13=0x00007fb03e412415, R14=0x00007fb03cc43430, R15=0x00007fb089938800
+RIP=0x00007fb079022738, EFLAGS=0x0000000000010246, CSGSFS=0x0000000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007fb03cc433d0)
+0x00007fb03cc433d0:   00007fb03cc433d0 00007fb03e412410
+0x00007fb03cc433e0:   00007fb03cc43430 00007fb03e418028
+0x00007fb03cc433f0:   0000000000000000 00007fb03e412438
+0x00007fb03cc43400:   0000000000000000 00007fb03cc43428
+0x00007fb03cc43410:   00007fb03cc43490 00007fb0790007a7
+0x00007fb03cc43420:   00000000d454daf8 00000000fe0595d0
+0x00007fb03cc43430:   0000000000001fa0 00007fb089939330
+0x00007fb03cc43440:   00007fb089938800 00007fb03cc43510
+0x00007fb03cc43450:   00007fb03cc43820 00007fb03cc434d0
+0x00007fb03cc43460:   00007fb03cc434d0 00007fb03cc43828
+0x00007fb03cc43470:   00007fb00000000c 00007fb03e412438
+0x00007fb03cc43480:   00007fb079012c80 00007fb03cc43718
+0x00007fb03cc43490:   00007fb03cc43600 00007fb08e731d16
+0x00007fb03cc434a0:   00007fb000000001 00007fb089938800
+0x00007fb03cc434b0:   00007fb03cc43710 00007fb03cc43820
+0x00007fb03cc434c0:   00007fb079012c80 01007fb00000000c
+0x00007fb03cc434d0:   00007fb089938800 00007fb064003550
+0x00007fb03cc434e0:   00007fb03e412438 00000000fe0595d0
+0x00007fb03cc434f0:   00007fb03cc43a30 00007fb0795922f7
+0x00007fb03cc43500:   0000000000000000 00007fb03cc43820
+0x00007fb03cc43510:   00007fb089938800 00007fb089939210
+0x00007fb03cc43520:   00007fb05418ee70 00007fb05418ee90
+0x00007fb03cc43530:   00007fb054196e58 00000000000080b0
+0x00007fb03cc43540:   00007fb03cc441a0 00007fb03cc43d10
+0x00007fb03cc43550:   00007fb03e412438 00007fb089938800
+0x00007fb03cc43560:   00000000000001a0 00007fb03cc43e40
+0x00007fb03cc43570:   00007fb03e412438 00007fb089938800
+0x00007fb03cc43580:   00007fb07934d090 00007fb0774a68a0
+0x00007fb03cc43590:   00007fb03cc43600 00007fb08e6e6493
+0x00007fb03cc435a0:   00007fb03e412438 00007fb089938800
+0x00007fb03cc435b0:   00007fb03cc43d30 00007fb08e7b4c94
+0x00007fb03cc435c0:   00007fb03e412438 00007fb089938800 
+
+Instructions: (pc=0x00007fb079022738)
+0x00007fb079022718:   ff 4c 8b 6d c8 4c 8b 75 d0 c3 41 0f b7 55 01 48
+0x00007fb079022728:   8b 4d d8 c1 e2 02 48 8b 5c d1 20 8b 44 d1 28 59
+0x00007fb079022738:   48 3b 01 c1 e8 1c 83 e0 0f 0f 85 13 00 00 00 0f
+0x00007fb079022748:   be 04 19 50 b9 cc 00 00 00 41 88 4d 00 e9 e9 00 
+
+Register to memory mapping:
+
+RAX=0x0000000084000000 is an unknown value
+RBX=0x0000000000000048 is an unknown value
+RCX=0x0000000000001fa0 is an unknown value
+RDX=0x0000000000000004 is an unknown value
+RSP=0x00007fb03cc433d0 is pointing into the stack for thread: 0x00007fb089938800
+RBP=0x00007fb03cc43410 is pointing into the stack for thread: 0x00007fb089938800
+RSI=0x0000000000000024 is an unknown value
+RDI=0x00007fb089938800 is a thread
+R8 =0x0000000000000000 is an unknown value
+R9 =0x0000000000000023 is an unknown value
+R10=0x00007fb08f06cc00: <offset 0xfccc00> in /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so at 0x00007fb08e0a0000
+R11=0x0000000000000002 is an unknown value
+R12=0x0000000000000000 is an unknown value
+R13=0x00007fb03e412415 is pointing into metadata
+R14=0x00007fb03cc43430 is pointing into the stack for thread: 0x00007fb089938800
+R15=0x00007fb089938800 is a thread
+
+
+Stack: [0x00007fb03cb4d000,0x00007fb03cc4e000],  sp=0x00007fb03cc433d0,  free space=984k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+j  nuevo_foro_fiuba.Usuario_$$_jvst5a4_c.isDirty(Ljava/lang/String;)Z+0
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x691d16]  JavaCalls::call_helper(JavaValue*, methodHandle*, JavaCallArguments*, Thread*)+0x1056
+V  [libjvm.so+0x99d637]  Reflection::invoke(instanceKlassHandle, methodHandle, Handle, bool, objArrayHandle, BasicType, objArrayHandle, bool, Thread*)+0x5d7
+V  [libjvm.so+0x9a0d47]  Reflection::invoke_method(oopDesc*, Handle, objArrayHandle, Thread*)+0x147
+V  [libjvm.so+0x7253cb]  JVM_InvokeMethod+0x26b
+J 2036  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (0 bytes) @ 0x00007fb07959236d [0x00007fb079592280+0xed]
+J 2035 C1 sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (104 bytes) @ 0x00007fb079592a14 [0x00007fb0795926a0+0x374]
+J 829 C1 sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (10 bytes) @ 0x00007fb0793a0544 [0x00007fb0793a0500+0x44]
+J 828 C1 java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (62 bytes) @ 0x00007fb0793a0154 [0x00007fb0793a0060+0xf4]
+J 1924 C1 org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (2214 bytes) @ 0x00007fb0795551cc [0x00007fb079553ba0+0x162c]
+J 3670 C1 org.codehaus.groovy.reflection.CachedMethod.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (70 bytes) @ 0x00007fb0798dd774 [0x00007fb0798dd740+0x34]
+J 1884 C1 groovy.lang.MetaMethod.doMethodInvoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (22 bytes) @ 0x00007fb079543394 [0x00007fb079543320+0x74]
+J 4175 C1 org.codehaus.groovy.runtime.metaclass.MethodMetaProperty$GetBeanMethodMetaProperty.getProperty(Ljava/lang/Object;)Ljava/lang/Object; (12 bytes) @ 0x00007fb0799eee4c [0x00007fb0799eee00+0x4c]
+j  org.codehaus.groovy.runtime.callsite.GetEffectivePogoPropertySite.getProperty(Ljava/lang/Object;)Ljava/lang/Object;+5
+j  org.codehaus.groovy.runtime.callsite.GetEffectivePogoPropertySite.callGetProperty(Ljava/lang/Object;)Ljava/lang/Object;+35
+j  home_rodrigo_nuevo_foro_fiuba_grails_app_views_publicacion_verPublicacion_gsp$_run_closure2$_closure16$_closure68.doCall(Ljava/lang/Object;)Ljava/lang/Object;+27
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x691d16]  JavaCalls::call_helper(JavaValue*, methodHandle*, JavaCallArguments*, Thread*)+0x1056
+V  [libjvm.so+0x99d637]  Reflection::invoke(instanceKlassHandle, methodHandle, Handle, bool, objArrayHandle, BasicType, objArrayHandle, bool, Thread*)+0x5d7
+V  [libjvm.so+0x9a0d47]  Reflection::invoke_method(oopDesc*, Handle, objArrayHandle, Thread*)+0x147
+V  [libjvm.so+0x7253cb]  JVM_InvokeMethod+0x26b
+J 2036  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (0 bytes) @ 0x00007fb07959236d [0x00007fb079592280+0xed]
+J 2035 C1 sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (104 bytes) @ 0x00007fb079592a14 [0x00007fb0795926a0+0x374]
+J 829 C1 sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (10 bytes) @ 0x00007fb0793a0544 [0x00007fb0793a0500+0x44]
+J 828 C1 java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (62 bytes) @ 0x00007fb0793a0154 [0x00007fb0793a0060+0xf4]
+J 1924 C1 org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (2214 bytes) @ 0x00007fb07955531c [0x00007fb079553ba0+0x177c]
+J 3670 C1 org.codehaus.groovy.reflection.CachedMethod.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (70 bytes) @ 0x00007fb0798dd774 [0x00007fb0798dd740+0x34]
+J 1884 C1 groovy.lang.MetaMethod.doMethodInvoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (22 bytes) @ 0x00007fb079543394 [0x00007fb079543320+0x74]
+J 3658 C1 org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object; (892 bytes) @ 0x00007fb0798d2284 [0x00007fb0798d10c0+0x11c4]
+J 1874 C1 groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object; (14 bytes) @ 0x00007fb079540e1c [0x00007fb079540dc0+0x5c]
+J 4110 C1 groovy.lang.Closure.call([Ljava/lang/Object;)Ljava/lang/Object; (30 bytes) @ 0x00007fb0799ccd3c [0x00007fb0799cccc0+0x7c]
+J 6274 C1 groovy.lang.Closure.call(Ljava/lang/Object;)Ljava/lang/Object; (13 bytes) @ 0x00007fb079d23034 [0x00007fb079d22f00+0x134]
+j  org.grails.gsp.GroovyPage.evaluate(Ljava/lang/String;ILjava/lang/Object;Lgroovy/lang/Closure;)Ljava/lang/Object;+3
+J 8474 C1 sun.reflect.GeneratedMethodAccessor159.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (163 bytes) @ 0x00007fb07a20d7ec [0x00007fb07a20d4e0+0x30c]
+J 829 C1 sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (10 bytes) @ 0x00007fb0793a0544 [0x00007fb0793a0500+0x44]
+J 828 C1 java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (62 bytes) @ 0x00007fb0793a0154 [0x00007fb0793a0060+0xf4]
+J 1924 C1 org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (2214 bytes) @ 0x00007fb07955531c [0x00007fb079553ba0+0x177c]
+J 3670 C1 org.codehaus.groovy.reflection.CachedMethod.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (70 bytes) @ 0x00007fb0798dd774 [0x00007fb0798dd740+0x34]
+J 1884 C1 groovy.lang.MetaMethod.doMethodInvoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (22 bytes) @ 0x00007fb079543394 [0x00007fb079543320+0x74]
+J 3658 C1 org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object; (892 bytes) @ 0x00007fb0798d224c [0x00007fb0798d10c0+0x118c]
+J 1874 C1 groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object; (14 bytes) @ 0x00007fb079540e1c [0x00007fb079540dc0+0x5c]
+J 7437 C1 org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(Lgroovy/lang/GroovyObject;[Ljava/lang/Object;)Ljava/lang/Object; (92 bytes) @ 0x00007fb079f9940c [0x00007fb079f99300+0x10c]
+J 8289 C1 org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; (50 bytes) @ 0x00007fb07a1919d4 [0x00007fb07a191720+0x2b4]
+j  home_rodrigo_nuevo_foro_fiuba_grails_app_views_publicacion_verPublicacion_gsp$_run_closure2$_closure16.doCall()Ljava/lang/Object;+2698
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x691d16]  JavaCalls::call_helper(JavaValue*, methodHandle*, JavaCallArguments*, Thread*)+0x1056
+V  [libjvm.so+0x99d637]  Reflection::invoke(instanceKlassHandle, methodHandle, Handle, bool, objArrayHandle, BasicType, objArrayHandle, bool, Thread*)+0x5d7
+V  [libjvm.so+0x9a0d47]  Reflection::invoke_method(oopDesc*, Handle, objArrayHandle, Thread*)+0x147
+V  [libjvm.so+0x7253cb]  JVM_InvokeMethod+0x26b
+J 2036  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (0 bytes) @ 0x00007fb07959236d [0x00007fb079592280+0xed]
+J 2035 C1 sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (104 bytes) @ 0x00007fb079592a14 [0x00007fb0795926a0+0x374]
+J 829 C1 sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (10 bytes) @ 0x00007fb0793a0544 [0x00007fb0793a0500+0x44]
+J 828 C1 java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (62 bytes) @ 0x00007fb0793a0154 [0x00007fb0793a0060+0xf4]
+J 1924 C1 org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (2214 bytes) @ 0x00007fb07955531c [0x00007fb079553ba0+0x177c]
+J 3670 C1 org.codehaus.groovy.reflection.CachedMethod.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (70 bytes) @ 0x00007fb0798dd774 [0x00007fb0798dd740+0x34]
+J 1884 C1 groovy.lang.MetaMethod.doMethodInvoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (22 bytes) @ 0x00007fb079543394 [0x00007fb079543320+0x74]
+J 3658 C1 org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object; (892 bytes) @ 0x00007fb0798d2284 [0x00007fb0798d10c0+0x11c4]
+J 1874 C1 groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object; (14 bytes) @ 0x00007fb079540e1c [0x00007fb079540dc0+0x5c]
+J 4110 C1 groovy.lang.Closure.call([Ljava/lang/Object;)Ljava/lang/Object; (30 bytes) @ 0x00007fb0799ccd3c [0x00007fb0799cccc0+0x7c]
+j  groovy.lang.Closure.call()Ljava/lang/Object;+6
+j  org.grails.taglib.TagBodyClosure.executeClosure(Ljava/lang/Object;)Ljava/lang/Object;+27
+j  org.grails.taglib.TagBodyClosure.captureClosureOutput(Ljava/lang/Object;Z)Ljava/lang/Object;+81
+j  org.grails.taglib.TagBodyClosure.call()Ljava/lang/Object;+3
+j  java_util_concurrent_Callable$call.call(Ljava/lang/Object;)Ljava/lang/Object;+12
+j  org.grails.plugins.web.taglib.FormTagLib$_closure9.doCall(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;+1206
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x691d16]  JavaCalls::call_helper(JavaValue*, methodHandle*, JavaCallArguments*, Thread*)+0x1056
+V  [libjvm.so+0x99d637]  Reflection::invoke(instanceKlassHandle, methodHandle, Handle, bool, objArrayHandle, BasicType, objArrayHandle, bool, Thread*)+0x5d7
+V  [libjvm.so+0x9a0d47]  Reflection::invoke_method(oopDesc*, Handle, objArrayHandle, Thread*)+0x147
+V  [libjvm.so+0x7253cb]  JVM_InvokeMethod+0x26b
+J 2036  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (0 bytes) @ 0x00007fb07959236d [0x00007fb079592280+0xed]
+J 2035 C1 sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (104 bytes) @ 0x00007fb079592a14 [0x00007fb0795926a0+0x374]
+J 829 C1 sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (10 bytes) @ 0x00007fb0793a0544 [0x00007fb0793a0500+0x44]
+J 828 C1 java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (62 bytes) @ 0x00007fb0793a0154 [0x00007fb0793a0060+0xf4]
+J 1924 C1 org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (2214 bytes) @ 0x00007fb07955531c [0x00007fb079553ba0+0x177c]
+J 3670 C1 org.codehaus.groovy.reflection.CachedMethod.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (70 bytes) @ 0x00007fb0798dd774 [0x00007fb0798dd740+0x34]
+J 1884 C1 groovy.lang.MetaMethod.doMethodInvoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (22 bytes) @ 0x00007fb079543394 [0x00007fb079543320+0x74]
+J 3658 C1 org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object; (892 bytes) @ 0x00007fb0798d2284 [0x00007fb0798d10c0+0x11c4]
+J 1874 C1 groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object; (14 bytes) @ 0x00007fb079540e1c [0x00007fb079540dc0+0x5c]
+J 4110 C1 groovy.lang.Closure.call([Ljava/lang/Object;)Ljava/lang/Object; (30 bytes) @ 0x00007fb0799ccd3c [0x00007fb0799cccc0+0x7c]
+j  org.grails.gsp.GroovyPage.invokeTagLibClosure(Ljava/lang/String;Ljava/lang/String;Lgroovy/lang/Closure;Ljava/util/Map;Lgroovy/lang/Closure;ZLjava/util/Map;)V+193
+j  org.grails.gsp.GroovyPage.invokeTag(Ljava/lang/String;Ljava/lang/String;ILjava/util/Map;I)V+258
+j  sun.reflect.GeneratedMethodAccessor175.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+220
+J 829 C1 sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (10 bytes) @ 0x00007fb0793a0544 [0x00007fb0793a0500+0x44]
+J 828 C1 java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (62 bytes) @ 0x00007fb0793a0154 [0x00007fb0793a0060+0xf4]
+J 1924 C1 org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (2214 bytes) @ 0x00007fb07955531c [0x00007fb079553ba0+0x177c]
+J 3670 C1 org.codehaus.groovy.reflection.CachedMethod.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (70 bytes) @ 0x00007fb0798dd774 [0x00007fb0798dd740+0x34]
+J 1884 C1 groovy.lang.MetaMethod.doMethodInvoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (22 bytes) @ 0x00007fb079543394 [0x00007fb079543320+0x74]
+J 3658 C1 org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object; (892 bytes) @ 0x00007fb0798d224c [0x00007fb0798d10c0+0x118c]
+J 1874 C1 groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object; (14 bytes) @ 0x00007fb079540e1c [0x00007fb079540dc0+0x5c]
+J 7437 C1 org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(Lgroovy/lang/GroovyObject;[Ljava/lang/Object;)Ljava/lang/Object; (92 bytes) @ 0x00007fb079f9940c [0x00007fb079f99300+0x10c]
+j  home_rodrigo_nuevo_foro_fiuba_grails_app_views_publicacion_verPublicacion_gsp$_run_closure2.doCall()Ljava/lang/Object;+708
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x691d16]  JavaCalls::call_helper(JavaValue*, methodHandle*, JavaCallArguments*, Thread*)+0x1056
+V  [libjvm.so+0x99d637]  Reflection::invoke(instanceKlassHandle, methodHandle, Handle, bool, objArrayHandle, BasicType, objArrayHandle, bool, Thread*)+0x5d7
+V  [libjvm.so+0x9a0d47]  Reflection::invoke_method(oopDesc*, Handle, objArrayHandle, Thread*)+0x147
+V  [libjvm.so+0x7253cb]  JVM_InvokeMethod+0x26b
+J 2036  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (0 bytes) @ 0x00007fb07959236d [0x00007fb079592280+0xed]
+J 2035 C1 sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; (104 bytes) @ 0x00007fb079592a14 [0x00007fb0795926a0+0x374]
+...<more frames>...
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007fb088015800 JavaThread "DestroyJavaVM" [_thread_blocked, id=20467, stack(0x00007fb08fb92000,0x00007fb08fc93000)]
+  0x00007fb08999b000 JavaThread "Thread-6" daemon [_thread_blocked, id=20556, stack(0x00007fb03c143000,0x00007fb03c244000)]
+  0x00007fb08999a800 JavaThread "Thread-8" [_thread_blocked, id=20555, stack(0x00007fb03c244000,0x00007fb03c345000)]
+  0x00007fb089993000 JavaThread "Thread-7" daemon [_thread_in_native, id=20554, stack(0x00007fb03c345000,0x00007fb03c446000)]
+  0x00007fb089979000 JavaThread "http-nio-8080-AsyncTimeout" daemon [_thread_blocked, id=20553, stack(0x00007fb03c446000,0x00007fb03c547000)]
+  0x00007fb089977000 JavaThread "http-nio-8080-Acceptor-0" daemon [_thread_in_native, id=20552, stack(0x00007fb03c547000,0x00007fb03c648000)]
+  0x00007fb089974800 JavaThread "http-nio-8080-ClientPoller-1" daemon [_thread_in_native, id=20551, stack(0x00007fb03c648000,0x00007fb03c749000)]
+  0x00007fb08995a000 JavaThread "http-nio-8080-ClientPoller-0" daemon [_thread_in_native, id=20550, stack(0x00007fb03c749000,0x00007fb03c84a000)]
+  0x00007fb08993e800 JavaThread "http-nio-8080-exec-10" daemon [_thread_blocked, id=20549, stack(0x00007fb03c84a000,0x00007fb03c94b000)]
+  0x00007fb08993c800 JavaThread "http-nio-8080-exec-9" daemon [_thread_blocked, id=20548, stack(0x00007fb03c94b000,0x00007fb03ca4c000)]
+  0x00007fb08993a800 JavaThread "http-nio-8080-exec-8" daemon [_thread_blocked, id=20547, stack(0x00007fb03ca4c000,0x00007fb03cb4d000)]
+=>0x00007fb089938800 JavaThread "http-nio-8080-exec-7" daemon [_thread_in_Java, id=20546, stack(0x00007fb03cb4d000,0x00007fb03cc4e000)]
+  0x00007fb089936800 JavaThread "http-nio-8080-exec-6" daemon [_thread_blocked, id=20545, stack(0x00007fb03cc4e000,0x00007fb03cd4f000)]
+  0x00007fb089934800 JavaThread "http-nio-8080-exec-5" daemon [_thread_blocked, id=20544, stack(0x00007fb03cd4f000,0x00007fb03ce50000)]
+  0x00007fb089932800 JavaThread "http-nio-8080-exec-4" daemon [_thread_blocked, id=20543, stack(0x00007fb03ce50000,0x00007fb03cf51000)]
+  0x00007fb089930800 JavaThread "http-nio-8080-exec-3" daemon [_thread_blocked, id=20542, stack(0x00007fb03cf51000,0x00007fb03d052000)]
+  0x00007fb08992e800 JavaThread "http-nio-8080-exec-2" daemon [_thread_blocked, id=20541, stack(0x00007fb03d052000,0x00007fb03d153000)]
+  0x00007fb08992b000 JavaThread "http-nio-8080-exec-1" daemon [_thread_blocked, id=20540, stack(0x00007fb03d153000,0x00007fb03d254000)]
+  0x00007fb08990b000 JavaThread "NioBlockingSelector.BlockPoller-1" daemon [_thread_in_native, id=20539, stack(0x00007fb03d254000,0x00007fb03d355000)]
+  0x00007fb08975e800 JavaThread "container-0" [_thread_blocked, id=20538, stack(0x00007fb03d955000,0x00007fb03da56000)]
+  0x00007fb08975c800 JavaThread "ContainerBackgroundProcessor[StandardEngine[Tomcat]]" daemon [_thread_blocked, id=20537, stack(0x00007fb03da56000,0x00007fb03db57000)]
+  0x00007fb0891ee800 JavaThread "Tomcat JDBC Pool Cleaner[414493378:1518492221766]" daemon [_thread_blocked, id=20523, stack(0x00007fb074221000,0x00007fb074322000)]
+  0x00007fb088781800 JavaThread "FileSystemWatcher: files=#72 cl=sun.misc.Launcher$AppClassLoader@18b4aac2" daemon [_thread_blocked, id=20493, stack(0x00007fb075295000,0x00007fb075396000)]
+  0x00007fb088732000 JavaThread "Service Thread" daemon [_thread_blocked, id=20491, stack(0x00007fb0754aa000,0x00007fb0755ab000)]
+  0x00007fb088721800 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, id=20490, stack(0x00007fb0755ab000,0x00007fb0756ac000)]
+  0x00007fb08871f000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=20489, stack(0x00007fb0756ac000,0x00007fb0757ad000)]
+  0x00007fb088729800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=20488, stack(0x00007fb0757ad000,0x00007fb0758ae000)]
+  0x00007fb088145800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=20481, stack(0x00007fb075bcd000,0x00007fb075cce000)]
+  0x00007fb088112800 JavaThread "Finalizer" daemon [_thread_blocked, id=20477, stack(0x00007fb07621b000,0x00007fb07631c000)]
+  0x00007fb08810e000 JavaThread "Reference Handler" daemon [_thread_blocked, id=20476, stack(0x00007fb07631c000,0x00007fb07641d000)]
+
+Other Threads:
+  0x00007fb088106000 VMThread [stack: 0x00007fb07641d000,0x00007fb07651e000] [id=20475]
+  0x00007fb088734800 WatcherThread [stack: 0x00007fb0753a9000,0x00007fb0754aa000] [id=20492]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 218112K, used 35098K [0x00000000f0000000, 0x0000000100000000, 0x0000000100000000)
+  eden space 184320K, 0% used [0x00000000f0000000,0x00000000f014cef8,0x00000000fb400000)
+  from space 33792K, 99% used [0x00000000fdf00000,0x00000000ffff9be0,0x0000000100000000)
+  to   space 38912K, 0% used [0x00000000fb400000,0x00000000fb400000,0x00000000fda00000)
+ ParOldGen       total 524288K, used 105885K [0x00000000d0000000, 0x00000000f0000000, 0x00000000f0000000)
+  object space 524288K, 20% used [0x00000000d0000000,0x00000000d67677c8,0x00000000f0000000)
+ Metaspace       used 72025K, capacity 75581K, committed 75800K, reserved 1114112K
+  class space    used 9126K, capacity 10401K, committed 10528K, reserved 1048576K
+
+Card table byte_map: [0x00007fb08c5af000,0x00007fb08c730000] byte_map_base: 0x00007fb08bf2f000
+
+Marking Bits: (ParMarkBitMap*) 0x00007fb08f065f60
+ Begin Bits: [0x00007fb077800000, 0x00007fb078400000)
+ End Bits:   [0x00007fb078400000, 0x00007fb079000000)
+
+Polling page: 0x00007fb08fcb6000
+
+CodeCache: size=245760Kb used=20148Kb max_used=20148Kb free=225611Kb
+ bounds [0x00007fb079000000, 0x00007fb07a3c0000, 0x00007fb088000000]
+ total_blobs=9851 nmethods=9058 adapters=706
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 224,831 Thread 0x00007fb088721800 9215       1       org.grails.buffer.StreamCharBuffer$StreamCharBufferWriter::<init> (25 bytes)
+Event: 224,831 Thread 0x00007fb088721800 nmethod 9215 0x00007fb07a3af490 code [0x00007fb07a3af5e0, 0x00007fb07a3af730]
+Event: 224,831 Thread 0x00007fb088721800 9216       1       org.codehaus.groovy.runtime.ArrayUtil::createArray (17 bytes)
+Event: 224,831 Thread 0x00007fb088721800 nmethod 9216 0x00007fb07a3af790 code [0x00007fb07a3af900, 0x00007fb07a3afbd0]
+Event: 224,831 Thread 0x00007fb088721800 9217   !   1       groovy.lang.ExpandoMetaClass::checkInitalised (38 bytes)
+Event: 224,831 Thread 0x00007fb088721800 nmethod 9217 0x00007fb07a3afd10 code [0x00007fb07a3afea0, 0x00007fb07a3b0098]
+Event: 224,832 Thread 0x00007fb088721800 9218       1       org.grails.buffer.StreamCharBuffer::writeTo (112 bytes)
+Event: 224,832 Thread 0x00007fb088721800 nmethod 9218 0x00007fb07a3b0190 code [0x00007fb07a3b0380, 0x00007fb07a3b08f8]
+Event: 224,832 Thread 0x00007fb088721800 9219       1       org.grails.buffer.StreamCharBuffer::writeToEncodedAppender (113 bytes)
+Event: 224,833 Thread 0x00007fb088721800 nmethod 9219 0x00007fb07a3b0bd0 code [0x00007fb07a3b0da0, 0x00007fb07a3b1278]
+
+GC Heap History (10 events):
+Event: 42,163 GC heap before
+{Heap before GC invocations=25 (full 3):
+ PSYoungGen      total 237568K, used 237523K [0x00000000f0000000, 0x0000000100000000, 0x0000000100000000)
+  eden space 216064K, 100% used [0x00000000f0000000,0x00000000fd300000,0x00000000fd300000)
+  from space 21504K, 99% used [0x00000000fd300000,0x00000000fe7f4d50,0x00000000fe800000)
+  to   space 24576K, 0% used [0x00000000fe800000,0x00000000fe800000,0x0000000100000000)
+ ParOldGen       total 524288K, used 89998K [0x00000000d0000000, 0x00000000f0000000, 0x00000000f0000000)
+  object space 524288K, 17% used [0x00000000d0000000,0x00000000d57e38a8,0x00000000f0000000)
+ Metaspace       used 66461K, capacity 68241K, committed 68376K, reserved 1110016K
+  class space    used 8215K, capacity 8735K, committed 8736K, reserved 1048576K
+Event: 42,196 GC heap after
+Heap after GC invocations=25 (full 3):
+ PSYoungGen      total 229376K, used 24215K [0x00000000f0000000, 0x0000000100000000, 0x0000000100000000)
+  eden space 204800K, 0% used [0x00000000f0000000,0x00000000f0000000,0x00000000fc800000)
+  from space 24576K, 98% used [0x00000000fe800000,0x00000000fffa5f48,0x0000000100000000)
+  to   space 28672K, 0% used [0x00000000fc800000,0x00000000fc800000,0x00000000fe400000)
+ ParOldGen       total 524288K, used 89998K [0x00000000d0000000, 0x00000000f0000000, 0x00000000f0000000)
+  object space 524288K, 17% used [0x00000000d0000000,0x00000000d57e38a8,0x00000000f0000000)
+ Metaspace       used 66461K, capacity 68241K, committed 68376K, reserved 1110016K
+  class space    used 8215K, capacity 8735K, committed 8736K, reserved 1048576K
+}
+Event: 43,932 GC heap before
+{Heap before GC invocations=26 (full 3):
+ PSYoungGen      total 229376K, used 229015K [0x00000000f0000000, 0x0000000100000000, 0x0000000100000000)
+  eden space 204800K, 100% used [0x00000000f0000000,0x00000000fc800000,0x00000000fc800000)
+  from space 24576K, 98% used [0x00000000fe800000,0x00000000fffa5f48,0x0000000100000000)
+  to   space 28672K, 0% used [0x00000000fc800000,0x00000000fc800000,0x00000000fe400000)
+ ParOldGen       total 524288K, used 89998K [0x00000000d0000000, 0x00000000f0000000, 0x00000000f0000000)
+  object space 524288K, 17% used [0x00000000d0000000,0x00000000d57e38a8,0x00000000f0000000)
+ Metaspace       used 67942K, capacity 70251K, committed 70296K, reserved 1110016K
+  class space    used 8494K, capacity 9360K, committed 9376K, reserved 1048576K
+Event: 43,974 GC heap after
+Heap after GC invocations=26 (full 3):
+ PSYoungGen      total 233472K, used 28665K [0x00000000f0000000, 0x0000000100000000, 0x0000000100000000)
+  eden space 204800K, 0% used [0x00000000f0000000,0x00000000f0000000,0x00000000fc800000)
+  from space 28672K, 99% used [0x00000000fc800000,0x00000000fe3fe500,0x00000000fe400000)
+  to   space 28672K, 0% used [0x00000000fe400000,0x00000000fe400000,0x0000000100000000)
+ ParOldGen       total 524288K, used 90401K [0x00000000d0000000, 0x00000000f0000000, 0x00000000f0000000)
+  object space 524288K, 17% used [0x00000000d0000000,0x00000000d58485a8,0x00000000f0000000)
+ Metaspace       used 67942K, capacity 70251K, committed 70296K, reserved 1110016K
+  class space    used 8494K, capacity 9360K, committed 9376K, reserved 1048576K
+}
+Event: 47,682 GC heap before
+{Heap before GC invocations=27 (full 3):
+ PSYoungGen      total 233472K, used 233465K [0x00000000f0000000, 0x0000000100000000, 0x0000000100000000)
+  eden space 204800K, 100% used [0x00000000f0000000,0x00000000fc800000,0x00000000fc800000)
+  from space 28672K, 99% used [0x00000000fc800000,0x00000000fe3fe500,0x00000000fe400000)
+  to   space 28672K, 0% used [0x00000000fe400000,0x00000000fe400000,0x0000000100000000)
+ ParOldGen       total 524288K, used 90401K [0x00000000d0000000, 0x00000000f0000000, 0x00000000f0000000)
+  object space 524288K, 17% used [0x00000000d0000000,0x00000000d58485a8,0x00000000f0000000)
+ Metaspace       used 68834K, capacity 71653K, committed 71704K, reserved 1112064K
+  class space    used 8683K, capacity 9740K, committed 9760K, reserved 1048576K
+Event: 47,766 GC heap after
+Heap after GC invocations=27 (full 3):
+ PSYoungGen      total 225280K, used 18603K [0x00000000f0000000, 0x0000000100000000, 0x0000000100000000)
+  eden space 196608K, 0% used [0x00000000f0000000,0x00000000f0000000,0x00000000fc000000)
+  from space 28672K, 64% used [0x00000000fe400000,0x00000000ff62aeb0,0x0000000100000000)
+  to   space 32768K, 0% used [0x00000000fc000000,0x00000000fc000000,0x00000000fe000000)
+ ParOldGen       total 524288K, used 104136K [0x00000000d0000000, 0x00000000f0000000, 0x00000000f0000000)
+  object space 524288K, 19% used [0x00000000d0000000,0x00000000d65b2188,0x00000000f0000000)
+ Metaspace       used 68834K, capacity 71653K, committed 71704K, reserved 1112064K
+  class space    used 8683K, capacity 9740K, committed 9760K, reserved 1048576K
+}
+Event: 52,503 GC heap before
+{Heap before GC invocations=28 (full 3):
+ PSYoungGen      total 225280K, used 215211K [0x00000000f0000000, 0x0000000100000000, 0x0000000100000000)
+  eden space 196608K, 100% used [0x00000000f0000000,0x00000000fc000000,0x00000000fc000000)
+  from space 28672K, 64% used [0x00000000fe400000,0x00000000ff62aeb0,0x0000000100000000)
+  to   space 32768K, 0% used [0x00000000fc000000,0x00000000fc000000,0x00000000fe000000)
+ ParOldGen       total 524288K, used 104136K [0x00000000d0000000, 0x00000000f0000000, 0x00000000f0000000)
+  object space 524288K, 19% used [0x00000000d0000000,0x00000000d65b2188,0x00000000f0000000)
+ Metaspace       used 69994K, capacity 73191K, committed 73368K, reserved 1112064K
+  class space    used 8889K, capacity 10088K, committed 10144K, reserved 1048576K
+Event: 52,534 GC heap after
+Heap after GC invocations=28 (full 3):
+ PSYoungGen      total 219136K, used 22250K [0x00000000f0000000, 0x0000000100000000, 0x0000000100000000)
+  eden space 196608K, 0% used [0x00000000f0000000,0x00000000f0000000,0x00000000fc000000)
+  from space 22528K, 98% used [0x00000000fc000000,0x00000000fd5bab68,0x00000000fd600000)
+  to   space 33792K, 0% used [0x00000000fdf00000,0x00000000fdf00000,0x0000000100000000)
+ ParOldGen       total 524288K, used 104144K [0x00000000d0000000, 0x00000000f0000000, 0x00000000f0000000)
+  object space 524288K, 19% used [0x00000000d0000000,0x00000000d65b4188,0x00000000f0000000)
+ Metaspace       used 69994K, capacity 73191K, committed 73368K, reserved 1112064K
+  class space    used 8889K, capacity 10088K, committed 10144K, reserved 1048576K
+}
+Event: 224,754 GC heap before
+{Heap before GC invocations=29 (full 3):
+ PSYoungGen      total 219136K, used 218858K [0x00000000f0000000, 0x0000000100000000, 0x0000000100000000)
+  eden space 196608K, 100% used [0x00000000f0000000,0x00000000fc000000,0x00000000fc000000)
+  from space 22528K, 98% used [0x00000000fc000000,0x00000000fd5bab68,0x00000000fd600000)
+  to   space 33792K, 0% used [0x00000000fdf00000,0x00000000fdf00000,0x0000000100000000)
+ ParOldGen       total 524288K, used 104144K [0x00000000d0000000, 0x00000000f0000000, 0x00000000f0000000)
+  object space 524288K, 19% used [0x00000000d0000000,0x00000000d65b4188,0x00000000f0000000)
+ Metaspace       used 72011K, capacity 75545K, committed 75672K, reserved 1114112K
+  class space    used 9122K, capacity 10395K, committed 10400K, reserved 1048576K
+Event: 224,816 GC heap after
+Heap after GC invocations=29 (full 3):
+ PSYoungGen      total 218112K, used 33766K [0x00000000f0000000, 0x0000000100000000, 0x0000000100000000)
+  eden space 184320K, 0% used [0x00000000f0000000,0x00000000f0000000,0x00000000fb400000)
+  from space 33792K, 99% used [0x00000000fdf00000,0x00000000ffff9be0,0x0000000100000000)
+  to   space 38912K, 0% used [0x00000000fb400000,0x00000000fb400000,0x00000000fda00000)
+ ParOldGen       total 524288K, used 105885K [0x00000000d0000000, 0x00000000f0000000, 0x00000000f0000000)
+  object space 524288K, 20% used [0x00000000d0000000,0x00000000d67677c8,0x00000000f0000000)
+ Metaspace       used 72011K, capacity 75545K, committed 75672K, reserved 1114112K
+  class space    used 9122K, capacity 10395K, committed 10400K, reserved 1048576K
+}
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 224,738 Thread 0x00007fb089938800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000fbebeb18) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u131/8869/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 224,738 Thread 0x00007fb089938800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000fbec6d30) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u131/8869/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 224,738 Thread 0x00007fb089938800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000fbec99d0) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u131/8869/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 224,739 Thread 0x00007fb089938800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000fbed0900) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u131/8869/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 224,739 Thread 0x00007fb089938800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000fbed3030) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u131/8869/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 224,739 Thread 0x00007fb089938800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000fbed7468) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u131/8869/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 224,739 Thread 0x00007fb089938800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000fbed8e38) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u131/8869/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 224,739 Thread 0x00007fb089938800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000fbedca68) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u131/8869/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 224,739 Thread 0x00007fb089938800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000fbee0d28) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u131/8869/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 224,739 Thread 0x00007fb089938800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000fbee2998) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u131/8869/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+
+Events (10 events):
+Event: 224,731 loading class nuevo_foro_fiuba/UsuarioCustomizer
+Event: 224,731 loading class nuevo_foro_fiuba/UsuarioCustomizer done
+Event: 224,734 loading class nuevo_foro_fiuba/UsuarioCustomizer
+Event: 224,734 loading class nuevo_foro_fiuba/UsuarioCustomizer done
+Event: 224,735 loading class nuevo_foro_fiuba/UsuarioCustomizer
+Event: 224,735 loading class nuevo_foro_fiuba/UsuarioCustomizer done
+Event: 224,750 Executing VM operation: RevokeBias
+Event: 224,750 Executing VM operation: RevokeBias done
+Event: 224,754 Executing VM operation: ParallelGCFailedAllocation
+Event: 224,816 Executing VM operation: ParallelGCFailedAllocation done
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 08:07 4472449                            /usr/lib/jvm/java-8-oracle/bin/java
+00600000-00601000 rw-p 00000000 08:07 4472449                            /usr/lib/jvm/java-8-oracle/bin/java
+02550000-025b8000 rw-p 00000000 00:00 0                                  [heap]
+d0000000-100a48000 rw-p 00000000 00:00 0 
+100a48000-140000000 ---p 00000000 00:00 0 
+7fb037800000-7fb0379c0000 rw-p 00000000 00:00 0 
+7fb0379c0000-7fb037a00000 ---p 00000000 00:00 0 
+7fb037a00000-7fb037c00000 rw-p 00000000 00:00 0 
+7fb037c00000-7fb037e00000 rw-p 00000000 00:00 0 
+7fb037e00000-7fb038000000 rw-p 00000000 00:00 0 
+7fb038000000-7fb038021000 rw-p 00000000 00:00 0 
+7fb038021000-7fb03c000000 ---p 00000000 00:00 0 
+7fb03c143000-7fb03c146000 ---p 00000000 00:00 0 
+7fb03c146000-7fb03c244000 rw-p 00000000 00:00 0 
+7fb03c244000-7fb03c247000 ---p 00000000 00:00 0 
+7fb03c247000-7fb03c345000 rw-p 00000000 00:00 0 
+7fb03c345000-7fb03c348000 ---p 00000000 00:00 0 
+7fb03c348000-7fb03c446000 rw-p 00000000 00:00 0 
+7fb03c446000-7fb03c449000 ---p 00000000 00:00 0 
+7fb03c449000-7fb03c547000 rw-p 00000000 00:00 0 
+7fb03c547000-7fb03c54a000 ---p 00000000 00:00 0 
+7fb03c54a000-7fb03c648000 rw-p 00000000 00:00 0 
+7fb03c648000-7fb03c64b000 ---p 00000000 00:00 0 
+7fb03c64b000-7fb03c749000 rw-p 00000000 00:00 0 
+7fb03c749000-7fb03c74c000 ---p 00000000 00:00 0 
+7fb03c74c000-7fb03c84a000 rw-p 00000000 00:00 0 
+7fb03c84a000-7fb03c84d000 ---p 00000000 00:00 0 
+7fb03c84d000-7fb03c94b000 rw-p 00000000 00:00 0 
+7fb03c94b000-7fb03c94e000 ---p 00000000 00:00 0 
+7fb03c94e000-7fb03ca4c000 rw-p 00000000 00:00 0 
+7fb03ca4c000-7fb03ca4f000 ---p 00000000 00:00 0 
+7fb03ca4f000-7fb03cb4d000 rw-p 00000000 00:00 0 
+7fb03cb4d000-7fb03cb50000 ---p 00000000 00:00 0 
+7fb03cb50000-7fb03cc4e000 rw-p 00000000 00:00 0 
+7fb03cc4e000-7fb03cc51000 ---p 00000000 00:00 0 
+7fb03cc51000-7fb03cd4f000 rw-p 00000000 00:00 0 
+7fb03cd4f000-7fb03cd52000 ---p 00000000 00:00 0 
+7fb03cd52000-7fb03ce50000 rw-p 00000000 00:00 0 
+7fb03ce50000-7fb03ce53000 ---p 00000000 00:00 0 
+7fb03ce53000-7fb03cf51000 rw-p 00000000 00:00 0 
+7fb03cf51000-7fb03cf54000 ---p 00000000 00:00 0 
+7fb03cf54000-7fb03d052000 rw-p 00000000 00:00 0 
+7fb03d052000-7fb03d055000 ---p 00000000 00:00 0 
+7fb03d055000-7fb03d153000 rw-p 00000000 00:00 0 
+7fb03d153000-7fb03d156000 ---p 00000000 00:00 0 
+7fb03d156000-7fb03d254000 rw-p 00000000 00:00 0 
+7fb03d254000-7fb03d257000 ---p 00000000 00:00 0 
+7fb03d257000-7fb03d555000 rw-p 00000000 00:00 0 
+7fb03d555000-7fb03d755000 rw-p 00000000 00:00 0 
+7fb03d755000-7fb03d955000 rw-p 00000000 00:00 0 
+7fb03d955000-7fb03d958000 ---p 00000000 00:00 0 
+7fb03d958000-7fb03da56000 rw-p 00000000 00:00 0 
+7fb03da56000-7fb03da59000 ---p 00000000 00:00 0 
+7fb03da59000-7fb03db57000 rw-p 00000000 00:00 0 
+7fb03db57000-7fb03db5a000 ---p 00000000 00:00 0 
+7fb03db5a000-7fb03de58000 rw-p 00000000 00:00 0 
+7fb03de58000-7fb03e058000 rw-p 00000000 00:00 0 
+7fb03e058000-7fb03e258000 rw-p 00000000 00:00 0 
+7fb03e258000-7fb03e458000 rw-p 00000000 00:00 0 
+7fb03e458000-7fb03e658000 rw-p 00000000 00:00 0 
+7fb03e658000-7fb03e858000 rw-p 00000000 00:00 0 
+7fb03e858000-7fb03ea58000 rw-p 00000000 00:00 0 
+7fb03ea58000-7fb03ec58000 rw-p 00000000 00:00 0 
+7fb03ec58000-7fb03ee58000 rw-p 00000000 00:00 0 
+7fb03ee58000-7fb03f056000 rw-p 00000000 00:00 0 
+7fb03f056000-7fb03f058000 ---p 00000000 00:00 0 
+7fb03f058000-7fb03f258000 rw-p 00000000 00:00 0 
+7fb03f258000-7fb03f458000 rw-p 00000000 00:00 0 
+7fb03f458000-7fb03f658000 rw-p 00000000 00:00 0 
+7fb03f658000-7fb03f858000 rw-p 00000000 00:00 0 
+7fb03f858000-7fb03f8ee000 r--s 0110d000 08:07 4472739                    /usr/lib/jvm/java-8-oracle/jre/lib/ext/jfxrt.jar
+7fb03f8ee000-7fb03f8ff000 r-xp 00000000 08:07 4599414                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7fb03f8ff000-7fb03fafe000 ---p 00011000 08:07 4599414                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7fb03fafe000-7fb03faff000 rw-p 00010000 08:07 4599414                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7fb03faff000-7fb03fcff000 rw-p 00000000 00:00 0 
+7fb03fcff000-7fb03feff000 rw-p 00000000 00:00 0 
+7fb03feff000-7fb03ff02000 ---p 00000000 00:00 0 
+7fb03ff02000-7fb040000000 rw-p 00000000 00:00 0 
+7fb040000000-7fb040290000 rw-p 00000000 00:00 0 
+7fb040290000-7fb044000000 ---p 00000000 00:00 0 
+7fb044000000-7fb0441a1000 rw-p 00000000 00:00 0 
+7fb0441a1000-7fb048000000 ---p 00000000 00:00 0 
+7fb048000000-7fb048039000 rw-p 00000000 00:00 0 
+7fb048039000-7fb04c000000 ---p 00000000 00:00 0 
+7fb04c000000-7fb04c258000 rw-p 00000000 00:00 0 
+7fb04c258000-7fb050000000 ---p 00000000 00:00 0 
+7fb050000000-7fb050077000 rw-p 00000000 00:00 0 
+7fb050077000-7fb054000000 ---p 00000000 00:00 0 
+7fb054000000-7fb054f85000 rw-p 00000000 00:00 0 
+7fb054f85000-7fb058000000 ---p 00000000 00:00 0 
+7fb058000000-7fb058021000 rw-p 00000000 00:00 0 
+7fb058021000-7fb05c000000 ---p 00000000 00:00 0 
+7fb05c000000-7fb05c06f000 rw-p 00000000 00:00 0 
+7fb05c06f000-7fb060000000 ---p 00000000 00:00 0 
+7fb060000000-7fb060021000 rw-p 00000000 00:00 0 
+7fb060021000-7fb064000000 ---p 00000000 00:00 0 
+7fb064000000-7fb0642ef000 rw-p 00000000 00:00 0 
+7fb0642ef000-7fb068000000 ---p 00000000 00:00 0 
+7fb068000000-7fb068056000 rw-p 00000000 00:00 0 
+7fb068056000-7fb06c000000 ---p 00000000 00:00 0 
+7fb06c000000-7fb06c021000 rw-p 00000000 00:00 0 
+7fb06c021000-7fb070000000 ---p 00000000 00:00 0 
+7fb070000000-7fb070058000 rw-p 00000000 00:00 0 
+7fb070058000-7fb074000000 ---p 00000000 00:00 0 
+7fb074017000-7fb07401c000 r--s 002f9000 08:07 4472616                    /usr/lib/jvm/java-8-oracle/jre/lib/charsets.jar
+7fb07401c000-7fb074021000 r--s 0009a000 08:07 4472623                    /usr/lib/jvm/java-8-oracle/jre/lib/jsse.jar
+7fb074021000-7fb074221000 rw-p 00000000 00:00 0 
+7fb074221000-7fb074224000 ---p 00000000 00:00 0 
+7fb074224000-7fb074322000 rw-p 00000000 00:00 0 
+7fb074322000-7fb07432b000 r-xp 00000000 08:07 4599419                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libmanagement.so
+7fb07432b000-7fb07452a000 ---p 00009000 08:07 4599419                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libmanagement.so
+7fb07452a000-7fb07452b000 rw-p 00008000 08:07 4599419                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libmanagement.so
+7fb07452b000-7fb07472b000 rw-p 00000000 00:00 0 
+7fb07472b000-7fb07492b000 rw-p 00000000 00:00 0 
+7fb07492b000-7fb074935000 r--s 00116000 08:07 4472745                    /usr/lib/jvm/java-8-oracle/jre/lib/ext/localedata.jar
+7fb074935000-7fb074951000 r--s 00393000 08:07 4472738                    /usr/lib/jvm/java-8-oracle/jre/lib/ext/cldrdata.jar
+7fb074951000-7fb074b51000 rw-p 00000000 00:00 0 
+7fb074b51000-7fb074d51000 rw-p 00000000 00:00 0 
+7fb074d51000-7fb075052000 rw-p 00000000 00:00 0 
+7fb075052000-7fb075068000 r-xp 00000000 08:07 4599411                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7fb075068000-7fb075268000 ---p 00016000 08:07 4599411                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7fb075268000-7fb075269000 rw-p 00016000 08:07 4599411                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7fb075269000-7fb075270000 r--s 00000000 08:07 4600620                    /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+7fb075270000-7fb075295000 r--p 00000000 08:07 5115247                    /usr/share/locale-langpack/es/LC_MESSAGES/libc.mo
+7fb075295000-7fb075298000 ---p 00000000 00:00 0 
+7fb075298000-7fb075396000 rw-p 00000000 00:00 0 
+7fb075396000-7fb0753a9000 r--s 00345000 08:07 4472622                    /usr/lib/jvm/java-8-oracle/jre/lib/resources.jar
+7fb0753a9000-7fb0753aa000 ---p 00000000 00:00 0 
+7fb0753aa000-7fb0754aa000 rw-p 00000000 00:00 0 
+7fb0754aa000-7fb0754ad000 ---p 00000000 00:00 0 
+7fb0754ad000-7fb0755ab000 rw-p 00000000 00:00 0 
+7fb0755ab000-7fb0755ae000 ---p 00000000 00:00 0 
+7fb0755ae000-7fb0756ac000 rw-p 00000000 00:00 0 
+7fb0756ac000-7fb0756af000 ---p 00000000 00:00 0 
+7fb0756af000-7fb0757ad000 rw-p 00000000 00:00 0 
+7fb0757ad000-7fb0757b0000 ---p 00000000 00:00 0 
+7fb0757b0000-7fb0758ae000 rw-p 00000000 00:00 0 
+7fb0758ae000-7fb0758b5000 r--s 00065000 08:08 276443                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/springloaded/1.2.8.RELEASE/b60bac05b0451cdc1863bfec617f39aa0dcaaa43/springloaded-1.2.8.RELEASE.jar
+7fb0758b5000-7fb0758ee000 r--s 00382000 08:08 276199                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/com.google.javascript/closure-compiler-unshaded/v20160713/7df7b683e16c93f65361a15356283599ba012c78/closure-compiler-unshaded-v20160713.jar
+7fb0758ee000-7fb0758fb000 r--s 00109000 08:08 279202                     /home/rodrigo/.m2/repository/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar
+7fb0758fb000-7fb075908000 r--s 00083000 08:08 276268                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/commons-collections/commons-collections/3.2.2/8ad72fe39fa8c91eaaf12aadb21e0c3661fe26d5/commons-collections-3.2.2.jar
+7fb075908000-7fb07590f000 r--s 0003f000 08:08 276741                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.10/4b95f4897fa13f2cd904aee711aeafc0c5295cd8/commons-codec-1.10.jar
+7fb07590f000-7fb075913000 r--s 0000c000 08:08 279220                     /home/rodrigo/.m2/repository/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar
+7fb075913000-7fb075916000 r--s 00029000 08:08 276253                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/commons-validator/commons-validator/1.5.1/86d05a46e8f064b300657f751b5a98c62807e2a0/commons-validator-1.5.1.jar
+7fb075916000-7fb07591c000 r--s 00027000 08:08 276740                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/opensymphony/sitemesh/2.4/fa84c82cce30a9a632c08dd2277d63993d972cf5/sitemesh-2.4.jar
+7fb07591c000-7fb07591e000 r--s 00007000 08:08 276739                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-taglib/3.3.0/7605089e33d591b25afdbb342c4babe332cda23f/grails-web-taglib-3.3.0.jar
+7fb07591e000-7fb075921000 r--s 00015000 08:08 276738                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-taglib/3.3.0/38a8e5db6edc038642399f0b01268647f50e8acf/grails-taglib-3.3.0.jar
+7fb075921000-7fb075924000 r--s 0001d000 08:08 276171                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-json/2.4.13/57aa290a9ec85e04d8e4557a5eae5e751b3aac41/groovy-json-2.4.13.jar
+7fb075924000-7fb075928000 r--s 00042000 08:08 276737                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.8.10/eb21a035c66ad307e66ec8fce37f5d50fd62d039/jackson-core-2.8.10.jar
+7fb075928000-7fb07592b000 r--s 0000b000 08:08 276736                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.8.0/45b426f7796b741035581a176744d91090e2e6fb/jackson-annotations-2.8.0.jar
+7fb07592b000-7fb07592c000 r--s 00005000 08:08 276735                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-codecs/3.3.2/b039f12277aa2d05c9d2092395179b305e50cade/grails-codecs-3.3.2.jar
+7fb07592c000-7fb075935000 r--s 0002d000 08:08 276734                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/xml-apis/xml-apis/1.4.01/3789d9fada2d3d458c4ba2de349d48780f381ee3/xml-apis-1.4.01.jar
+7fb075935000-7fb075937000 r--s 00008000 08:08 276198                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/javax.el/javax.el-api/2.2.4/1287562cc3f0ff5439ded6f2949e73ce1c0edaab/javax.el-api-2.2.4.jar
+7fb075937000-7fb075948000 r--s 000a1000 08:08 276733                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-validator/5.3.5.Final/622a9bcef2eed6d41b5b8e0662c36212009e375/hibernate-validator-5.3.5.Final.jar
+7fb075948000-7fb075950000 r--s 0005f000 08:08 276196                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-gorm-hibernate-core/6.1.8.RELEASE/277097547e711e4ad55db70e01f830e00fb666e0/grails-datastore-gorm-hibernate-core-6.1.8.RELEASE.jar
+7fb075950000-7fb075961000 r--s 000b8000 08:08 276732                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/4.3.12.RELEASE/86c29588cca74d0fc848b194cb13fcdfd12bc990/spring-web-4.3.12.RELEASE.jar
+7fb075961000-7fb075966000 r--s 00026000 08:08 276731                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/scaffolding-core/1.1.1/c79e9bd310896f3afbba331170c54fa2ce7f9a5d/scaffolding-core-1.1.1.jar
+7fb075966000-7fb075969000 r--s 00013000 08:08 276234                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-gorm-validation/6.1.8.RELEASE/9e87d021bad3b88d2facc167712eca69bca735b0/grails-datastore-gorm-validation-6.1.8.RELEASE.jar
+7fb075969000-7fb07596b000 r--s 00014000 08:08 276730                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-logging-log4j/8.5.2/53bdd1eebc7393713261d178ac096a742423f940/tomcat-embed-logging-log4j-8.5.2.jar
+7fb07596b000-7fb07597c000 r--s 000d0000 08:08 276194                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-gorm/6.1.8.RELEASE/8c896a263aac99967517504f92e347a3aae19672/grails-datastore-gorm-6.1.8.RELEASE.jar
+7fb07597c000-7fb07597f000 r--s 00012000 08:08 276729                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-sql/2.4.13/24d3e87b24a63262ce344f4c8f2c7ecf1f122798/groovy-sql-2.4.13.jar
+7fb07597f000-7fb075989000 r--s 0005f000 08:08 276728                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/4.3.12.RELEASE/5c840abbdc1a1dfd0f79c4a4c25eac0c98e6af22/spring-jdbc-4.3.12.RELEASE.jar
+7fb075989000-7fb07598b000 r--s 00006000 08:08 276727                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-domain-class/3.3.2/49c95a1dd841f045573474bff9b56a1dec241494/grails-plugin-domain-class-3.3.2.jar
+7fb07598b000-7fb07598c000 r--s 00004000 08:08 276726                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-validation/3.3.2/c4e87434287172942f7f91f3e7d4c21a9fcc669a/grails-plugin-validation-3.3.2.jar
+7fb07598c000-7fb07598e000 r--s 00009000 08:08 276725                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-mimetypes/3.3.2/5ed6653ce5d0ddb87290fe42569e8b74183d26b1/grails-plugin-mimetypes-3.3.2.jar
+7fb07598e000-7fb075990000 r--s 0000b000 08:08 276724                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-sitemesh/3.3.0/93ce68536c5806bcfc2b4a65cf57971f4bd0d2ce/grails-web-sitemesh-3.3.0.jar
+7fb075990000-7fb075992000 r--s 00011000 08:08 276723                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-gsp/3.3.0/e0cd55173b03fca8b1caabde8633a4592d0e5dd3/grails-web-gsp-3.3.0.jar
+7fb075992000-7fb075993000 r--s 00005000 08:08 276722                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-mvc/3.3.2/35dff1ea5854396d705d8c4b74cbcfa860345e02/grails-web-mvc-3.3.2.jar
+7fb075993000-7fb075996000 r--s 0002a000 08:08 276721                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-url-mappings/3.3.2/99c5bf084f743274f718ab4729748a8bcffba1de/grails-web-url-mappings-3.3.2.jar
+7fb075996000-7fb075999000 r--s 00014000 08:08 276720                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-databinding/3.3.2/69ee3542868ce71af531228cb772a0e49dd75ea1/grails-web-databinding-3.3.2.jar
+7fb075999000-7fb07599e000 r--s 00029000 08:08 276719                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context-support/4.3.12.RELEASE/6f3a71b93b69f38ac545b6043fab7e474addee15/spring-context-support-4.3.12.RELEASE.jar
+7fb07599e000-7fb0759af000 r--s 000cf000 08:08 276718                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/4.3.12.RELEASE/986e5dcd4435e780f6be64f8185eaa51523cf851/spring-webmvc-4.3.12.RELEASE.jar
+7fb0759af000-7fb0759b2000 r--s 00027000 08:08 276717                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-gsp/3.3.0/58e246e986a5d293806b3768d8efb73b1dc71047/grails-gsp-3.3.0.jar
+7fb0759b2000-7fb0759b6000 r--s 00029000 08:08 276716                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-encoder/3.3.2/963f64a85f2a2fb97ab5a2f0ff88d876aac99acc/grails-encoder-3.3.2.jar
+7fb0759b6000-7fb0759b8000 r--s 0000f000 08:08 276715                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-databinding/3.3.2/b0fcd7ab1ccf7210a65193930f66c21c232e028b/grails-databinding-3.3.2.jar
+7fb0759b8000-7fb0759ba000 r--s 00003000 08:08 276714                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.apache.tomcat/tomcat-annotations-api/8.5.23/aaf17df9fe0240e9e9d5375d24d5f177174b73d9/tomcat-annotations-api-8.5.23.jar
+7fb0759ba000-7fb0759cc000 r--s 0011e000 08:08 276713                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.8.10/f7b83cb2bc4b88d53961e749e1ad32f49ef017b7/jackson-databind-2.8.10.jar
+7fb0759cc000-7fb0759cd000 r--s 00003000 08:08 276233                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/javax.transaction/jta/1.1/2ca09f0b36ca7d71b762e14ea2ff09d5eac57558/jta-1.1.jar
+7fb0759cd000-7fb0759d3000 r--s 0003d000 08:08 276712                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.yaml/snakeyaml/1.17/7a27ea250c5130b2922b86dea63cbb1cc10a660c/snakeyaml-1.17.jar
+7fb0759d3000-7fb0759d5000 r--s 00016000 08:08 276179                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-templates/2.4.13/50c6b36707328f94678892408455b7a9bfe96577/groovy-templates-2.4.13.jar
+7fb0759d5000-7fb0759d9000 r--s 00031000 08:08 276178                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-xml/2.4.13/a768f5f738bed0ab0b2dd54401830739203839c6/groovy-xml-2.4.13.jar
+7fb0759d9000-7fb0759de000 r--s 0003c000 08:08 276711                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.3.12.RELEASE/790f69f6ad7f9da8d4a92c603ad7244c398c8309/spring-expression-4.3.12.RELEASE.jar
+7fb0759de000-7fb0759e7000 r--s 00054000 08:08 276710                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.3.12.RELEASE/b3fef085902993c2ef874c45c7bfd79296d5a5a4/spring-aop-4.3.12.RELEASE.jar
+7fb0759e7000-7fb0759e9000 r--s 0000e000 08:08 276269                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar
+7fb0759e9000-7fb0759f4000 r--s 0006a000 08:08 276709                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.1.11/88b8df40340eed549fb07e2613879bf6b006704d/logback-core-1.1.11.jar
+7fb0759f4000-7fb0759f8000 r--s 00049000 08:08 276168                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/com.bertramlabs.plugins/asset-pipeline-core/2.14.6/c34fb5075888bb68a68b65cc1fad1b206b453083/asset-pipeline-core-2.14.6.jar
+7fb0759f8000-7fb0759f9000 r--s 0000b000 08:08 276708                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.apache.tomcat/tomcat-juli/8.5.23/98e7f0610b7b2fb8303f11be0210e3f5a56a7d55/tomcat-juli-8.5.23.jar
+7fb0759f9000-7fb0759fb000 r--s 00007000 08:08 276707                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/javax.el/el-api/2.1.2-b03/1ac087d9d1a632d2ff82fa1e8b6610aca025ff2a/el-api-2.1.2-b03.jar
+7fb0759fb000-7fb0759fc000 r--s 0002b000 08:08 526388                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.webjars/jquery/1.11.1/195eda53ac8beba7bff08f9919b48c954c858590/jquery-1.11.1.jar
+7fb0759fc000-7fb0759fd000 r--s 00004000 08:08 276706                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-codecs/3.3.2/f6f40decad83386a1415897954bcfb894e888d2b/grails-plugin-codecs-3.3.2.jar
+7fb0759fd000-7fb075a02000 r--s 00041000 08:08 276705                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/commons-lang/commons-lang/2.6/ce1edb914c94ebc388f086c6827e8bdeec71ac2/commons-lang-2.6.jar
+7fb075a02000-7fb075a04000 r--s 0000b000 08:08 276704                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-gsp-taglib/3.3.0/72e3b9636f0a777bebfeb117e3b2f95defd44959/grails-web-gsp-taglib-3.3.0.jar
+7fb075a04000-7fb075a06000 r--s 0001f000 08:08 276703                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-jsp/3.3.0/83df1e17ef4301c34db377e817bdb6a842e82b8e/grails-web-jsp-3.3.0.jar
+7fb075a06000-7fb075a09000 r--s 00010000 08:08 276190                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.hibernate.common/hibernate-commons-annotations/5.0.1.Final/71e1cff3fcb20d3b3af4f3363c3ddb24d33c6879/hibernate-commons-annotations-5.0.1.Final.jar
+7fb075a09000-7fb075a0e000 r--s 00048000 08:08 279251                     /home/rodrigo/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar
+7fb075a0e000-7fb075a10000 r--s 0000e000 08:08 276702                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/com.fasterxml/classmate/1.3.4/3d5f48f10bbe4eb7bd862f10c0583be2e0053c6/classmate-1.3.4.jar
+7fb075a10000-7fb075a13000 r--s 0002b000 08:08 276188                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.jboss/jandex/2.0.3.Final/bfc4d6257dbff7a33a357f0de116be6ff951d849/jandex-2.0.3.Final.jar
+7fb075a13000-7fb075a14000 r--s 00003000 08:08 276187                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1/aabab3165b8ea936b9360abbf448459c0d04a5a4/geronimo-jta_1.1_spec-1.1.1.jar
+7fb075a14000-7fb075a19000 r--s 00068000 08:08 279230                     /home/rodrigo/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar
+7fb075a19000-7fb075a1c000 r--s 0000e000 08:08 276701                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.jboss.logging/jboss-logging/3.3.1.Final/c46217ab74b532568c0ed31dc599db3048bd1b67/jboss-logging-3.3.1.Final.jar
+7fb075a1c000-7fb075a26000 r--s 0006b000 08:08 276700                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-orm/4.3.12.RELEASE/47bbe35a92944aeedf06a388098581272f8db9bd/spring-orm-4.3.12.RELEASE.jar
+7fb075a26000-7fb075a2a000 r--s 00039000 08:08 276167                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-gorm-hibernate5/6.1.8.RELEASE/77ea75d00b7bf705a286eb02c729607919a94309/grails-datastore-gorm-hibernate5-6.1.8.RELEASE.jar
+7fb075a2a000-7fb075a2d000 r--s 00012000 08:08 276166                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-gorm-support/6.1.8.RELEASE/73039097b346e345a6d8054551bf068bb2857b93/grails-datastore-gorm-support-6.1.8.RELEASE.jar
+7fb075a2d000-7fb075a2e000 r--s 00002000 08:08 276165                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-web/6.1.8.RELEASE/7b779ffd10658ff5a31ee98a1f896d8f123d46f9/grails-datastore-web-6.1.8.RELEASE.jar
+7fb075a2e000-7fb075a30000 r--s 00003000 08:08 276699                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-events-compat/3.3.2/1250482ac83841a19c75b150777a2d2c28592d33/grails-events-compat-3.3.2.jar
+7fb075a30000-7fb075a31000 r--s 00007000 08:08 276698                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-events-transform/3.3.2/645c93ccb03ea27a23d6ac25265b01e5a63b9525/grails-events-transform-3.3.2.jar
+7fb075a31000-7fb075a33000 r--s 0000b000 08:08 276697                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-events/3.3.2/a4c70fc8c391d8060d715ea68bfe4ff87761fd02/grails-events-3.3.2.jar
+7fb075a33000-7fb075a35000 r--s 0001f000 08:08 276696                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails.plugins/fields/2.2.3/79149f99c909ddae5bc11d89642e14d2a275e683/fields-2.2.3.jar
+7fb075a35000-7fb075a38000 r--s 0000e000 08:08 276695                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-async/3.3.2/df2d4d6d96161b1105298a951c6fff31dd52e1e9/grails-async-3.3.2.jar
+7fb075a38000-7fb075a42000 r--s 000aa000 08:08 276259                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.javassist/javassist/3.21.0-GA/598244f595db5c5fb713731eddbb1c91a58d959b/javassist-3.21.0-GA.jar
+7fb075a42000-7fb075a45000 r--s 00016000 08:08 276694                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-validation/3.3.2/99b01646296571eb930bafe5ba50716ea60bb882/grails-validation-3.3.2.jar
+7fb075a45000-7fb075a49000 r--s 0001e000 08:08 276693                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails.plugins/converters/3.3.1/afc1ea5fa7d7d52e83017856fa5a651d38145048/converters-3.3.1.jar
+7fb075a49000-7fb075a4b000 r--s 00005000 08:08 276692                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-datasource/3.3.2/94cef3919a1a3dd23fbdb0af1b4733e3904f5fbe/grails-plugin-datasource-3.3.2.jar
+7fb075a4b000-7fb075a4e000 r--s 00019000 08:08 276691                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-controllers/3.3.2/a275c53d228b1822b128b8dd263e221cf0ffa884/grails-plugin-controllers-3.3.2.jar
+7fb075a4e000-7fb075a4f000 r--s 00005000 08:08 276690                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-web/3.3.2/ffed6c9b78a0fd3c6cd215638333b2bc8901be5e/grails-web-3.3.2.jar
+7fb075a4f000-7fb075a53000 r--s 00028000 08:08 276689                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-common/3.3.2/b9bc2dc38e7570ab169d0d14ed5c19267e8ce28f/grails-web-common-3.3.2.jar
+7fb075a53000-7fb075a58000 r--s 00038000 08:08 276688                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-websocket/8.5.23/52f07abcae10dc7e1764304b0877def175c2c833/tomcat-embed-websocket-8.5.23.jar
+7fb075a58000-7fb075a5c000 r--s 00037000 08:08 276687                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-el/8.5.23/98d979cde444dffa6d434c8377d0123b2dfa614c/tomcat-embed-el-8.5.23.jar
+7fb075a5c000-7fb075a85000 r--s 002c7000 08:08 276686                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/8.5.23/79261793a47f507890ee08f749b9d81774e4f7f0/tomcat-embed-core-8.5.23.jar
+7fb075a85000-7fb075a95000 r--s 00079000 08:08 276685                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-actuator/1.5.8.RELEASE/aac530fe877ed91c92831019755c49f29b08e6/spring-boot-actuator-1.5.8.RELEASE.jar
+7fb075a95000-7fb075a96000 r--s 00000000 08:08 276684                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter/1.5.8.RELEASE/18048efe1f06569022a53cc3fb2fe9c0162935a3/spring-boot-starter-1.5.8.RELEASE.jar
+7fb075a96000-7fb075a9a000 r--s 00040000 08:08 276683                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/xalan/serializer/2.7.2/24247f3bb052ee068971393bdb83e04512bb1c3c/serializer-2.7.2.jar
+7fb075a9a000-7fb075aa8000 r--s 00081000 08:08 276191                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-core/6.1.8.RELEASE/23fd4fd6fbbec658d8cb9d43f3c475438496cb00/grails-datastore-core-6.1.8.RELEASE.jar
+7fb075aa8000-7fb075aad000 r--s 00039000 08:08 276159                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-bootstrap/3.3.2/a1b6727614ce8f50eed4db9bccda3f8cd3f53c44/grails-bootstrap-3.3.2.jar
+7fb075aad000-7fb075ac6000 r--s 000fe000 08:08 276681                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.3.12.RELEASE/5e6d26f36636f36b7efec1d6a0c5991284fbd95b/spring-context-4.3.12.RELEASE.jar
+7fb075ac6000-7fb075ad4000 r--s 000ad000 08:08 276680                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.3.12.RELEASE/547dd432d47d0f01d9ccbedc4b705f9f7c1240a/spring-beans-4.3.12.RELEASE.jar
+7fb075ad4000-7fb075adc000 r--s 0003a000 08:08 276679                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/4.3.12.RELEASE/7147b6839b2bf9db3621b79c73b4dddbe69572b6/spring-tx-4.3.12.RELEASE.jar
+7fb075adc000-7fb075af3000 r--s 000fc000 08:08 276206                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.3.12.RELEASE/4cebc69478c6d350dbd5af28e3db7d5694f416e3/spring-core-4.3.12.RELEASE.jar
+7fb075af3000-7fb075af7000 r--s 00019000 08:08 276230                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/com.googlecode.concurrentlinkedhashmap/concurrentlinkedhashmap-lru/1.4.2/2eaf3d3c9746d526ff7e5b93931d482c3887e6ac/concurrentlinkedhashmap-lru-1.4.2.jar
+7fb075af7000-7fb075afc000 r--s 00017000 08:08 276186                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/1.0.0.Final/5e731d961297e5a07290bfaf3db1fbc8bbbf405a/hibernate-jpa-2.1-api-1.0.0.Final.jar
+7fb075afc000-7fb075afe000 r--s 00009000 08:08 276678                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.25/da76ca59f6a57ee3102f8f9bd9cee742973efa8a/slf4j-api-1.7.25.jar
+7fb075afe000-7fb075b4b000 r--s 00410000 08:08 276154                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy/2.4.13/de7b73bed517fa1323aab391b719b59c3702391a/groovy-2.4.13.jar
+7fb075b4b000-7fb075b5b000 r--s 00095000 08:08 276677                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot/1.5.8.RELEASE/748ebde51761e12627ad23d064024f342b18f9b4/spring-boot-1.5.8.RELEASE.jar
+7fb075b5b000-7fb075b5d000 r--s 00004000 08:08 276676                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.slf4j/log4j-over-slf4j/1.7.25/a87bb47468f47ee7aabbd54f93e133d4215769c3/log4j-over-slf4j-1.7.25.jar
+7fb075b5d000-7fb075b5f000 r--s 00000000 08:08 276675                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.slf4j/jul-to-slf4j/1.7.25/af5364cd6679bfffb114f0dec8a157aaa283b76/jul-to-slf4j-1.7.25.jar
+7fb075b5f000-7fb075b61000 r--s 00003000 08:08 276674                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.slf4j/jcl-over-slf4j/1.7.25/f8c32b13ff142a513eeb5b6330b1588dcb2c0461/jcl-over-slf4j-1.7.25.jar
+7fb075b61000-7fb075bcd000 r--s 0050a000 08:08 276667                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.1.5.Final/28366d161d448e82370e5bbd871eb2835ba0fb7b/hibernate-core-5.1.5.Final.jar
+7fb075bcd000-7fb075bd0000 ---p 00000000 00:00 0 
+7fb075bd0000-7fb075cce000 rw-p 00000000 00:00 0 
+7fb075cce000-7fb07621b000 r--p 00000000 08:07 4349219                    /usr/lib/locale/locale-archive
+7fb07621b000-7fb07621e000 ---p 00000000 00:00 0 
+7fb07621e000-7fb07631c000 rw-p 00000000 00:00 0 
+7fb07631c000-7fb07631f000 ---p 00000000 00:00 0 
+7fb07631f000-7fb07641d000 rw-p 00000000 00:00 0 
+7fb07641d000-7fb07641e000 ---p 00000000 00:00 0 
+7fb07641e000-7fb076e27000 rw-p 00000000 00:00 0 
+7fb076e27000-7fb077000000 r--s 03d40000 08:07 4472618                    /usr/lib/jvm/java-8-oracle/jre/lib/rt.jar
+7fb077000000-7fb079000000 rw-p 00000000 00:00 0 
+7fb079000000-7fb07a3c0000 rwxp 00000000 00:00 0 
+7fb07a3c0000-7fb088000000 ---p 00000000 00:00 0 
+7fb088000000-7fb0899ba000 rw-p 00000000 00:00 0 
+7fb0899ba000-7fb08c000000 ---p 00000000 00:00 0 
+7fb08c000000-7fb08c001000 r--s 00009000 08:08 276682                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-spring/3.3.2/bb328f18e3b442e9808b28665ba4f04d60e21c9/grails-spring-3.3.2.jar
+7fb08c001000-7fb08c008000 r--s 00045000 08:08 276673                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.1.11/ccedfbacef4a6515d2983e3f89ed753d5d4fb665/logback-classic-1.1.11.jar
+7fb08c008000-7fb08c00a000 r--s 0001e000 08:08 276672                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/com.bertramlabs.plugins/asset-pipeline-grails/2.14.6/23889d1725fae5f1705a90bca409fad3e8721b98/asset-pipeline-grails-2.14.6.jar
+7fb08c00a000-7fb08c00d000 r--s 00021000 08:08 276671                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.apache.tomcat/tomcat-jdbc/8.5.23/6036400a8f2d90dd3ae3a4d09e5136c56002887b/tomcat-jdbc-8.5.23.jar
+7fb08c00d000-7fb08c01c000 r--s 001ae000 08:08 276670                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/com.h2database/h2/1.4.196/dd0034398d593aa3588c6773faac429bbd9aea0e/h2-1.4.196.jar
+7fb08c01c000-7fb08c01f000 r--s 00018000 08:08 276669                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.glassfish.web/el-impl/2.1.2-b03/6bab1211b6e6b191fdbf06067bd05d2f75a62ac0/el-impl-2.1.2-b03.jar
+7fb08c01f000-7fb08c026000 r--s 0009b000 08:08 526386                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.webjars/bootstrap/3.3.6/1360e2bcd3016ce44a273d2a3b6569963bb0bd68/bootstrap-3.3.6.jar
+7fb08c026000-7fb08c02b000 r--s 0004b000 08:08 276668                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails.plugins/gsp/3.3.0/207d8d9c87e33608297fcd9a97c2105043774287/gsp-3.3.0.jar
+7fb08c02b000-7fb08c02d000 r--s 00006000 08:08 276152                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails.plugins/hibernate5/6.1.8/4b432464dc97f05bb27f322186783b803f7e3d1a/hibernate5-6.1.8.jar
+7fb08c02d000-7fb08c02e000 r--s 00001000 08:08 276666                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails.plugins/events/3.3.2/c43aed0886464bc62b8ef2c4963ea1bedeb19e6/events-3.3.2.jar
+7fb08c02e000-7fb08c030000 r--s 00006000 08:08 276665                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails.plugins/scaffolding/3.4.1/3794a2154aa473fd2281e1e36de398815a63e740/scaffolding-3.4.1.jar
+7fb08c030000-7fb08c033000 r--s 0000c000 08:08 276664                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails.plugins/async/3.3.2/849be6dcabfba176078915404451c4b4479c6d49/async-3.3.2.jar
+7fb08c033000-7fb08c035000 r--s 00011000 08:08 276663                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails.plugins/cache/4.0.0/72be24e2f8b3e5407048f5cc5186dcd32e8de841/cache-4.0.0.jar
+7fb08c035000-7fb08c037000 r--s 00004000 08:08 276661                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-url-mappings/3.3.2/bd54a241118067e6a9276b053fdd26b70e5ef65/grails-plugin-url-mappings-3.3.2.jar
+7fb08c037000-7fb08c044000 r--s 000ae000 08:08 276652                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-core/3.3.2/824db64a3117fdc40b2a6bd4b5444e536453e51d/grails-core-3.3.2.jar
+7fb08c044000-7fb08c064000 r--s 000e6000 08:08 276651                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-autoconfigure/1.5.8.RELEASE/e4f2efa4c319f4e3613d94fbccfdb5ccda6873e3/spring-boot-autoconfigure-1.5.8.RELEASE.jar
+7fb08c064000-7fb08c0de000 r--s 010f6000 08:07 4476022                    /usr/lib/jvm/java-8-oracle/jre/lib/ext/tools.jar
+7fb08c0de000-7fb08c2ad000 rw-p 00000000 00:00 0 
+7fb08c2ad000-7fb08c2ae000 ---p 00000000 00:00 0 
+7fb08c2ae000-7fb08c3ae000 rw-p 00000000 00:00 0 
+7fb08c3ae000-7fb08c3af000 ---p 00000000 00:00 0 
+7fb08c3af000-7fb08c77f000 rw-p 00000000 00:00 0 
+7fb08c77f000-7fb08caf0000 ---p 00000000 00:00 0 
+7fb08caf0000-7fb08cb0a000 r-xp 00000000 08:07 4599407                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7fb08cb0a000-7fb08cd0a000 ---p 0001a000 08:07 4599407                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7fb08cd0a000-7fb08cd0b000 rw-p 0001a000 08:07 4599407                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7fb08cd0b000-7fb08cd16000 r-xp 00000000 08:07 1310891                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7fb08cd16000-7fb08cf15000 ---p 0000b000 08:07 1310891                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7fb08cf15000-7fb08cf16000 r--p 0000a000 08:07 1310891                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7fb08cf16000-7fb08cf17000 rw-p 0000b000 08:07 1310891                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7fb08cf17000-7fb08cf1d000 rw-p 00000000 00:00 0 
+7fb08cf1d000-7fb08cf28000 r-xp 00000000 08:07 1310894                    /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7fb08cf28000-7fb08d127000 ---p 0000b000 08:07 1310894                    /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7fb08d127000-7fb08d128000 r--p 0000a000 08:07 1310894                    /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7fb08d128000-7fb08d129000 rw-p 0000b000 08:07 1310894                    /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7fb08d129000-7fb08d13f000 r-xp 00000000 08:07 1310887                    /lib/x86_64-linux-gnu/libnsl-2.23.so
+7fb08d13f000-7fb08d33e000 ---p 00016000 08:07 1310887                    /lib/x86_64-linux-gnu/libnsl-2.23.so
+7fb08d33e000-7fb08d33f000 r--p 00015000 08:07 1310887                    /lib/x86_64-linux-gnu/libnsl-2.23.so
+7fb08d33f000-7fb08d340000 rw-p 00016000 08:07 1310887                    /lib/x86_64-linux-gnu/libnsl-2.23.so
+7fb08d340000-7fb08d342000 rw-p 00000000 00:00 0 
+7fb08d342000-7fb08d34a000 r-xp 00000000 08:07 1310900                    /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7fb08d34a000-7fb08d549000 ---p 00008000 08:07 1310900                    /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7fb08d549000-7fb08d54a000 r--p 00007000 08:07 1310900                    /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7fb08d54a000-7fb08d54b000 rw-p 00008000 08:07 1310900                    /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7fb08d54b000-7fb08d555000 r-xp 00000000 08:07 4599416                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libinstrument.so
+7fb08d555000-7fb08d754000 ---p 0000a000 08:07 4599416                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libinstrument.so
+7fb08d754000-7fb08d755000 rw-p 00009000 08:07 4599416                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libinstrument.so
+7fb08d755000-7fb08d780000 r-xp 00000000 08:07 4599401                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7fb08d780000-7fb08d97f000 ---p 0002b000 08:07 4599401                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7fb08d97f000-7fb08d981000 rw-p 0002a000 08:07 4599401                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7fb08d981000-7fb08d98e000 r-xp 00000000 08:07 4599406                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7fb08d98e000-7fb08db8d000 ---p 0000d000 08:07 4599406                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7fb08db8d000-7fb08db8f000 rw-p 0000c000 08:07 4599406                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7fb08db8f000-7fb08db96000 r-xp 00000000 08:07 1310896                    /lib/x86_64-linux-gnu/librt-2.23.so
+7fb08db96000-7fb08dd95000 ---p 00007000 08:07 1310896                    /lib/x86_64-linux-gnu/librt-2.23.so
+7fb08dd95000-7fb08dd96000 r--p 00006000 08:07 1310896                    /lib/x86_64-linux-gnu/librt-2.23.so
+7fb08dd96000-7fb08dd97000 rw-p 00007000 08:07 1310896                    /lib/x86_64-linux-gnu/librt-2.23.so
+7fb08dd97000-7fb08de9f000 r-xp 00000000 08:07 1310905                    /lib/x86_64-linux-gnu/libm-2.23.so
+7fb08de9f000-7fb08e09e000 ---p 00108000 08:07 1310905                    /lib/x86_64-linux-gnu/libm-2.23.so
+7fb08e09e000-7fb08e09f000 r--p 00107000 08:07 1310905                    /lib/x86_64-linux-gnu/libm-2.23.so
+7fb08e09f000-7fb08e0a0000 rw-p 00108000 08:07 1310905                    /lib/x86_64-linux-gnu/libm-2.23.so
+7fb08e0a0000-7fb08ed6f000 r-xp 00000000 08:07 4599384                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7fb08ed6f000-7fb08ef6f000 ---p 00ccf000 08:07 4599384                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7fb08ef6f000-7fb08f048000 rw-p 00ccf000 08:07 4599384                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7fb08f048000-7fb08f093000 rw-p 00000000 00:00 0 
+7fb08f093000-7fb08f253000 r-xp 00000000 08:07 1310910                    /lib/x86_64-linux-gnu/libc-2.23.so
+7fb08f253000-7fb08f453000 ---p 001c0000 08:07 1310910                    /lib/x86_64-linux-gnu/libc-2.23.so
+7fb08f453000-7fb08f457000 r--p 001c0000 08:07 1310910                    /lib/x86_64-linux-gnu/libc-2.23.so
+7fb08f457000-7fb08f459000 rw-p 001c4000 08:07 1310910                    /lib/x86_64-linux-gnu/libc-2.23.so
+7fb08f459000-7fb08f45d000 rw-p 00000000 00:00 0 
+7fb08f45d000-7fb08f460000 r-xp 00000000 08:07 1310899                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7fb08f460000-7fb08f65f000 ---p 00003000 08:07 1310899                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7fb08f65f000-7fb08f660000 r--p 00002000 08:07 1310899                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7fb08f660000-7fb08f661000 rw-p 00003000 08:07 1310899                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7fb08f661000-7fb08f676000 r-xp 00000000 08:07 4861827                    /usr/lib/jvm/java-8-oracle/lib/amd64/jli/libjli.so
+7fb08f676000-7fb08f876000 ---p 00015000 08:07 4861827                    /usr/lib/jvm/java-8-oracle/lib/amd64/jli/libjli.so
+7fb08f876000-7fb08f877000 rw-p 00015000 08:07 4861827                    /usr/lib/jvm/java-8-oracle/lib/amd64/jli/libjli.so
+7fb08f877000-7fb08f88f000 r-xp 00000000 08:07 1310893                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7fb08f88f000-7fb08fa8e000 ---p 00018000 08:07 1310893                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7fb08fa8e000-7fb08fa8f000 r--p 00017000 08:07 1310893                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7fb08fa8f000-7fb08fa90000 rw-p 00018000 08:07 1310893                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7fb08fa90000-7fb08fa94000 rw-p 00000000 00:00 0 
+7fb08fa94000-7fb08faba000 r-xp 00000000 08:07 1310888                    /lib/x86_64-linux-gnu/ld-2.23.so
+7fb08faba000-7fb08fabb000 r--s 00008000 08:08 276662                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-interceptors/3.3.2/4f73122cdc8c27c27cedde83bd80e87c924dc197/grails-plugin-interceptors-3.3.2.jar
+7fb08fabb000-7fb08fabd000 r--s 00003000 08:08 276660                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-services/3.3.2/ea22bd2a1edfe4aa09a4b14de4083d08bad7bf31/grails-plugin-services-3.3.2.jar
+7fb08fabd000-7fb08fac1000 r--s 00031000 08:08 276657                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-rest/3.3.2/d748b4fb52d140ecc3edcf8771a2135621993378/grails-plugin-rest-3.3.2.jar
+7fb08fac1000-7fb08fb92000 rw-p 00000000 00:00 0 
+7fb08fb92000-7fb08fb95000 ---p 00000000 00:00 0 
+7fb08fb95000-7fb08fc97000 rw-p 00000000 00:00 0 
+7fb08fc97000-7fb08fc98000 r--s 00003000 08:08 276659                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-i18n/3.3.2/6f01bb2a4ce26391b2bbf6bc04dc74904504b62c/grails-plugin-i18n-3.3.2.jar
+7fb08fc98000-7fb08fc99000 r--s 00004000 08:08 276658                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-databinding/3.3.2/8d7ee9adb4ac2666fd5aa9cdc87a9e5138459c45/grails-plugin-databinding-3.3.2.jar
+7fb08fc99000-7fb08fc9a000 r--s 00000000 08:08 276656                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-logging/3.3.2/4d1eb8335f81f9d0341688230c3d0f133b1e7cd4/grails-logging-3.3.2.jar
+7fb08fc9a000-7fb08fc9b000 r--s 00001000 08:08 276655                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-boot/3.3.2/a0f4cc58704e6551121d0453968f7f834e529b4/grails-web-boot-3.3.2.jar
+7fb08fc9b000-7fb08fc9c000 r--s 00000000 08:08 276654                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-tomcat/1.5.8.RELEASE/cf3b7eb7e192a60ab1dd09e4f8bce82710a5feb0/spring-boot-starter-tomcat-1.5.8.RELEASE.jar
+7fb08fc9c000-7fb08fc9d000 r--s 00000000 08:08 276653                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-actuator/1.5.8.RELEASE/927c40a1af518dc240dfdf7aaf0a9673c3a127c5/spring-boot-starter-actuator-1.5.8.RELEASE.jar
+7fb08fc9d000-7fb08fc9e000 r--s 00000000 08:08 276650                     /home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-logging/1.5.8.RELEASE/ebc00a0e46753d90431fdcc5e3d6b9fd3bf1564a/spring-boot-starter-logging-1.5.8.RELEASE.jar
+7fb08fc9e000-7fb08fcad000 rw-p 00000000 00:00 0 
+7fb08fcad000-7fb08fcb5000 rw-s 00000000 08:07 4194419                    /tmp/hsperfdata_rodrigo/20465
+7fb08fcb5000-7fb08fcb6000 rw-p 00000000 00:00 0 
+7fb08fcb6000-7fb08fcb7000 r--p 00000000 00:00 0 
+7fb08fcb7000-7fb08fcb9000 rw-p 00000000 00:00 0 
+7fb08fcb9000-7fb08fcba000 r--p 00025000 08:07 1310888                    /lib/x86_64-linux-gnu/ld-2.23.so
+7fb08fcba000-7fb08fcbb000 rw-p 00026000 08:07 1310888                    /lib/x86_64-linux-gnu/ld-2.23.so
+7fb08fcbb000-7fb08fcbc000 rw-p 00000000 00:00 0 
+7fff0abfb000-7fff0ac22000 rw-p 00000000 00:00 0                          [stack]
+7fff0acfd000-7fff0acff000 r--p 00000000 00:00 0                          [vvar]
+7fff0acff000-7fff0ad01000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -Dendpoints.shutdown.enabled=true -Denv=development -Dfull.stacktrace=false -Dgrails.env=development -Dgrails.full.stacktrace=false -Dinfo.app.grailsVersion=3.3.2 -Dinfo.app.name=nuevo-foro-fiuba -Dinfo.app.version=0.1 -Djdk.reflect.allowGetCallerClass=true -Drun.active=true -Dspring.output.ansi.enabled=always -Dspringloaded=inclusions=grails.plugins..*;synchronize=true;allowSplitPackages=true;cacheDir=/home/rodrigo/nuevo-foro-fiuba/build/springloaded -Dverbose=false -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -XX:CICompilerCount=3 -javaagent:/home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework/springloaded/1.2.8.RELEASE/b60bac05b0451cdc1863bfec617f39aa0dcaaa43/springloaded-1.2.8.RELEASE.jar -Xverify:none -Xms768m -Xmx768m -Dfile.encoding=UTF-8 -Duser.country=AR -Duser.language=es -Duser.variant 
+java_command: nuevo_foro_fiuba.Application
+java_class_path (initial): /home/rodrigo/nuevo-foro-fiuba/src/main/resources:/home/rodrigo/nuevo-foro-fiuba/grails-app/views:/home/rodrigo/nuevo-foro-fiuba/grails-app/i18n:/home/rodrigo/nuevo-foro-fiuba/grails-app/conf:/home/rodrigo/nuevo-foro-fiuba/build/classes/main:/home/rodrigo/nuevo-foro-fiuba/build/resources/main:/home/rodrigo/nuevo-foro-fiuba/gsp-classes:/home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-logging/1.5.8.RELEASE/ebc00a0e46753d90431fdcc5e3d6b9fd3bf1564a/spring-boot-starter-logging-1.5.8.RELEASE.jar:/home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-autoconfigure/1.5.8.RELEASE/e4f2efa4c319f4e3613d94fbccfdb5ccda6873e3/spring-boot-autoconfigure-1.5.8.RELEASE.jar:/home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-core/3.3.2/824db64a3117fdc40b2a6bd4b5444e536453e51d/grails-core-3.3.2.jar:/home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-actuator/1.5.8.RELEASE/927c40a1af518dc240dfdf7aaf0a9673c3a127c5/spring-boot-starter-actuator-1.5.8.RELEASE.jar:/home/rodrigo/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-tomcat/1.5.8.RELEASE/cf3b7eb7e192a60ab1dd09e4f8bce82710a5feb0/spring-boot-starter-tomcat-1.5.8.RELEASE.jar:/home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-boot/3.3.2/a0f4cc58704e6551121d0453968f7f834e529b4/grails-web-boot-3.3.2.jar:/home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-logging/3.3.2/4d1eb8335f81f9d0341688230c3d0f133b1e7cd4/grails-logging-3.3.2.jar:/home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-rest/3.3.2/d748b4fb52d140ecc3edcf8771a2135621993378/grails-plugin-rest-3.3.2.jar:/home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-databinding/3.3.2/8d7ee9adb4ac2666fd5aa9cdc87a9e5138459c45/grails-plugin-databinding-3.3.2.jar:/home/rodrigo/.gradle/caches/modules-2/files-2.1/org.grails/grails
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/usr/lib/jvm/java-8-oracle
+PATH=/home/rodrigo/.sdkman/candidates/grails/current/bin:/home/rodrigo/anaconda2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/rodrigo/spark/bin
+SHELL=/bin/bash
+DISPLAY=:0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xac8af0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xac8af0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0x921dd0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0x921dd0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0x921dd0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0x921dd0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR1: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR2: [libjvm.so+0x923610], sa_mask[0]=00100000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.so+0x924a10], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: [libjvm.so+0x924a10], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGTERM: [libjvm.so+0x924a10], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.so+0x924a10], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+
+
+---------------  S Y S T E M  ---------------
+
+OS:DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION="Ubuntu 16.04.2 LTS"
+
+uname:Linux 4.4.0-83-generic #106-Ubuntu SMP Mon Jun 26 17:54:43 UTC 2017 x86_64
+libc:glibc 2.23 NPTL 2.23 
+rlimit: STACK 8192k, CORE 0k, NPROC 14742, NOFILE 65536, AS infinity
+load average:1,02 1,62 2,06
+
+/proc/meminfo:
+MemTotal:        3913756 kB
+MemFree:          153668 kB
+MemAvailable:     213620 kB
+Buffers:            5252 kB
+Cached:           595748 kB
+SwapCached:       101428 kB
+Active:          2674116 kB
+Inactive:         873612 kB
+Active(anon):    2530688 kB
+Inactive(anon):   776388 kB
+Active(file):     143428 kB
+Inactive(file):    97224 kB
+Unevictable:         256 kB
+Mlocked:             256 kB
+SwapTotal:       8000508 kB
+SwapFree:        6288068 kB
+Dirty:              1416 kB
+Writeback:             0 kB
+AnonPages:       2930736 kB
+Mapped:           432652 kB
+Shmem:            360232 kB
+Slab:              86156 kB
+SReclaimable:      43928 kB
+SUnreclaim:        42228 kB
+KernelStack:       13792 kB
+PageTables:        66460 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     9957384 kB
+Committed_AS:   23379048 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:   1110016 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      151868 kB
+DirectMap2M:     3909632 kB
+DirectMap1G:           0 kB
+
+
+CPU:total 2 (initial active 2) (2 cores per cpu, 1 threads per core) family 6 model 60 stepping 3, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, clmul, erms, lzcnt, tsc, tscinvbit
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 60
+model name	: Intel(R) Pentium(R) CPU G3220 @ 3.00GHz
+stepping	: 3
+microcode	: 0x9
+cpu MHz		: 2997.421
+cache size	: 3072 KB
+physical id	: 0
+siblings	: 2
+core id		: 0
+cpu cores	: 2
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg cx16 xtpr pdcm pcid sse4_1 sse4_2 movbe popcnt tsc_deadline_timer xsave rdrand lahf_lm abm epb tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust erms invpcid xsaveopt dtherm arat pln pts
+bugs		:
+bogomips	: 5986.51
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 60
+model name	: Intel(R) Pentium(R) CPU G3220 @ 3.00GHz
+stepping	: 3
+microcode	: 0x9
+cpu MHz		: 2999.882
+cache size	: 3072 KB
+physical id	: 0
+siblings	: 2
+core id		: 1
+cpu cores	: 2
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg cx16 xtpr pdcm pcid sse4_1 sse4_2 movbe popcnt tsc_deadline_timer xsave rdrand lahf_lm abm epb tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust erms invpcid xsaveopt dtherm arat pln pts
+bugs		:
+bogomips	: 5986.51
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 3913756k(153668k free), swap 8000508k(6288068k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.131-b11) for linux-amd64 JRE (1.8.0_131-b11), built on Mar 15 2017 01:23:40 by "java_re" with gcc 4.3.0 20080428 (Red Hat 4.3.0-8)
+
+time: Tue Feb 13 00:27:08 2018
+elapsed time: 224 seconds (0d 0h 3m 44s)
+

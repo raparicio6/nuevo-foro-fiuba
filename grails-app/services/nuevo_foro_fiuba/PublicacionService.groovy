@@ -46,7 +46,7 @@ class PublicacionService {
   def calificarPublicacion(Usuario usuario, Publicacion publicacion, Puntaje.TipoPuntaje tipo){
     def promedioCalificaciones = (usuario.getPromedioCalificaciones()).toInteger()
     Integer numeroPuntaje = promedioCalificaciones + 0**promedioCalificaciones
-    Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)    
+    Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)
     Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, null)
     calificacion.save(failOnError:true)
     usuario.calificar(publicacion, calificacion)
