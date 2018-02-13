@@ -64,6 +64,10 @@ class Publicacion {
 		this.estado==EstadoPublicacion.CERRADA
 	}
 
+	Boolean estaEliminada(){
+		this.estado==EstadoPublicacion.ELIMINADA
+	}
+
 	def cambiarEstado(){
 		this.setEstado((this.estado == EstadoPublicacion.ABIERTA) ? EstadoPublicacion.CERRADA : EstadoPublicacion.ABIERTA)
 	}

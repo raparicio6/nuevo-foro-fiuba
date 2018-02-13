@@ -1,16 +1,24 @@
-import grails.test.mixin.*
+package nuevo_foro_fiuba
+
+import grails.test.mixin.TestFor
+import spock.lang.Specification
+import grails.test.mixin.support.*
 import org.junit.*
 import domain.*
 
 @TestFor(Usuario)
-class UsuarioTests {
+class Usuario extends specificacion{
 
     Usuario usuario
 
-    void setup() {
+    void setUp() {
         usuario = new Usuario(nombre: 'Homero', apellido: 'Simpson', nombreUsuario: 'HSimpson')
     }
 
+    void tearDown() {
+    }
+
+    @Test
     void 'test soy un usuario que quiere comentar en una publicacion pero no tiene el promedido suficiente' () {
         Publicacion publicacion = new Publicacion(usuarioCreador: usuario, promedioRequeridoParaComentar: 4)
         Comentario comentario = new Comentario()
@@ -19,6 +27,7 @@ class UsuarioTests {
         }
     }
 
+    @Test
     void 'test soy un usuario que quiere comentar en una publicacion cerrada' () {
         Publicacion publicacion = new Publicacion(usuarioCreador: usuario, promedioRequeridoParaComentar: 4)
         Comentario comentario = new Comentario()
@@ -28,6 +37,7 @@ class UsuarioTests {
         }
     }
 
+    @Test
     void 'test soy un usuario que crea una publicacion y aparezco como creador' () {
         Publicacion publicacion = new Publicacion(usuarioCreador: usuario, promedioRequeridoParaComentar: 4)
         assert shouldFail(PromedioInsuficienteException) {
@@ -35,6 +45,7 @@ class UsuarioTests {
         } == true
     }
 
+    @Test
     void 'test soy un usuario que quiere comentar en una publicacion eliminada' () {
         Publicacion publicacion = new Publicacion(usuarioCreador: usuario, promedioRequeridoParaComentar: 4)
         Comentario comentario = new Comentario()
@@ -44,6 +55,7 @@ class UsuarioTests {
         }
     }
 
+    @Test
     void 'test soy un usuario que califico una publicacion e intento calificarla otra vez' () {
         Publicacion publicacion = new Publicacion(usuarioCreador: usuario, promedioRequeridoParaComentar: 2)
         Usuario usuario2 = new Usuario(nombre: 'Benito', apellido: 'Camelas', promedioCalificaciones: 4)
@@ -55,6 +67,7 @@ class UsuarioTests {
         }
     }
 
+    @Test
     void 'test soy un usuario que califico un comentario e intento calificarlo otra vez' () {
         Comentario comentario = new Comentario()
         Usuario usuario2 = new Usuario(nombre: 'Benito', apellido: 'Camelas', promedioCalificaciones: 4)
