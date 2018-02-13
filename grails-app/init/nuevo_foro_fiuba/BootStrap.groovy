@@ -30,7 +30,7 @@ class BootStrap {
       usuario.agregarCursada(cursada)
       Publicacion publicacion = new Publicacion ('TextoPublicacion_', usuario, materia, catedra)
       publicacion.save(failOnError:true)
-      Publicacion publicacion2 = new Publicacion ('TextoPublicacion_', usuario2, materia, catedra)
+      Publicacion publicacion2 = new Publicacion ('TextoPublicacion_', usuario2, materia2, catedra2)
       publicacion2.save(failOnError:true)
       Comentario comentario = new Comentario ("Soy el usuario2", usuario2, publicacion, null)
       comentario.save(failOnError:true)
@@ -49,6 +49,14 @@ class BootStrap {
       Calificacion calificacion = new Calificacion (usuario2, puntaje, publicacion, null)
       calificacion.save(failOnError:true)
       publicacion.agregarCalificacion(calificacion)
+      MensajePrivado mensaje = new MensajePrivado("Mensaje", null, null)
+      mensaje.save(failOnError:true)
+      InformacionMensajeUsuario info1 = new InformacionMensajeUsuario(usuario3, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
+      usuario.guardarMensaje(info1)
+      info1.save(failOnError:true)
+      InformacionMensajeUsuario info2 = new InformacionMensajeUsuario(usuario, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
+      usuario3.guardarMensaje(info2)
+      info2.save(failOnError:true)
     }
     def destroy = {
     }

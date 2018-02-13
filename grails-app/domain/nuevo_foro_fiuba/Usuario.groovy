@@ -41,6 +41,7 @@ class Usuario {
 		this.comentarios = []
 		this.cursadas = []
 		this.promedioCalificaciones = 2.5
+		//MEJOR QUE ARRANQUE CON PROMEDIO CERO PORQUE DE TODAS FORMAS LA PRIMERA CALIFICACION SIEMPRE VA A PISAR ESTE NRO
 	}
 
 // ------------------------------------------------------------------------- //
@@ -48,7 +49,7 @@ class Usuario {
 		//no se puede comentar una publicacion cerrada
 		if (publicacionAComentar.estaCerrada())
 			throw new PublicacionCerradaException()
-		if (publicaionAComentar.estaEliminada())
+		if (publicacionAComentar.estaEliminada())
 			throw new PublicacionEliminadaException()
 		if (publicacionAComentar.getPromedioRequeridoParaComentar() > this.promedioCalificaciones)
 			throw new PromedioInsuficienteException()
@@ -64,6 +65,15 @@ class Usuario {
 		comentarioAComentar.agregarComentario(comentario)
 	}
 
+	// Boolean esDueñoDeLaPublicacion(Publicacion publicacion){
+	// 	(publicacion.getUsuarioCreador() == this)
+	// }
+	//
+	// Boolean esDueñoDelComentario(Comentario comentario){
+	// 	(comentario.getUsuarioCreador() == this)
+	// }
+
+	//LOS DE ARRIBA NO FUNCIONAN
 	Boolean esDueñoDeLaPublicacion(Publicacion publicacion){
 		(publicacion.getUsuarioCreador().getId() == this.id)
 	}
@@ -89,10 +99,10 @@ class Usuario {
 	}
 
 	def calificar(def calificable, Calificacion calificacion){
-		def calificaciones = calificable.calificaciones.collect {calificacionInstance -> calificacionInstance.usuario.getId()}
-		def calificacionesUsuario = calificaciones.findAll {idUsuario -> idUsuario == this.id}
-		//println(calificacionesUsuario.size().toString())
-		if (calificacionesUsuario.size()>1) // CORREGIR
+		def calificaciones = calificable.calificaciones
+		def calificacionesUsuario = calificaciones.collect {calificacionInstance -> calificacionInstance.getUsuario() == this}
+		println(calificacionesUsuario.size().toString())
+		if (calificacionesUsuario.size()>=1)
 			throw new UsuarioYaCalificoException()
 		else
 			calificable.agregarCalificacion(calificacion)
@@ -109,6 +119,19 @@ class Usuario {
 
 	def agregarCursada(Cursada cursada){
 		this.cursadas << cursada
+	}
+
+	def actualizarPromedioCalificaciones(){
+		def publicaciones = this.publicaciones
+		def calificaciones = publicaciones.collect {publicacionInstance -> publicacionInstance.calificaciones}
+		def comentarios = this.comentarios
+		calificaciones += comentarios.collect {comentarioInstance -> comentarioInstance.calificaciones}
+		calificaciones = calificaciones.flatten()
+		def contador = 0
+		calificaciones.collect {calificacionInstance -> contador += Puntaje.TipoPuntaje.getProporcion(calificacionInstance.puntaje.tipo) * calificacionInstance.puntaje.numero}
+		promedioCalificaciones = (contador/calificaciones.size()).toFloat()
+		this.setPromedioCalificaciones(promedioCalificaciones)
+		//siempre va a tener al menos una calificacion
 	}
 
 }

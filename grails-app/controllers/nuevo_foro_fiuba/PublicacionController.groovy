@@ -1,8 +1,5 @@
 package nuevo_foro_fiuba
 
-import grails.gorm.transactions.Transactional
-
-@Transactional
 class PublicacionController {
 
   def publicacionService
@@ -31,14 +28,14 @@ class PublicacionController {
     def usuarioLogin = Usuario.get(idUsuario)
     def publicacionInstance = Publicacion.get(id)
     publicacionService.cambiarEstado(usuarioLogin, publicacionInstance)
-    redirect(action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
+    redirect(action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
   }
 
   def modificarTextoPublicacion(long id, String nuevoTexto, long idUsuario){
     def usuarioLogin = Usuario.get(idUsuario)
     def publicacionInstance = Publicacion.get(id)
     publicacionService.modificarTexto(usuarioLogin, publicacionInstance, nuevoTexto)
-    redirect(action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
+    redirect(action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
   }
 
   def modificarMateria(long id, long idMateria, long idUsuario){
@@ -46,7 +43,7 @@ class PublicacionController {
     def publicacionInstance = Publicacion.get(id)
     def materiaInstance = Materia.get(idMateria)
     publicacionService.modificarMateriaPublicacion(usuarioLogin, publicacionInstance, materiaInstance)
-    redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
+    redirect (action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
   }
 
   def modificarCatedra(long id, long idCatedra, long idUsuario){
@@ -54,17 +51,16 @@ class PublicacionController {
     def publicacionInstance = Publicacion.get(id)
     def catedraInstance = Catedra.get(idCatedra)
     publicacionService.modificarCatedraPublicacion(usuarioLogin, publicacionInstance, catedraInstance)
-    redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
+    redirect (action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
   }
 
   def modificarPromedioRequeridoParaComentar (long id, long idUsuario, Integer promedio){
     def usuarioLogin = Usuario.get(idUsuario)
     def publicacionInstance = Publicacion.get(id)
     publicacionService.modificarPromedioRequeridoParaComentar(usuarioLogin, publicacionInstance, promedio)
-    redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
+    redirect (action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
   }
 
-//VER ???????
   def eliminarPublicacion(long id, long idUsuario){
     def usuarioLogin = Usuario.get(idUsuario)
     def publicacionInstance = Publicacion.get(id)
@@ -89,10 +85,10 @@ class PublicacionController {
     catch (UsuarioYaCalificoException e){
       flash.message = e.MENSAJE
     }
-    redirect (action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
+    redirect (action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
   }
 
-  def comentar(long id, long idUsuario, long idComentario, String textoComentario){
+  def comentar(long id, long idUsuario, String textoComentario){
     def usuarioLogin = Usuario.get(idUsuario)
     def publicacionInstance = Publicacion.get(id)
     try{
@@ -104,6 +100,6 @@ class PublicacionController {
     catch (PublicacionCerradaException e){
       flash.message = e.MENSAJE
     }
-    redirect(controller:"publicacion", action: "verPublicacion", id: publicacionInstance.id, params: [idUsuario:idUsuario])
+    redirect(controller:"publicacion", action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
   }
 }

@@ -1,8 +1,5 @@
 package nuevo_foro_fiuba
 
-import grails.gorm.transactions.Transactional
-
-@Transactional
 class ComentarioController {
 
   def comentarioService
@@ -22,13 +19,12 @@ class ComentarioController {
     def usuarioLogin = Usuario.get(idUsuario)
     def comentarioInstance = Comentario.get(id)
     comentarioService.modificarTexto(usuarioLogin, comentarioInstance, nuevoTexto)
-    redirect(controller:"comentario", action: "verComentario", id: comentarioInstance.id,  params: [idUsuario:idUsuario])
+    redirect(controller:"comentario", action: "verComentario", id:id,  params: [idUsuario:idUsuario])
   }
 
   def eliminarComentario(long id, long idUsuario){
     def comentarioInstance = Comentario.get(id)
     comentarioService.eliminarComentario(comentarioInstance)
-
     (comentarioInstance.publicacionComentada) ? redirect(controller: "publicacion", action: "verPublicacion", id: comentarioInstance.publicacionComentada.id, params: [idUsuario:idUsuario]) : redirect(controller:"comentario", action: "verComentario", id: comentarioInstance.comentarioComentado.id,  params: [idUsuario:idUsuario])
   }
 
@@ -49,19 +45,19 @@ class ComentarioController {
     catch (UsuarioYaCalificoException e){
       flash.message = e.MENSAJE
     }
-    redirect (action: "verComentario", id: comentarioInstance.id, params: [idUsuario:idUsuario])
+    redirect (action: "verComentario", id:id, params: [idUsuario:idUsuario])
   }
 
-  def comentar(long id, long idUsuario, long idComentario, String textoComentario){
+  def comentar(long id, long idUsuario, String textoComentario){
     def usuarioLogin = Usuario.get(idUsuario)
-    def comentarioInstance = Comentario.get(idComentario)
+    def comentarioInstance = Comentario.get(id)
     try{
       comentarioService.comentarComentario(usuarioLogin, textoComentario, comentarioInstance)
     }
     catch (PublicacionCerradaException e){
       flash.message = e.MENSAJE
     }
-    redirect(controller:"comentario", action: "verComentario", id: comentarioInstance.id, params: [idUsuario:idUsuario])
+    redirect(controller:"comentario", action: "verComentario", id:id, params: [idUsuario:idUsuario])
   }
 
 }

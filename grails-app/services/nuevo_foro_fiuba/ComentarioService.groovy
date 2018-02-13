@@ -33,21 +33,11 @@ class ComentarioService {
   def calificarComentario(Usuario usuario, Comentario comentario, Puntaje.TipoPuntaje tipo){
     def promedioCalificaciones = (usuario.getPromedioCalificaciones()).toInteger()
     Integer numeroPuntaje = promedioCalificaciones + 0**promedioCalificaciones
-    Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)    
+    Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)
     Calificacion calificacion = new Calificacion(usuario, puntaje, null, comentario)
-    calificacion.save(failOnError:true)
     usuario.calificar(comentario, calificacion)
-    def usuarioCalificado = comentario.getUsuarioCreador()
-    def publicaciones = usuarioCalificado.getPublicaciones()
-    def calificaciones = publicaciones.collect {publicacionInstance -> publicacionInstance.calificaciones}
-    def comentarios = usuarioCalificado.getComentarios()
-    calificaciones += comentarios.collect {comentarioInstance -> comentarioInstance.calificaciones}
-    calificaciones = calificaciones.flatten()
-    def contador = 0
-    calificaciones.collect {calificacionInstance -> contador += Puntaje.TipoPuntaje.getProporcion(calificacionInstance.puntaje.tipo) * calificacionInstance.puntaje.numero}
-    promedioCalificaciones = (contador/calificaciones.size()).toFloat()
-    usuarioCalificado.setPromedioCalificaciones(promedioCalificaciones)
-    //siempre va a tener al menos una calificacion
+    calificacion.save(failOnError:true)
+    comentario.getUsuarioCreador().actualizarPromedioCalificaciones()
   }
 
   def comentarComentario (Usuario usuario, String textoComentario, Comentario comentarioAComentar){
