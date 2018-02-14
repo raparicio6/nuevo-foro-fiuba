@@ -17,6 +17,7 @@ class MensajePrivadoService {
     MensajePrivado mensaje = new MensajePrivado(texto, null, null)
     InformacionMensajeUsuario infoEmisor = new InformacionMensajeUsuario (receptor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
     InformacionMensajeUsuario infoReceptor = new InformacionMensajeUsuario (emisor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
+    // orden incorrecto
     emisor.enviarMensaje(receptor, infoEmisor, infoReceptor)
     mensaje.save(failOnError:true)
     infoEmisor.save(failOnError:true)

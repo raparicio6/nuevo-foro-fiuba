@@ -65,4 +65,8 @@ class Comentario {
 		this.setEstado(EstadoComentario.ELIMINADO)
 	}
 
+	def eliminarComentarios(){
+		this.comentarios.collect{subcomentario -> subcomentario.eliminar()}
+	}
+
 }

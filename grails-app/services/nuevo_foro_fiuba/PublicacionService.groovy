@@ -37,9 +37,8 @@ class PublicacionService {
   }
 
   def eliminarPublicacion (Usuario usuario, Publicacion publicacionInstance){
-    publicacionInstance.comentarios.collect {comentario -> comentario.comentarios.collect { subcomentario -> subcomentario.eliminar()}}
-    publicacionInstance.comentarios.collect {comentario2 -> comentario2.eliminar()}
-    publicacionInstance.calificaciones.collect {calificacion -> calificacion.eliminar()}
+    publicacionInstance.eliminarComentarios()    
+    publicacionInstance.eliminarCalificaciones()
     publicacionInstance.eliminar()
   }
 
@@ -48,6 +47,7 @@ class PublicacionService {
     Integer numeroPuntaje = promedioCalificaciones + 0**promedioCalificaciones
     Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)
     Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, null)
+    // orden incorrecto
     usuario.calificar(publicacion, calificacion)
     calificacion.save(failOnError:true)
     publicacion.getUsuarioCreador().actualizarPromedioCalificaciones()
@@ -55,6 +55,7 @@ class PublicacionService {
 
   def comentarPublicacion (Usuario usuario, String textoComentario, Publicacion publicacionAComentar){
     Comentario comentario = new Comentario(textoComentario, usuario, publicacionAComentar, null)
+    // orden incorrecto
     usuario.comentarPublicacion(comentario, publicacionAComentar)
     comentario.save(failOnError:true)
   }

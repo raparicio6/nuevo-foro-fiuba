@@ -25,8 +25,8 @@ class ComentarioService {
     comentario.esSubComentario()
   }
 
-  def eliminarComentario (Comentario comentario){
-    comentario.comentarios.collect {subcomentario -> subcomentario.eliminar()}
+  def eliminarComentario (Comentario comentario){    
+    comentario.eliminarComentarios()
     comentario.eliminar()
   }
 
@@ -35,6 +35,7 @@ class ComentarioService {
     Integer numeroPuntaje = promedioCalificaciones + 0**promedioCalificaciones
     Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)
     Calificacion calificacion = new Calificacion(usuario, puntaje, null, comentario)
+    // orden incorrecto
     usuario.calificar(comentario, calificacion)
     calificacion.save(failOnError:true)
     comentario.getUsuarioCreador().actualizarPromedioCalificaciones()

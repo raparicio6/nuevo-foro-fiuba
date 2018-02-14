@@ -40,8 +40,10 @@ class Usuario {
 		this.mensajes = []
 		this.comentarios = []
 		this.cursadas = []
-		this.promedioCalificaciones = 2.5
-		//MEJOR QUE ARRANQUE CON PROMEDIO CERO PORQUE DE TODAS FORMAS LA PRIMERA CALIFICACION SIEMPRE VA A PISAR ESTE NRO
+		this.promedioCalificaciones = 3.5
+		// MEJOR QUE ARRANQUE CON PROMEDIO CERO PORQUE DE TODAS FORMAS LA PRIMERA CALIFICACION SIEMPRE VA A PISAR ESTE NRO
+		// ARREGLAR ESTO, QUE ESTE 3.5 SEA COMO UNA CALIFICACION MAS
+		// en todos lados se hace asi, cuando te creas un usuario siempre empezas en "verde"
 	}
 
 // ------------------------------------------------------------------------- //
@@ -74,6 +76,8 @@ class Usuario {
 	// }
 
 	//LOS DE ARRIBA NO FUNCIONAN
+	// hay que preguntar para que se pueda usar algo como lo de arriba
+
 	Boolean esDueñoDeLaPublicacion(Publicacion publicacion){
 		(publicacion.getUsuarioCreador().getId() == this.id)
 	}
@@ -101,7 +105,7 @@ class Usuario {
 	def calificar(def calificable, Calificacion calificacion){
 		def calificaciones = calificable.calificaciones
 		def calificacionesUsuario = calificaciones.collect {calificacionInstance -> calificacionInstance.getUsuario() == this}
-		println(calificacionesUsuario.size().toString())
+		// println(calificacionesUsuario.size().toString())
 		if (calificacionesUsuario.size()>=1)
 			throw new UsuarioYaCalificoException()
 		else

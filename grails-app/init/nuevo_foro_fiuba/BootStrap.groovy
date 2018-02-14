@@ -52,10 +52,12 @@ class BootStrap {
       MensajePrivado mensaje = new MensajePrivado("Mensaje", null, null)
       mensaje.save(failOnError:true)
       InformacionMensajeUsuario info1 = new InformacionMensajeUsuario(usuario3, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
+      // orden incorrecto
       usuario.guardarMensaje(info1)
       info1.save(failOnError:true)
       InformacionMensajeUsuario info2 = new InformacionMensajeUsuario(usuario, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
-      usuario3.guardarMensaje(info2)
+      // orden incorrecto
+      usuario3.guardarMensaje(info2)      
       info2.save(failOnError:true)
     }
     def destroy = {

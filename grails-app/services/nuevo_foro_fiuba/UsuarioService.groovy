@@ -15,6 +15,8 @@ class UsuarioService {
 
   def materiasCursadas(Usuario usuario){
     usuario.cursadas.collect {cursada -> cursada.catedra.materia.id}
+    // refactorizar y moverlo para el dominio, desde aca simplemente llamar a ese
+    // metodo
   }
 
 }

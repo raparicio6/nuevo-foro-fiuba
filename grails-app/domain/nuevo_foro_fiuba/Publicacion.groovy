@@ -100,4 +100,14 @@ class Publicacion {
 	def eliminar(){
 		this.setEstado(EstadoPublicacion.ELIMINADA)
 	}
+
+	def eliminarComentarios(){
+		this.comentarios.collect {comentario -> comentario.eliminarComentarios()}
+    this.comentarios.collect {comentario -> comentario.eliminar()}
+	}
+
+	def eliminarCalificaciones(){
+		this.calificaciones.collect {calificacion -> calificacion.eliminar()}
+	}	
+
 }
