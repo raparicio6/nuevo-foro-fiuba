@@ -14,14 +14,26 @@ class MensajePrivadoService {
   }
 
   def enviarMensaje(Usuario emisor, Usuario receptor, String texto, MensajePrivado mensajeAlCualResponde, String archivoAdjunto){
+    println (emisor)
+    println (receptor)
     MensajePrivado mensaje = new MensajePrivado(texto, null, null)
     InformacionMensajeUsuario infoEmisor = new InformacionMensajeUsuario (receptor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
     InformacionMensajeUsuario infoReceptor = new InformacionMensajeUsuario (emisor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
+    println (emisor.mensajes)
+    println (receptor.mensajes)
     // orden incorrecto
     emisor.enviarMensaje(receptor, infoEmisor, infoReceptor)
+    println (emisor.mensajes)
+    println (receptor.mensajes)
     mensaje.save(failOnError:true)
+    println (emisor.mensajes)
+    println (receptor.mensajes)
     infoEmisor.save(failOnError:true)
+    println (emisor.mensajes)
+    println (receptor.mensajes)
     infoReceptor.save(failOnError:true)
+    println (emisor.mensajes)
+    println (receptor.mensajes)
   }
 
 }

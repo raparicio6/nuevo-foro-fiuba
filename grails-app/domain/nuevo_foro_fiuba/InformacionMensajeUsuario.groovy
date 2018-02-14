@@ -7,20 +7,20 @@ class InformacionMensajeUsuario {
     RECEPTOR,
   }
 
-  Usuario usuario
+  Usuario usuarioConElQueSeInteractua
   MensajePrivado mensajePrivado
   RolUsuarioMensaje rolUsuario
 
   static constraints = {
-    usuario nullable:false
+    usuarioConElQueSeInteractua nullable:false
     mensajePrivado nullable:false
     rolUsuario nullable:false
   }
 
   InformacionMensajeUsuario(Usuario usuario, MensajePrivado mensajePrivado, RolUsuarioMensaje rolUsuario) {
-    this.usuario = usuario
+    this.usuarioConElQueSeInteractua = usuario
     this.mensajePrivado = mensajePrivado
     this.rolUsuario = rolUsuario
   }
-  
+
 }

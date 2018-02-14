@@ -11,7 +11,7 @@ class ComentarioController {
     def usuarioInstance = Usuario.get(idUsuario)
     def esDueño = comentarioService.usuarioEsDueñoDelComentario(usuarioInstance, comentarioInstance)
     def esSubComentario = comentarioService.esSubComentario(comentarioInstance)
-    def comentarios = comentarioInstance.comentarios.findAll {comentario -> comentario.getEstado() != Comentario.EstadoComentario.ELIMINADO}
+    def comentarios = comentarioInstance.obtenerComentariosNoEliminados()
     [comentario: comentarioInstance, usuario:usuarioInstance, modificar:esDueño, subComentario:esSubComentario, comentarios:comentarios]
   }
 
@@ -55,6 +55,9 @@ class ComentarioController {
       comentarioService.comentarComentario(usuarioLogin, textoComentario, comentarioInstance)
     }
     catch (PublicacionCerradaException e){
+      flash.message = e.MENSAJE
+    }
+    catch (UsuarioNoPoseeMateriasNecesariasException e){
       flash.message = e.MENSAJE
     }
     redirect(controller:"comentario", action: "verComentario", id:id, params: [idUsuario:idUsuario])

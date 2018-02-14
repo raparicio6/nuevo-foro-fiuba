@@ -48,7 +48,7 @@ div {
         </div>
         <div>
             <h1>Responder mensaje</h1>
-            <g:form action="enviarMensaje" params="[idUsuarioCreador:"${usuario.id}", idUsuarioReceptor:"${informacion.usuario.id}", mensajeAlCualResponde:"${mensaje.id}"]">
+            <g:form action="enviarMensaje" params="[idUsuarioCreador:"${usuario.id}", idUsuarioReceptor:"${informacion.usuarioConElQueSeInteractua.id}", mensajeAlCualResponde:"${mensaje.id}"]">
               <g:textArea name="texto" placeholder="Escriba una respuesta..."/>
               <g:textArea name="archivoAdjunto" placeholder="Path del archivo..."/>
               <g:submitButton name="enviarMensaje" value="Responder"/>

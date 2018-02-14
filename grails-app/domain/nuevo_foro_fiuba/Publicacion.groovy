@@ -108,6 +108,18 @@ class Publicacion {
 
 	def eliminarCalificaciones(){
 		this.calificaciones.collect {calificacion -> calificacion.eliminar()}
-	}	
+	}
+
+	def obtenerComentariosNoEliminados(){
+		this.comentarios.findAll {comentario -> comentario.getEstado() != Comentario.EstadoComentario.ELIMINADO}
+	}
+
+	def agregarMateriaRequeridaParaComentar(Materia materiaInstance){
+		this.materiasNecesariasParaComentar << materiaInstance
+	}
+
+	def agregarEncuesta(Encuesta encuesta){
+		this.setEncuesta(encuesta) 
+	}
 
 }

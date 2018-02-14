@@ -145,10 +145,17 @@
                       ${publicacion.usuarioCreador.promedioCalificaciones.round(2)}
                     </span>
                   </li>
-                  <li class="list-group-item">
-                    Materias requeridas para comentar:
-                    <g:field name="a" type="checkbox"/>
-                  </li>
+                  <g:if test="${modificar}">
+                    <li class="list-group-item">
+                      Agregar materia necesaria para comentar:
+                      <g:form action="agregarMateriaRequeridaParaComentar" id="${publicacion.id}" params="[idUsuario:"${usuario.id}"]">
+                        <g:select name="idMateria" from="${materias}" optionValue="${{it.nombre}}" optionKey="id" />
+                        <button type="submit" title="Guardar" style="background-color: Transparent;border: none;">
+                          <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                      </g:form>
+                    </li>
+                  </g:if>
                   <li class="list-group-item">
                     Fecha y hora de creaci&oacute;n:
                     <span class="label label-info">
@@ -161,6 +168,64 @@
           </div>
         </div>
       </g:form>
+
+      <g:if test="${publicacion.encuesta}">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="col-md-2">
+              <h3>
+                  <span class="label label-default">Encuesta: ${publicacion.encuesta.nombre}</span>
+              </h3>
+            </div>
+            <div class="col-md-6">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Opciones</th>
+                    <th>Porcentaje de votos</th>
+                    <th>Votar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <g:each in="${publicacion.encuesta.opciones}" var="opcion">
+                    <tr>
+                      <td>${opcion.nombre}</td>
+                      <td>${opcion.votos.size()}</td>
+                      <td>Votar</td>
+                    </tr>
+                  </g:each>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </g:if>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-2">
+            <h3>
+                <span class="label label-default">Materias necesarias para comentar:</span>
+            </h3>
+          </div>
+          <div class="col-md-6">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Nombre de la materia</th>
+                </tr>
+              </thead>
+              <tbody>
+                <g:each in="${publicacion.materiasNecesariasParaComentar}" var="materia">
+                  <tr>
+                    <td>${materia.nombre}</td>
+                  </tr>
+                </g:each>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
       <div class="row">
         <div class="col-md-12">

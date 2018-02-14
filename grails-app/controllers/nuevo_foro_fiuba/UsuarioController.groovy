@@ -23,9 +23,9 @@ class UsuarioController {
        promedioMin=0
     if (!promedioMax)
        promedioMax=5
-    def usuarios = Usuario.list().findAll {usuario -> usuario.promedioCalificaciones >= promedioMin && usuario.promedioCalificaciones <= promedioMax}
+    def usuarios = usuarioService.filtrarPorPromedio (Usuario.list(), promedioMin, promedioMax)
     if (idMateria)
-      usuarios= usuarios.findAll { usuario -> idMateria in usuarioService.materiasCursadas(usuario) }
+      usuarios= usuarioService.filtrarPorMateria(usuarios, idMateria)
     Usuario usuarioInstance = Usuario.get(id)
     params.max = Math.min(max ?: 10, 100)
     [usuarioInstanceList: usuarios, usuarioInstanceTotal: usuarios.size() , usuarioInstance: usuarioInstance, materias: Materia.list(), catedras: Catedra.list()]
@@ -33,7 +33,7 @@ class UsuarioController {
 
   def verMateriasCursadas (long id){
     def usuarioInstance = Usuario.get(id)
-    def cursadas = usuarioInstance.cursadas
+    def cursadas = usuarioInstance.getCursadas()
     [usuario:usuarioInstance, cursadas:cursadas]
   }
 

@@ -2,6 +2,7 @@ package nuevo_foro_fiuba
 
 class Encuesta {
 
+	String nombre
 	Set<Opcion> opciones
 
 	static hasMany = [
@@ -9,10 +10,12 @@ class Encuesta {
 	]
 
   static constraints = {
+		nombre blank:false, nullable:false
 		opciones nullable: false
   }
 
-	Encuesta(Set<Opcion> opciones){
+	Encuesta(String nombre, Set<Opcion> opciones){
+		this.nombre = nombre
 		this.opciones = opciones
 	}
 }

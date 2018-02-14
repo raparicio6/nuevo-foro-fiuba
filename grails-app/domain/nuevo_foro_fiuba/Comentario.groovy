@@ -69,4 +69,8 @@ class Comentario {
 		this.comentarios.collect{subcomentario -> subcomentario.eliminar()}
 	}
 
+	def obtenerComentariosNoEliminados(){
+		this.comentarios.findAll {comentario -> comentario.getEstado() != Comentario.EstadoComentario.ELIMINADO}
+	}
+
 }

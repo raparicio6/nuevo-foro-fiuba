@@ -61,7 +61,7 @@ div {
           <tbody>
             <g:each in="${mensajes}" var="mensaje">
               <tr>
-                <td>${mensaje.usuario.nombre}</td>
+                <td>${mensaje.usuarioConElQueSeInteractua.nombre}</td>
                 <td>${mensaje.mensajePrivado.texto}</td>
                 <td>
                   <g:link action="verMensaje" id="${mensaje.mensajePrivado.id}" params="[idUsuario:"${usuarioInstance.id}", idInformacion:"${mensaje.id}"]" >

@@ -6,11 +6,8 @@ class MensajePrivadoController {
 
   def index(long id) {
     def usuarioInstance = Usuario.get(id)
-    def mensajesUsuario = usuarioInstance.mensajes
     // .findAll {mensajePrivado -> mensajePrivado.rolUsuario == InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR}
-    // println(usuarioInstance.nombre)
-    // println(mensajesUsuario.toString())
-    render (view: "casilla", model:[usuarioInstance:usuarioInstance, mensajes:mensajesUsuario])
+    render (view: "casilla", model:[usuarioInstance:usuarioInstance, mensajes:usuarioInstance.mensajes])
   }
 
   def verMensaje(long id, long idUsuario, long idInformacion){
@@ -23,8 +20,10 @@ class MensajePrivadoController {
 
   def enviarMensaje (long idUsuarioCreador, long  idUsuarioReceptor, String texto, MensajePrivado mensajeAlCualResponde, String archivoAdjunto){
     def usuarioCreadorInstance = Usuario.get(idUsuarioCreador)
+    println(usuarioCreadorInstance.nombre)
     def usuarioReceptorInstance = Usuario.get(idUsuarioReceptor)
     mensajePrivadoService.enviarMensaje(usuarioCreadorInstance, usuarioReceptorInstance, texto, mensajeAlCualResponde, archivoAdjunto)
+    redirect (action:"index", id:idUsuarioCreador)
   }
 
   def crearMensaje(long id){

@@ -37,7 +37,7 @@ class PublicacionService {
   }
 
   def eliminarPublicacion (Usuario usuario, Publicacion publicacionInstance){
-    publicacionInstance.eliminarComentarios()    
+    publicacionInstance.eliminarComentarios()
     publicacionInstance.eliminarCalificaciones()
     publicacionInstance.eliminar()
   }
@@ -58,6 +58,18 @@ class PublicacionService {
     // orden incorrecto
     usuario.comentarPublicacion(comentario, publicacionAComentar)
     comentario.save(failOnError:true)
+  }
+
+  def obtenerPublicacionesNoEliminadas(){
+    Publicacion.list().findAll {publicacionInstance -> publicacionInstance.getEstado() != Publicacion.EstadoPublicacion.ELIMINADA}
+  }
+
+  def filtrarPublicacionesPorCatedra(ArrayList publicaciones, long idCatedra){
+    publicaciones.findAll {publicacion -> publicacion.catedraRelacionada.id == idCatedra}
+  }
+
+  def agregarMateriaRequeridaParaComentar(Publicacion publicacionInstance, Usuario usuarioInstance, Materia materiaInstance){
+    usuarioInstance.agregarMateriaRequeridaParaComentar(publicacionInstance, materiaInstance)
   }
 
 }

@@ -40,10 +40,8 @@ class Usuario {
 		this.mensajes = []
 		this.comentarios = []
 		this.cursadas = []
-		this.promedioCalificaciones = 3.5
-		// MEJOR QUE ARRANQUE CON PROMEDIO CERO PORQUE DE TODAS FORMAS LA PRIMERA CALIFICACION SIEMPRE VA A PISAR ESTE NRO
-		// ARREGLAR ESTO, QUE ESTE 3.5 SEA COMO UNA CALIFICACION MAS
-		// en todos lados se hace asi, cuando te creas un usuario siempre empezas en "verde"
+		this.promedioCalificaciones = 0
+
 	}
 
 // ------------------------------------------------------------------------- //
@@ -55,8 +53,14 @@ class Usuario {
 			throw new PublicacionEliminadaException()
 		if (publicacionAComentar.getPromedioRequeridoParaComentar() > this.promedioCalificaciones)
 			throw new PromedioInsuficienteException()
+		if (! this.poseeMateriasNecesariasParaComentar(publicacionAComentar))
+			throw new UsuarioNoPoseeMateriasNecesariasException()
 		this.comentarios << comentario
 		publicacionAComentar.agregarComentario(comentario)
+	}
+
+	def poseeMateriasNecesariasParaComentar(Publicacion publicacion){
+		!(false in publicacion.getMateriasNecesariasParaComentar().collect {materia -> materia in this.obtenerMateriasCursadas()})
 	}
 
 	def comentarComentario(Comentario comentario, Comentario comentarioAComentar){
@@ -106,9 +110,9 @@ class Usuario {
 		def calificaciones = calificable.calificaciones
 		def calificacionesUsuario = calificaciones.collect {calificacionInstance -> calificacionInstance.getUsuario() == this}
 		// println(calificacionesUsuario.size().toString())
-		if (calificacionesUsuario.size()>=1)
-			throw new UsuarioYaCalificoException()
-		else
+		// if (calificacionesUsuario.size()>=1)
+		// 	throw new UsuarioYaCalificoException()
+		// else
 			calificable.agregarCalificacion(calificacion)
 	}
 
@@ -133,9 +137,21 @@ class Usuario {
 		calificaciones = calificaciones.flatten()
 		def contador = 0
 		calificaciones.collect {calificacionInstance -> contador += Puntaje.TipoPuntaje.getProporcion(calificacionInstance.puntaje.tipo) * calificacionInstance.puntaje.numero}
-		promedioCalificaciones = (contador/calificaciones.size()).toFloat()
-		this.setPromedioCalificaciones(promedioCalificaciones)
+		def promedioDeCalificaciones = (contador/calificaciones.size()).toFloat()
+		this.setPromedioCalificaciones(promedioDeCalificaciones)
 		//siempre va a tener al menos una calificacion
+	}
+
+	def agregarPublicacion(Publicacion publicacion){
+		this.publicaciones << publicacion
+	}
+
+	def obtenerMateriasCursadas(){
+		this.cursadas.collect {cursada -> cursada.catedra.materia}
+	}
+
+	def agregarMateriaRequeridaParaComentar(Publicacion publicacionInstance, Materia materiaInstance){
+		publicacionInstance.agregarMateriaRequeridaParaComentar(materiaInstance)
 	}
 
 }

@@ -2,13 +2,18 @@ package nuevo_foro_fiuba
 
 class BootStrap {
 
+    def usuarioService
+
     def init = { servletContext ->
-      Usuario usuario = new Usuario ("Mariano", "Martin", "mmartin")
-      usuario.save(failOnError:true)
-      Usuario usuario2 = new Usuario ("Rodrigo", "Aparicio", "raparicio")
-      usuario2.save(failOnError:true)
-      Usuario usuario3 = new Usuario ("German", "Rotili", "grotili")
-      usuario3.save(failOnError:true)
+      Usuario usuario = usuarioService.crearUsuario ("Mariano", "Martin", "mmartin")
+      Usuario usuario2 = usuarioService.crearUsuario ("Rodrigo", "Aparicio", "raparicio")
+      Usuario usuario3 = usuarioService.crearUsuario ("German", "Rotili", "grotili")
+      // Usuario usuario = new Usuario ("Mariano", "Martin", "mmartin")
+      // usuario.save(failOnError:true)
+      // Usuario usuario2 = new Usuario ("Rodrigo", "Aparicio", "raparicio")
+      // usuario2.save(failOnError:true)
+      // Usuario usuario3 = new Usuario ("German", "Rotili", "grotili")
+      // usuario3.save(failOnError:true)
       Materia materia = new Materia ('Matematica discreta', 'Esto es mate discreta')
       materia.save(failOnError:true)
       Materia materia2 = new Materia ('Analisis II', 'Esto es analisis II')
@@ -38,7 +43,6 @@ class BootStrap {
       comentario2.save(failOnError:true)
       publicacion.agregarComentario(comentario)
       comentario.agregarComentario(comentario2)
-      usuario.setPromedioCalificaciones(4)
       Cursada cursada2 = new Cursada (usuario, catedra2)
       cursada2.save(failOnError:true)
       usuario.agregarCursada(cursada2)
@@ -49,16 +53,31 @@ class BootStrap {
       Calificacion calificacion = new Calificacion (usuario2, puntaje, publicacion, null)
       calificacion.save(failOnError:true)
       publicacion.agregarCalificacion(calificacion)
-      MensajePrivado mensaje = new MensajePrivado("Mensaje", null, null)
-      mensaje.save(failOnError:true)
-      InformacionMensajeUsuario info1 = new InformacionMensajeUsuario(usuario3, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
-      // orden incorrecto
-      usuario.guardarMensaje(info1)
-      info1.save(failOnError:true)
-      InformacionMensajeUsuario info2 = new InformacionMensajeUsuario(usuario, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
-      // orden incorrecto
-      usuario3.guardarMensaje(info2)      
-      info2.save(failOnError:true)
+      // MensajePrivado mensaje = new MensajePrivado("Mensaje", null, null)
+      // mensaje.save(failOnError:true)
+      // InformacionMensajeUsuario info1 = new InformacionMensajeUsuario(usuario3, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
+      // println (usuario.mensajes)
+      // // orden incorrecto
+      // usuario.guardarMensaje(info1)
+      // println (usuario.mensajes)
+      // info1.save(failOnError:true)
+      // println (usuario.mensajes)
+      // InformacionMensajeUsuario info2 = new InformacionMensajeUsuario(usuario, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
+      // println (usuario.mensajes)
+      // // orden incorrecto
+      // usuario3.guardarMensaje(info2)
+      // println (usuario.mensajes)
+      // info2.save(failOnError:true)
+      // println (usuario.mensajes)
+      Opcion opcion1 = new Opcion ("Buena")
+      opcion1.save(failOnError:true)
+      Opcion opcion2 = new Opcion ("Mala")
+      opcion2.save(failOnError:true)
+      Opcion opcion3 = new Opcion ("Me es indiferente")
+      opcion3.save(failOnError:true)
+      Encuesta encuesta = new Encuesta ("Qué opinan de la cátedra?", [opcion1,opcion2,opcion3].toSet())
+      encuesta.save(failOnError:true)
+      publicacion.agregarEncuesta(encuesta)
     }
     def destroy = {
     }
