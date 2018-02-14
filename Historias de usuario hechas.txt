@@ -21,17 +21,9 @@ HECHO
 		
 	10)Con el fin de limitar el origen de los usuarios que hacen comentarios sobre mi publicación, como usuario creador de la publicación, quiero poder establecer un filtro a partir de las materias cursadas por el usuario que quiere hacer un comentario.
 
+	11)Con el fin de manifestar mi opinión, como usuario que no creó la publicación, quiero poder participar en su encuesta asociada.
 ***********************************************************************************************************************************************************************
 EN PROGRESO
 
 	1)Con el fin de compartir archivos externos, como usuario , quiero poder adjuntar archivos a publicaciones y mensajes privados. 
-
-	
-
-***********************************************************************************************************************************************************************
-AUN SIN HACER	
-
-	 
-
-	
 

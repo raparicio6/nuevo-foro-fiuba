@@ -110,9 +110,9 @@ class Usuario {
 		def calificaciones = calificable.calificaciones
 		def calificacionesUsuario = calificaciones.collect {calificacionInstance -> calificacionInstance.getUsuario() == this}
 		// println(calificacionesUsuario.size().toString())
-		// if (calificacionesUsuario.size()>=1)
-		// 	throw new UsuarioYaCalificoException()
-		// else
+		if (calificacionesUsuario.size()>=1)
+			throw new UsuarioYaCalificoException()
+		else
 			calificable.agregarCalificacion(calificacion)
 	}
 
@@ -152,6 +152,16 @@ class Usuario {
 
 	def agregarMateriaRequeridaParaComentar(Publicacion publicacionInstance, Materia materiaInstance){
 		publicacionInstance.agregarMateriaRequeridaParaComentar(materiaInstance)
+	}
+
+	def votarOpcion(Publicacion publicacion,Opcion opcion, Voto voto){
+		if (publicacion.getUsuarioCreador().id == this.id)  //NO FUNCIONA SIN EL .ID
+			throw new CreadorEncuestaNoPuedeVotarException()
+		if (publicacion.estaCerrada())
+			throw new PublicacionCerradaException()
+		if (this in publicacion.encuesta.obtenerUsuariosQueVotaron() )
+			throw new UsuarioYaVotoException()
+		opcion.agregarVoto(voto)
 	}
 
 }

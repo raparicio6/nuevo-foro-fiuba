@@ -111,6 +111,21 @@ class PublicacionController {
     def materiaInstance = Materia.get(idMateria)
     publicacionService.agregarMateriaRequeridaParaComentar(publicacionInstance, usuarioInstance, materiaInstance)
     redirect(controller:"publicacion", action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
+  }
 
+  def votarOpcionEncuesta(long id, long idUsuario, long idOpcion){
+    try{
+      publicacionService.votarOpcionEncuesta(id, idUsuario, idOpcion)
+    }
+    catch(PublicacionCerradaException e){
+      flash.message = e.MENSAJE
+    }
+    catch(CreadorEncuestaNoPuedeVotarException e){
+      flash.message = e.MENSAJE
+    }
+    catch(UsuarioYaVotoException e){
+      flash.message = e.MENSAJE
+    }
+    redirect(controller:"publicacion", action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
   }
 }

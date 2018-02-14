@@ -18,4 +18,9 @@ class Encuesta {
 		this.nombre = nombre
 		this.opciones = opciones
 	}
+
+	def obtenerUsuariosQueVotaron(){
+		def todosLosVotos = this.opciones.collect {opcionInstance -> opcionInstance.getVotos() }
+		todosLosVotos.flatten().collect {voto -> voto.getUsuario()}
+	}
 }

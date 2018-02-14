@@ -72,4 +72,13 @@ class PublicacionService {
     usuarioInstance.agregarMateriaRequeridaParaComentar(publicacionInstance, materiaInstance)
   }
 
+  def votarOpcionEncuesta(long idPublicacion, long idUsuario, long idOpcion){
+    Publicacion publicacionInstance = Publicacion.get(idPublicacion)
+    Usuario usuarioInstance = Usuario.get(idUsuario)
+    Opcion opcionInstance = Opcion.get(idOpcion)
+    Voto voto = new Voto (usuarioInstance)
+    voto.save(failOnError:true)
+    usuarioInstance.votarOpcion(publicacionInstance,opcionInstance, voto)
+  }
+
 }

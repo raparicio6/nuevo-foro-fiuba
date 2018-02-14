@@ -182,8 +182,8 @@
                 <thead>
                   <tr>
                     <th>Opciones</th>
-                    <th>Porcentaje de votos</th>
-                    <th>Votar</th>
+                    <th>Cantidad de votos</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -191,7 +191,11 @@
                     <tr>
                       <td>${opcion.nombre}</td>
                       <td>${opcion.votos.size()}</td>
-                      <td>Votar</td>
+                      <td>
+                        <g:form action="votarOpcionEncuesta" id="${publicacion.id}" params="[idUsuario:"${usuario.id}", idOpcion:"${opcion.id}"]" >
+                          <g:submitButton name="Votar" value="Votar"/>
+                        </g:form>
+                      </td>
                     </tr>
                   </g:each>
                 </tbody>

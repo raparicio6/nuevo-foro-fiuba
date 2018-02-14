@@ -77,7 +77,6 @@ class Publicacion {
 	}
 
 	def agregarComentario(Comentario comentario){
-		// println(this.comentarios)
 		this.comentarios << comentario
 	}
 
@@ -119,7 +118,7 @@ class Publicacion {
 	}
 
 	def agregarEncuesta(Encuesta encuesta){
-		this.setEncuesta(encuesta) 
+		this.setEncuesta(encuesta)
 	}
 
 }

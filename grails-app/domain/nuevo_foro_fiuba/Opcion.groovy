@@ -19,4 +19,8 @@ class Opcion {
 		this.votos = []
   }
 
+	def agregarVoto(Voto voto){
+		this.votos << voto
+	}
+
 }
