@@ -14,6 +14,11 @@ class PublicacionController {
     [publicacionInstanceList: publicaciones, publicacionInstanceTotal: publicaciones.size(), usuarioInstance: usuarioInstance, materias: Materia.list(), catedras: Catedra.list()]
   }
 
+  def crearPublicacion (long idUsuario) {
+    def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
+    [usuario: usuarioInstance]
+  }
+
   def verPublicacion (long idPublicacion, long idUsuario){
     def publicacionInstance = publicacionService.getPublicacionById(idPublicacion)  
     def usuarioInstance = publicacionService.getUsuarioById(idUsuario)  
@@ -21,6 +26,12 @@ class PublicacionController {
     def comentarios = publicacionService.obtenerComentariosNoEliminados(publicacionInstance)
     [publicacion: publicacionInstance, materias: Materia.list(), catedras: Catedra.list(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios] //--> groovy !null==true
     // EL ATRIBUTO MODIFICAR DEFINE SI EL USUARIO QUE INGRESA A LA PUBLICACION PUEDE VER LOS BOTONES ELIMINAR,CAMBIAR ESTADO, ETC
+  }
+
+  def formarPublicacion (String texto, long idUsuario, long idMateria, long idCatedra) {
+    def publicacion = publicacionService.crearPublicacion(texto, idUsuario, idMateria, idCatedra)
+    long idPublicacion = publicacion.id()
+    redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
   def cambiarEstado (long idPublicacion, long idUsuario){
@@ -34,7 +45,7 @@ class PublicacionController {
   }
 
   def modificarMateria(long idPublicacion, long idMateria, long idUsuario){
-    publicacionService.modificarMateriaPublicacion(idusuario, idPublicacion, idMateria)
+    publicacionService.modificarMateriaPublicacion(idUsuario, idPublicacion, idMateria)
     redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 

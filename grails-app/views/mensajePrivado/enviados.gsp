@@ -64,7 +64,7 @@ div {
                 <td>${mensaje.usuarioConElQueSeInteractua.nombre}</td>
                 <td>${mensaje.mensajePrivado.texto}</td>
                 <td>
-                  <g:link action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${mensaje.mensajePrivado.id}", idInformacion:"${mensaje.id}", mostrarResponder:"${false}"]" >
+                  <g:link action="verMensaje" id="${mensaje.mensajePrivado.id}" params="[idUsuario:"${usuarioInstance.id}", idInformacion:"${mensaje.id}"]" >
                     Ver mensaje
                   </g:link>
                 </td>
@@ -83,7 +83,7 @@ div {
         <g:form action="crearMensaje" params="[idUsuario:"${usuarioInstance.id}"]" >
           <g:actionSubmit  action="crearMensaje" value="Redactar nuevo mensaje" class="btn btn-warning"  />
         </g:form>
-        <g:form action="index" params="[idUsuario:"${usuarioInstance.id}"]">
+        <g:form action="index" id="${usuarioInstance.id}">
           <g:actionSubmit  action="index" value="Volver a la casilla" class="btn btn-warning"  />
         </g:form>
       </div>

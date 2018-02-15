@@ -46,15 +46,13 @@ div {
             <h1>Texto</h1>
             <g:textArea name="texto" value="${mensaje.texto}" disabled="true"/>
         </div>
-        <g:if test="${mostrarResponder}">
-          <div>
-              <h1>Responder mensaje</h1>
-              <g:form action="enviarMensaje" params="[idUsuarioCreador:"${usuario.id}", idUsuarioReceptor:"${informacion.usuarioConElQueSeInteractua.id}", mensajeAlCualResponde:"${mensaje.id}"]">
-                <g:textArea name="texto" placeholder="Escriba una respuesta..."/>
-                <g:textArea name="archivoAdjunto" placeholder="Path del archivo..."/>
-                <g:submitButton name="enviarMensaje" value="Responder"/>
-              </g:form>
-          </div>
-        </g:if>
+        <div>
+            <h1>Responder mensaje</h1>
+            <g:form action="enviarMensaje" params="[idUsuarioCreador:"${usuario.id}", idUsuarioReceptor:"${informacion.usuarioConElQueSeInteractua.id}", mensajeAlCualResponde:"${mensaje.id}"]">
+              <g:textArea name="texto" placeholder="Escriba una respuesta..."/>
+              <g:textArea name="archivoAdjunto" placeholder="Path del archivo..."/>
+              <g:submitButton name="enviarMensaje" value="Responder"/>
+            </g:form>
+        </div>
 </body>
 </html>
