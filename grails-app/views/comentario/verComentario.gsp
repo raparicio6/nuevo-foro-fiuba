@@ -21,10 +21,10 @@
                 </a></li>
                 <li>
                   <g:if test="${comentario.publicacionComentada}">
-                    <g:link controller="Publicacion" action="verPublicacion" id="${comentario.publicacionComentada.id}" params="[idUsuario:"${usuario.id}"]">${"Volver"}</g:link>
+                    <g:link controller="Publicacion" action="verPublicacion" params="[idUsuario:"${usuario.id}", idPublicacion:"${comentario.publicacionComentada.id}"]">${"Volver"}</g:link>
                   </g:if>
                   <g:else>
-                    <g:link action="verComentario" id="${comentario.comentarioComentado.id}" params="[idUsuario:"${usuario.id}"]">${"Volver"}</g:link>
+                    <g:link action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.comentarioComentado.id}"]">${"Volver"}</g:link>
                   </g:else>
                 </li>
                 <li><a>
@@ -54,7 +54,7 @@
 
       <br/>
 
-      <g:form action="modificarTextoComentario" id="${comentario.id}" params="[idUsuario:"${usuario.id}"]">
+      <g:form action="modificarTextoComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.id}"]">
         <div class="row">
           <div class="col-md-12">
             <div class="col-md-7" style="padding-right:0px; padding-left:0px">
@@ -72,19 +72,19 @@
                         <g:submitButton name="Modificar" value="Modificar" class="btn btn-danger pull-right" style="margin-top:10px;" />
                       </g:if>
                       <g:else>
-                        <g:form action="calificarComentario" id="${comentario.id}" params="[idUsuario:"${usuario.id}"]">
+                        <g:form action="calificarComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.id}"]">
                           <g:actionSubmit action="calificarPositivo" value="Me gusta" class="btn btn-danger pull-right" style="margin-top:10px;" />
                         </g:form>
                       </g:else>
                     </div>
                     <div class="col-md-5 col-md-offset-4">
                       <g:if test="${!modificar}">
-                        <g:form action="calificarComentario" id="${comentario.id}" params="[idUsuario:"${usuario.id}"]">
+                        <g:form action="calificarComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.id}"]">
                           <g:actionSubmit action="calificarNegativo" value="No me gusta" class="btn btn-danger pull-right" style="margin-top:10px;" />
                         </g:form>
                       </g:if>
                       <g:if test="${modificar}">
-                        <g:form action="eliminarComentario" id="${comentario.id}" params="[idUsuario:"${usuario.id}"]">
+                        <g:form action="eliminarComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.id}"]">
                           <g:actionSubmit action="eliminarComentario" value="Eliminar comentario" class="btn btn-danger pull-right" style="margin-top:10px;" />
                         </g:form>
                       </g:if>
@@ -181,7 +181,7 @@
                     <td>${comentarioInstance.texto}</td>
                     <td>${comentarioInstance.fechaHoraCreacion}</td>
                     <td>
-                      <g:link controller="comentario" action="verComentario" id="${comentarioInstance.id}" params="[idUsuario:"${usuario.id}"]">
+                      <g:link controller="comentario" action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentarioInstance.id}"]">
                         <span class="glyphicon glyphicon-zoom-in"></span>
                       </g:link>
                     </td>
@@ -197,7 +197,7 @@
 
       <div class="row">
         <div class="col-md-5 col-md-offset-2">
-          <g:form action="comentar" id="${comentario.id}" params="[idUsuario:"${usuario.id}"]">
+          <g:form action="comentar" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.id}"]">
             <g:textArea style="height:50px" class="form-control" name="textoComentario" placeholder="Ingrese un comentario" />
             <g:submitButton name="Comentar" value="Comentar" class="btn btn-danger pull-right" style="margin-top:5px;" />
           </g:form>

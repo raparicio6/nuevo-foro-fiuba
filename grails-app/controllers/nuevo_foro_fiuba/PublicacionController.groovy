@@ -6,92 +6,74 @@ class PublicacionController {
 
   def index() {}
 
-  def listaPublicaciones(long id,Integer max,Integer idCatedra) {
+  def listaPublicaciones(long idUsuario,Integer max,Integer idCatedra) {
     def publicacionesNoEliminadas = publicacionService.obtenerPublicacionesNoEliminadas()
     def publicaciones = (!idCatedra) ? publicacionesNoEliminadas : publicacionService.filtrarPublicacionesPorCatedra(publicacionesNoEliminadas, idCatedra)
-    def usuarioInstance = Usuario.get(id)
+    def usuarioInstance = publicacionService.getUsuarioById(idUsuario)  //NO SE PUEDEN SACAR, LOS PASA COMO PARAMETRO A LA VISTA
     params.max = Math.min(max ?: 10, 100)
     [publicacionInstanceList: publicaciones, publicacionInstanceTotal: publicaciones.size(), usuarioInstance: usuarioInstance, materias: Materia.list(), catedras: Catedra.list()]
   }
 
-  def verPublicacion (long id, long idUsuario){
-    def publicacionInstance = Publicacion.get(id)
-    def usuarioInstance = Usuario.get(idUsuario)
+  def verPublicacion (long idPublicacion, long idUsuario){
+    def publicacionInstance = publicacionService.getPublicacionById(idPublicacion)  //NO SE PUEDEN SACAR, LOS PASA COMO PARAMETRO A LA VISTA
+    def usuarioInstance = publicacionService.getUsuarioById(idUsuario)  //NO SE PUEDEN SACAR, LOS PASA COMO PARAMETRO A LA VISTA
     def esDueño = publicacionService.usuarioEsDueñoDeLaPublicacion(usuarioInstance, publicacionInstance)
-    def comentarios = publicacionInstance.obtenerComentariosNoEliminados()
+    def comentarios = publicacionService.obtenerComentariosNoEliminados(publicacionInstance)
     [publicacion: publicacionInstance, materias: Materia.list(), catedras: Catedra.list(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios] //--> groovy !null==true
     // EL ATRIBUTO MODIFICAR DEFINE SI EL USUARIO QUE INGRESA A LA PUBLICACION PUEDE VER LOS BOTONES ELIMINAR,CAMBIAR ESTADO, ETC
   }
 
-  def cambiarEstado (long id, long idUsuario){
-    def usuarioLogin = Usuario.get(idUsuario)
-    def publicacionInstance = Publicacion.get(id)
-    publicacionService.cambiarEstado(usuarioLogin, publicacionInstance)
-    redirect(action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
+  def cambiarEstado (long idPublicacion, long idUsuario){
+    publicacionService.cambiarEstado(idUsuario, idPublicacion)
+    redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
-  def modificarTextoPublicacion(long id, String nuevoTexto, long idUsuario){
-    def usuarioLogin = Usuario.get(idUsuario)
-    def publicacionInstance = Publicacion.get(id)
-    publicacionService.modificarTexto(usuarioLogin, publicacionInstance, nuevoTexto)
-    redirect(action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
+  def modificarTextoPublicacion(long idPublicacion, String nuevoTexto, long idUsuario){
+    publicacionService.modificarTextoPublicacion(idUsuario, idPublicacion, nuevoTexto)
+    redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
-  def modificarMateria(long id, long idMateria, long idUsuario){
-    def usuarioLogin = Usuario.get(idUsuario)
-    def publicacionInstance = Publicacion.get(id)
-    def materiaInstance = Materia.get(idMateria)
-    publicacionService.modificarMateriaPublicacion(usuarioLogin, publicacionInstance, materiaInstance)
-    redirect (action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
+  def modificarMateria(long idPublicacion, long idMateria, long idUsuario){
+    publicacionService.modificarMateriaPublicacion(idusuario, idPublicacion, idMateria)
+    redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
-  def modificarCatedra(long id, long idCatedra, long idUsuario){
-    def usuarioLogin = Usuario.get(idUsuario)
-    def publicacionInstance = Publicacion.get(id)
-    def catedraInstance = Catedra.get(idCatedra)
-    publicacionService.modificarCatedraPublicacion(usuarioLogin, publicacionInstance, catedraInstance)
-    redirect (action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
+  def modificarCatedra(long idPublicacion, long idCatedra, long idUsuario){
+    publicacionService.modificarCatedraPublicacion(idUsuario, idPublicacion, idCatedra)
+    redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
-  def modificarPromedioRequeridoParaComentar (long id, long idUsuario, Integer promedio){
-    def usuarioLogin = Usuario.get(idUsuario)
-    def publicacionInstance = Publicacion.get(id)
-    publicacionService.modificarPromedioRequeridoParaComentar(usuarioLogin, publicacionInstance, promedio)
-    redirect (action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
+  def modificarPromedioRequeridoParaComentar (long idPublicacion, long idUsuario, Integer promedio){
+    publicacionService.modificarPromedioRequeridoParaComentar(idUsuario, idPublicacion, promedio)
+    redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
-  def eliminarPublicacion(long id, long idUsuario){
-    def usuarioLogin = Usuario.get(idUsuario)
-    def publicacionInstance = Publicacion.get(id)
-    publicacionService.eliminarPublicacion(usuarioLogin, publicacionInstance)
-    redirect(action: "listaPublicaciones", max: 10, params: [id:idUsuario])
+  def eliminarPublicacion(long idPublicacion, long idUsuario){
+    publicacionService.eliminarPublicacion(idUsuario, idPublicacion)
+    redirect(action: "listaPublicaciones", max: 10, params: [idUsuario:idUsuario])
   }
 
-  def calificarPositivo(long id, long idUsuario){
-    calificarPublicacion(Puntaje.TipoPuntaje.ME_GUSTA, id, idUsuario)
+  def calificarPositivo(long idPublicacion, long idUsuario){
+    calificarPublicacion(Puntaje.TipoPuntaje.ME_GUSTA, idPublicacion, idUsuario)
   }
 
-  def calificarNegativo(long id, long idUsuario){
-    calificarPublicacion(Puntaje.TipoPuntaje.NO_ME_GUSTA, id, idUsuario)
+  def calificarNegativo(long idPublicacion, long idUsuario){
+    calificarPublicacion(Puntaje.TipoPuntaje.NO_ME_GUSTA, idPublicacion, idUsuario)
   }
 
-  def calificarPublicacion(Puntaje.TipoPuntaje tipo, long id, long idUsuario){
-    def publicacionInstance = Publicacion.get(id)
-    def usuarioInstance = Usuario.get(idUsuario)
+  def calificarPublicacion(Puntaje.TipoPuntaje tipo, long idPublicacion, long idUsuario){
     try{
-      publicacionService.calificarPublicacion(usuarioInstance, publicacionInstance, tipo)
+      publicacionService.calificarPublicacion(idUsuario, idPublicacion, tipo)
     }
     catch (UsuarioYaCalificoException e){
       flash.message = e.MENSAJE
     }
-    redirect (action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
+    redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
-  def comentar(long id, long idUsuario, String textoComentario){
-    def usuarioLogin = Usuario.get(idUsuario)
-    def publicacionInstance = Publicacion.get(id)
+  def comentar(long idPublicacion, long idUsuario, String textoComentario){
     try{
-      publicacionService.comentarPublicacion(usuarioLogin, textoComentario, publicacionInstance)
+      publicacionService.comentarPublicacion(idUsuario, textoComentario, idPublicacion)
     }
     catch (PromedioInsuficienteException e){
       flash.message = e.MENSAJE
@@ -102,20 +84,17 @@ class PublicacionController {
     catch (UsuarioNoPoseeMateriasNecesariasException e){
       flash.message = e.MENSAJE
     }
-    redirect(controller:"publicacion", action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
+    redirect(controller:"publicacion", action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
-  def agregarMateriaRequeridaParaComentar(long id, long idUsuario, long idMateria){
-    def publicacionInstance = Publicacion.get(id)
-    def usuarioInstance = Usuario.get(idUsuario)
-    def materiaInstance = Materia.get(idMateria)
-    publicacionService.agregarMateriaRequeridaParaComentar(publicacionInstance, usuarioInstance, materiaInstance)
-    redirect(controller:"publicacion", action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
+  def agregarMateriaRequeridaParaComentar(long idPublicacion, long idUsuario, long idMateria){
+    publicacionService.agregarMateriaRequeridaParaComentar(idPublicacion, idUsuario, idMateria)
+    redirect(controller:"publicacion", action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
-  def votarOpcionEncuesta(long id, long idUsuario, long idOpcion){
+  def votarOpcionEncuesta(long idPublicacion, long idUsuario, long idOpcion){
     try{
-      publicacionService.votarOpcionEncuesta(id, idUsuario, idOpcion)
+      publicacionService.votarOpcionEncuesta(idPublicacion, idUsuario, idOpcion)
     }
     catch(PublicacionCerradaException e){
       flash.message = e.MENSAJE
@@ -126,6 +105,6 @@ class PublicacionController {
     catch(UsuarioYaVotoException e){
       flash.message = e.MENSAJE
     }
-    redirect(controller:"publicacion", action: "verPublicacion", id:id, params: [idUsuario:idUsuario])
+    redirect(controller:"publicacion", action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 }

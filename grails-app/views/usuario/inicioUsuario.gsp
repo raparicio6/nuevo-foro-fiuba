@@ -13,9 +13,9 @@
           <div class="navbar navbar-inverse">
             <div class="container-fluid">
               <ul class="nav navbar-nav">
-                <li> <g:link controller="publicacion" action="listaPublicaciones" id="${usuarioInstance.id}">${"Ver publicaciones"}</g:link> </li>
+                <li> <g:link controller="publicacion" action="listaPublicaciones" params="[idUsuario:"${usuarioInstance.id}"]">${"Ver publicaciones"}</g:link> </li>
                 <li> <g:link controller="${"mensajePrivado"}" id="${usuarioInstance.id}">${"Mensajes privados"}</g:link> </li>
-                <li> <g:link controller="${"usuario"}" action="listaUsuarios" id="${usuarioInstance.id}">${"Buscar usuarios"}</g:link> </li>
+                <li> <g:link controller="${"usuario"}" action="listaUsuarios" params="[idUsuario:"${usuarioInstance.id}"]">${"Buscar usuarios"}</g:link> </li>
                 <li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>
               </ul>
             </div>

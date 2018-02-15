@@ -29,12 +29,36 @@ class UsuarioService {
     usuario
   }
 
-  def filtrarPorPromedio(ArrayList usuarios, long promedioMin, long promedioMax){
-    usuarios.findAll {usuario -> usuario.promedioCalificaciones >= promedioMin && usuario.promedioCalificaciones <= promedioMax}
+//LISTO
+  def obtenerTodosLosUsuarios(){
+    Usuario.list()
   }
 
+//LISTO
+  def obtenerCantidadDeUsuariosTotal(){
+    Usuario.count()
+  }
+
+//LISTO
+  def filtrarPorPromedio(long promedioMin, long promedioMax){
+    Usuario.list().findAll {usuario -> usuario.promedioCalificaciones >= promedioMin && usuario.promedioCalificaciones <= promedioMax}
+  }
+
+//LISTO
   def filtrarPorMateria(ArrayList usuarios, long idMateria){
-    usuarios.findAll { usuario -> Materia.get(idMateria) in usuario.obtenerMateriasCursadas() }
+    usuarios.findAll { usuario -> getMateriaById(idMateria) in usuario.obtenerMateriasCursadas() }
+  }
+
+  def getMateriaById(long idMateria){
+    Materia.get(idMateria)
+  }
+
+  def getUsuarioById(long idUsuario){
+    Usuario.get(idUsuario)
+  }
+
+  def getPublicacionById(long idPublicacion){
+    Publicacion.get(idPublicacion)
   }
 
 }

@@ -10,29 +10,29 @@ class UsuarioController {
 
   def seleccionarUsuario(Integer max){
     params.max = Math.min(max ?: 10, 100)
-    [usuarioInstanceList: Usuario.list(params), usuarioInstanceTotal: Usuario.count()]
+    [usuarioInstanceList: usuarioService.obtenerTodosLosUsuarios(), usuarioInstanceTotal: usuarioService.obtenerCantidadDeUsuariosTotal()]
   }
 
-  def inicioUsuario(long id){
-    def usuarioInstance = Usuario.get(id)
+  def inicioUsuario(long idUsuario){
+    def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
     [usuarioInstance: usuarioInstance]
   }
 
-  def listaUsuarios(long id, Integer max, Integer promedioMin, Integer promedioMax, long idMateria){
+  def listaUsuarios(long idUsuario, Integer max, Integer promedioMin, Integer promedioMax, long idMateria){
     if (!promedioMin)
        promedioMin=0
     if (!promedioMax)
        promedioMax=5
-    def usuarios = usuarioService.filtrarPorPromedio (Usuario.list(), promedioMin, promedioMax)
+    def usuarios = usuarioService.filtrarPorPromedio (promedioMin, promedioMax)
     if (idMateria)
       usuarios= usuarioService.filtrarPorMateria(usuarios, idMateria)
-    Usuario usuarioInstance = Usuario.get(id)
+    Usuario usuarioInstance = usuarioService.getUsuarioById(idUsuario)
     params.max = Math.min(max ?: 10, 100)
     [usuarioInstanceList: usuarios, usuarioInstanceTotal: usuarios.size() , usuarioInstance: usuarioInstance, materias: Materia.list(), catedras: Catedra.list()]
   }
 
-  def verMateriasCursadas (long id){
-    def usuarioInstance = Usuario.get(id)
+  def verMateriasCursadas (long idUsuario){
+    def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
     def cursadas = usuarioInstance.getCursadas()
     [usuario:usuarioInstance, cursadas:cursadas]
   }

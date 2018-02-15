@@ -1,5 +1,6 @@
 package nuevo_foro_fiuba
 
+
 import grails.gorm.transactions.Transactional
 
 @Transactional
@@ -13,24 +14,37 @@ class ComentarioService {
     comentario
   }
 
-  def modificarTexto (Usuario usuario,def objetoAModificar, String nuevoTexto){
-    objetoAModificar.modificarTexto(nuevoTexto)
+//LISTO
+  def modificarTextoComentario (long idUsuario,long idComentario, String nuevoTexto){
+    def usuario = getUsuarioById(idUsuario)
+    def comentario = getComentarioById(idComentario)
+    comentario.modificarTexto(nuevoTexto)
   }
 
+//LISTO
   Boolean usuarioEsDueñoDelComentario(Usuario usuario, Comentario comentario){
     usuario.esDueñoDelComentario(comentario)
   }
 
+//LISTO
   def esSubComentario(Comentario comentario){
     comentario.esSubComentario()
   }
 
-  def eliminarComentario (Comentario comentario){    
-    comentario.eliminarComentarios()
+//LISTO
+  def obtenerComentariosNoEliminados(Comentario comentario){
+    comentario.obtenerComentariosNoEliminados()
+  }
+
+//LISTO
+  def eliminarComentario (Comentario comentario){
     comentario.eliminar()
   }
 
-  def calificarComentario(Usuario usuario, Comentario comentario, Puntaje.TipoPuntaje tipo){
+//LISTO
+  def calificarComentario(long idUsuario, long idComentario, Puntaje.TipoPuntaje tipo){
+    def usuario = getUsuarioById(idUsuario)
+    def comentario = getComentarioById(idComentario)
     def promedioCalificaciones = (usuario.getPromedioCalificaciones()).toInteger()
     Integer numeroPuntaje = promedioCalificaciones + 0**promedioCalificaciones
     Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)
@@ -41,9 +55,20 @@ class ComentarioService {
     comentario.getUsuarioCreador().actualizarPromedioCalificaciones()
   }
 
-  def comentarComentario (Usuario usuario, String textoComentario, Comentario comentarioAComentar){
+//LISTO
+  def comentarComentario (long idUsuario, String textoComentario, long idComentario){
+    def usuario = getUsuarioById(idUsuario)
+    def comentarioAComentar = getComentarioById(idComentario)
     Comentario comentario = this.crearComentario(textoComentario, usuario, null, comentarioAComentar)
     usuario.comentarComentario(comentario, comentarioAComentar)
+  }
+
+  def getUsuarioById(long idUsuario){
+    Usuario.get(idUsuario)
+  }
+
+  def getComentarioById(long idComentario){
+    Comentario.get(idComentario)
   }
 
 }

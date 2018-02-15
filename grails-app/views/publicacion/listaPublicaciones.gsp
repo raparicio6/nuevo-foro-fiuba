@@ -21,7 +21,7 @@
 		</div>
 
 		<h1>Buscar publicaciones:</h1>
-		<g:form action="listaPublicaciones" id="${usuarioInstance.id}">
+		<g:form action="listaPublicaciones" params="[idUsuario:"${usuarioInstance.id}"]">
 			<g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", " + "catedra " + it.profesor.nombre}}" optionKey="id" />
 			<g:submitButton name="Buscar"/>
 		</g:form>
@@ -48,7 +48,7 @@
 						<td>${fieldValue(bean: publicacionInstance, field: "catedraRelacionada.materia.nombre")}</td>
             <td>${fieldValue(bean: publicacionInstance, field: "catedraRelacionada.profesor.nombre")}</td>
             <td>${fieldValue(bean: publicacionInstance, field: "estado")}</td>
-            <td><g:link action="verPublicacion" id="${publicacionInstance.id}" params="[idUsuario:"${usuarioInstance.id}"]">${"Ver"}</g:link></td>
+            <td><g:link action="verPublicacion" params="[idUsuario:"${usuarioInstance.id}", idPublicacion:"${publicacionInstance.id}"]">${"Ver"}</g:link></td>
 
 					</tr>
 				</g:each>

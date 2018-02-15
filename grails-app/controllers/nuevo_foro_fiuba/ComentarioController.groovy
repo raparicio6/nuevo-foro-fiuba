@@ -6,53 +6,47 @@ class ComentarioController {
 
   def index() {}
 
-  def verComentario (long id, long idUsuario){
-    def comentarioInstance = Comentario.get(id)
-    def usuarioInstance = Usuario.get(idUsuario)
+  def verComentario (long idComentario, long idUsuario){
+    def comentarioInstance = comentarioService.getComentarioById(idComentario)     //NO SE PUEDEN SACAR, LOS PASA COMO PARAMETRO A LA VISTA
+    def usuarioInstance = comentarioService.getUsuarioById(idUsuario)   //NO SE PUEDEN SACAR, LOS PASA COMO PARAMETRO A LA VISTA
     def esDueño = comentarioService.usuarioEsDueñoDelComentario(usuarioInstance, comentarioInstance)
     def esSubComentario = comentarioService.esSubComentario(comentarioInstance)
-    def comentarios = comentarioInstance.obtenerComentariosNoEliminados()
+    def comentarios = comentarioService.obtenerComentariosNoEliminados(comentarioInstance)
     [comentario: comentarioInstance, usuario:usuarioInstance, modificar:esDueño, subComentario:esSubComentario, comentarios:comentarios]
   }
 
-  def modificarTextoComentario(long id, long idUsuario,String nuevoTexto){
-    def usuarioLogin = Usuario.get(idUsuario)
-    def comentarioInstance = Comentario.get(id)
-    comentarioService.modificarTexto(usuarioLogin, comentarioInstance, nuevoTexto)
-    redirect(controller:"comentario", action: "verComentario", id:id,  params: [idUsuario:idUsuario])
+  def modificarTextoComentario(long idComentario, long idUsuario,String nuevoTexto){
+    comentarioService.modificarTextoComentario(idUsuario, idComentario, nuevoTexto)
+    redirect(controller:"comentario", action: "verComentario",  params: [idUsuario:idUsuario, idComentario:idComentario])
   }
 
-  def eliminarComentario(long id, long idUsuario){
-    def comentarioInstance = Comentario.get(id)
+  def eliminarComentario(long idComentario, long idUsuario){
+    Comentario comentarioInstance = comentarioService.getComentarioById(idComentario)  //NO SE PUEDEN SACAR, LOS PASA COMO PARAMETRO A LA VISTA
     comentarioService.eliminarComentario(comentarioInstance)
-    (comentarioInstance.publicacionComentada) ? redirect(controller: "publicacion", action: "verPublicacion", id: comentarioInstance.publicacionComentada.id, params: [idUsuario:idUsuario]) : redirect(controller:"comentario", action: "verComentario", id: comentarioInstance.comentarioComentado.id,  params: [idUsuario:idUsuario])
+    (comentarioInstance.publicacionComentada) ? redirect(controller: "publicacion", action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion: comentarioInstance.publicacionComentada.id]) : redirect(controller:"comentario", action: "verComentario",  params: [idUsuario:idUsuario, idComentario: comentarioInstance.comentarioComentado.id])
   }
 
-  def calificarPositivo(long id, long idUsuario){
-    calificarComentario(Puntaje.TipoPuntaje.ME_GUSTA, id, idUsuario)
+  def calificarPositivo(long idComentario, long idUsuario){
+    calificarComentario(Puntaje.TipoPuntaje.ME_GUSTA, idComentario, idUsuario)
   }
 
-  def calificarNegativo(long id, long idUsuario){
-    calificarComentario(Puntaje.TipoPuntaje.NO_ME_GUSTA, id, idUsuario)
+  def calificarNegativo(long idComentario, long idUsuario){
+    calificarComentario(Puntaje.TipoPuntaje.NO_ME_GUSTA, idComentario, idUsuario)
   }
 
-  def calificarComentario(Puntaje.TipoPuntaje tipo, long id, long idUsuario){
-    def usuarioInstance = Usuario.get(idUsuario)
-    def comentarioInstance = Comentario.get(id)
+  def calificarComentario(Puntaje.TipoPuntaje tipo, long idComentario, long idUsuario){
     try{
-      comentarioService.calificarComentario(usuarioInstance, comentarioInstance, tipo)
+      comentarioService.calificarComentario(idUsuario, idComentario, tipo)
     }
     catch (UsuarioYaCalificoException e){
       flash.message = e.MENSAJE
     }
-    redirect (action: "verComentario", id:id, params: [idUsuario:idUsuario])
+    redirect (action: "verComentario", params: [idUsuario:idUsuario, idComentario: idComentario])
   }
 
-  def comentar(long id, long idUsuario, String textoComentario){
-    def usuarioLogin = Usuario.get(idUsuario)
-    def comentarioInstance = Comentario.get(id)
+  def comentar(long idComentario, long idUsuario, String textoComentario){
     try{
-      comentarioService.comentarComentario(usuarioLogin, textoComentario, comentarioInstance)
+      comentarioService.comentarComentario(idUsuario, textoComentario, idComentario)
     }
     catch (PublicacionCerradaException e){
       flash.message = e.MENSAJE
@@ -60,7 +54,7 @@ class ComentarioController {
     catch (UsuarioNoPoseeMateriasNecesariasException e){
       flash.message = e.MENSAJE
     }
-    redirect(controller:"comentario", action: "verComentario", id:id, params: [idUsuario:idUsuario])
+    redirect(controller:"comentario", action: "verComentario", params: [idUsuario:idUsuario, idComentario: idComentario])
   }
 
 }

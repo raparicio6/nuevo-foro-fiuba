@@ -14,37 +14,74 @@ class PublicacionService {
     publicacion
   }
 
+//LISTO
+  def obtenerPublicacionesNoEliminadas(){
+    Publicacion.list().findAll {publicacionInstance -> publicacionInstance.getEstado() != Publicacion.EstadoPublicacion.ELIMINADA}
+  }
+
+//LISTO
+  def filtrarPublicacionesPorCatedra(ArrayList publicaciones, long idCatedra){
+    publicaciones.findAll {publicacion -> publicacion.catedraRelacionada.id == idCatedra}
+  }
+
+//LISTO
   Boolean usuarioEsDueñoDeLaPublicacion(Usuario usuario, Publicacion publicacion){
     usuario.esDueñoDeLaPublicacion(publicacion)
   }
 
-  def cambiarEstado (Usuario usuario, Publicacion publicacion){
+//LISTO
+  def obtenerComentariosNoEliminados(Publicacion publicacion){
+    publicacion.obtenerComentariosNoEliminados()
+  }
+
+//LISTO
+  def cambiarEstado (long idUsuario, long idPublicacion){
+    def usuario = getUsuarioById(idUsuario)
+    def publicacion = getPublicacionById(idPublicacion)
     usuario.cambiarEstado(publicacion)
   }
 
-  def modificarTexto (Usuario usuario,def objetoAModificar, String nuevoTexto){
-    objetoAModificar.modificarTexto(nuevoTexto)
+//LISTO
+  def modificarTextoPublicacion (long idUsuario,long idPublicacion, String nuevoTexto){
+    def usuario = getUsuarioById(idUsuario)
+    def publicacion = getPublicacionById(idPublicacion)
+    publicacion.modificarTexto(nuevoTexto)
   }
 
-  def modificarMateriaPublicacion (Usuario usuario, Publicacion publicacion, Materia materia){
+//LISTO
+  def modificarMateriaPublicacion (long idUsuario, long idPublicacion, long idMateria){
+    def usuario = getUsuarioById(idUsuario)
+    def publicacion = getPublicacionById(idPublicacion)
+    def materia = getMateriaById(idMateria)
     usuario.modificarMateriaPublicacion(publicacion, materia)
   }
 
-  def modificarCatedraPublicacion (Usuario usuario, Publicacion publicacion, Catedra catedra){
+//LISTO
+  def modificarCatedraPublicacion (long idUsuario, long idPublicacion, long idCatedra){
+    def usuario = getUsuarioById(idUsuario)
+    def publicacion = getPublicacionById(idPublicacion)
+    def catedra = getCatedraById(idCatedra)
     usuario.modificarCatedraPublicacion(publicacion, catedra)
   }
 
-  def modificarPromedioRequeridoParaComentar(Usuario usuario, Publicacion publicacion, Integer promedio){
+//LISTO
+  def modificarPromedioRequeridoParaComentar(long idUsuario, long idPublicacion, Integer promedio){
+    def usuario = getUsuarioById(idUsuario)
+    def publicacion = getPublicacionById(idPublicacion)
     usuario.modificarPromedioRequeridoParaComentar(publicacion, promedio)
   }
 
-  def eliminarPublicacion (Usuario usuario, Publicacion publicacionInstance){
-    publicacionInstance.eliminarComentarios()
-    publicacionInstance.eliminarCalificaciones()
-    publicacionInstance.eliminar()
+//LISTO
+  def eliminarPublicacion (long idUsuario, long idPublicacion){
+    def usuario = getUsuarioById(idUsuario)
+    def publicacion = getPublicacionById(idPublicacion)
+    usuario.eliminarPublicacion(publicacion)
   }
 
-  def calificarPublicacion(Usuario usuario, Publicacion publicacion, Puntaje.TipoPuntaje tipo){
+//LISTO
+  def calificarPublicacion(long idUsuario, long idPublicacion, Puntaje.TipoPuntaje tipo){
+    def usuario = getUsuarioById(idUsuario)
+    def publicacion = getPublicacionById(idPublicacion)
     def promedioCalificaciones = (usuario.getPromedioCalificaciones()).toInteger()
     Integer numeroPuntaje = promedioCalificaciones + 0**promedioCalificaciones
     Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)
@@ -55,32 +92,52 @@ class PublicacionService {
     publicacion.getUsuarioCreador().actualizarPromedioCalificaciones()
   }
 
-  def comentarPublicacion (Usuario usuario, String textoComentario, Publicacion publicacionAComentar){
+//LISTO
+  def comentarPublicacion (long idUsuario, String textoComentario, long idPublicacion){
+    def usuario = getUsuarioById(idUsuario)
+    def publicacionAComentar = getPublicacionById(idPublicacion)
     Comentario comentario = new Comentario(textoComentario, usuario, publicacionAComentar, null)
     // orden incorrecto
     usuario.comentarPublicacion(comentario, publicacionAComentar)
     comentario.save(failOnError:true)
   }
 
-  def obtenerPublicacionesNoEliminadas(){
-    Publicacion.list().findAll {publicacionInstance -> publicacionInstance.getEstado() != Publicacion.EstadoPublicacion.ELIMINADA}
+//LISTO
+  def agregarMateriaRequeridaParaComentar(long idPublicacion, long idUsuario, long idMateria){
+    def publicacion = getPublicacionById(idPublicacion)
+    def usuario = getUsuarioById(idUsuario)
+    def materia = getMateriaById(idMateria)
+    usuario.agregarMateriaRequeridaParaComentar(publicacion, materia)
   }
 
-  def filtrarPublicacionesPorCatedra(ArrayList publicaciones, long idCatedra){
-    publicaciones.findAll {publicacion -> publicacion.catedraRelacionada.id == idCatedra}
-  }
-
-  def agregarMateriaRequeridaParaComentar(Publicacion publicacionInstance, Usuario usuarioInstance, Materia materiaInstance){
-    usuarioInstance.agregarMateriaRequeridaParaComentar(publicacionInstance, materiaInstance)
-  }
-
+//LISTO
   def votarOpcionEncuesta(long idPublicacion, long idUsuario, long idOpcion){
-    Publicacion publicacionInstance = Publicacion.get(idPublicacion)
-    Usuario usuarioInstance = Usuario.get(idUsuario)
-    Opcion opcionInstance = Opcion.get(idOpcion)
-    Voto voto = new Voto (usuarioInstance)
+    Publicacion publicacion = getPublicacionById(idPublicacion)
+    Usuario usuario = getUsuarioById(idUsuario)
+    Opcion opcion = getOpcionById(idOpcion)
+    Voto voto = new Voto (usuario)
     voto.save(failOnError:true)
-    usuarioInstance.votarOpcion(publicacionInstance,opcionInstance, voto)
+    usuario.votarOpcion(publicacion, opcion, voto)
+  }
+
+  def getUsuarioById(long idUsuario){
+    Usuario.get(idUsuario)
+  }
+
+  def getPublicacionById(long idPublicacion){
+    Publicacion.get(idPublicacion)
+  }
+
+  def getMateriaById(long idMateria){
+    Materia.get(idMateria)
+  }
+
+  def getCatedraById(long idCatedra){
+    Catedra.get(idCatedra)
+  }
+
+  def getOpcionById(long idOpcion){
+    Opcion.get(idOpcion)
   }
 
 }

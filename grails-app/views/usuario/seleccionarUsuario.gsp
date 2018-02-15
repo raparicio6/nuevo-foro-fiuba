@@ -38,7 +38,7 @@
 								<td>${usuarioInstance.apellido}</td>
 								<td>${usuarioInstance.nombreUsuario}</td>
 								<td>
-									<g:link action="inicioUsuario" id="${usuarioInstance.id}">
+									<g:link action="inicioUsuario" params="[idUsuario:"${usuarioInstance.id}"]">
 										Iniciar sesi&oacute;n
 									</g:link>
 								</td>

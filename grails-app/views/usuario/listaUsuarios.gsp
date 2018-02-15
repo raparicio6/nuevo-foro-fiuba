@@ -23,10 +23,9 @@
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sitios<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li> <g:link controller="${"prueba"}" id="${usuarioInstance.id}">${"[ZONA PRUEBA]"}</g:link> </li>
-									<li> <g:link controller="publicacion" action="listaPublicaciones" max="10" id="${usuarioInstance.id}">${"Ver publicaciones"}</g:link> </li>
+									<li> <g:link controller="publicacion" action="listaPublicaciones" max="10" params="[idUsuario:"${usuarioInstance.id}"]">${"Ver publicaciones"}</g:link> </li>
 									<li> <g:link controller="${"crearMensaje"}" id="${usuarioInstance.id}">${"Crear mensaje privado"}</g:link> </li>
-									<li> <g:link controller="${"usuario"}" action="listaUsuarios" id="${usuarioInstance.id}">${"Buscar usuarios"}</g:link> </li>
+									<li> <g:link controller="${"usuario"}" action="listaUsuarios" params="[idUsuario:"${usuarioInstance.id}"]">${"Buscar usuarios"}</g:link> </li>
 									<li> <g:link controller="${"usuario"}">${"Cerrar sesion"}</g:link> </li>
 								</ul>
 							</li>
@@ -43,7 +42,7 @@
 		</div>
 
 		<h1>Filtrar usuarios</h1>
-		<g:form controller="usuario" action="listaUsuarios" id="${usuarioInstance.id}" params="[max:'10']">
+		<g:form controller="usuario" action="listaUsuarios" params="[max:'10', idUsuario:"${usuarioInstance.id}"]">
 			<!-- hacer que acepten floats -->
 			<div>Promedio de calificaciones minimo: <g:field type="number" min="0" max="5" name="promedioMin"/></div>
 			<div>Promedio de calificaciones maximo: <g:field type="number" min="0" max="5" name="promedioMax"/></div>
@@ -65,7 +64,7 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						<td>${fieldValue(bean: usuarioInstance, field: "nombre")}</td>
             <td>${usuarioInstance.promedioCalificaciones.round(2)}</td>
-            <td><g:link action="verMateriasCursadas" id="${usuarioInstance.id}">${"Ver"}</g:link></td>
+            <td><g:link action="verMateriasCursadas" params="[idUsuario:"${usuarioInstance.id}"]">${"Ver"}</g:link></td>
 					</tr>
 				</g:each>
 				</tbody>

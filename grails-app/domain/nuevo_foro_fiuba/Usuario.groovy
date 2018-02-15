@@ -50,7 +50,7 @@ class Usuario {
 			throw new PublicacionCerradaException()
 		if (publicacionAComentar.estaEliminada())
 			throw new PublicacionEliminadaException()
-		if (publicacionAComentar.getPromedioRequeridoParaComentar() > this.promedioCalificaciones)
+		if (publicacionAComentar.getPromedioRequeridoParaComentar() > this.promedioCalificaciones && !this.esDueñoDeLaPublicacion(publicacionAComentar))
 			throw new PromedioInsuficienteException()
 		if (!this.poseeMateriasNecesariasParaComentar(publicacionAComentar) && !this.esDueñoDeLaPublicacion(publicacionAComentar))
 			throw new UsuarioNoPoseeMateriasNecesariasException()
@@ -161,6 +161,10 @@ class Usuario {
 		if (this in publicacion.encuesta.obtenerUsuariosQueVotaron())
 			throw new UsuarioYaVotoException()
 		opcion.agregarVoto(voto)
+	}
+
+	def eliminarPublicacion(Publicacion publicacion){
+		publicacion.eliminar()
 	}
 
 }
