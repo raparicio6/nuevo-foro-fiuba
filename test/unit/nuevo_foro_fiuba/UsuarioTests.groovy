@@ -1,13 +1,14 @@
-package nuevo_foro_fiuba
+package ''
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TestGenerator
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 import grails.test.mixin.support.*
 import org.junit.*
-import domain.*
+import main.domain.*
 
-@TestFor(Usuario)
-class Usuario extends specificacion{
+@TestFor(UsuarioTests)
+class UsuarioTests extends specificacion{
 
     Usuario usuario
 
@@ -19,7 +20,7 @@ class Usuario extends specificacion{
     }
 
     @Test
-    void 'test soy un usuario que quiere comentar en una publicacion pero no tiene el promedido suficiente' () {
+    void 'test soy un usuario que quiere comentar en una publicacion pero no tiene el promedido suficiente lanza exception' () {
         Publicacion publicacion = new Publicacion(usuarioCreador: usuario, promedioRequeridoParaComentar: 4)
         Comentario comentario = new Comentario()
         assert shouldFail(PromedioInsuficienteException) {
@@ -28,7 +29,7 @@ class Usuario extends specificacion{
     }
 
     @Test
-    void 'test soy un usuario que quiere comentar en una publicacion cerrada' () {
+    void 'test soy un usuario que quiere comentar en una publicacion cerrada lanza exception' () {
         Publicacion publicacion = new Publicacion(usuarioCreador: usuario, promedioRequeridoParaComentar: 4)
         Comentario comentario = new Comentario()
         usuario.cambiarEstado(publicacion)
@@ -40,13 +41,11 @@ class Usuario extends specificacion{
     @Test
     void 'test soy un usuario que crea una publicacion y aparezco como creador' () {
         Publicacion publicacion = new Publicacion(usuarioCreador: usuario, promedioRequeridoParaComentar: 4)
-        assert shouldFail(PromedioInsuficienteException) {
-            usuario.esDueñoDeLaPublicacion(publicacion)
-        } == true
+        assert usuario.esDueñoDeLaPublicacion(publicacion) == true
     }
 
     @Test
-    void 'test soy un usuario que quiere comentar en una publicacion eliminada' () {
+    void 'test soy un usuario que quiere comentar en una publicacion eliminada lanza exception' () {
         Publicacion publicacion = new Publicacion(usuarioCreador: usuario, promedioRequeridoParaComentar: 4)
         Comentario comentario = new Comentario()
         publicaion.eliminar()
@@ -56,7 +55,7 @@ class Usuario extends specificacion{
     }
 
     @Test
-    void 'test soy un usuario que califico una publicacion e intento calificarla otra vez' () {
+    void 'test soy un usuario que califico una publicacion e intento calificarla otra vez lanza exception' () {
         Publicacion publicacion = new Publicacion(usuarioCreador: usuario, promedioRequeridoParaComentar: 2)
         Usuario usuario2 = new Usuario(nombre: 'Benito', apellido: 'Camelas', promedioCalificaciones: 4)
         Calificacion calificacion = new Calificacion(usuario: usuario2, puntaje: 3, publicacion: publicacion)
@@ -68,7 +67,7 @@ class Usuario extends specificacion{
     }
 
     @Test
-    void 'test soy un usuario que califico un comentario e intento calificarlo otra vez' () {
+    void 'test soy un usuario que califico un comentario e intento calificarlo otra vez lanza exception' () {
         Comentario comentario = new Comentario()
         Usuario usuario2 = new Usuario(nombre: 'Benito', apellido: 'Camelas', promedioCalificaciones: 4)
         Calificacion calificacion = new Calificacion(usuario: usuario2, puntaje: 3, comentario: comentario)
@@ -79,4 +78,59 @@ class Usuario extends specificacion{
         }
     }
 
+    @Test
+    void 'test soy un usuario, voto en una encuesta e intento votar de vuelta lanza exception' () {
+        Voto voto = new Voto(usuario: usuario)
+        Opcion opcion = new Opcion(nombre: 'Opcion')
+        Set<Opcion> opciones = [opcion]
+        Encuesta encuesta = new Encuesta(nombre: 'Encuesta', opciones: opciones)
+        Publicacion publicacion = new Publicacion(usuarioCreador: usuario)
+        publicacion.agregarEncuesta(encuesta)
+        Usuario usuario2 = new Usuario(nombre: 'Benito', apellido: 'Camelas')
+        usuario2.votarOpcion(publicacion, opcion, voto)
+        assert shouldFail(UsuarioYaVotoException) {
+            usuario2.votarOpcion(publicacion, opcion, voto)
+        }
+    }
+
+    @Test
+    void 'test soy un usuario, creo una encuesta en intento votar lanza exception' () {
+        Voto voto = new Voto(usuario: usuario)
+        Opcion opcion = new Opcion(nombre: 'Opcion')
+        Set<Opcion> opciones = [opcion]
+        Encuesta encuesta = new Encuesta(nombre: 'Encuesta', opciones: opciones)
+        Publicacion publicacion = new Publicacion(usuarioCreador: usuario)
+        publicacion.agregarEncuesta(encuesta)
+        assert shouldFail(CreadorEncuestaNoPuedeVotarException) {
+            usuario.votarOpcion(publicacion, opcion, voto)
+        }
+    }
+
+    @Test
+    void 'test soy un usuario que intenta votar en una publicacion sin tener las materias necesarias lanza exception' () {
+        Publicacion publicacion = new Publicacion(usuarioCreador: usuario)
+        Usuario usuario2 = new Usuario(nombre: 'Benito', apellido: 'Camelas')
+        Materia materia = new Materia(nombre: 'materia')
+        Comentario comentario = new Comentario()
+        publicacion.agregarMateriaRequeridaParaComentar(materia)
+        assert shouldFail(USuarioNoPoseeMateriasNecesariasException) {
+            usuario2.comentarPublicacion(comentario, publicacion)
+        }
+    }
+
+    @Test
+    void 'test soy un usuario, voto en una encuesta cerrada lanza exception' () {
+        Voto voto = new Voto(usuario: usuario)
+        Opcion opcion = new Opcion(nombre: 'Opcion')
+        Set<Opcion> opciones = [opcion]
+        Encuesta encuesta = new Encuesta(nombre: 'Encuesta', opciones: opciones)
+        Publicacion publicacion = new Publicacion(usuarioCreador: usuario)
+        publicacion.agregarEncuesta(encuesta)
+        publicaion.cambiarEstado()
+        Usuario usuario2 = new Usuario(nombre: 'Benito', apellido: 'Camelas')
+        usuario2.votarOpcion(publicacion, opcion, voto)
+        assert shouldFail(PublicacionCerradaException) {
+            usuario2.votarOpcion(publicacion, opcion, voto)
+        }
+    }
 }
