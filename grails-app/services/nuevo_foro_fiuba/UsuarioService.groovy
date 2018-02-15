@@ -29,22 +29,18 @@ class UsuarioService {
     usuario
   }
 
-//LISTO
   def obtenerTodosLosUsuarios(){
     Usuario.list()
   }
 
-//LISTO
   def obtenerCantidadDeUsuariosTotal(){
     Usuario.count()
   }
 
-//LISTO
   def filtrarPorPromedio(long promedioMin, long promedioMax){
     Usuario.list().findAll {usuario -> usuario.promedioCalificaciones >= promedioMin && usuario.promedioCalificaciones <= promedioMax}
   }
 
-//LISTO
   def filtrarPorMateria(ArrayList usuarios, long idMateria){
     usuarios.findAll { usuario -> getMateriaById(idMateria) in usuario.obtenerMateriasCursadas() }
   }

@@ -14,41 +14,34 @@ class PublicacionService {
     publicacion
   }
 
-//LISTO
   def obtenerPublicacionesNoEliminadas(){
     Publicacion.list().findAll {publicacionInstance -> publicacionInstance.getEstado() != Publicacion.EstadoPublicacion.ELIMINADA}
   }
 
-//LISTO
   def filtrarPublicacionesPorCatedra(ArrayList publicaciones, long idCatedra){
     publicaciones.findAll {publicacion -> publicacion.catedraRelacionada.id == idCatedra}
   }
 
-//LISTO
   Boolean usuarioEsDueñoDeLaPublicacion(Usuario usuario, Publicacion publicacion){
     usuario.esDueñoDeLaPublicacion(publicacion)
   }
 
-//LISTO
   def obtenerComentariosNoEliminados(Publicacion publicacion){
     publicacion.obtenerComentariosNoEliminados()
   }
 
-//LISTO
   def cambiarEstado (long idUsuario, long idPublicacion){
     def usuario = getUsuarioById(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
     usuario.cambiarEstado(publicacion)
   }
 
-//LISTO
   def modificarTextoPublicacion (long idUsuario,long idPublicacion, String nuevoTexto){
     def usuario = getUsuarioById(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
     publicacion.modificarTexto(nuevoTexto)
   }
 
-//LISTO
   def modificarMateriaPublicacion (long idUsuario, long idPublicacion, long idMateria){
     def usuario = getUsuarioById(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
@@ -56,7 +49,6 @@ class PublicacionService {
     usuario.modificarMateriaPublicacion(publicacion, materia)
   }
 
-//LISTO
   def modificarCatedraPublicacion (long idUsuario, long idPublicacion, long idCatedra){
     def usuario = getUsuarioById(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
@@ -64,21 +56,18 @@ class PublicacionService {
     usuario.modificarCatedraPublicacion(publicacion, catedra)
   }
 
-//LISTO
   def modificarPromedioRequeridoParaComentar(long idUsuario, long idPublicacion, Integer promedio){
     def usuario = getUsuarioById(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
     usuario.modificarPromedioRequeridoParaComentar(publicacion, promedio)
   }
 
-//LISTO
   def eliminarPublicacion (long idUsuario, long idPublicacion){
     def usuario = getUsuarioById(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
     usuario.eliminarPublicacion(publicacion)
   }
 
-//LISTO
   def calificarPublicacion(long idUsuario, long idPublicacion, Puntaje.TipoPuntaje tipo){
     def usuario = getUsuarioById(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
@@ -92,7 +81,6 @@ class PublicacionService {
     publicacion.getUsuarioCreador().actualizarPromedioCalificaciones()
   }
 
-//LISTO
   def comentarPublicacion (long idUsuario, String textoComentario, long idPublicacion){
     def usuario = getUsuarioById(idUsuario)
     def publicacionAComentar = getPublicacionById(idPublicacion)
@@ -102,7 +90,6 @@ class PublicacionService {
     comentario.save(failOnError:true)
   }
 
-//LISTO
   def agregarMateriaRequeridaParaComentar(long idPublicacion, long idUsuario, long idMateria){
     def publicacion = getPublicacionById(idPublicacion)
     def usuario = getUsuarioById(idUsuario)
@@ -110,7 +97,6 @@ class PublicacionService {
     usuario.agregarMateriaRequeridaParaComentar(publicacion, materia)
   }
 
-//LISTO
   def votarOpcionEncuesta(long idPublicacion, long idUsuario, long idOpcion){
     Publicacion publicacion = getPublicacionById(idPublicacion)
     Usuario usuario = getUsuarioById(idUsuario)

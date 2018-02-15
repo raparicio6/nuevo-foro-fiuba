@@ -46,7 +46,7 @@ div {
     <div class="col-md-12">
       <div class="col-md-2">
         <h3>
-            <span class="label label-default">Mensajes:</span>
+            <span class="label label-default">Mensajes enviados:</span>
         </h3>
       </div>
       <div class="col-md-6">
@@ -55,7 +55,7 @@ div {
             <tr>
               <th>Nombre usuario</th>
               <th>Texto</th>
-              <th>Responder</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -83,8 +83,8 @@ div {
         <g:form action="crearMensaje" params="[idUsuario:"${usuarioInstance.id}"]" >
           <g:actionSubmit  action="crearMensaje" value="Redactar nuevo mensaje" class="btn btn-warning"  />
         </g:form>
-        <g:form action="verMensajesEnviados" params="[idUsuario:"${usuarioInstance.id}"]">
-          <g:actionSubmit  action="verMensajesEnviados" value="Ver mensajes enviados" class="btn btn-warning"  />
+        <g:form action="index" id="${usuarioInstance.id}">
+          <g:actionSubmit  action="index" value="Volver a la casilla" class="btn btn-warning"  />
         </g:form>
       </div>
     </div>

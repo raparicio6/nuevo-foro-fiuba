@@ -14,34 +14,28 @@ class ComentarioService {
     comentario
   }
 
-//LISTO
   def modificarTextoComentario (long idUsuario,long idComentario, String nuevoTexto){
     def usuario = getUsuarioById(idUsuario)
     def comentario = getComentarioById(idComentario)
     comentario.modificarTexto(nuevoTexto)
   }
 
-//LISTO
   Boolean usuarioEsDueñoDelComentario(Usuario usuario, Comentario comentario){
     usuario.esDueñoDelComentario(comentario)
   }
 
-//LISTO
   def esSubComentario(Comentario comentario){
     comentario.esSubComentario()
   }
 
-//LISTO
   def obtenerComentariosNoEliminados(Comentario comentario){
     comentario.obtenerComentariosNoEliminados()
   }
 
-//LISTO
   def eliminarComentario (Comentario comentario){
     comentario.eliminar()
   }
 
-//LISTO
   def calificarComentario(long idUsuario, long idComentario, Puntaje.TipoPuntaje tipo){
     def usuario = getUsuarioById(idUsuario)
     def comentario = getComentarioById(idComentario)
@@ -55,7 +49,6 @@ class ComentarioService {
     comentario.getUsuarioCreador().actualizarPromedioCalificaciones()
   }
 
-//LISTO
   def comentarComentario (long idUsuario, String textoComentario, long idComentario){
     def usuario = getUsuarioById(idUsuario)
     def comentarioAComentar = getComentarioById(idComentario)

@@ -7,8 +7,8 @@ class ComentarioController {
   def index() {}
 
   def verComentario (long idComentario, long idUsuario){
-    def comentarioInstance = comentarioService.getComentarioById(idComentario)     //NO SE PUEDEN SACAR, LOS PASA COMO PARAMETRO A LA VISTA
-    def usuarioInstance = comentarioService.getUsuarioById(idUsuario)   //NO SE PUEDEN SACAR, LOS PASA COMO PARAMETRO A LA VISTA
+    def comentarioInstance = comentarioService.getComentarioById(idComentario)     
+    def usuarioInstance = comentarioService.getUsuarioById(idUsuario)   
     def esDueño = comentarioService.usuarioEsDueñoDelComentario(usuarioInstance, comentarioInstance)
     def esSubComentario = comentarioService.esSubComentario(comentarioInstance)
     def comentarios = comentarioService.obtenerComentariosNoEliminados(comentarioInstance)
@@ -21,7 +21,7 @@ class ComentarioController {
   }
 
   def eliminarComentario(long idComentario, long idUsuario){
-    Comentario comentarioInstance = comentarioService.getComentarioById(idComentario)  //NO SE PUEDEN SACAR, LOS PASA COMO PARAMETRO A LA VISTA
+    Comentario comentarioInstance = comentarioService.getComentarioById(idComentario)  
     comentarioService.eliminarComentario(comentarioInstance)
     (comentarioInstance.publicacionComentada) ? redirect(controller: "publicacion", action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion: comentarioInstance.publicacionComentada.id]) : redirect(controller:"comentario", action: "verComentario",  params: [idUsuario:idUsuario, idComentario: comentarioInstance.comentarioComentado.id])
   }

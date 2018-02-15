@@ -36,4 +36,8 @@ class MensajePrivadoService {
     println (receptor.mensajes)
   }
 
+  def getUsuarioById(long idUsuario){
+    Usuario.get(idUsuario)
+  }
+
 }

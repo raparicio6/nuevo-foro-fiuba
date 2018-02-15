@@ -26,9 +26,14 @@ class MensajePrivadoController {
     redirect (action:"index", id:idUsuarioCreador)
   }
 
-  def crearMensaje(long id){
-    def usuarioInstance = Usuario.get(id)
+  def crearMensaje(long idUsuario){
+    def usuarioInstance = Usuario.get(idUsuario)
     [usuarioInstance:usuarioInstance, usuarios:Usuario.list()]
+  }
+
+  def verMensajesEnviados(long idUsuario){
+    Usuario usuarioInstance = mensajePrivadoService.getUsuarioById(idUsuario)
+    render (view:"enviados", model:[usuarioInstance:usuarioInstance, mensajes:usuarioInstance.mensajes])
   }
 
 }
