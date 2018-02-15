@@ -1,7 +1,9 @@
+package ''
+
 import grails.test.mixin.*
 import org.junit.*
 
-@TestFor(Publicacion)
+@TestFor(PublicacionTests)
 class PublicacionTests {
 
     Publicacion publicacion

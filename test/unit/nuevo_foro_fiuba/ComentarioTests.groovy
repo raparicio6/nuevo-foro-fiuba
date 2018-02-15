@@ -1,7 +1,9 @@
+package ''
+
 import grails.test.mixin.*
 import org.junit.*
 
-@TestMixin(GrailsUnitTestMixin)
+@TestFor(CommentarioTests)
 class ComentarioTests {
 
     Comentario comentario
