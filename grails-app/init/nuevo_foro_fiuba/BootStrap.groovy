@@ -1,13 +1,19 @@
 package nuevo_foro_fiuba
 
+import grails.gorm.transactions.Transactional
+
+@Transactional
 class BootStrap {
 
     def usuarioService
 
     def init = { servletContext ->
       Usuario usuario = usuarioService.crearUsuario ("Mariano", "Martin", "mmartin")
+      usuario.save(failOnError:true)
       Usuario usuario2 = usuarioService.crearUsuario ("Rodrigo", "Aparicio", "raparicio")
+      usuario2.save(failOnError:true)
       Usuario usuario3 = usuarioService.crearUsuario ("German", "Rotili", "grotili")
+      usuario3.save(failOnError:true)
       Materia materia = new Materia ('Matematica discreta', 'Esto es mate discreta')
       materia.save(failOnError:true)
       Materia materia2 = new Materia ('Analisis II', 'Esto es analisis II')
@@ -47,22 +53,20 @@ class BootStrap {
       Calificacion calificacion = new Calificacion (usuario2, puntaje, publicacion, null)
       calificacion.save(failOnError:true)
       publicacion.agregarCalificacion(calificacion)
-      // MensajePrivado mensaje = new MensajePrivado("Mensaje", null, null)
-      // mensaje.save(failOnError:true)
-      // InformacionMensajeUsuario info1 = new InformacionMensajeUsuario(usuario3, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
-      // println (usuario.mensajes)
-      // // orden incorrecto
-      // usuario.guardarMensaje(info1)
-      // println (usuario.mensajes)
-      // info1.save(failOnError:true)
-      // println (usuario.mensajes)
-      // InformacionMensajeUsuario info2 = new InformacionMensajeUsuario(usuario, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
-      // println (usuario.mensajes)
-      // // orden incorrecto
-      // usuario3.guardarMensaje(info2)
-      // println (usuario.mensajes)
-      // info2.save(failOnError:true)
-      // println (usuario.mensajes)
+      MensajePrivado mensaje = new MensajePrivado("Mensaje", null, null)
+      mensaje.save(failOnError:true)
+      InformacionMensajeUsuario info1 = new InformacionMensajeUsuario(usuario3, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
+      println (usuario.mensajes)
+      info1.save(failOnError:true)
+      println (usuario.mensajes)
+      usuario.guardarMensaje(info1)
+      println (usuario.mensajes)
+      InformacionMensajeUsuario info2 = new InformacionMensajeUsuario(usuario, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
+      println (usuario.mensajes)
+      info2.save(failOnError:true)
+      println (usuario.mensajes)
+      usuario3.guardarMensaje(info2)
+      println (usuario.mensajes)
       Opcion opcion1 = new Opcion ("Buena")
       opcion1.save(failOnError:true)
       Opcion opcion2 = new Opcion ("Mala")

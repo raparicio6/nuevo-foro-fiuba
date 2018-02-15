@@ -3,11 +3,8 @@ Temas para ver:
 *Hay que armar una pantalla para crear publicaciones
 *El this.atributo = algo no anda en el dominio pero el .setAtributo(algo) sí
 *Objeto == this no anda en el dominio pero objeto.id == this.id sí
-*Armar la historia de mensajePrivado
 *Tests
 *Las calificaciones de usuarios con bajo promedio te bajan el promedio, por mas que las calificaciones sean positvas. Tal vez habria que buscar otra estrategia para calcular el numero del puntaje asociado a la calificacion.
 *Los .save() que están en orden incorrecto
 *Homogeneizar las pantallas para que todas tengan el mismo patron
 *Darle estilo a las pantallas que les falta
-*Desde servicio delego a usuario y desde usuario delego a otra clase, ver si lo dejo así o solamente delego servicio -> otra clase.
- 

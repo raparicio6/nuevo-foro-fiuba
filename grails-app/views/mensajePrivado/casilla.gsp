@@ -64,7 +64,7 @@ div {
                 <td>${mensaje.usuarioConElQueSeInteractua.nombre}</td>
                 <td>${mensaje.mensajePrivado.texto}</td>
                 <td>
-                  <g:link action="verMensaje" id="${mensaje.mensajePrivado.id}" params="[idUsuario:"${usuarioInstance.id}", idInformacion:"${mensaje.id}"]" >
+                  <g:link action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${mensaje.mensajePrivado.id}", idInformacion:"${mensaje.id}", mostrarResponder:"${true}"]" >
                     Ver mensaje
                   </g:link>
                 </td>
