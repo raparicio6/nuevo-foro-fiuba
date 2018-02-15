@@ -9,7 +9,7 @@ class Archivo {
 
   static constraints = {
 		nombre blank: false, nullable: false
-		nombreFinal blank: false, nullable: false
+		nombreFinal blank: false, nullable: false, unique: true
 		path blank: false, nullable: false
   }
 

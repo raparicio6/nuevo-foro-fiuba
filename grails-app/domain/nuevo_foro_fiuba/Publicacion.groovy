@@ -10,13 +10,18 @@ class Publicacion {
 
 	String texto
 	Usuario usuarioCreador
+	// Materia materiaRelacionada = null
 	Materia materiaRelacionada
+	// Catedra catedraRelacionada = null
 	Catedra catedraRelacionada
 	Float promedioRequeridoParaComentar
+	// Set <Materia> materiasNecesariasParaComentar = []
 	Set <Materia> materiasNecesariasParaComentar
 	Set <Comentario> comentarios
+	// Archivo archivoAdjunto = null
 	Archivo archivoAdjunto
 	EstadoPublicacion estado
+	// Encuesta encuesta = null
 	Encuesta encuesta
 	Set <Calificacion> calificaciones
 	Date fechaHoraCreacion
@@ -42,6 +47,22 @@ class Publicacion {
 		fechaHoraCreacion nullable:false
     }
 // ------------------------------------------------------------------------- //
+
+	// Publicacion(String texto, Usuario usuarioCreador, Materia materiaRelacionada = null, Catedra catedraRelacionada = null, Float promedioRequeridoParaComentar = 0, Set <Materia> materiasNecesariasParaComentar = [], Archivo archivoAdjunto = null, Encuesta encuesta = null){
+	// 	this.texto = texto
+	// 	this.usuarioCreador = usuarioCreador
+	// 	this.estado = EstadoPublicacion.ABIERTA
+	// 	this.comentarios = []
+	// 	this.calificaciones = []
+	// 	String dia = new Date().format( 'dd/MM/yyyy hh:mm' )
+	// 	this.fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', dia);
+	// 	this.materiaRelacionada = materiaRelacionada
+	// 	this.catedraRelacionada = catedraRelacionada
+	// 	this.promedioRequeridoParaComentar = 0
+	// 	this.materiasNecesariasParaComentar = []
+	// 	this.archivoAdjunto = archivoAdjunto
+	// 	this.encuesta = encuesta
+	// }
 
 	Publicacion(String texto, Usuario usuarioCreador, Materia materiaRelacionada, Catedra catedraRelacionada){
 		this.texto = texto

@@ -146,7 +146,7 @@
                 <g:each in="${comentario.calificaciones}" var="calificacion">
                   <tr>
                     <td>${calificacion.usuario.nombre}</td>
-                    <td>${calificacion.puntaje.tipo}</td>
+                    <td>${calificacion.puntaje.tipo.toString().replace("_", " ")}</td>
                     <td>${calificacion.usuario.promedioCalificaciones.round(2)}</td>
                   </tr>
                 </g:each>

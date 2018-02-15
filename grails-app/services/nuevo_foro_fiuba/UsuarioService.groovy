@@ -5,21 +5,24 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class UsuarioService {
 
+  final Integer PROMEDIO_INICIAL_USUARIOS = 3
+
   def serviceMethod() {}
 
   Usuario crearUsuario(String nombre, String apellido, String nombreUsuario){
     Usuario usuario = new Usuario(nombre, apellido, nombreUsuario)
     usuario.save(failOnError: true)
-    Publicacion publicacion = new Publicacion("A", usuario, null, null)
+
+    // se crea una publicacion vacia para que el usuario tenga
+    // un promedio inicial distinto de 0
+    Publicacion publicacion = new Publicacion("", usuario, null, null)
     //orden incorrecto
     usuario.agregarPublicacion(publicacion)
     publicacion.save(failOnError: true)
     publicacion.eliminar()
-    def promedioCalificaciones = 3.toInteger()
-    Integer numeroPuntaje = promedioCalificaciones + 0**promedioCalificaciones
-    Puntaje puntaje = new Puntaje (Puntaje.TipoPuntaje.ME_GUSTA, numeroPuntaje)
+
+    Puntaje puntaje = new Puntaje(Puntaje.TipoPuntaje.ME_GUSTA, this.PROMEDIO_INICIAL_USUARIOS)
     Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, null)
-    //orden incorrecto
     publicacion.agregarCalificacion(calificacion)
     calificacion.save(failOnError:true)
     usuario.actualizarPromedioCalificaciones()

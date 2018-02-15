@@ -6,7 +6,7 @@ class Materia {
 	String descripcion
 
   static constraints = {
-		nombre blank: false, nullable: false
+		nombre blank: false, nullable: false, unique: true
 		descripcion blank: true, nullable: true
   }
 
@@ -14,5 +14,5 @@ class Materia {
 		this.nombre = nombre
 		this.descripcion = descripcion
 	}
-	
+
 }

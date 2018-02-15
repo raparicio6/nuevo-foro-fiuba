@@ -41,7 +41,6 @@ class Usuario {
 		this.comentarios = []
 		this.cursadas = []
 		this.promedioCalificaciones = 0
-
 	}
 
 // ------------------------------------------------------------------------- //
@@ -53,7 +52,7 @@ class Usuario {
 			throw new PublicacionEliminadaException()
 		if (publicacionAComentar.getPromedioRequeridoParaComentar() > this.promedioCalificaciones)
 			throw new PromedioInsuficienteException()
-		if (! this.poseeMateriasNecesariasParaComentar(publicacionAComentar))
+		if (!this.poseeMateriasNecesariasParaComentar(publicacionAComentar))
 			throw new UsuarioNoPoseeMateriasNecesariasException()
 		this.comentarios << comentario
 		publicacionAComentar.agregarComentario(comentario)
@@ -159,7 +158,7 @@ class Usuario {
 			throw new CreadorEncuestaNoPuedeVotarException()
 		if (publicacion.estaCerrada())
 			throw new PublicacionCerradaException()
-		if (this in publicacion.encuesta.obtenerUsuariosQueVotaron() )
+		if (this in publicacion.encuesta.obtenerUsuariosQueVotaron())
 			throw new UsuarioYaVotoException()
 		opcion.agregarVoto(voto)
 	}

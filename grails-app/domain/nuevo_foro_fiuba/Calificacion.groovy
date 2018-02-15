@@ -17,9 +17,9 @@ class Calificacion {
 
   static constraints = {
   	usuario nullable: false
-		publicacion  nullable:true
-		comentario  nullable:true
-		puntaje  nullable:false
+		publicacion nullable:true
+		comentario nullable:true
+		puntaje nullable:false
 		estado nullable:false
 	}
 
