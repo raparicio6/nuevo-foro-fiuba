@@ -6,11 +6,11 @@ class Puntaje { // VALUE OBJECT
       ME_GUSTA,
       NO_ME_GUSTA,
 
-      static Integer getProporcion(TipoPuntaje tipo){
+      static Float getProporcion(TipoPuntaje tipo){
         if (tipo == TipoPuntaje.ME_GUSTA)
           return 1
         if (tipo == TipoPuntaje.NO_ME_GUSTA)
-          return -1
+          return -0.05
       }
     }
 

@@ -107,9 +107,9 @@ class Usuario {
 
 	def calificar(def calificable, Calificacion calificacion){
 		def calificaciones = calificable.calificaciones
-		def calificacionesUsuario = calificaciones.collect {calificacionInstance -> calificacionInstance.getUsuario() == this}
+		def calificacionesUsuario = calificaciones.findAll {calificacionInstance -> calificacionInstance.getUsuario() == this}
 		// println(calificacionesUsuario.size().toString())
-		if (calificacionesUsuario.size()>=1)
+		if (calificacionesUsuario.size()>= 1)
 			throw new UsuarioYaCalificoException()
 		else
 			calificable.agregarCalificacion(calificacion)
@@ -134,11 +134,27 @@ class Usuario {
 		def comentarios = this.comentarios
 		calificaciones += comentarios.collect {comentarioInstance -> comentarioInstance.calificaciones}
 		calificaciones = calificaciones.flatten()
+
 		def contador = 0
-		calificaciones.collect {calificacionInstance -> contador += Puntaje.TipoPuntaje.getProporcion(calificacionInstance.puntaje.tipo) * calificacionInstance.puntaje.numero}
-		def promedioDeCalificaciones = (contador/calificaciones.size()).toFloat()
-		this.setPromedioCalificaciones(promedioDeCalificaciones)
-		//siempre va a tener al menos una calificacion
+		def calificacionesPositivas = calificaciones.findAll { calificacion ->
+			Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) > 0 }
+		calificacionesPositivas.collect { calificacion ->
+					def numeroPuntaje = calificacion.puntaje.numero
+					(numeroPuntaje > this.promedioCalificaciones) ?
+					(contador += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * numeroPuntaje) :
+					(contador += this.promedioCalificaciones + numeroPuntaje * 0.05)
+		}
+		def promedioDeCalificaciones = (contador/calificacionesPositivas.size())
+
+		def calificacionesNegativas = calificaciones.findAll { calificacion ->
+			Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) < 0
+		}
+		calificacionesNegativas.collect {calificacion ->
+				promedioDeCalificaciones += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * calificacion.puntaje.numero
+		}
+
+		this.setPromedioCalificaciones(promedioDeCalificaciones.toFloat())
+		//siempre va a tener al menos una calificacion cuando se llame a este método, no hay división por 0
 	}
 
 	def agregarPublicacion(Publicacion publicacion){
