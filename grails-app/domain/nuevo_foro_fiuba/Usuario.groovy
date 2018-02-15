@@ -53,7 +53,7 @@ class Usuario {
 			throw new PublicacionEliminadaException()
 		if (publicacionAComentar.getPromedioRequeridoParaComentar() > this.promedioCalificaciones)
 			throw new PromedioInsuficienteException()
-		if (! this.poseeMateriasNecesariasParaComentar(publicacionAComentar))
+		if (! this.poseeMateriasNecesariasParaComentar(publicacionAComentar) && ! this.esDueñoDeLaPublicacion(publicacionAComentar))
 			throw new UsuarioNoPoseeMateriasNecesariasException()
 		this.comentarios << comentario
 		publicacionAComentar.agregarComentario(comentario)
