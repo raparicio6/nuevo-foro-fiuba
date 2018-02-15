@@ -52,11 +52,7 @@ class Usuario {
 			throw new PublicacionEliminadaException()
 		if (publicacionAComentar.getPromedioRequeridoParaComentar() > this.promedioCalificaciones)
 			throw new PromedioInsuficienteException()
-<<<<<<< HEAD
-		if (!this.poseeMateriasNecesariasParaComentar(publicacionAComentar))
-=======
-		if (! this.poseeMateriasNecesariasParaComentar(publicacionAComentar) && ! this.esDueñoDeLaPublicacion(publicacionAComentar))
->>>>>>> 4fd8d078228a2e3f51d7ea5f8e9295fd2da195da
+		if (!this.poseeMateriasNecesariasParaComentar(publicacionAComentar) && !this.esDueñoDeLaPublicacion(publicacionAComentar))
 			throw new UsuarioNoPoseeMateriasNecesariasException()
 		this.comentarios << comentario
 		publicacionAComentar.agregarComentario(comentario)
