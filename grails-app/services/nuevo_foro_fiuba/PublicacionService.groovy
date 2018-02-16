@@ -64,7 +64,7 @@ class PublicacionService {
     usuario.modificarCatedraPublicacion(publicacion, catedra)
   }
 
-  def modificarPromedioRequeridoParaComentar(long idUsuario, long idPublicacion, Integer promedio){
+  def modificarPromedioRequeridoParaComentar(long idUsuario, long idPublicacion, float promedio){
     def usuario = getUsuarioById(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
     usuario.modificarPromedioRequeridoParaComentar(publicacion, promedio)

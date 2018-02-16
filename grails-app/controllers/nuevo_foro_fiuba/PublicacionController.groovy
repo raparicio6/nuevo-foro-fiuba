@@ -54,7 +54,7 @@ class PublicacionController {
     redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
-  def modificarPromedioRequeridoParaComentar (long idPublicacion, long idUsuario, Integer promedio){
+  def modificarPromedioRequeridoParaComentar (long idPublicacion, long idUsuario, float promedio){
     publicacionService.modificarPromedioRequeridoParaComentar(idUsuario, idPublicacion, promedio)
     redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }

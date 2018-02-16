@@ -108,7 +108,7 @@ class Usuario {
 		publicacion.cambiarCatedra(catedra)
 	}
 
-	def modificarPromedioRequeridoParaComentar(Publicacion publicacion, Integer promedio){
+	def modificarPromedioRequeridoParaComentar(Publicacion publicacion, float promedio){
 		publicacion.modificarPromedioRequeridoParaComentar(promedio)
 	}
 

@@ -37,7 +37,7 @@ class UsuarioService {
     Usuario.count()
   }
 
-  def filtrarPorPromedio(long promedioMin, long promedioMax){
+  def filtrarPorPromedio(float promedioMin, float promedioMax){
     Usuario.list().findAll {usuario -> usuario.promedioCalificaciones >= promedioMin && usuario.promedioCalificaciones <= promedioMax}
   }
 

@@ -18,7 +18,7 @@ class UsuarioController {
     [usuarioInstance: usuarioInstance]
   }
 
-  def listaUsuarios(long idUsuario, Integer max, Integer promedioMin, Integer promedioMax, long idMateria){
+  def listaUsuarios(long idUsuario, Integer max, float promedioMin, float promedioMax, long idMateria){
     if (!promedioMin)
        promedioMin=0
     if (!promedioMax)
