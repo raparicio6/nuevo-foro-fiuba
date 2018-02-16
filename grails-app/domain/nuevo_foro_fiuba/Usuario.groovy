@@ -84,6 +84,10 @@ class Usuario {
 	//LOS DE ARRIBA NO FUNCIONAN
 	// hay que preguntar para que se pueda usar algo como lo de arriba
 
+	def publicar(Publicacion publicacion){
+		this.publicaciones << publicacion
+	}
+
 	Boolean esDueñoDeLaPublicacion(Publicacion publicacion){
 		(publicacion.getUsuarioCreador() == this)
 	}
@@ -172,7 +176,7 @@ class Usuario {
 	}
 
 	def votarOpcion(Publicacion publicacion,Opcion opcion, Voto voto){
-		if (publicacion.getUsuarioCreador() == this) 
+		if (publicacion.getUsuarioCreador() == this)
 			throw new CreadorEncuestaNoPuedeVotarException()
 		if (publicacion.estaCerrada())
 			throw new PublicacionCerradaException()

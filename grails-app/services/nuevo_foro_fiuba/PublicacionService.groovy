@@ -30,6 +30,14 @@ class PublicacionService {
     publicacion.obtenerComentariosNoEliminados()
   }
 
+  def formarPublicacion(long idUsuario, long idCatedra, String texto){
+    Usuario usuario = getUsuarioById(idUsuario)
+    Catedra catedra = getCatedraById(idCatedra)
+    Publicacion publicacion = new Publicacion (texto, usuario, catedra.materia, catedra)
+    publicacion.save(failOnError:true)
+    usuario.publicar(publicacion)
+  }
+
   def cambiarEstado (long idUsuario, long idPublicacion){
     def usuario = getUsuarioById(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
@@ -125,5 +133,6 @@ class PublicacionService {
   def getOpcionById(long idOpcion){
     Opcion.get(idOpcion)
   }
+
 
 }

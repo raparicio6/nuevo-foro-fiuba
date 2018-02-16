@@ -1,5 +1,6 @@
 package nuevo_foro_fiuba
 
+import java.io.File
 import grails.gorm.transactions.Transactional
 
 @Transactional
@@ -23,12 +24,11 @@ class MensajePrivadoService {
     def mensajeAlCualResponde = MensajePrivado.get(idMensajeAlCualResponde)
     def archivo
     if (archivoAdjunto){
-       archivo = new Archivo("Archivo adjunto", archivoAdjunto)
+       archivo = new Archivo(archivoAdjunto, "path")
     }
     MensajePrivado mensaje = new MensajePrivado(texto, mensajeAlCualResponde, archivo)
     InformacionMensajeUsuario infoEmisor = new InformacionMensajeUsuario (emisor,receptor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
     InformacionMensajeUsuario infoReceptor = new InformacionMensajeUsuario (receptor,emisor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
-    // orden incorrecto
     emisor.enviarMensaje(receptor, infoEmisor, infoReceptor)
     mensaje.save(failOnError:true)
     infoEmisor.save(failOnError:true)

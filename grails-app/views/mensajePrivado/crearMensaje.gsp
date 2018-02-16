@@ -50,7 +50,7 @@ div {
         <div>
             <h1>Texto</h1>
             <g:textArea name="texto" placeholder="Contenido del mensaje..."/>
-            <g:textArea name="archivoAdjunto" placeholder="Path del archivo..."/>
+            <g:field name="archivoAdjunto" type="file"/>
         </div>
         <div>
             <g:submitButton name="Enviar" value="Enviar mensaje"/>

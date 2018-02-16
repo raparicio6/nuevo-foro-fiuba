@@ -1,5 +1,7 @@
 package nuevo_foro_fiuba
 
+import java.io.File
+
 class MensajePrivadoController {
 
   def mensajePrivadoService

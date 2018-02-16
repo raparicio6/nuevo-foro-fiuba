@@ -14,6 +14,11 @@ class PublicacionController {
     [publicacionInstanceList: publicaciones, publicacionInstanceTotal: publicaciones.size(), usuarioInstance: usuarioInstance, materias: Materia.list(), catedras: Catedra.list()]
   }
 
+  def crearPublicacion (long idUsuario) {
+    def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
+    [usuario: usuarioInstance, catedras: Catedra.list()]
+  }
+
   def verPublicacion (long idPublicacion, long idUsuario){
     def publicacionInstance = publicacionService.getPublicacionById(idPublicacion)
     def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
@@ -22,6 +27,12 @@ class PublicacionController {
     [publicacion: publicacionInstance, materias: Materia.list(), catedras: Catedra.list(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios] //--> groovy !null==true
     // EL ATRIBUTO MODIFICAR DEFINE SI EL USUARIO QUE INGRESA A LA PUBLICACION PUEDE VER LOS BOTONES ELIMINAR,CAMBIAR ESTADO, ETC
   }
+
+  def formarPublicacion (String texto, long idUsuario, long idCatedra) {
+    publicacionService.formarPublicacion(idUsuario, idCatedra,texto)
+    redirect (action: "listaPublicaciones", params:[idUsuario:idUsuario])
+  }
+
 
   def cambiarEstado (long idPublicacion, long idUsuario){
     publicacionService.cambiarEstado(idUsuario, idPublicacion)
