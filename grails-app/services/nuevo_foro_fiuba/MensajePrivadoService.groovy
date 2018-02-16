@@ -21,30 +21,18 @@ class MensajePrivadoService {
     def emisor = getUsuarioById(idUsuarioCreador)
     def receptor = getUsuarioById(idUsuarioReceptor)
     def mensajeAlCualResponde = MensajePrivado.get(idMensajeAlCualResponde)
-    println (emisor)
-    println (receptor)
     def archivo
     if (archivoAdjunto){
        archivo = new Archivo("Archivo adjunto", archivoAdjunto)
     }
     MensajePrivado mensaje = new MensajePrivado(texto, mensajeAlCualResponde, archivo)
-    InformacionMensajeUsuario infoEmisor = new InformacionMensajeUsuario (receptor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
-    InformacionMensajeUsuario infoReceptor = new InformacionMensajeUsuario (emisor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
-    println (emisor.mensajes)
-    println (receptor.mensajes)
+    InformacionMensajeUsuario infoEmisor = new InformacionMensajeUsuario (emisor,receptor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
+    InformacionMensajeUsuario infoReceptor = new InformacionMensajeUsuario (receptor,emisor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
     // orden incorrecto
     emisor.enviarMensaje(receptor, infoEmisor, infoReceptor)
-    println (emisor.mensajes)
-    println (receptor.mensajes)
     mensaje.save(failOnError:true)
-    println (emisor.mensajes)
-    println (receptor.mensajes)
     infoEmisor.save(failOnError:true)
-    println (emisor.mensajes)
-    println (receptor.mensajes)
     infoReceptor.save(failOnError:true)
-    println (emisor.mensajes)
-    println (receptor.mensajes)
   }
 
   def obtenerMensajesEnviados(Usuario usuario){

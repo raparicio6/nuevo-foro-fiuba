@@ -30,7 +30,7 @@ class MensajePrivadoController {
   def verMensajesEnviados(long idUsuario){
     Usuario usuarioInstance = mensajePrivadoService.getUsuarioById(idUsuario)
     def mensajes = mensajePrivadoService.obtenerMensajesEnviados(usuarioInstance)
-    render (view:"enviados", model:[usuarioInstance:usuarioInstance, mensajes:usuarioInstance.mensajes])
+    render (view:"enviados", model:[usuarioInstance:usuarioInstance, mensajes:mensajes])
   }
 
 }

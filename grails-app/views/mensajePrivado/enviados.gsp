@@ -53,7 +53,7 @@ div {
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Nombre usuario</th>
+              <th>Para</th>
               <th>Texto</th>
               <th>Acciones</th>
             </tr>

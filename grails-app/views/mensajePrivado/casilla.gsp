@@ -46,16 +46,16 @@ div {
     <div class="col-md-12">
       <div class="col-md-2">
         <h3>
-            <span class="label label-default">Mensajes:</span>
+            <span class="label label-default">Mensajes recibidos:</span>
         </h3>
       </div>
       <div class="col-md-6">
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Nombre usuario</th>
+              <th>De</th>
               <th>Texto</th>
-              <th>Responder</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>

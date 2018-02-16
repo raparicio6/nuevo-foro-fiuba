@@ -9,14 +9,14 @@ class PublicacionController {
   def listaPublicaciones(long idUsuario,Integer max,Integer idCatedra) {
     def publicacionesNoEliminadas = publicacionService.obtenerPublicacionesNoEliminadas()
     def publicaciones = (!idCatedra) ? publicacionesNoEliminadas : publicacionService.filtrarPublicacionesPorCatedra(publicacionesNoEliminadas, idCatedra)
-    def usuarioInstance = publicacionService.getUsuarioById(idUsuario)  
+    def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
     params.max = Math.min(max ?: 10, 100)
     [publicacionInstanceList: publicaciones, publicacionInstanceTotal: publicaciones.size(), usuarioInstance: usuarioInstance, materias: Materia.list(), catedras: Catedra.list()]
   }
 
   def verPublicacion (long idPublicacion, long idUsuario){
-    def publicacionInstance = publicacionService.getPublicacionById(idPublicacion)  
-    def usuarioInstance = publicacionService.getUsuarioById(idUsuario)  
+    def publicacionInstance = publicacionService.getPublicacionById(idPublicacion)
+    def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
     def esDueño = publicacionService.usuarioEsDueñoDeLaPublicacion(usuarioInstance, publicacionInstance)
     def comentarios = publicacionService.obtenerComentariosNoEliminados(publicacionInstance)
     [publicacion: publicacionInstance, materias: Materia.list(), catedras: Catedra.list(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios] //--> groovy !null==true

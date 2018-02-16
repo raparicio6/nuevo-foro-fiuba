@@ -45,6 +45,8 @@ div {
         <div>
             <h1>Texto</h1>
             <g:textArea name="texto" value="${mensaje.texto}" disabled="true"/>
+            <h1>Archivo</h1>
+            <g:resource base="${mensaje.archivo.path}"/>
         </div>
         <g:if test="${mostrarResponder}">
           <div>

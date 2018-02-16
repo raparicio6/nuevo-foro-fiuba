@@ -1,6 +1,7 @@
 package nuevo_foro_fiuba
 
 class Comentario {
+// implements Comparable
 
 	enum EstadoComentario {
 		VIGENTE,
@@ -45,6 +46,15 @@ class Comentario {
 		this.estado = EstadoComentario.VIGENTE
 	}
 // ------------------------------------------------------------------------- //
+
+	// int compareTo (Comentario otroComentario){
+	// 	if (this.fechaHoraCreacion > otroComentario.fechaHoraCreacion)
+	// 		return 1
+	// 	else if (this.fechaHoraCreacion < otroComentario.fechaHoraCreacion)
+	// 		return -1
+	// 	return 0
+	// }
+
 	def modificarTexto(String nuevoTexto){
 		this.setTexto(nuevoTexto)
 	}

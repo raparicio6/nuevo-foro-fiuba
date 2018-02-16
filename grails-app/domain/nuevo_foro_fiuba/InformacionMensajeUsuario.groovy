@@ -7,18 +7,21 @@ class InformacionMensajeUsuario {
     RECEPTOR,
   }
 
+  Usuario usuarioQueInteractua
   Usuario usuarioConElQueSeInteractua
   MensajePrivado mensajePrivado
   RolUsuarioMensaje rolUsuario
 
   static constraints = {
+    usuarioQueInteractua nullable:false
     usuarioConElQueSeInteractua nullable:false
     mensajePrivado nullable:false
     rolUsuario nullable:false
   }
 
-  InformacionMensajeUsuario(Usuario usuario, MensajePrivado mensajePrivado, RolUsuarioMensaje rolUsuario) {
-    this.usuarioConElQueSeInteractua = usuario
+  InformacionMensajeUsuario(Usuario usuarioQueInteractua, Usuario usuarioConElQueSeInteractua, MensajePrivado mensajePrivado, RolUsuarioMensaje rolUsuario) {
+    this.usuarioQueInteractua = usuarioQueInteractua
+    this.usuarioConElQueSeInteractua = usuarioConElQueSeInteractua
     this.mensajePrivado = mensajePrivado
     this.rolUsuario = rolUsuario
   }

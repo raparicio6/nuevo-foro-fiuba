@@ -1,5 +1,8 @@
 package nuevo_foro_fiuba
 
+import groovy.transform.EqualsAndHashCode
+
+@EqualsAndHashCode(includeFields=true)
 class Usuario {
 
 	String nombre
@@ -15,7 +18,7 @@ class Usuario {
 		publicaciones: Publicacion,
 		comentarios: Comentario,
 		mensajes: InformacionMensajeUsuario,
-		cursadas: Cursada,
+		cursadas: Cursada
 	]
 
   static constraints = {
@@ -82,11 +85,11 @@ class Usuario {
 	// hay que preguntar para que se pueda usar algo como lo de arriba
 
 	Boolean esDueñoDeLaPublicacion(Publicacion publicacion){
-		(publicacion.getUsuarioCreador().getId() == this.id)
+		(publicacion.getUsuarioCreador() == this)
 	}
 
 	Boolean esDueñoDelComentario(Comentario comentario){
-		(comentario.getUsuarioCreador().getId() == this.id)
+		(comentario.getUsuarioCreador() == this)
 	}
 
 	def cambiarEstado(Publicacion publicacion){
@@ -108,7 +111,6 @@ class Usuario {
 	def calificar(def calificable, Calificacion calificacion){
 		def calificaciones = calificable.calificaciones
 		def calificacionesUsuario = calificaciones.findAll {calificacionInstance -> calificacionInstance.getUsuario() == this}
-		// println(calificacionesUsuario.size().toString())
 		if (calificacionesUsuario.size()>= 1)
 			throw new UsuarioYaCalificoException()
 		else
@@ -170,7 +172,7 @@ class Usuario {
 	}
 
 	def votarOpcion(Publicacion publicacion,Opcion opcion, Voto voto){
-		if (publicacion.getUsuarioCreador().id == this.id)  //NO FUNCIONA SIN EL .ID
+		if (publicacion.getUsuarioCreador() == this) 
 			throw new CreadorEncuestaNoPuedeVotarException()
 		if (publicacion.estaCerrada())
 			throw new PublicacionCerradaException()

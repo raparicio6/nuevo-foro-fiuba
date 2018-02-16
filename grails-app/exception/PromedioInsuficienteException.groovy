@@ -1,6 +1,6 @@
 package nuevo_foro_fiuba
 
-class PromedioInsuficienteException extends Exception{
+class PromedioInsuficienteException extends RuntimeException{
 
     final String MENSAJE = "El promedio de calificaciones del usuario es insuficiente"
 
