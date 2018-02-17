@@ -33,8 +33,7 @@ class PublicacionService {
   def formarPublicacion(long idUsuario, long idCatedra, String texto){
     Usuario usuario = getUsuarioById(idUsuario)
     Catedra catedra = getCatedraById(idCatedra)
-    Publicacion publicacion = new Publicacion (texto, usuario, catedra.materia, catedra)
-    publicacion.save(failOnError:true)
+    Publicacion publicacion = this.crearPublicacion(texto, usuario, catedra.materia, catedra)
     usuario.publicar(publicacion)
   }
 
@@ -64,7 +63,7 @@ class PublicacionService {
     usuario.modificarCatedraPublicacion(publicacion, catedra)
   }
 
-  def modificarPromedioRequeridoParaComentar(long idUsuario, long idPublicacion, float promedio){
+  def modificarPromedioRequeridoParaComentar(long idUsuario, long idPublicacion, Float promedio){
     def usuario = getUsuarioById(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
     usuario.modificarPromedioRequeridoParaComentar(publicacion, promedio)
@@ -80,20 +79,19 @@ class PublicacionService {
     def usuario = getUsuarioById(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
     def promedioCalificaciones = (usuario.getPromedioCalificaciones()).toInteger()
+    // EDITAR (rodrigo)
     Integer numeroPuntaje = promedioCalificaciones + 0**promedioCalificaciones
     Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)
     Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, null)
-    // orden incorrecto
     usuario.calificar(publicacion, calificacion)
-    calificacion.save(failOnError:true)
     publicacion.getUsuarioCreador().actualizarPromedioCalificaciones()
+    calificacion.save(failOnError:true)
   }
 
   def comentarPublicacion (long idUsuario, String textoComentario, long idPublicacion){
     def usuario = getUsuarioById(idUsuario)
     def publicacionAComentar = getPublicacionById(idPublicacion)
     Comentario comentario = new Comentario(textoComentario, usuario, publicacionAComentar, null)
-    // orden incorrecto
     usuario.comentarPublicacion(comentario, publicacionAComentar)
     comentario.save(failOnError:true)
   }
@@ -110,8 +108,8 @@ class PublicacionService {
     Usuario usuario = getUsuarioById(idUsuario)
     Opcion opcion = getOpcionById(idOpcion)
     Voto voto = new Voto (usuario)
-    voto.save(failOnError:true)
     usuario.votarOpcion(publicacion, opcion, voto)
+    voto.save(failOnError:true)
   }
 
   def getUsuarioById(long idUsuario){
@@ -126,13 +124,20 @@ class PublicacionService {
     Materia.get(idMateria)
   }
 
+  def getAllMaterias(){
+    Materia.list()
+  }
+
   def getCatedraById(long idCatedra){
     Catedra.get(idCatedra)
+  }
+
+  def getAllCatedras(){
+    Catedra.list()
   }
 
   def getOpcionById(long idOpcion){
     Opcion.get(idOpcion)
   }
-
 
 }

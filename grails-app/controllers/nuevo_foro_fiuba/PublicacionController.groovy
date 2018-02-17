@@ -6,17 +6,17 @@ class PublicacionController {
 
   def index() {}
 
-  def listaPublicaciones(long idUsuario,Integer max,Integer idCatedra) {
+  def listaPublicaciones(long idUsuario, Integer max, Integer idCatedra) {
     def publicacionesNoEliminadas = publicacionService.obtenerPublicacionesNoEliminadas()
     def publicaciones = (!idCatedra) ? publicacionesNoEliminadas : publicacionService.filtrarPublicacionesPorCatedra(publicacionesNoEliminadas, idCatedra)
     def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
     params.max = Math.min(max ?: 10, 100)
-    [publicacionInstanceList: publicaciones, publicacionInstanceTotal: publicaciones.size(), usuarioInstance: usuarioInstance, materias: Materia.list(), catedras: Catedra.list()]
+    [publicacionInstanceList: publicaciones, publicacionInstanceTotal: publicaciones.size(), usuarioInstance: usuarioInstance, materias: publicacionService.getAllMaterias(), catedras: publicacionService.getAllCatedras()]
   }
 
   def crearPublicacion (long idUsuario) {
     def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
-    [usuario: usuarioInstance, catedras: Catedra.list()]
+    [usuario: usuarioInstance, catedras: publicacionService.getAllCatedras()]
   }
 
   def verPublicacion (long idPublicacion, long idUsuario){
@@ -24,7 +24,7 @@ class PublicacionController {
     def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
     def esDueño = publicacionService.usuarioEsDueñoDeLaPublicacion(usuarioInstance, publicacionInstance)
     def comentarios = publicacionService.obtenerComentariosNoEliminados(publicacionInstance)
-    [publicacion: publicacionInstance, materias: Materia.list(), catedras: Catedra.list(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios] //--> groovy !null==true
+    [publicacion: publicacionInstance, materias: publicacionService.getAllMaterias(), catedras: publicacionService.getAllCatedras(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios] //--> groovy !null==true
     // EL ATRIBUTO MODIFICAR DEFINE SI EL USUARIO QUE INGRESA A LA PUBLICACION PUEDE VER LOS BOTONES ELIMINAR,CAMBIAR ESTADO, ETC
   }
 
@@ -45,7 +45,7 @@ class PublicacionController {
   }
 
   def modificarMateria(long idPublicacion, long idMateria, long idUsuario){
-    publicacionService.modificarMateriaPublicacion(idusuario, idPublicacion, idMateria)
+    publicacionService.modificarMateriaPublicacion(idUsuario, idPublicacion, idMateria)
     redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
@@ -54,7 +54,7 @@ class PublicacionController {
     redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
-  def modificarPromedioRequeridoParaComentar (long idPublicacion, long idUsuario, float promedio){
+  def modificarPromedioRequeridoParaComentar (long idPublicacion, long idUsuario, Float promedio){
     publicacionService.modificarPromedioRequeridoParaComentar(idUsuario, idPublicacion, promedio)
     redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }

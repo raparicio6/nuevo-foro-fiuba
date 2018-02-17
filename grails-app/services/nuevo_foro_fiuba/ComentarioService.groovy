@@ -40,13 +40,13 @@ class ComentarioService {
     def usuario = getUsuarioById(idUsuario)
     def comentario = getComentarioById(idComentario)
     def promedioCalificaciones = (usuario.getPromedioCalificaciones()).toInteger()
+    // EDITAR (rodrigo)
     Integer numeroPuntaje = promedioCalificaciones + 0**promedioCalificaciones
     Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)
     Calificacion calificacion = new Calificacion(usuario, puntaje, null, comentario)
-    // orden incorrecto
     usuario.calificar(comentario, calificacion)
-    calificacion.save(failOnError:true)
     comentario.getUsuarioCreador().actualizarPromedioCalificaciones()
+    calificacion.save(failOnError:true)
   }
 
   def comentarComentario (long idUsuario, String textoComentario, long idComentario){

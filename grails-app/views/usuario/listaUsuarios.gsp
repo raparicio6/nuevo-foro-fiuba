@@ -42,8 +42,7 @@
 		</div>
 
 		<h1>Filtrar usuarios</h1>
-		<g:form controller="usuario" action="listaUsuarios" params="[max:'10', idUsuario:"${usuarioInstance.id}"]">
-			<!-- hacer que acepten floats -->
+		<g:form controller="usuario" action="listaUsuarios" params="[max:'10', idUsuario:"${usuarioInstance.id}"]">			
 			<div>Promedio de calificaciones minimo: <g:field type="float" step="any" min="0" max="5" name="promedioMin"/></div>
 			<div>Promedio de calificaciones maximo: <g:field type="float" step="any" min="0" max="5" name="promedioMax"/></div>
 			<div>Materia cursada: <g:select  name="idMateria" from="${materias}" optionValue ="nombre" optionKey = "id" noSelection="${['null':'Elegir materia...']}"/></div>

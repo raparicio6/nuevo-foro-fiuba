@@ -7,21 +7,21 @@ class ComentarioController {
   def index() {}
 
   def verComentario (long idComentario, long idUsuario){
-    def comentarioInstance = comentarioService.getComentarioById(idComentario)     
-    def usuarioInstance = comentarioService.getUsuarioById(idUsuario)   
+    def comentarioInstance = comentarioService.getComentarioById(idComentario)
+    def usuarioInstance = comentarioService.getUsuarioById(idUsuario)
     def esDueño = comentarioService.usuarioEsDueñoDelComentario(usuarioInstance, comentarioInstance)
     def esSubComentario = comentarioService.esSubComentario(comentarioInstance)
     def comentarios = comentarioService.obtenerComentariosNoEliminados(comentarioInstance)
     [comentario: comentarioInstance, usuario:usuarioInstance, modificar:esDueño, subComentario:esSubComentario, comentarios:comentarios]
   }
 
-  def modificarTextoComentario(long idComentario, long idUsuario,String nuevoTexto){
+  def modificarTextoComentario(long idComentario, long idUsuario, String nuevoTexto){
     comentarioService.modificarTextoComentario(idUsuario, idComentario, nuevoTexto)
     redirect(controller:"comentario", action: "verComentario",  params: [idUsuario:idUsuario, idComentario:idComentario])
   }
 
   def eliminarComentario(long idComentario, long idUsuario){
-    Comentario comentarioInstance = comentarioService.getComentarioById(idComentario)  
+    Comentario comentarioInstance = comentarioService.getComentarioById(idComentario)
     comentarioService.eliminarComentario(comentarioInstance)
     (comentarioInstance.publicacionComentada) ? redirect(controller: "publicacion", action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion: comentarioInstance.publicacionComentada.id]) : redirect(controller:"comentario", action: "verComentario",  params: [idUsuario:idUsuario, idComentario: comentarioInstance.comentarioComentado.id])
   }

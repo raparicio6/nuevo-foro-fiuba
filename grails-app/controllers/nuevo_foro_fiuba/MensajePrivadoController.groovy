@@ -19,14 +19,14 @@ class MensajePrivadoController {
     [mensaje:mensajePrivadoInstance, usuario:usuarioInstance, informacion:informacionMensajeUsuario, mostrarResponder:mostrarResponder]
   }
 
-  def enviarMensaje (long idUsuarioCreador, long  idUsuarioReceptor, String texto, long idMensajeAlCualResponde, String archivoAdjunto){
+  def enviarMensaje (long idUsuarioCreador, long idUsuarioReceptor, String texto, long idMensajeAlCualResponde, String archivoAdjunto){
     mensajePrivadoService.enviarMensaje(idUsuarioCreador, idUsuarioReceptor, texto, idMensajeAlCualResponde, archivoAdjunto)
     redirect (action:"index", params:[idUsuario:idUsuarioCreador])
   }
 
   def crearMensaje(long idUsuario){
     def usuarioInstance = mensajePrivadoService.getUsuarioById(idUsuario)
-    [usuarioInstance:usuarioInstance, usuarios:Usuario.list()]
+    [usuarioInstance:usuarioInstance, usuarios:mensajePrivadoService.getAllUsuarios()]
   }
 
   def verMensajesEnviados(long idUsuario){

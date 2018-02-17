@@ -108,7 +108,7 @@ class Usuario {
 		publicacion.cambiarCatedra(catedra)
 	}
 
-	def modificarPromedioRequeridoParaComentar(Publicacion publicacion, float promedio){
+	def modificarPromedioRequeridoParaComentar(Publicacion publicacion, Float promedio){
 		publicacion.modificarPromedioRequeridoParaComentar(promedio)
 	}
 
@@ -135,6 +135,7 @@ class Usuario {
 	}
 
 	def actualizarPromedioCalificaciones(){
+		// EDITAR (rodrigo)
 		def publicaciones = this.publicaciones
 		def calificaciones = publicaciones.collect {publicacionInstance -> publicacionInstance.calificaciones}
 		def comentarios = this.comentarios

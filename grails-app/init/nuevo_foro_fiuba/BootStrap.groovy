@@ -9,8 +9,7 @@ class BootStrap {
 
     def init = { servletContext ->
       Usuario usuario = usuarioService.crearUsuario ("Mariano", "Martin", "mmartin")
-      Usuario usuario2 = usuarioService.crearUsuario ("Rodrigo", "Aparicio", "raparicio")
-      usuario2.save(failOnError:true)
+      Usuario usuario2 = usuarioService.crearUsuario ("Rodrigo", "Aparicio", "raparicio")      
       Usuario usuario3 = usuarioService.crearUsuario ("German", "Rotili", "grotili")
       Materia materia = new Materia ('Matematica discreta', 'Esto es mate discreta')
       materia.save(failOnError:true)

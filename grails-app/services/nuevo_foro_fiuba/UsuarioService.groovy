@@ -11,21 +11,21 @@ class UsuarioService {
 
   Usuario crearUsuario(String nombre, String apellido, String nombreUsuario){
     Usuario usuario = new Usuario(nombre, apellido, nombreUsuario)
-    usuario.save(failOnError: true)
 
     // se crea una publicacion vacia para que el usuario tenga
     // un promedio inicial distinto de 0
-    Publicacion publicacion = new Publicacion("", usuario, null, null)
-    //orden incorrecto
-    usuario.agregarPublicacion(publicacion)
-    publicacion.save(failOnError: true)
+    Publicacion publicacion = new Publicacion("Publicación de bienvenida!", usuario, null, null)
     publicacion.eliminar()
+    usuario.agregarPublicacion(publicacion)
 
     Puntaje puntaje = new Puntaje(Puntaje.TipoPuntaje.ME_GUSTA, this.PROMEDIO_INICIAL_USUARIOS)
     Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, null)
     publicacion.agregarCalificacion(calificacion)
-    calificacion.save(failOnError:true)
     usuario.actualizarPromedioCalificaciones()
+
+    usuario.save(failOnError: true)
+    publicacion.save(failOnError: true)
+    calificacion.save(failOnError:true)
     usuario
   }
 
@@ -37,7 +37,7 @@ class UsuarioService {
     Usuario.count()
   }
 
-  def filtrarPorPromedio(float promedioMin, float promedioMax){
+  def filtrarPorPromedio(Float promedioMin, Float promedioMax){
     Usuario.list().findAll {usuario -> usuario.promedioCalificaciones >= promedioMin && usuario.promedioCalificaciones <= promedioMax}
   }
 
@@ -55,6 +55,14 @@ class UsuarioService {
 
   def getPublicacionById(long idPublicacion){
     Publicacion.get(idPublicacion)
+  }
+
+  def getAllCatedras(){
+    Catedra.list()
+  }
+
+  def getAllMaterias(){
+    Materia.list()
   }
 
 }
