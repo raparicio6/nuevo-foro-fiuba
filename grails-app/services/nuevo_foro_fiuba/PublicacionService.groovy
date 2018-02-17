@@ -30,11 +30,14 @@ class PublicacionService {
     publicacion.obtenerComentariosNoEliminados()
   }
 
-  def formarPublicacion(long idUsuario, long idCatedra, String texto){
-    Usuario usuario = getUsuarioById(idUsuario)
-    Catedra catedra = getCatedraById(idCatedra)
+  def formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateria, Float puntajeMinimoParaComentar){
+    def usuario = getUsuarioById(idUsuario)
+    def catedra = getCatedraById(idCatedra)
+    def materia = getMateriaById(idMateria)
     Publicacion publicacion = this.crearPublicacion(texto, usuario, catedra.materia, catedra)
     usuario.publicar(publicacion)
+    usuario.modificarPromedioRequeridoParaComentar(publicacion, puntajeMinimoParaComentar)
+    usuario.agregarMateriaRequeridaParaComentar(publicacion, materia)
   }
 
   def cambiarEstado (long idUsuario, long idPublicacion){
