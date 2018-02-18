@@ -16,7 +16,7 @@ class PublicacionController {
 
   def crearPublicacion (long idUsuario) {
     def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
-    [usuario: usuarioInstance, catedras: publicacionService.getAllCatedras()]
+    [usuario: usuarioInstance, catedras: publicacionService.getAllCatedras(), materias: publicacionService.getAllMaterias()]
   }
 
   def verPublicacion (long idPublicacion, long idUsuario){
