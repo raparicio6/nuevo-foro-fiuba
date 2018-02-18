@@ -30,24 +30,17 @@ class PublicacionService {
     publicacion.obtenerComentariosNoEliminados()
   }
 
-  def formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateria, Float puntajeMinimoParaComentar, String nombreEncuesta, String opciones){
+  Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateria, Float puntajeMinimoParaComentar){
+    // aca falta validar que los id que te pasan puedan ser null, y en ese caso no se buscan en la base ni tampoco se hacen algunos de los metodos
+    // usar operador elvis para eso
     def usuario = getUsuarioById(idUsuario)
     def catedra = getCatedraById(idCatedra)
     def materia = getMateriaById(idMateria)
     Publicacion publicacion = this.crearPublicacion(texto, usuario, catedra.materia, catedra)
-    if (nombreEncuesta && opciones) {
-      def opcionesSeparadas = opciones.tokenize(',')
-      Set<Opcion> listaDeOpciones = []
-      while (!opcionesSeparadas.empty) {
-        def opcion = new Opcion(opcionesSeparadas.remove(0))
-        listaDeOpciones.add(opcion)
-      }
-      def encuesta = new Encuesta(nombreEncuesta, listaDeOpciones)
-      publicacion.agregarEncuesta(encuesta)
-    }
     usuario.publicar(publicacion)
     usuario.modificarPromedioRequeridoParaComentar(publicacion, puntajeMinimoParaComentar)
     usuario.agregarMateriaRequeridaParaComentar(publicacion, materia)
+    publicacion
   }
 
   def cambiarEstado (long idUsuario, long idPublicacion){
@@ -91,22 +84,21 @@ class PublicacionService {
   def calificarPublicacion(long idUsuario, long idPublicacion, Puntaje.TipoPuntaje tipo){
     def usuario = getUsuarioById(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
-    def promedioCalificaciones = (usuario.getPromedioCalificaciones()).toInteger()
-    // EDITAR (rodrigo)
-    Integer numeroPuntaje = promedioCalificaciones + 0**promedioCalificaciones
-    Puntaje puntaje = new Puntaje (tipo, numeroPuntaje)
+    def promedioCalificaciones = usuario.getPromedioCalificaciones()
+    Puntaje puntaje = new Puntaje (tipo, promedioCalificaciones)
     Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, null)
     usuario.calificar(publicacion, calificacion)
     publicacion.getUsuarioCreador().actualizarPromedioCalificaciones()
     calificacion.save(failOnError:true)
   }
 
-  def comentarPublicacion (long idUsuario, String textoComentario, long idPublicacion){
+  Comentario comentarPublicacion (long idUsuario, String textoComentario, long idPublicacion){
     def usuario = getUsuarioById(idUsuario)
     def publicacionAComentar = getPublicacionById(idPublicacion)
     Comentario comentario = new Comentario(textoComentario, usuario, publicacionAComentar, null)
     usuario.comentarPublicacion(comentario, publicacionAComentar)
     comentario.save(failOnError:true)
+    comentario
   }
 
   def agregarMateriaRequeridaParaComentar(long idPublicacion, long idUsuario, long idMateria){
