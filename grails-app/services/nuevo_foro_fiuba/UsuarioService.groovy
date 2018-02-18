@@ -18,13 +18,7 @@ class UsuarioService {
     publicacion.eliminar()
     usuario.agregarPublicacion(publicacion)
 
-    // random entre 1 y 100000
-    Integer decimalesASumar = Math.abs(new Random().nextInt() % 100000) + 1
-    String primerPuntaje = this.PROMEDIO_INICIAL_USUARIOS.toString() + ".000" + decimalesASumar.toString()
-    println(primerPuntaje)
-    Float numeroPrimerPuntaje = primerPuntaje.toFloat()
-
-    Puntaje puntaje = new Puntaje(Puntaje.TipoPuntaje.ME_GUSTA, numeroPrimerPuntaje)
+    Puntaje puntaje = new Puntaje(Puntaje.TipoPuntaje.ME_GUSTA, this.PROMEDIO_INICIAL_USUARIOS)
     Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, null)
     publicacion.agregarCalificacion(calificacion)
     usuario.actualizarPromedioCalificaciones()
