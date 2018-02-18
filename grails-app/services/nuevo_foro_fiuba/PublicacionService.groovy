@@ -30,13 +30,23 @@ class PublicacionService {
     publicacion.obtenerComentariosNoEliminados()
   }
 
-  Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateria, Float puntajeMinimoParaComentar){
+  def formarPublicacion(long idUsuario, long idCatedra, String texto, def idMateria, Float puntajeMinimoParaComentar, String nombreEncuesta, String opciones){
     // aca falta validar que los id que te pasan puedan ser null, y en ese caso no se buscan en la base ni tampoco se hacen algunos de los metodos
     // usar operador elvis para eso
     def usuario = getUsuarioById(idUsuario)
     def catedra = getCatedraById(idCatedra)
     def materia = getMateriaById(idMateria)
     Publicacion publicacion = this.crearPublicacion(texto, usuario, catedra.materia, catedra)
+    if (nombreEncuesta && opciones) {
+      def opcionesSeparadas = opciones.tokenize(',')
+      Set<Opcion> listaDeOpciones = []
+      while (!opcionesSeparadas.empty) {
+        def opcion = new Opcion(opcionesSeparadas.remove(0))
+        listaDeOpciones.add(opcion)
+      }
+      def encuesta = new Encuesta(nombreEncuesta, listaDeOpciones)
+      publicacion.agregarEncuesta(encuesta)
+    }
     usuario.publicar(publicacion)
     usuario.modificarPromedioRequeridoParaComentar(publicacion, puntajeMinimoParaComentar)
     usuario.agregarMateriaRequeridaParaComentar(publicacion, materia)
