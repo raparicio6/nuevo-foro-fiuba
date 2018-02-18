@@ -14,6 +14,8 @@ class Usuario {
 	Set <Cursada> cursadas
 	Float promedioCalificaciones
 
+	final Float ProporcionAIncrementarEnPuntajesMenores = 0.03
+
 	static hasMany = [
 		publicaciones: Publicacion,
 		comentarios: Comentario,
@@ -115,7 +117,7 @@ class Usuario {
 	def calificar(def calificable, Calificacion calificacion){
 		def calificaciones = calificable.calificaciones
 		def calificacionesUsuario = calificaciones.findAll {calificacionInstance -> calificacionInstance.getUsuario() == this}
-		if (calificacionesUsuario.size()>= 1)
+		if (calificacionesUsuario.size() >= 1)
 			throw new UsuarioYaCalificoException()
 		else
 			calificable.agregarCalificacion(calificacion)
@@ -135,7 +137,7 @@ class Usuario {
 	}
 
 	def actualizarPromedioCalificaciones(){
-		// EDITAR (rodrigo)
+		// usar .sum donde corresponda !!!!
 		def publicaciones = this.publicaciones
 		def calificaciones = publicaciones.collect {publicacionInstance -> publicacionInstance.calificaciones}
 		def comentarios = this.comentarios
@@ -143,25 +145,31 @@ class Usuario {
 		calificaciones = calificaciones.flatten()
 
 		def contador = 0
+		def tamanio = 0
 		def calificacionesPositivas = calificaciones.findAll { calificacion ->
 			Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) > 0 }
-		calificacionesPositivas.collect { calificacion ->
+		calificacionesPositivas.each { calificacion ->
 					def numeroPuntaje = calificacion.puntaje.numero
-					(numeroPuntaje > this.promedioCalificaciones) ?
-					(contador += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * numeroPuntaje) :
-					(contador += this.promedioCalificaciones + numeroPuntaje * 0.05)
+					if (numeroPuntaje > this.promedioCalificaciones){
+						contador += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * numeroPuntaje
+						tamanio += 1
+					}else
+						contador += numeroPuntaje * this.ProporcionAIncrementarEnPuntajesMenores
 		}
-		def promedioDeCalificaciones = (contador/calificacionesPositivas.size())
+		def promedioDeCalificaciones
+		if (tamanio > 0)
+			promedioDeCalificaciones = contador/tamanio
+		else
+			promedioDeCalificaciones = this.promedioCalificaciones + contador
 
 		def calificacionesNegativas = calificaciones.findAll { calificacion ->
 			Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) < 0
 		}
-		calificacionesNegativas.collect {calificacion ->
+		calificacionesNegativas.each {calificacion ->
 				promedioDeCalificaciones += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * calificacion.puntaje.numero
 		}
 
 		this.setPromedioCalificaciones(promedioDeCalificaciones.toFloat())
-		//siempre va a tener al menos una calificacion cuando se llame a este método, no hay división por 0
 	}
 
 	def agregarPublicacion(Publicacion publicacion){

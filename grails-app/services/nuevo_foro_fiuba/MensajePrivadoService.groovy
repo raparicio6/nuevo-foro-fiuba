@@ -20,10 +20,12 @@ class MensajePrivadoService {
     usuario.getMensajes().findAll {mensajePrivado -> mensajePrivado.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR}
   }
 
-  def enviarMensaje(long idUsuarioCreador, long idUsuarioReceptor, String texto, long idMensajeAlCualResponde, String archivoAdjunto){
+  MensajePrivado enviarMensaje(long idUsuarioCreador, long idUsuarioReceptor, String texto, long idMensajeAlCualResponde = 0, String archivoAdjunto = null){
     def emisor = getUsuarioById(idUsuarioCreador)
     def receptor = getUsuarioById(idUsuarioReceptor)
-    def mensajeAlCualResponde = MensajePrivado.get(idMensajeAlCualResponde)
+    def mensajeAlCualResponde = null // capaz está de mas el = null ya que lo es por defecto
+    if (idMensajeAlCualResponde) // está bien así? 0 = null ?
+      mensajeAlCualResponde = MensajePrivado.get(idMensajeAlCualResponde)
     def archivo = null // capaz está de mas el = null ya que lo es por defecto
     if (archivoAdjunto)
        archivo = new Archivo(archivoAdjunto, this.PATH)
@@ -36,6 +38,7 @@ class MensajePrivadoService {
     infoEmisor.save(failOnError:true)
     infoReceptor.save(failOnError:true)
     mensaje.save(failOnError:true)
+    mensaje
   }
 
   def obtenerMensajesEnviados(Usuario usuario){
