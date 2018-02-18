@@ -1,7 +1,5 @@
 package nuevo_foro_fiuba
 
-import grails.web.servlet.mvc.GrailsParameterMap
-
 class PublicacionController {
 
   def publicacionService
@@ -18,7 +16,7 @@ class PublicacionController {
 
   def crearPublicacion (long idUsuario) {
     def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
-    [usuario: usuarioInstance, catedras: publicacionService.getAllCatedras(), materias: publicacionService.getAllMaterias()]
+    [usuario: usuarioInstance, catedras: publicacionService.getAllCatedras()]
   }
 
   def verPublicacion (long idPublicacion, long idUsuario){
@@ -30,7 +28,7 @@ class PublicacionController {
     // EL ATRIBUTO MODIFICAR DEFINE SI EL USUARIO QUE INGRESA A LA PUBLICACION PUEDE VER LOS BOTONES ELIMINAR,CAMBIAR ESTADO, ETC
   }
 
-  def formarPublicacion (String texto, long idUsuario, long idCatedra, long idMateria, Float puntajeMinimoParaComentar, String encuesta, String opciones) {
+  def formarPublicacion (String texto, long idUsuario, long idCatedra, Float puntajeMinimoParaComentar, long idMateria, String encuesta, String opciones) {
     publicacionService.formarPublicacion(idUsuario, idCatedra, texto, idMateria, puntajeMinimoParaComentar, encuesta, opciones)
     redirect (action: "listaPublicaciones", params:[idUsuario:idUsuario])
   }

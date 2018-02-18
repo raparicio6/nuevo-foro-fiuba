@@ -1,6 +1,5 @@
 package nuevo_foro_fiuba
 import grails.gorm.transactions.Transactional
-import grails.web.servlet.mvc.GrailsParameterMap
 
 @Transactional
 class PublicacionService {
@@ -31,7 +30,7 @@ class PublicacionService {
     publicacion.obtenerComentariosNoEliminados()
   }
 
-  def formarPublicacion(long idUsuario, long idCatedra, String texto, def idMateria, Float puntajeMinimoParaComentar, String nombreEncuesta, String opciones){
+  def formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateria, Float puntajeMinimoParaComentar, String nombreEncuesta, String opciones){
     def usuario = getUsuarioById(idUsuario)
     def catedra = getCatedraById(idCatedra)
     def materia = getMateriaById(idMateria)
