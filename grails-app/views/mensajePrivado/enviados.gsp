@@ -36,9 +36,7 @@ div {
 
 <head>
     <meta name="layout" content="mainPantallas"/>
-    <title>Casilla de mensajes</title>
-
-    <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
+    <title>Casilla de mensajes</title>    
 </head>
 
 <body>

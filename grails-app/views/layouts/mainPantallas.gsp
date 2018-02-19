@@ -11,6 +11,7 @@
 
   <asset:stylesheet src="application.css" />
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+  <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
 
   <g:layoutHead/>
 </head>

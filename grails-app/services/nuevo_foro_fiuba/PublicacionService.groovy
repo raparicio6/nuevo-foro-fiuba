@@ -30,7 +30,7 @@ class PublicacionService {
     publicacion.obtenerComentariosNoEliminados()
   }
 
-  Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateria, Float puntajeMinimoParaComentar = 0, String nombreEncuesta = null, String opciones = null){
+  Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateria, Float puntajeMinimoParaComentar = 0, String nombreEncuesta = null, String nombreOpciones = null){
     def usuario = getUsuarioById(idUsuario)
     def catedra = null
     if (idCatedra)
@@ -40,8 +40,8 @@ class PublicacionService {
       materia = getMateriaById(idMateria)
     Publicacion publicacion = this.crearPublicacion(texto, usuario, catedra.materia, catedra)
     def encuesta = null
-    if (nombreEncuesta && opciones) {
-      def opcionesSeparadas = opciones.tokenize(',')
+    if (nombreEncuesta && nombreOpciones) {
+      def opcionesSeparadas = nombreOpciones.tokenize(',')
       Set<Opcion> listaDeOpciones = []
       while (!opcionesSeparadas.empty) {
         def opcion = new Opcion(opcionesSeparadas.remove(0))

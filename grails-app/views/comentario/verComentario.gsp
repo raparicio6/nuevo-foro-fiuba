@@ -5,7 +5,6 @@
   <head>
     <meta name="layout" content="mainPantallas" />
     <title>Comentario</title>
-    <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
   </head>
 
   <body>
@@ -16,9 +15,9 @@
           <div class="navbar navbar-inverse">
             <div class="container-fluid">
               <ul class="nav navbar-nav">
-                <li><a class="home navbar-brand" href="${createLink(uri: '/')}">
-                  Volver al inicio
-                </a></li>
+                <li><a class="home navbar-brand" href="${createLink(controller : 'usuario' ,action : 'inicioUsuario', params: [idUsuario : usuario.id])}">
+									Volver al inicio
+								</a></li>
                 <li>
                   <g:if test="${comentario.publicacionComentada}">
                     <g:link controller="Publicacion" action="verPublicacion" params="[idUsuario:"${usuario.id}", idPublicacion:"${comentario.publicacionComentada.id}"]">${"Volver"}</g:link>
@@ -26,10 +25,7 @@
                   <g:else>
                     <g:link action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.comentarioComentado.id}"]">${"Volver"}</g:link>
                   </g:else>
-                </li>
-                <li><a>
-                  ${usuario.nombre}
-                </a></li>
+                </li>                
               </ul>
             </div>
           </div>
@@ -181,9 +177,11 @@
                     <td>${comentarioInstance.texto}</td>
                     <td>${comentarioInstance.fechaHoraCreacion}</td>
                     <td>
-                      <g:link controller="comentario" action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentarioInstance.id}"]">
-                        <span class="glyphicon glyphicon-zoom-in"></span>
-                      </g:link>
+                      <g:form controller="comentario" action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentarioInstance.id}"]">
+  											<button type="submit" title="Ver" style="background-color: Transparent;border: none;font-size: 20px;">
+  												<span class="glyphicon glyphicon-zoom-in" ></span>
+  											</button>
+  										</g:form>
                     </td>
                   </tr>
                 </g:each>

@@ -3,7 +3,7 @@
 
 <head>
 	<meta name="layout" content="mainPantallas">
-	<title>Seleccionar usuario</title>
+	<title>Iniciar sesi&oacute;n</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
 						<tr>
 							<th>Nombre</th>
 							<th>Apellido</th>
-							<th>Nick</th>
+							<th>Nombre usuario</th>
 							<th></th>
 						</tr>
 					</thead>

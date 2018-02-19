@@ -1,12 +1,9 @@
-<%@ page import = "nuevo_foro_fiuba.Publicacion.EstadoPublicacion" %>
-  <!doctype html>
-
-  <html>
+<!doctype html>
+<html>
 
   <head>
     <meta name="layout" content="mainPantallas" />
     <title>Publicacion</title>
-    <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
   </head>
 
   <body>
@@ -17,9 +14,9 @@
           <div class="navbar navbar-inverse">
             <div class="container-fluid">
               <ul class="nav navbar-nav">
-                <li><a class="home navbar-brand" href="${createLink(uri: '/')}">
-                  Volver al inicio
-                </a></li>
+                <li><a class="home navbar-brand" href="${createLink(controller : 'usuario' ,action : 'inicioUsuario', params: [idUsuario : usuario.id])}">
+									Volver al inicio
+								</a></li>
                 <li>
                   <g:link action="listaPublicaciones" max="10" params="[idUsuario:"${usuario.id}"]">${"Volver al listado"}</g:link>
                 </li>
@@ -285,9 +282,11 @@
                     <td>${comentario.texto}</td>
                     <td>${comentario.fechaHoraCreacion}</td>
                     <td>
-                      <g:link controller="comentario" action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.id}"]" title="Ver">
-                        <span class="glyphicon glyphicon-zoom-in"></span>
-                      </g:link>
+                      <g:form controller="comentario" action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.id}"]">
+  											<button type="submit" title="Ver" style="background-color: Transparent;border: none;font-size: 20px;">
+  												<span class="glyphicon glyphicon-zoom-in" ></span>
+  											</button>
+  										</g:form>
                     </td>
                   </tr>
                 </g:each>

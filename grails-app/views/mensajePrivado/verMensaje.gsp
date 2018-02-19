@@ -36,9 +36,7 @@ div {
 
 <head>
     <meta name="layout" content="mainPantallas"/>
-    <title>Ver Mensaje</title>
-
-    <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
+    <title>Ver Mensaje</title>    
 </head>
 
 <body>

@@ -1,4 +1,3 @@
-<%@ page import="nuevo_foro_fiuba.Publicacion" %>
 <!DOCTYPE html>
 <html>
 	<head>

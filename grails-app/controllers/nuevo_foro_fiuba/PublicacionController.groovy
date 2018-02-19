@@ -10,7 +10,6 @@ class PublicacionController {
     def publicacionesNoEliminadas = publicacionService.obtenerPublicacionesNoEliminadas()
     def publicaciones = (!idCatedra) ? publicacionesNoEliminadas : publicacionService.filtrarPublicacionesPorCatedra(publicacionesNoEliminadas, idCatedra)
     def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
-    params.max = Math.min(max ?: 10, 100)
     [publicacionInstanceList: publicaciones, publicacionInstanceTotal: publicaciones.size(), usuarioInstance: usuarioInstance, materias: publicacionService.getAllMaterias(), catedras: publicacionService.getAllCatedras()]
   }
 
@@ -28,8 +27,8 @@ class PublicacionController {
     // EL ATRIBUTO MODIFICAR DEFINE SI EL USUARIO QUE INGRESA A LA PUBLICACION PUEDE VER LOS BOTONES ELIMINAR,CAMBIAR ESTADO, ETC
   }
 
-  def formarPublicacion (String texto, long idUsuario, long idCatedra, long idMateria, Float puntajeMinimoParaComentar, String encuesta, String opciones) {
-    publicacionService.formarPublicacion(idUsuario, idCatedra, texto, idMateria, puntajeMinimoParaComentar, encuesta, opciones)
+  def formarPublicacion (String texto, long idUsuario, long idCatedra, long idMateria, Float puntajeMinimoParaComentar, String nombreEncuesta, String nombreOpciones) {
+    publicacionService.formarPublicacion(idUsuario, idCatedra, texto, idMateria, puntajeMinimoParaComentar, nombreEncuesta, nombreOpciones)
     redirect (action: "listaPublicaciones", params:[idUsuario:idUsuario])
   }
 

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="mainPantallas"/>
-    <title>Iniciar sesi&oacute;n</title>
+    <title>Seleccionar usuario</title>
 </head>
 <body>
     <div class="container">
@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-md-12 text-center">
           <g:form controller="usuario" action="seleccionarUsuario" max="10">
-            <g:actionSubmit  action="seleccionarUsuario" value="Iniciar sesion" class="btn btn-warning"  />
+            <g:actionSubmit  action="seleccionarUsuario" value="Seleccionar usuario" class="btn btn-warning"  />
           </g:form>
         </div>
       </div>

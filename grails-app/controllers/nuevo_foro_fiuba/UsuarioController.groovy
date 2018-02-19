@@ -8,8 +8,7 @@ class UsuarioController {
     redirect(action: "seleccionarUsuario", max: "10")
   }
 
-  def seleccionarUsuario(Integer max){
-    params.max = Math.min(max ?: 10, 100)
+  def seleccionarUsuario(Integer max){    
     [usuarioInstanceList: usuarioService.obtenerTodosLosUsuarios(), usuarioInstanceTotal: usuarioService.obtenerCantidadDeUsuariosTotal()]
   }
 
@@ -27,7 +26,6 @@ class UsuarioController {
     if (idMateria)
       usuarios = usuarioService.filtrarPorMateria(usuarios, idMateria)
     Usuario usuarioInstance = usuarioService.getUsuarioById(idUsuario)
-    params.max = Math.min(max ?: 10, 100)
     [usuarioInstanceList: usuarios, usuarioInstanceTotal: usuarios.size(), usuarioInstance: usuarioInstance, materias: usuarioService.getAllMaterias(), catedras: usuarioService.getAllCatedras()]
   }
 
