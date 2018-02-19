@@ -38,9 +38,6 @@
 				</g:each>
 				</tbody>
 			</table>
-			<div class="pagination">
-				<g:paginate total="10" />
-			</div>
 		</div>
 	</body>
 </html>

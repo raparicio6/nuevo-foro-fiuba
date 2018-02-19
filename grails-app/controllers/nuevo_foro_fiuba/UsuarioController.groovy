@@ -5,11 +5,11 @@ class UsuarioController {
   def usuarioService
 
   def index() {
-    redirect(action: "seleccionarUsuario", max: "10")
+    redirect(action: "seleccionarUsuario")
   }
 
-  def seleccionarUsuario(Integer max){    
-    [usuarioInstanceList: usuarioService.obtenerTodosLosUsuarios(), usuarioInstanceTotal: usuarioService.obtenerCantidadDeUsuariosTotal()]
+  def seleccionarUsuario(){
+    [usuarioInstanceList: usuarioService.obtenerTodosLosUsuarios()]
   }
 
   def inicioUsuario(long idUsuario){
@@ -17,7 +17,7 @@ class UsuarioController {
     [usuarioInstance: usuarioInstance]
   }
 
-  def listaUsuarios(long idUsuario, Integer max, Float promedioMin, Float promedioMax, long idMateria){
+  def listaUsuarios(long idUsuario, Float promedioMin, Float promedioMax, long idMateria){
     if (!promedioMin)
        promedioMin=0
     if (!promedioMax)
@@ -26,7 +26,7 @@ class UsuarioController {
     if (idMateria)
       usuarios = usuarioService.filtrarPorMateria(usuarios, idMateria)
     Usuario usuarioInstance = usuarioService.getUsuarioById(idUsuario)
-    [usuarioInstanceList: usuarios, usuarioInstanceTotal: usuarios.size(), usuarioInstance: usuarioInstance, materias: usuarioService.getAllMaterias(), catedras: usuarioService.getAllCatedras()]
+    [usuarioInstanceList: usuarios, usuarioInstance: usuarioInstance, materias: usuarioService.getAllMaterias(), catedras: usuarioService.getAllCatedras()]
   }
 
   def verMateriasCursadas (long idUsuario){

@@ -8,7 +8,7 @@ class ComentarioService {
 
   def serviceMethod() {}
 
-  Comentario crearComentario(String texto, Usuario usuarioCreador,Publicacion publicacionComentada, Comentario comentarioComentado){
+  Comentario crearComentario(String texto, Usuario usuarioCreador, Comentario comentarioComentado = null, Publicacion publicacionComentada = null ){
     Comentario comentario = new Comentario (texto, usuarioCreador, publicacionComentada, comentarioComentado)
     comentario.save(failOnError : true)
     comentario
@@ -50,7 +50,7 @@ class ComentarioService {
   Comentario comentarComentario (long idUsuario, String textoComentario, long idComentario){
     def usuario = getUsuarioById(idUsuario)
     def comentarioAComentar = getComentarioById(idComentario)
-    Comentario comentario = this.crearComentario(textoComentario, usuario, null, comentarioAComentar)
+    Comentario comentario = this.crearComentario(textoComentario, usuario, comentarioAComentar)
     usuario.comentarComentario(comentario, comentarioAComentar)
     comentario
   }

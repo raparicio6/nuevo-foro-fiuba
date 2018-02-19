@@ -35,8 +35,8 @@ class Publicacion {
 	static constraints = {
 		texto blank: true, nullable:false
 		usuarioCreador nullable:false
-		materiaRelacionada nullable:true
-		catedraRelacionada nullable:true
+		materiaRelacionada nullable:false
+		catedraRelacionada nullable:false
 		promedioRequeridoParaComentar nullable:false
 		materiasNecesariasParaComentar nullable:false
 		comentarios nullable:false

@@ -33,7 +33,7 @@
 			</div>
 
 
-			<g:form controller="usuario" action="listaUsuarios" params="[max:'10', idUsuario:"${usuarioInstance.id}"]">
+			<g:form controller="usuario" action="listaUsuarios" params="[idUsuario:"${usuarioInstance.id}"]">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="col-md-3" style="padding-right:0px">

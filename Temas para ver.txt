@@ -1,10 +1,8 @@
 Temas para ver:
 
-*Hay que armar una pantalla para crear publicaciones
-*El this.atributo = algo no anda en el dominio pero el .setAtributo(algo) sí
-*Objeto == this no anda en el dominio pero objeto.id == this.id sí
+
+
+
 *Tests
-*Las calificaciones de usuarios con bajo promedio te bajan el promedio, por mas que las calificaciones sean positvas. Tal vez habria que buscar otra estrategia para calcular el numero del puntaje asociado a la calificacion.
-*Los .save() que están en orden incorrecto
 *Homogeneizar las pantallas para que todas tengan el mismo patron
 *Darle estilo a las pantallas que les falta

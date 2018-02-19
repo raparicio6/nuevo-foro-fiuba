@@ -18,7 +18,7 @@
 									Volver al inicio
 								</a></li>
                 <li>
-                  <g:link action="listaPublicaciones" max="10" params="[idUsuario:"${usuario.id}"]">${"Volver al listado"}</g:link>
+                  <g:link action="listaPublicaciones" params="[idUsuario:"${usuario.id}"]">${"Volver al listado"}</g:link>
                 </li>
               </ul>
             </div>

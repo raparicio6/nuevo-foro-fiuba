@@ -8,8 +8,8 @@ class PublicacionService {
 
   // Publicacion crearPublicacion(String texto, Usuario usuarioCreador, Float promedioRequeridoParaComentar = 0, Materia materiaRelacionada = null, Catedra catedraRelacionada = null, Set <Materia> materiasNecesariasParaComentar = [], Archivo archivoAdjunto = null, Encuesta encuesta = null){
   //  Publicacion publicacion = new Publicacion (texto, usuarioCreador, promedioRequeridoParaComentar, materiaRelacionada, catedraRelacionada, materiasNecesariasParaComentar, archivoAdjunto, encuesta)
-  Publicacion crearPublicacion(String texto, Usuario usuarioCreador, Materia materiaRelacionada, Catedra catedraRelacionada){
-    Publicacion publicacion = new Publicacion (texto, usuarioCreador, materiaRelacionada, catedraRelacionada)
+  Publicacion crearPublicacion(Usuario usuarioCreador, Catedra catedraRelacionada, String texto, Materia materiaRelacionada, Materia idMateriaRequerida = null, Float promedioCalificacionesMinimoParaComentar = 0, String nombreEncuesta = null, String nombreOpciones = null){
+    Publicacion publicacion = new Publicacion (texto, usuarioCreador, materiaRelacionada, catedraRelacionada)  //AMPLIAR CONSTRUCTOR
     publicacion.save(failOnError: true)
     publicacion
   }
@@ -30,29 +30,27 @@ class PublicacionService {
     publicacion.obtenerComentariosNoEliminados()
   }
 
-  Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateria, Float calificacionMinimaParaComentar = 0, String nombreEncuesta = null, String nombreOpciones = null){
+  Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateriaRequerida, Float promedioCalificacionesMinimoParaComentar = 0, String nombreEncuesta = null, String nombreOpciones = null){
     def usuario = getUsuarioById(idUsuario)
     def catedra = null
     if (idCatedra)
       catedra = getCatedraById(idCatedra)
-    def materia = null
-    if (idMateria)
-      materia = getMateriaById(idMateria)
-    Publicacion publicacion = this.crearPublicacion(texto, usuario, catedra.materia, catedra)
+    Publicacion publicacion = this.crearPublicacion(usuario, catedra, texto, catedra.materia)
+    def materiaRequerida = null
+    if (idMateriaRequerida){
+      materiaRequerida = getMateriaById(idMateriaRequerida)
+      usuario.agregarMateriaRequeridaParaComentar(publicacion, materiaRequerida)
+    }
     def encuesta = null
     if (nombreEncuesta && nombreOpciones) {
       def opcionesSeparadas = nombreOpciones.tokenize(',')
-      Set<Opcion> listaDeOpciones = []
-      while (!opcionesSeparadas.empty) {
-        def opcion = new Opcion(opcionesSeparadas.remove(0))
-        listaDeOpciones.add(opcion)
-      }
-      encuesta = new Encuesta(nombreEncuesta, listaDeOpciones)
+      def listaDeOpciones = opcionesSeparadas.collect { opcion -> new Opcion (opcion).save(failOnError:true) }
+      encuesta = new Encuesta(nombreEncuesta, listaDeOpciones.toSet())
+      publicacion.agregarEncuesta(encuesta)
+      encuesta.save(failOnError:true)
     }
-    publicacion.agregarEncuesta(encuesta)
     usuario.publicar(publicacion)
-    usuario.modificarPromedioRequeridoParaComentar(publicacion, calificacionMinimaParaComentar)
-    usuario.agregarMateriaRequeridaParaComentar(publicacion, materia)
+    usuario.modificarPromedioRequeridoParaComentar(publicacion, promedioCalificacionesMinimoParaComentar)
     publicacion
   }
 

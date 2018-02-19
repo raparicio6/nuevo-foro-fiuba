@@ -6,11 +6,11 @@ class PublicacionController {
 
   def index() {}
 
-  def listaPublicaciones(long idUsuario, Integer max, Integer idCatedra) {
+  def listaPublicaciones(long idUsuario, Integer idCatedra) {
     def publicacionesNoEliminadas = publicacionService.obtenerPublicacionesNoEliminadas()
     def publicaciones = (!idCatedra) ? publicacionesNoEliminadas : publicacionService.filtrarPublicacionesPorCatedra(publicacionesNoEliminadas, idCatedra)
     def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
-    [publicacionInstanceList: publicaciones, publicacionInstanceTotal: publicaciones.size(), usuarioInstance: usuarioInstance, materias: publicacionService.getAllMaterias(), catedras: publicacionService.getAllCatedras()]
+    [publicacionInstanceList: publicaciones, usuarioInstance: usuarioInstance, materias: publicacionService.getAllMaterias(), catedras: publicacionService.getAllCatedras()]
   }
 
   def crearPublicacion (long idUsuario) {
@@ -23,15 +23,15 @@ class PublicacionController {
     def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
     def esDueño = publicacionService.usuarioEsDueñoDeLaPublicacion(usuarioInstance, publicacionInstance)
     def comentarios = publicacionService.obtenerComentariosNoEliminados(publicacionInstance)
-    [publicacion: publicacionInstance, materias: publicacionService.getAllMaterias(), catedras: publicacionService.getAllCatedras(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios] //--> groovy !null==true
-    // EL ATRIBUTO MODIFICAR DEFINE SI EL USUARIO QUE INGRESA A LA PUBLICACION PUEDE VER LOS BOTONES ELIMINAR,CAMBIAR ESTADO, ETC
+    [publicacion: publicacionInstance, materias: publicacionService.getAllMaterias(), catedras: publicacionService.getAllCatedras(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios]
   }
 
-  def formarPublicacion (String texto, long idUsuario, long idCatedra, long idMateria, Float calificacionMinimaParaComentar, String nombreEncuesta, String nombreOpciones) {
-    publicacionService.formarPublicacion(idUsuario, idCatedra, texto, idMateria, calificacionMinimaParaComentar, nombreEncuesta, nombreOpciones)
+  def formarPublicacion (String texto, long idUsuario, long idCatedra, long idMateria, Float promedioCalificacionesMinimoParaComentar, String nombreEncuesta, String nombreOpciones) {
+    if (! promedioCalificacionesMinimoParaComentar)
+      promedioCalificacionesMinimoParaComentar = 0
+    publicacionService.formarPublicacion(idUsuario, idCatedra, texto, idMateria, promedioCalificacionesMinimoParaComentar, nombreEncuesta, nombreOpciones)
     redirect (action: "listaPublicaciones", params:[idUsuario:idUsuario])
   }
-
 
   def cambiarEstado (long idPublicacion, long idUsuario){
     publicacionService.cambiarEstado(idUsuario, idPublicacion)
@@ -60,7 +60,7 @@ class PublicacionController {
 
   def eliminarPublicacion(long idPublicacion, long idUsuario){
     publicacionService.eliminarPublicacion(idUsuario, idPublicacion)
-    redirect(action: "listaPublicaciones", max: 10, params: [idUsuario:idUsuario])
+    redirect(action: "listaPublicaciones", params: [idUsuario:idUsuario])
   }
 
   def calificarPositivo(long idPublicacion, long idUsuario){

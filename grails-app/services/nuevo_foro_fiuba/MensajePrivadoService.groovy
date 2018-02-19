@@ -23,10 +23,10 @@ class MensajePrivadoService {
   MensajePrivado enviarMensaje(long idUsuarioCreador, long idUsuarioReceptor, String texto, long idMensajeAlCualResponde = 0, String archivoAdjunto = null){
     def emisor = getUsuarioById(idUsuarioCreador)
     def receptor = getUsuarioById(idUsuarioReceptor)
-    def mensajeAlCualResponde = null // capaz está de mas el = null ya que lo es por defecto
-    if (idMensajeAlCualResponde) // está bien así? 0 = null ? //CONFIRMADO 0==NULL
+    def mensajeAlCualResponde = null
+    if (idMensajeAlCualResponde)
       mensajeAlCualResponde = getMensajePrivadoById(idMensajeAlCualResponde)
-    def archivo = null // capaz está de mas el = null ya que lo es por defecto
+    def archivo = null 
     if (archivoAdjunto)
        archivo = new Archivo(archivoAdjunto, this.PATH)
     MensajePrivado mensaje = new MensajePrivado(texto, mensajeAlCualResponde, archivo)

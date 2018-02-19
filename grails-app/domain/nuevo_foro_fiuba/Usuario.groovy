@@ -48,7 +48,6 @@ class Usuario {
 
 // ------------------------------------------------------------------------- //
 	def comentarPublicacion(Comentario comentario, Publicacion publicacionAComentar){
-		//no se puede comentar una publicacion cerrada
 		if (publicacionAComentar.estaCerrada())
 			throw new PublicacionCerradaException()
 		if (publicacionAComentar.estaEliminada())
@@ -66,7 +65,6 @@ class Usuario {
 	}
 
 	def comentarComentario(Comentario comentario, Comentario comentarioAComentar){
-		//no se puede comentar una publicacion cerrada
 		if (comentarioAComentar.publicacionComentada.estaCerrada())
 			throw new PublicacionCerradaException()
 		this.comentarios << comentario
@@ -123,7 +121,7 @@ class Usuario {
 		this.cursadas << cursada
 	}
 
-	def actualizarPromedioCalificaciones(Calificacion calificacion){		
+	def actualizarPromedioCalificaciones(Calificacion calificacion){
 		// def publicaciones = this.publicaciones
 		// def calificaciones = publicaciones.collect {publicacionInstance -> publicacionInstance.calificaciones}
 		// def comentarios = this.comentarios

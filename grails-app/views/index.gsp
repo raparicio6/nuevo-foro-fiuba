@@ -11,7 +11,7 @@
 
       <div class="row">
         <div class="col-md-12 text-center">
-          <g:form controller="usuario" action="seleccionarUsuario" max="10">
+          <g:form controller="usuario" action="seleccionarUsuario">
             <g:actionSubmit  action="seleccionarUsuario" value="Seleccionar usuario" class="btn btn-warning"  />
           </g:form>
         </div>

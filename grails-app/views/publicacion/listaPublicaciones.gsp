@@ -31,6 +31,7 @@
 				<thead>
 					<tr>
 
+						<g:sortableColumn property="id" title="${message(code: 'publicacion.usuarioCreador.label', default: 'Numero publicacion')}" />
             <g:sortableColumn property="usuarioCreador" title="${message(code: 'publicacion.usuarioCreador.label', default: 'Autor')}" />
             <g:sortableColumn property="materiaRelacionada" title="${message(code: 'publicacion.catedraRelacionada.label', default: 'Materia')}" />
 						<g:sortableColumn property="materiaRelacionada" title="${message(code: 'publicacion.catedraRelacionada.label', default: 'Catedra')}" />
@@ -43,6 +44,7 @@
 				<g:each in="${publicacionInstanceList}" status="i" var="publicacionInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
+						<td>${fieldValue(bean: publicacionInstance, field: "id")}</td>
 						<td>${fieldValue(bean: publicacionInstance, field: "usuarioCreador.nombre")}</td>
 						<td>${fieldValue(bean: publicacionInstance, field: "catedraRelacionada.materia.nombre")}</td>
             <td>${fieldValue(bean: publicacionInstance, field: "catedraRelacionada.profesor.nombre")}</td>
@@ -53,9 +55,6 @@
 				</g:each>
 				</tbody>
 			</table>
-			<div class="pagination">
-				<g:paginate total="${publicacionInstanceTotal}" />
-			</div>
 		</div>
 	</body>
 </html>

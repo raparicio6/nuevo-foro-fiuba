@@ -13,7 +13,7 @@ class MensajePrivado {
 	EstadoMensajePrivado estado
 
   static constraints = {
-  	texto blank: false, nullable:false
+  	texto blank: true, nullable:false
 		mensajeAlCualSeResponde nullable:true
 		archivo nullable:true
 		estado nullable:false
