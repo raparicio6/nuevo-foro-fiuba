@@ -16,6 +16,11 @@
             <div class="container-fluid">
               <ul class="nav navbar-nav">
                 <li>
+                  <a class="home navbar-brand" href="${createLink(controller : 'usuario' ,action : 'inicioUsuario', params: [idUsuario : usuario.id])}">
+                    Volver al inicio
+                  </a>
+                </li>
+                <li>
                   <g:if test="${comentario.publicacionComentada}">
                     <g:link controller="Publicacion" action="verPublicacion" params="[idUsuario:"${usuario.id}", idPublicacion:"${comentario.publicacionComentada.id}"]">${"Volver"}</g:link>
                   </g:if>
