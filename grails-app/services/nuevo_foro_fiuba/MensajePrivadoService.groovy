@@ -24,8 +24,8 @@ class MensajePrivadoService {
     def emisor = getUsuarioById(idUsuarioCreador)
     def receptor = getUsuarioById(idUsuarioReceptor)
     def mensajeAlCualResponde = null // capaz está de mas el = null ya que lo es por defecto
-    if (idMensajeAlCualResponde) // está bien así? 0 = null ?
-      mensajeAlCualResponde = MensajePrivado.get(idMensajeAlCualResponde)
+    if (idMensajeAlCualResponde) // está bien así? 0 = null ? //CONFIRMADO 0==NULL
+      mensajeAlCualResponde = getMensajePrivadoById(idMensajeAlCualResponde)
     def archivo = null // capaz está de mas el = null ya que lo es por defecto
     if (archivoAdjunto)
        archivo = new Archivo(archivoAdjunto, this.PATH)

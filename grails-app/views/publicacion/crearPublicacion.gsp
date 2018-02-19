@@ -15,7 +15,7 @@
             <h1>Materias requeridas para comentar</h1>
             <g:select name="idMateria" from="${materias}" optionValue="${{it.nombre}}" optionKey="id" />
             <h1>Promedio requerido para comentar</h1>
-            <g:field type="float" step="any" name="puntajeMinimoParaComentar" value="0" min="0" max="5"/>
+            <g:field type="number" step="0.01" name="calificacionMinimaParaComentar" value="0" min="0" max="5"/>
             <g:submitButton name = "Crear publicacion" value="Crear publicacion" />
         </g:form>
     </body>

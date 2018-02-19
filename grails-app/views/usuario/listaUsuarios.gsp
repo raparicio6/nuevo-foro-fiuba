@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="mainPantallas">
-		<title>Buscar usuarios</title>		
+		<title>Buscar usuarios</title>
 	</head>
 	<body>
 
@@ -40,7 +40,7 @@
 							Promedio de calificaciones m&iacute;nimo:
 						</div>
 						<div class="col-md-1" style="margin-left:-40px">
-							<g:field type="float" step="any" min="0" max="5" name="promedioMin" class="form-control" />
+							<g:field type="number" step="0.01" min="0" max="5" name="promedioMin" class="form-control" />
 						</div>
 					</div>
 				</div>
@@ -51,7 +51,7 @@
 							Promedio de calificaciones m&aacute;ximo:
 						</div>
 						<div class="col-md-1" style="margin-left:-40px">
-							<g:field type="float" step="any" min="0" max="5" name="promedioMax" class="form-control" />
+							<g:field type="number" step="0.01" min="0" max="5" name="promedioMax" class="form-control" />
 						</div>
 					</div>
 				</div>

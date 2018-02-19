@@ -27,8 +27,8 @@ class PublicacionController {
     // EL ATRIBUTO MODIFICAR DEFINE SI EL USUARIO QUE INGRESA A LA PUBLICACION PUEDE VER LOS BOTONES ELIMINAR,CAMBIAR ESTADO, ETC
   }
 
-  def formarPublicacion (String texto, long idUsuario, long idCatedra, long idMateria, Float puntajeMinimoParaComentar, String nombreEncuesta, String nombreOpciones) {
-    publicacionService.formarPublicacion(idUsuario, idCatedra, texto, idMateria, puntajeMinimoParaComentar, nombreEncuesta, nombreOpciones)
+  def formarPublicacion (String texto, long idUsuario, long idCatedra, long idMateria, Float calificacionMinimaParaComentar, String nombreEncuesta, String nombreOpciones) {
+    publicacionService.formarPublicacion(idUsuario, idCatedra, texto, idMateria, calificacionMinimaParaComentar, nombreEncuesta, nombreOpciones)
     redirect (action: "listaPublicaciones", params:[idUsuario:idUsuario])
   }
 

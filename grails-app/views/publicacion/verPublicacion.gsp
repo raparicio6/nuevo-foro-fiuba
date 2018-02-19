@@ -100,7 +100,7 @@
                     Promedio de calificaciones m&iacute;nimo para comentar:
                       <g:if test="${modificar}">
                         <g:form action="modificarPromedioRequeridoParaComentar" params="[idUsuario:"${usuario.id}", idPublicacion:"${publicacion.id}"]">
-                          <g:field type="float" step="any" name="promedio" value="${publicacion.promedioRequeridoParaComentar}" min="0" max="5"/>
+                          <g:field type="number" step="0.01" name="promedio" value="${publicacion.promedioRequeridoParaComentar}" min="0" max="5"/>
                             <button type="submit" title="Guardar" style="background-color: Transparent;border: none;">
                               <span class="glyphicon glyphicon-ok"></span>
                             </button>

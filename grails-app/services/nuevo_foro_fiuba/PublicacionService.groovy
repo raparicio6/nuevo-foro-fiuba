@@ -30,7 +30,7 @@ class PublicacionService {
     publicacion.obtenerComentariosNoEliminados()
   }
 
-  Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateria, Float puntajeMinimoParaComentar = 0, String nombreEncuesta = null, String nombreOpciones = null){
+  Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateria, Float calificacionMinimaParaComentar = 0, String nombreEncuesta = null, String nombreOpciones = null){
     def usuario = getUsuarioById(idUsuario)
     def catedra = null
     if (idCatedra)
@@ -51,7 +51,7 @@ class PublicacionService {
     }
     publicacion.agregarEncuesta(encuesta)
     usuario.publicar(publicacion)
-    usuario.modificarPromedioRequeridoParaComentar(publicacion, puntajeMinimoParaComentar)
+    usuario.modificarPromedioRequeridoParaComentar(publicacion, calificacionMinimaParaComentar)
     usuario.agregarMateriaRequeridaParaComentar(publicacion, materia)
     publicacion
   }

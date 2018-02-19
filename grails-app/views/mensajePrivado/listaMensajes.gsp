@@ -36,7 +36,7 @@ div {
 
 <head>
     <meta name="layout" content="mainPantallas"/>
-    <title>Casilla de mensajes</title>    
+    <title>${title}</title>
 </head>
 
 <body>
@@ -44,14 +44,14 @@ div {
     <div class="col-md-12">
       <div class="col-md-2">
         <h3>
-            <span class="label label-default">Mensajes recibidos:</span>
+            <span class="label label-default">Mensajes ${enviadosRecibidos}:</span>
         </h3>
       </div>
       <div class="col-md-6">
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>De</th>
+              <th>${dePara}</th>
               <th>Texto</th>
               <th>Acciones</th>
             </tr>
@@ -62,7 +62,7 @@ div {
                 <td>${mensaje.usuarioConElQueSeInteractua.nombre}</td>
                 <td>${mensaje.mensajePrivado.texto}</td>
                 <td>
-                  <g:link action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${mensaje.mensajePrivado.id}", idInformacion:"${mensaje.id}", mostrarResponder:"${true}"]" >
+                  <g:link action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${mensaje.mensajePrivado.id}", idInformacion:"${mensaje.id}", mostrarResponder:"${mostrarResponder}"]" >
                     Ver mensaje
                   </g:link>
                 </td>
@@ -82,7 +82,7 @@ div {
           <g:actionSubmit  action="crearMensaje" value="Redactar nuevo mensaje" class="btn btn-warning"  />
         </g:form>
         <g:form action="verMensajesEnviados" params="[idUsuario:"${usuarioInstance.id}"]">
-          <g:actionSubmit  action="verMensajesEnviados" value="Ver mensajes enviados" class="btn btn-warning"  />
+          <g:actionSubmit  action="${action}" value="${value}" class="btn btn-warning"  />
         </g:form>
       </div>
     </div>

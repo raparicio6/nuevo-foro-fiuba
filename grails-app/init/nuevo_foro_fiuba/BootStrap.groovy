@@ -56,7 +56,7 @@ class BootStrap {
       usuario2.agregarCursada(cursada4)
       usuario2.agregarCursada(cursada3)
 
-      
+
       // PUBLICACIONES Y COMENTARIOS
       Publicacion publicacion = publicacionService.formarPublicacion(usuario.id, catedra.id, "texto publicacion", materia.id, 0, "Qué opinan de la cátedra?", "Buena,Mala,Me es indiferente")
       Publicacion publicacion2 = publicacionService.formarPublicacion(usuario2.id, catedra2.id, "texto publicacion aaaa", materia2.id, 0)
