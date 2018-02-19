@@ -43,7 +43,7 @@ class ComentarioService {
     Puntaje puntaje = new Puntaje (tipo, promedioCalificaciones)
     Calificacion calificacion = new Calificacion(usuario, puntaje, null, comentario)
     usuario.calificar(comentario, calificacion)
-    comentario.getUsuarioCreador().actualizarPromedioCalificaciones()
+    comentario.getUsuarioCreador().actualizarPromedioCalificaciones(calificacion)
     calificacion.save(failOnError:true)
   }
 

@@ -56,10 +56,10 @@ class BootStrap {
       usuario2.agregarCursada(cursada4)
       usuario2.agregarCursada(cursada3)
 
-
+      
       // PUBLICACIONES Y COMENTARIOS
-      Publicacion publicacion = publicacionService.formarPublicacion(usuario.id, catedra.id, "texto publicacion", materia.id, 0, null, null)
-      Publicacion publicacion2 = publicacionService.formarPublicacion(usuario2.id, catedra2.id, "texto publicacion aaaa", materia2.id, 0, null, null)
+      Publicacion publicacion = publicacionService.formarPublicacion(usuario.id, catedra.id, "texto publicacion", materia.id, 0, "Qué opinan de la cátedra?", "Buena,Mala,Me es indiferente")
+      Publicacion publicacion2 = publicacionService.formarPublicacion(usuario2.id, catedra2.id, "texto publicacion aaaa", materia2.id, 0)
       Comentario comentario = publicacionService.comentarPublicacion(usuario2.id, "Soy el usuario2", publicacion.id)
       Comentario comentario2 = comentarioService.comentarComentario(usuario2.id, "Soy el usuario2 otra vez", comentario.id)
 
@@ -70,18 +70,6 @@ class BootStrap {
 
       // MENSAJES
       mensajePrivadoService.enviarMensaje(usuario3.id, usuario.id, "Texto del mensaje")
-
-
-      // ENCUESTAS --> cuando se agregue la encuesta en formarPublicacion pasarlo para alla
-      Opcion opcion1 = new Opcion ("Buena")
-      opcion1.save(failOnError:true)
-      Opcion opcion2 = new Opcion ("Mala")
-      opcion2.save(failOnError:true)
-      Opcion opcion3 = new Opcion ("Me es indiferente")
-      opcion3.save(failOnError:true)
-      Encuesta encuesta = new Encuesta ("Qué opinan de la cátedra?", [opcion1,opcion2,opcion3].toSet())
-      encuesta.save(failOnError:true)
-      publicacion.agregarEncuesta(encuesta)
 
     }
 

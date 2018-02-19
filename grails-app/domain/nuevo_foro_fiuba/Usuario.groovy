@@ -14,8 +14,6 @@ class Usuario {
 	Set <Cursada> cursadas
 	Float promedioCalificaciones
 
-	final Float ProporcionAIncrementarEnPuntajesMenores = 0.03
-
 	static hasMany = [
 		publicaciones: Publicacion,
 		comentarios: Comentario,
@@ -37,7 +35,7 @@ class Usuario {
 // ------------------------------------------------------------------------- //
 
 //CONSTRUCTOR
-	Usuario(String nombre, String apellido, String nombreUsuario) {
+	Usuario(String nombre, String apellido, String nombreUsuario, Float calificacionInicial) {
 		this.nombre = nombre
 		this.apellido = apellido
 		this.nombreUsuario = nombreUsuario
@@ -45,7 +43,7 @@ class Usuario {
 		this.mensajes = []
 		this.comentarios = []
 		this.cursadas = []
-		this.promedioCalificaciones = 0
+		this.promedioCalificaciones = calificacionInicial
 	}
 
 // ------------------------------------------------------------------------- //
@@ -74,17 +72,6 @@ class Usuario {
 		this.comentarios << comentario
 		comentarioAComentar.agregarComentario(comentario)
 	}
-
-	// Boolean esDueñoDeLaPublicacion(Publicacion publicacion){
-	// 	(publicacion.getUsuarioCreador() == this)
-	// }
-	//
-	// Boolean esDueñoDelComentario(Comentario comentario){
-	// 	(comentario.getUsuarioCreador() == this)
-	// }
-
-	//LOS DE ARRIBA NO FUNCIONAN
-	// hay que preguntar para que se pueda usar algo como lo de arriba
 
 	def publicar(Publicacion publicacion){
 		this.publicaciones << publicacion
@@ -136,40 +123,41 @@ class Usuario {
 		this.cursadas << cursada
 	}
 
-	def actualizarPromedioCalificaciones(){
-		// usar .sum donde corresponda !!!!
-		def publicaciones = this.publicaciones
-		def calificaciones = publicaciones.collect {publicacionInstance -> publicacionInstance.calificaciones}
-		def comentarios = this.comentarios
-		calificaciones += comentarios.collect {comentarioInstance -> comentarioInstance.calificaciones}
-		calificaciones = calificaciones.flatten()
+	def actualizarPromedioCalificaciones(Calificacion calificacion){		
+		// def publicaciones = this.publicaciones
+		// def calificaciones = publicaciones.collect {publicacionInstance -> publicacionInstance.calificaciones}
+		// def comentarios = this.comentarios
+		// calificaciones += comentarios.collect {comentarioInstance -> comentarioInstance.calificaciones}
+		// calificaciones = calificaciones.flatten()
+    //
+		// def contador = 0
+		// def tamanio = 0
+		// def calificacionesPositivas = calificaciones.findAll { calificacion ->
+		// 	Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) > 0 }
+		// calificacionesPositivas.each { calificacion ->
+		// 			def numeroPuntaje = calificacion.puntaje.numero
+		// 			if (numeroPuntaje > this.promedioCalificaciones){
+		// 				contador += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * numeroPuntaje
+		// 				tamanio += 1
+		// 			}else
+		// 				contador += numeroPuntaje * this.ProporcionAIncrementarEnPuntajesMenores
+		// }
+		// def promedioDeCalificaciones
+		// if (tamanio > 0)
+		// 	promedioDeCalificaciones = contador/tamanio
+		// else
+		// 	promedioDeCalificaciones = this.promedioCalificaciones + contador
+    //
+		// def calificacionesNegativas = calificaciones.findAll { calificacion ->
+		// 	Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) < 0
+		// }
+		// calificacionesNegativas.each {calificacion ->
+		// 		promedioDeCalificaciones += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * calificacion.puntaje.numero
+		// }
 
-		def contador = 0
-		def tamanio = 0
-		def calificacionesPositivas = calificaciones.findAll { calificacion ->
-			Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) > 0 }
-		calificacionesPositivas.each { calificacion ->
-					def numeroPuntaje = calificacion.puntaje.numero
-					if (numeroPuntaje > this.promedioCalificaciones){
-						contador += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * numeroPuntaje
-						tamanio += 1
-					}else
-						contador += numeroPuntaje * this.ProporcionAIncrementarEnPuntajesMenores
-		}
-		def promedioDeCalificaciones
-		if (tamanio > 0)
-			promedioDeCalificaciones = contador/tamanio
-		else
-			promedioDeCalificaciones = this.promedioCalificaciones + contador
-
-		def calificacionesNegativas = calificaciones.findAll { calificacion ->
-			Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) < 0
-		}
-		calificacionesNegativas.each {calificacion ->
-				promedioDeCalificaciones += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * calificacion.puntaje.numero
-		}
-
-		this.setPromedioCalificaciones(promedioDeCalificaciones.toFloat())
+		def promedio = this.promedioCalificaciones
+		promedio += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * calificacion.puntaje.numero
+		this.setPromedioCalificaciones(promedio.toFloat())
 	}
 
 	def agregarPublicacion(Publicacion publicacion){
