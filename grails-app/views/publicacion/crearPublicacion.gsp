@@ -1,9 +1,26 @@
 <!doctype html>
     <html>
         <head>
+            <meta name="layout" content="mainPantallas"/>
             <title>Crear publicacion</title>
         </head>
     <body>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="navbar navbar-inverse">
+                  <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                      <li> <g:link controller="publicacion" action="listaPublicaciones" params="[idUsuario:"${usuario.id}"]">${"Ver publicaciones"}</g:link> </li>
+                      <li> <g:link controller="${"mensajePrivado"}" params="[idUsuario:"${usuario.id}"]">${"Mensajes privados"}</g:link> </li>
+                      <li> <g:link controller="${"usuario"}" action="listaUsuarios" params="[idUsuario:"${usuario.id}"]">${"Buscar usuarios"}</g:link> </li>
+                      <li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <g:form controller="publicacion" action="formarPublicacion" value="Crear Publicacion" params="[idUsuario:"${usuario.id}"]">
               <h1>Materia</h1>
               <g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", catedra " + it.profesor.nombre}}" optionKey="id"  />
@@ -17,6 +34,7 @@
               <h1>Promedio requerido para comentar</h1>
               <g:field type="number" step="0.01" name="promedioCalificacionesMinimoParaComentar" value="0" min="0" max="5"/>
               <g:submitButton name = "Crear publicacion" value="Crear publicacion" />
-        </g:form>
+            </g:form>
+          </div>
     </body>
 </html>

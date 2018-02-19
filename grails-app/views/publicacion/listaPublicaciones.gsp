@@ -2,22 +2,25 @@
 <html>
 	<head>
 		<meta name="layout" content="mainPantallas">
-		<g:set var="entityName" value="${message(code: 'publicacion.label', default: 'Publicacion')}" />
-		<title><g:message code="default.list.label" args="[entityName]" /></title>
+		<title>Listado de publicaciones</title>
 	</head>
 	<body>
 
-		<a href="#list-publicacion" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-
-			<content tag="nav">
-	      <a><li>${usuarioInstance.nombre}</li></a>
-	    </content>
-
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="Volver al inicio"/></a></li>
-			</ul>
-		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="navbar navbar-inverse">
+						<div class="container-fluid">
+							<ul class="nav navbar-nav">
+								<li> <g:link controller="publicacion" action="crearPublicacion" params="[idUsuario:"${usuarioInstance.id}"]">Crear publicaci&oacute;n</g:link></li>
+								<li> <g:link controller="${"mensajePrivado"}" params="[idUsuario:"${usuarioInstance.id}"]">${"Mensajes privados"}</g:link> </li>
+								<li> <g:link controller="${"usuario"}" action="listaUsuarios" params="[idUsuario:"${usuarioInstance.id}"]">${"Buscar usuarios"}</g:link> </li>
+								<li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 
 		<h1>Buscar publicaciones:</h1>
 		<g:form action="listaPublicaciones" params="[idUsuario:"${usuarioInstance.id}"]">
@@ -56,5 +59,6 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
 	</body>
 </html>

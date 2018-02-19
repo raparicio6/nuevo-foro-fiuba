@@ -14,12 +14,11 @@
           <div class="navbar navbar-inverse">
             <div class="container-fluid">
               <ul class="nav navbar-nav">
-                <li><a class="home navbar-brand" href="${createLink(controller : 'usuario' ,action : 'inicioUsuario', params: [idUsuario : usuario.id])}">
-									Volver al inicio
-								</a></li>
-                <li>
-                  <g:link action="listaPublicaciones" params="[idUsuario:"${usuario.id}"]">${"Volver al listado"}</g:link>
-                </li>
+                <li> <g:link action="listaPublicaciones" params="[idUsuario:"${usuario.id}"]">${"Volver al listado"}</g:link> </li>
+                <li> <g:link controller="publicacion" action="crearPublicacion" params="[idUsuario:"${usuario.id}"]">Crear publicaci&oacute;n</g:link></li>
+                <li> <g:link controller="${"mensajePrivado"}" params="[idUsuario:"${usuario.id}"]">${"Mensajes privados"}</g:link> </li>
+                <li> <g:link controller="${"usuario"}" action="listaUsuarios" params="[idUsuario:"${usuario.id}"]">${"Buscar usuarios"}</g:link> </li>
+                <li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>
               </ul>
             </div>
           </div>
