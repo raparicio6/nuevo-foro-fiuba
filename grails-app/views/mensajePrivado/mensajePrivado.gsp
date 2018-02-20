@@ -3,7 +3,14 @@
 
 <head>
     <meta name="layout" content="mainPantallas"/>
-    <title>Ver mensaje</title>
+    <title>
+      <g:if test="${accion=="ver"}">      
+        Ver mensaje
+      </g:if>
+      <g:else>
+        Crear mensaje
+      </g:else>
+    </title>
 </head>
 
 <body>
@@ -54,7 +61,7 @@
       </g:if>
 
       <g:if test="${accion=="crear"}">
-        <g:form action="enviarMensaje" params="[idUsuarioCreador:"${usuarioInstance.id}"]">
+        <g:form action="enviarMensaje" params="[idUsuarioCreador:"${usuario.id}"]">
 
                 <h1>Receptor</h1>
                 <g:select  name="idUsuarioReceptor" from="${usuarios}" optionValue ="nombre" optionKey = "id" />

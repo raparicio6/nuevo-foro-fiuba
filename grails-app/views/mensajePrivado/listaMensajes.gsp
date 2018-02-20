@@ -3,7 +3,7 @@
 
 <head>
     <meta name="layout" content="mainPantallas"/>
-    <title>Mensajes privados</title>
+    <title>${title}</title>
 </head>
 
 <body>
@@ -48,10 +48,18 @@
                   <td>${mensaje.usuarioConElQueSeInteractua.nombre}</td>
                   <td>${mensaje.mensajePrivado.texto}</td>
                   <td>
+                    <!-- DE ACA DEBERIAS PODER PASARLE LA ACCION AL CONTROLADOR -->                    
                     <g:form action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${mensaje.mensajePrivado.id}", idInformacion:"${mensaje.id}", mostrarResponder:"${mostrarResponder}"]" >
-                      <button type="submit" title="Ver" style="background-color: Transparent;border: none;font-size: 20px;">
-                        <span class="glyphicon glyphicon-zoom-in" ></span>
+                      <g:if test="${mostrarResponder}">
+                      <button type="submit" title="Responder" style="background-color: Transparent;border: none;font-size: 20px;">
+                        <span class="glyphicon glyphicon-pencil" ></span>
                       </button>
+                      </g:if>
+                      <g:else>
+                        <button type="submit" title="Ver" style="background-color: Transparent;border: none;font-size: 20px;">
+                          <span class="glyphicon glyphicon-zoom-in" ></span>
+                        </button>
+                      </g:else>
                     </g:form>
                   </td>
                 </tr>
@@ -68,7 +76,7 @@
       <div class="col-md-12">
         <div class="col-md-3 col-md-offset-3">
           <g:form action="crearMensaje" params="[idUsuario:"${usuarioInstance.id}"]" >
-            <g:actionSubmit  action="crearMensaje" value="Redactar nuevo mensaje" class="btn btn-danger"  />
+            <g:actionSubmit action="crearMensaje" value="Redactar nuevo mensaje" class="btn btn-danger"  />
           </g:form>
         </div>
         <div class="col-md-3 col-md-offset-1">

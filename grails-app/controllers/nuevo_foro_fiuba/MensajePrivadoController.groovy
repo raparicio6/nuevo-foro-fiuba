@@ -9,18 +9,18 @@ class MensajePrivadoController {
   def index(long idUsuario) {
     def usuarioInstance = mensajePrivadoService.getUsuarioById(idUsuario)
     def mensajesRecibidos = mensajePrivadoService.obtenerMensajesRecibidos(usuarioInstance)
-    render (view:"listaMensajes", model:[usuarioInstance:usuarioInstance, mensajes:mensajesRecibidos, title:"Casilla", enviadosRecibidos:"Recibidos", dePara:"De", mostrarResponder:true, action:"verMensajesEnviados", value:"Ver mensajes enviados"])
+    render (view:"listaMensajes", model:[usuarioInstance:usuarioInstance, mensajes:mensajesRecibidos, title:"Mensajes recibidos", enviadosRecibidos:"Recibidos", dePara:"De", mostrarResponder:true, action:"verMensajesEnviados", value:"Ver mensajes enviados"])
   }
 
   def verMensajesEnviados(long idUsuario){
     Usuario usuarioInstance = mensajePrivadoService.getUsuarioById(idUsuario)
     def mensajesEnviados = mensajePrivadoService.obtenerMensajesEnviados(usuarioInstance)
-    render (view:"listaMensajes", model:[usuarioInstance:usuarioInstance, mensajes:mensajesEnviados, title:"Enviados", enviadosRecibidos:"Enviados", dePara:"Para", mostrarResponder:false, action:"index", value:"Volver a recibidos"])
+    render (view:"listaMensajes", model:[usuarioInstance:usuarioInstance, mensajes:mensajesEnviados, title:"Mensajes enviados", enviadosRecibidos:"Enviados", dePara:"Para", mostrarResponder:false, action:"index", value:"Volver a recibidos"])
   }
 
   def crearMensaje(long idUsuario){
     def usuarioInstance = mensajePrivadoService.getUsuarioById(idUsuario)
-    render (view:"mensajePrivado", model:[usuarioInstance:usuarioInstance, usuarios:mensajePrivadoService.getAllUsuarios(), accion:"crear"])
+    render (view:"mensajePrivado", model:[usuario:usuarioInstance, usuarios:mensajePrivadoService.getAllUsuarios(), accion:"crear", title:"Crear mensaje"])
   }
 
   def verMensaje(long idMensajePrivado, long idUsuario, long idInformacion, Boolean mostrarResponder){
@@ -31,8 +31,8 @@ class MensajePrivadoController {
   }
 
   def enviarMensaje (long idUsuarioCreador, long idUsuarioReceptor, String texto, long idMensajeAlCualResponde, String archivoAdjunto){
-    mensajePrivadoService.enviarMensaje(idUsuarioCreador, idUsuarioReceptor, texto, idMensajeAlCualResponde, archivoAdjunto)
-    redirect (action:"index", params:[idUsuario:idUsuarioCreador])
+    mensajePrivadoService.enviarMensaje(idUsuarioCreador, idUsuarioReceptor, texto, idMensajeAlCualResponde, archivoAdjunto)    
+    redirect (action:"verMensajesEnviados", params:[idUsuario:idUsuarioCreador])
   }
 
 }
