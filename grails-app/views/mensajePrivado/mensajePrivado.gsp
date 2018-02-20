@@ -30,10 +30,10 @@
               </a></li>
               <li>
                 <g:if test="${!mostrarResponder}">
-                  <g:link action="verMensajesEnviados" params="[idUsuario:"${usuario.id}"]">Atras</g:link>
+                  <g:link action="verMensajesEnviados" params="[idUsuario:"${usuario.id}"]">Atr&aacute;s</g:link>
                 </g:if>
                 <g:else>
-                  <g:link action="index" params="[idUsuario:"${usuario.id}"]">Atras</g:link>
+                  <g:link action="index" params="[idUsuario:"${usuario.id}"]">Atr&aacute;s</g:link>
                 </g:else>
               </li>
               <li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>

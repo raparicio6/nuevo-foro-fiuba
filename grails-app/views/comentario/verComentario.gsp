@@ -22,10 +22,10 @@
                 </li>
                 <li>
                   <g:if test="${comentario.publicacionComentada}">
-                    <g:link controller="Publicacion" action="verPublicacion" params="[idUsuario:"${usuario.id}", idPublicacion:"${comentario.publicacionComentada.id}"]">${"Atras"}</g:link>
+                    <g:link controller="Publicacion" action="verPublicacion" params="[idUsuario:"${usuario.id}", idPublicacion:"${comentario.publicacionComentada.id}"]">Atr&aacute;s</g:link>
                   </g:if>
                   <g:else>
-                    <g:link action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.comentarioComentado.id}"]">${"Atras"}</g:link>
+                    <g:link action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.comentarioComentado.id}"]">Atr&aacute;s</g:link>
                   </g:else>
                 </li>
                 <li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>

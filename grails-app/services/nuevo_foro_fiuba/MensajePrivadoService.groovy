@@ -17,7 +17,7 @@ class MensajePrivadoService {
   }
 
   def obtenerMensajesRecibidos (Usuario usuario){
-    usuario.getMensajes().findAll {mensajePrivado -> mensajePrivado.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR && mensajePrivado.getEstado() == InformacionMensajeUsuario.EstadoInformacionMensajeUsuario.VIGENTE }
+    usuario.getMensajes().findAll {infoMensaje -> infoMensaje.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR && infoMensaje.getEstado() == InformacionMensajeUsuario.EstadoInformacionMensajeUsuario.VIGENTE }
   }
 
   MensajePrivado enviarMensaje(long idUsuarioCreador, long idUsuarioReceptor, String texto, long idMensajeAlCualResponde = 0, String archivoAdjunto = null){
@@ -42,7 +42,7 @@ class MensajePrivadoService {
   }
 
   def obtenerMensajesEnviados(Usuario usuario){
-    usuario.getMensajes().findAll {mensajePrivado -> mensajePrivado.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR && mensajePrivado.getEstado() == InformacionMensajeUsuario.EstadoInformacionMensajeUsuario.VIGENTE}
+    usuario.getMensajes().findAll {infoMensaje -> infoMensaje.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR && infoMensaje.getEstado() == InformacionMensajeUsuario.EstadoInformacionMensajeUsuario.VIGENTE}
   }
 
 

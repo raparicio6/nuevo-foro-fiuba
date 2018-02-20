@@ -18,7 +18,7 @@
 									Volver al inicio
 									</a>
 								</li>
-								<li> <g:link action="listaUsuarios" params="[idUsuario:"${usuario.id}"]">Atras</g:link> </li>
+								<li> <g:link action="listaUsuarios" params="[idUsuario:"${usuario.id}"]">Atr&aacute;s</g:link> </li>
                 <li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>
               </ul>
             </div>
