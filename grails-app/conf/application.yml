@@ -1,5 +1,11 @@
 ---
 grails:
+    guides:
+        cdnFolder: /Users/sdelamo/Sites/GrailsGuides/UploadFiles
+        cdnRootUrl: http://localhost:8888
+        
+---
+grails:
     profile: web
     codegen:
         defaultPackage: nuevo_foro_fiuba
@@ -68,6 +74,9 @@ grails:
             maxsize: 1000
     controllers:
         defaultScope: singleton
+        upload:
+            maxFileSize: 26214400
+            maxRequestSize: 26214400
     converters:
         encoding: UTF-8
     views:

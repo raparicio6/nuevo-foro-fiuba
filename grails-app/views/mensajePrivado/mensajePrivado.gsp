@@ -49,34 +49,30 @@
             <g:textArea name="texto" value="${mensaje.texto}" disabled="true"/>
             <g:if test="${mensaje.archivo}">
               <h1>Archivo</h1>
-              <a href="${mensaje.archivo.nombreFinal}">Abrir archivo</a>
+              <g:link action="descargarArchivoAdjunto" params="[idArchivo:"${mensaje.archivo.id}"]"> Descargar ${mensaje.archivo.nombre} </g:link>
             </g:if>
 
         <g:if test="${mostrarResponder}">
 
               <h1>Responder mensaje</h1>
-              <g:form action="enviarMensaje" params="[idUsuarioCreador:"${usuario.id}", idUsuarioReceptor:"${informacion.usuarioConElQueSeInteractua.id}", idMensajeAlCualResponde:"${mensaje.id}"]">
+              <g:uploadForm action="enviarMensaje" params="[idUsuarioCreador:"${usuario.id}", idUsuarioReceptor:"${informacion.usuarioConElQueSeInteractua.id}", idMensajeAlCualResponde:"${mensaje.id}"]">
                 <g:textArea name="texto" placeholder="Escriba una respuesta..."/>
-                <g:field name="archivoAdjunto" type="file"/>
+                <input type="file" name="file" />
                 <g:submitButton name="enviarMensaje" value="Responder"/>
-              </g:form>
+              </g:uploadForm>
 
         </g:if>
       </g:if>
 
       <g:if test="${accion=="crear"}">
-        <g:form action="enviarMensaje" params="[idUsuarioCreador:"${usuario.id}"]">
-
+        <g:uploadForm action="enviarMensaje" params="[idUsuarioCreador:"${usuario.id}"]">
                 <h1>Receptor</h1>
                 <g:select  name="idUsuarioReceptor" from="${usuarios}" optionValue ="nombre" optionKey = "id" />
-
                 <h1>Texto</h1>
                 <g:textArea name="texto" placeholder="Contenido del mensaje..."/>
-                <g:field name="archivoAdjunto" type="file"/>
-
+                <input type="file" name="file" />
                 <g:submitButton name="Enviar" value="Enviar mensaje"/>
-
-        </g:form>
+        </g:uploadForm>
       </g:if>
 
   </div>

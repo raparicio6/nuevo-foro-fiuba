@@ -1,14 +1,14 @@
 package nuevo_foro_fiuba
 
-import java.io.File
 import grails.gorm.transactions.Transactional
+import org.springframework.web.multipart.MultipartFile
 
 @Transactional
 class MensajePrivadoService {
 
   def serviceMethod() {}
 
-  final String PATH = "/files/"
+  final String PATH = "C:/Users/Mariano/nuevo_foro_fiuba/grails-app/files/"
 
   MensajePrivado crearMensaje (String texto, MensajePrivado mensajeAlCualSeResponde, Archivo archivo){
     MensajePrivado mensaje = new MensajePrivado(texto, mensajeAlCualSeResponde, archivo)
@@ -20,21 +20,22 @@ class MensajePrivadoService {
     usuario.getMensajes().findAll {infoMensaje -> infoMensaje.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR && infoMensaje.getEstado() == InformacionMensajeUsuario.EstadoInformacionMensajeUsuario.VIGENTE }
   }
 
-  MensajePrivado enviarMensaje(long idUsuarioCreador, long idUsuarioReceptor, String texto, long idMensajeAlCualResponde = 0, String archivoAdjunto = null){
+  MensajePrivado enviarMensaje(long idUsuarioCreador, long idUsuarioReceptor, String texto, long idMensajeAlCualResponde = 0, MultipartFile file = null){
     def emisor = getUsuarioById(idUsuarioCreador)
     def receptor = getUsuarioById(idUsuarioReceptor)
     def mensajeAlCualResponde = null
     if (idMensajeAlCualResponde)
       mensajeAlCualResponde = getMensajePrivadoById(idMensajeAlCualResponde)
     def archivo = null
-    if (archivoAdjunto)
-       archivo = new Archivo(archivoAdjunto, this.PATH)
+    if (file && !file.empty){
+       archivo = new Archivo(file.originalFilename, this.PATH + file.originalFilename)
+       file.transferTo(new File(archivo.path))
+       archivo.save(failOnError:true)
+    }
     MensajePrivado mensaje = new MensajePrivado(texto, mensajeAlCualResponde, archivo)
     InformacionMensajeUsuario infoEmisor = new InformacionMensajeUsuario (emisor,receptor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR)
     InformacionMensajeUsuario infoReceptor = new InformacionMensajeUsuario (receptor,emisor, mensaje, InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR)
     emisor.enviarMensaje(receptor, infoEmisor, infoReceptor)
-    if (archivo)
-      archivo.save(failOnError:true)
     infoEmisor.save(failOnError:true)
     infoReceptor.save(failOnError:true)
     mensaje.save(failOnError:true)
@@ -52,7 +53,6 @@ class MensajePrivadoService {
     usuario.eliminarMensajePrivado (informacionMensajeUsuario)
   }
 
-
   def getUsuarioById(long idUsuario){
     Usuario.get(idUsuario)
   }
@@ -67,6 +67,10 @@ class MensajePrivadoService {
 
   def getInformacionMensajeUsuarioById(long idInformacionMensajeUsuario){
     InformacionMensajeUsuario.get(idInformacionMensajeUsuario)
+  }
+
+  def getArchivoById(long idArchivo){
+    Archivo.get(idArchivo)
   }
 
 }

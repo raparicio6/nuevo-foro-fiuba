@@ -10,3 +10,5 @@ out/
 .project
 .settings
 .classpath
+grails-app/files/diagrama de clases foro.jpg
+grails-app/files/MVC.png
