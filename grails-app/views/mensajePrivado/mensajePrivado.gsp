@@ -4,12 +4,15 @@
 <head>
     <meta name="layout" content="mainPantallas"/>
     <title>
-      <g:if test="${accion=="ver"}">      
+      <g:if test="${accion=="ver" && !mostrarResponder}">
         Ver mensaje
       </g:if>
-      <g:else>
+      <g:if test="${accion=="ver" && mostrarResponder}">
+        Responder mensaje
+      </g:if>
+      <g:if test="${accion=="crear"}">
         Crear mensaje
-      </g:else>
+      </g:if>
     </title>
 </head>
 
@@ -27,12 +30,13 @@
               </a></li>
               <li>
                 <g:if test="${!mostrarResponder}">
-                  <g:link action="verMensajesEnviados" params="[idUsuario:"${usuario.id}"]">Volver</g:link>
+                  <g:link action="verMensajesEnviados" params="[idUsuario:"${usuario.id}"]">Atras</g:link>
                 </g:if>
                 <g:else>
-                  <g:link action="index" params="[idUsuario:"${usuario.id}"]">Volver</g:link>
+                  <g:link action="index" params="[idUsuario:"${usuario.id}"]">Atras</g:link>
                 </g:else>
               </li>
+              <li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>
             </ul>
           </div>
         </div>

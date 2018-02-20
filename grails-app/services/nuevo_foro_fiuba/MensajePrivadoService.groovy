@@ -17,7 +17,7 @@ class MensajePrivadoService {
   }
 
   def obtenerMensajesRecibidos (Usuario usuario){
-    usuario.getMensajes().findAll {mensajePrivado -> mensajePrivado.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR}
+    usuario.getMensajes().findAll {mensajePrivado -> mensajePrivado.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR && mensajePrivado.getEstado() == InformacionMensajeUsuario.EstadoInformacionMensajeUsuario.VIGENTE }
   }
 
   MensajePrivado enviarMensaje(long idUsuarioCreador, long idUsuarioReceptor, String texto, long idMensajeAlCualResponde = 0, String archivoAdjunto = null){
@@ -26,7 +26,7 @@ class MensajePrivadoService {
     def mensajeAlCualResponde = null
     if (idMensajeAlCualResponde)
       mensajeAlCualResponde = getMensajePrivadoById(idMensajeAlCualResponde)
-    def archivo = null 
+    def archivo = null
     if (archivoAdjunto)
        archivo = new Archivo(archivoAdjunto, this.PATH)
     MensajePrivado mensaje = new MensajePrivado(texto, mensajeAlCualResponde, archivo)
@@ -42,8 +42,16 @@ class MensajePrivadoService {
   }
 
   def obtenerMensajesEnviados(Usuario usuario){
-    usuario.getMensajes().findAll {mensajePrivado -> mensajePrivado.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR}
+    usuario.getMensajes().findAll {mensajePrivado -> mensajePrivado.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR && mensajePrivado.getEstado() == InformacionMensajeUsuario.EstadoInformacionMensajeUsuario.VIGENTE}
   }
+
+
+  def eliminarMensaje (long idUsuario, long idInformacionMensajeUsuario){
+    def usuario = getUsuarioById(idUsuario)
+    def informacionMensajeUsuario = getInformacionMensajeUsuarioById(idInformacionMensajeUsuario)
+    usuario.eliminarMensajePrivado (informacionMensajeUsuario)
+  }
+
 
   def getUsuarioById(long idUsuario){
     Usuario.get(idUsuario)

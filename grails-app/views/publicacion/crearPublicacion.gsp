@@ -11,10 +11,12 @@
                 <div class="navbar navbar-inverse">
                   <div class="container-fluid">
                     <ul class="nav navbar-nav">
-                      <li> <g:link controller="publicacion" action="listaPublicaciones" params="[idUsuario:"${usuario.id}"]">${"Ver publicaciones"}</g:link> </li>
-                      <li> <g:link controller="${"mensajePrivado"}" params="[idUsuario:"${usuario.id}"]">${"Mensajes privados"}</g:link> </li>
-                      <li> <g:link controller="${"usuario"}" action="listaUsuarios" params="[idUsuario:"${usuario.id}"]">${"Buscar usuarios"}</g:link> </li>
-                      <li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>
+                      <li>
+                        <a class="home navbar-brand" href="${createLink(controller : 'usuario' ,action : 'inicioUsuario', params: [idUsuario : usuario.id])}">
+                          Volver al inicio
+                        </a>
+                      </li>
+                      <li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>                  
                     </ul>
                   </div>
                 </div>
@@ -23,7 +25,7 @@
 
             <g:form controller="publicacion" action="formarPublicacion" value="Crear Publicacion" params="[idUsuario:"${usuario.id}"]">
               <h1>Materia</h1>
-              <g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", catedra " + it.profesor.nombre}}" optionKey="id"  />
+              <g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", catedra " + it.profesor.nombre}}" optionKey="id" noSelection="${['null':'Elegir materia...']}" />
               <h1>Texto</h1>
               <g:textArea name="texto" style="height:50px" class="form-control" placeHolder="Ingrese un texto" />
               <h1>Agregar encuesta</h1>

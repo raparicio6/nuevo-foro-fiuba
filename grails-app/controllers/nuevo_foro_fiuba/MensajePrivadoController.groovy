@@ -31,8 +31,13 @@ class MensajePrivadoController {
   }
 
   def enviarMensaje (long idUsuarioCreador, long idUsuarioReceptor, String texto, long idMensajeAlCualResponde, String archivoAdjunto){
-    mensajePrivadoService.enviarMensaje(idUsuarioCreador, idUsuarioReceptor, texto, idMensajeAlCualResponde, archivoAdjunto)    
+    mensajePrivadoService.enviarMensaje(idUsuarioCreador, idUsuarioReceptor, texto, idMensajeAlCualResponde, archivoAdjunto)
     redirect (action:"verMensajesEnviados", params:[idUsuario:idUsuarioCreador])
+  }
+
+  def eliminarMensaje (long idUsuario, long idInformacionMensajeUsuario){
+    mensajePrivadoService.eliminarMensaje(idUsuario, idInformacionMensajeUsuario)
+    redirect (action:"index", params:[idUsuario:idUsuario])
   }
 
 }

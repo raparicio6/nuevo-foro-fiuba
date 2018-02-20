@@ -13,9 +13,12 @@
           <div class="navbar navbar-inverse">
             <div class="container-fluid">
               <ul class="nav navbar-nav">
-								<li><a class="home navbar-brand" href="${createLink(action : 'inicioUsuario', params: [idUsuario : usuarioInstance.id])}">
+								<li>
+									<a class="home navbar-brand" href="${createLink(action : 'inicioUsuario', params: [idUsuario : usuarioInstance.id])}">
 									Volver al inicio
-								</a></li>
+									</a>
+								</li>
+								<li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>
               </ul>
             </div>
           </div>

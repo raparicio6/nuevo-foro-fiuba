@@ -20,9 +20,6 @@
                   </a>
                 </li>
                 <li> <g:link action="listaPublicaciones" params="[idUsuario:"${usuario.id}"]">${"Volver al listado"}</g:link> </li>
-                <li> <g:link controller="publicacion" action="crearPublicacion" params="[idUsuario:"${usuario.id}"]">Crear publicaci&oacute;n</g:link></li>
-                <li> <g:link controller="${"mensajePrivado"}" params="[idUsuario:"${usuario.id}"]">${"Mensajes privados"}</g:link> </li>
-                <li> <g:link controller="${"usuario"}" action="listaUsuarios" params="[idUsuario:"${usuario.id}"]">${"Buscar usuarios"}</g:link> </li>
                 <li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>
               </ul>
             </div>
@@ -124,14 +121,24 @@
                       Materia:
                       <g:if test="${modificar}">
                         <g:form controller="publicacion" action="modificarCatedra" params="[idUsuario:"${usuario.id}", idPublicacion:"${publicacion.id}"]">
-                          <g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", " + "catedra " + it.profesor.nombre}}" optionKey="id" value="${publicacion.catedraRelacionada.id}"/>
+                          <g:if test="${publicacion.catedraRelacionada}">
+                            <g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", " + "catedra " + it.profesor.nombre}}" optionKey="id" value="${publicacion.catedraRelacionada.id}"/>
+                          </g:if>
+                          <g:else>
+                            <g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", " + "catedra " + it.profesor.nombre}}" optionKey="id"/>
+                          </g:else>
                           <button type="submit" title="Guardar" style="background-color: Transparent;border: none;">
                             <span class="glyphicon glyphicon-ok"></span>
                           </button>
                         </g:form>
                       </g:if>
                       <g:else>
-                        ${publicacion.catedraRelacionada.materia.nombre}, catedra ${publicacion.catedraRelacionada.profesor.nombre}
+                        <g:if test="${publicacion.catedraRelacionada}">
+                          ${publicacion.catedraRelacionada.materia.nombre}, catedra ${publicacion.catedraRelacionada.profesor.nombre}
+                        </g:if>
+                        <g:else>
+                          Ninguna
+                        </g:else>
                       </g:else>
                   </li>
                   <li class="list-group-item">

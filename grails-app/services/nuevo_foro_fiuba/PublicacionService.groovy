@@ -19,7 +19,7 @@ class PublicacionService {
   }
 
   def filtrarPublicacionesPorCatedra(ArrayList publicaciones, long idCatedra){
-    publicaciones.findAll {publicacion -> publicacion.catedraRelacionada.id == idCatedra}
+    publicaciones.findAll {publicacion -> if (publicacion.catedraRelacionada) {publicacion.catedraRelacionada.id == idCatedra}}
   }
 
   Boolean usuarioEsDueñoDeLaPublicacion(Usuario usuario, Publicacion publicacion){
@@ -33,9 +33,12 @@ class PublicacionService {
   Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateriaRequerida, Float promedioCalificacionesMinimoParaComentar = 0, String nombreEncuesta = null, String nombreOpciones = null){
     def usuario = getUsuarioById(idUsuario)
     def catedra = null
-    if (idCatedra)
+    def materia = null
+    if (idCatedra){
       catedra = getCatedraById(idCatedra)
-    Publicacion publicacion = this.crearPublicacion(usuario, catedra, texto, catedra.materia)
+      materia = catedra.materia
+    }
+    Publicacion publicacion = this.crearPublicacion(usuario, catedra, texto, materia)
     def materiaRequerida = null
     if (idMateriaRequerida){
       materiaRequerida = getMateriaById(idMateriaRequerida)
@@ -78,6 +81,7 @@ class PublicacionService {
     def publicacion = getPublicacionById(idPublicacion)
     def catedra = getCatedraById(idCatedra)
     usuario.modificarCatedraPublicacion(publicacion, catedra)
+    modificarMateriaPublicacion(idUsuario, idPublicacion, catedra.materia.id)
   }
 
   def modificarPromedioRequeridoParaComentar(long idUsuario, long idPublicacion, Float promedio){

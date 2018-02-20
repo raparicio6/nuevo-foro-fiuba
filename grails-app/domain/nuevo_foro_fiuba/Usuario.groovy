@@ -184,4 +184,8 @@ class Usuario {
 		publicacion.eliminar()
 	}
 
+	def eliminarMensajePrivado(InformacionMensajeUsuario info){
+		info.eliminar()
+	}
+
 }

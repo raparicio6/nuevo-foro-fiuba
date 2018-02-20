@@ -22,16 +22,12 @@
                 </li>
                 <li>
                   <g:if test="${comentario.publicacionComentada}">
-                    <g:link controller="Publicacion" action="verPublicacion" params="[idUsuario:"${usuario.id}", idPublicacion:"${comentario.publicacionComentada.id}"]">${"Volver"}</g:link>
+                    <g:link controller="Publicacion" action="verPublicacion" params="[idUsuario:"${usuario.id}", idPublicacion:"${comentario.publicacionComentada.id}"]">${"Atras"}</g:link>
                   </g:if>
                   <g:else>
-                    <g:link action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.comentarioComentado.id}"]">${"Volver"}</g:link>
+                    <g:link action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.comentarioComentado.id}"]">${"Atras"}</g:link>
                   </g:else>
                 </li>
-                <li> <g:link controller="publicacion" action="crearPublicacion" params="[idUsuario:"${usuario.id}"]">Crear publicaci&oacute;n</g:link></li>
-                <li> <g:link controller="publicacion" action="listaPublicaciones" params="[idUsuario:"${usuario.id}"]">${"Ver publicaciones"}</g:link> </li>
-                <li> <g:link controller="${"mensajePrivado"}" params="[idUsuario:"${usuario.id}"]">${"Mensajes privados"}</g:link> </li>
-                <li> <g:link controller="${"usuario"}" action="listaUsuarios" params="[idUsuario:"${usuario.id}"]">${"Buscar usuarios"}</g:link> </li>
                 <li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>
               </ul>
             </div>

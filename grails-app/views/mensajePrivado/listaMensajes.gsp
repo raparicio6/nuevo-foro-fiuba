@@ -15,9 +15,12 @@
         <div class="navbar navbar-inverse">
           <div class="container-fluid">
             <ul class="nav navbar-nav">
-              <li><a class="home navbar-brand" href="${createLink(controller : 'usuario', action : 'inicioUsuario', params: [idUsuario : usuarioInstance.id])}">
-                Volver al inicio
-              </a></li>
+              <li>
+                <a class="home navbar-brand" href="${createLink(controller : 'usuario', action : 'inicioUsuario', params: [idUsuario : usuarioInstance.id])}">
+                  Volver al inicio
+                </a>
+              </li>
+              <li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>
             </ul>
           </div>
         </div>
@@ -48,7 +51,7 @@
                   <td>${mensaje.usuarioConElQueSeInteractua.nombre}</td>
                   <td>${mensaje.mensajePrivado.texto}</td>
                   <td>
-                    <!-- DE ACA DEBERIAS PODER PASARLE LA ACCION AL CONTROLADOR -->                    
+                    <!-- DE ACA DEBERIAS PODER PASARLE LA ACCION AL CONTROLADOR -->
                     <g:form action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${mensaje.mensajePrivado.id}", idInformacion:"${mensaje.id}", mostrarResponder:"${mostrarResponder}"]" >
                       <g:if test="${mostrarResponder}">
                       <button type="submit" title="Responder" style="background-color: Transparent;border: none;font-size: 20px;">
@@ -60,6 +63,11 @@
                           <span class="glyphicon glyphicon-zoom-in" ></span>
                         </button>
                       </g:else>
+                    </g:form>
+                    <g:form action="eliminarMensaje" params="[idUsuario:"${usuarioInstance.id}", idInformacionMensajeUsuario:"${mensaje.id}"]">
+                      <button type="submit" title="Eliminar mensaje" style="background-color: Transparent;border: none;font-size: 20px;">
+                        <span class="glyphicon glyphicon-remove" ></span>
+                      </button>
                     </g:form>
                   </td>
                 </tr>

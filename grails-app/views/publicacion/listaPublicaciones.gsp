@@ -17,9 +17,6 @@
                     Volver al inicio
                   </a>
                 </li>
-								<li> <g:link controller="publicacion" action="crearPublicacion" params="[idUsuario:"${usuarioInstance.id}"]">Crear publicaci&oacute;n</g:link></li>
-								<li> <g:link controller="${"mensajePrivado"}" params="[idUsuario:"${usuarioInstance.id}"]">${"Mensajes privados"}</g:link> </li>
-								<li> <g:link controller="${"usuario"}" action="listaUsuarios" params="[idUsuario:"${usuarioInstance.id}"]">${"Buscar usuarios"}</g:link> </li>
 								<li> <g:link controller="${"usuario"}">Cerrar sesi&oacute;n</g:link> </li>
 							</ul>
 						</div>
@@ -29,7 +26,7 @@
 
 		<h1>Buscar publicaciones:</h1>
 		<g:form action="listaPublicaciones" params="[idUsuario:"${usuarioInstance.id}"]">
-			<g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", " + "catedra " + it.profesor.nombre}}" optionKey="id" />
+			<g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", " + "catedra " + it.profesor.nombre}}" optionKey="id" noSelection="${['null':'Elegir materia...']}"/>
 			<g:submitButton name="Buscar"/>
 		</g:form>
 
@@ -38,25 +35,29 @@
 			<table>
 				<thead>
 					<tr>
-
-						<g:sortableColumn property="id" title="${message(code: 'publicacion.usuarioCreador.label', default: 'Numero publicacion')}" />
-            <g:sortableColumn property="usuarioCreador" title="${message(code: 'publicacion.usuarioCreador.label', default: 'Autor')}" />
-            <g:sortableColumn property="materiaRelacionada" title="${message(code: 'publicacion.catedraRelacionada.label', default: 'Materia')}" />
-						<g:sortableColumn property="materiaRelacionada" title="${message(code: 'publicacion.catedraRelacionada.label', default: 'Catedra')}" />
-						<g:sortableColumn property="estado" title="${message(code: 'publicacion.estado.label', default: 'Estado')}" />
-            <g:sortableColumn property=" " title="${message(code: ' ', default: ' ')}" />
-
+						<th>Fecha creacion</th>
+						<th>Autor</th>
+						<th>Materia</th>
+						<th>Catedra</th>
+						<th>Estado</th>
+						<th>Acciones<th>
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${publicacionInstanceList}" status="i" var="publicacionInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					<tr>
 
-						<td>${fieldValue(bean: publicacionInstance, field: "id")}</td>
+						<td>${fieldValue(bean: publicacionInstance, field: "fechaHoraCreacion")}</td>
 						<td>${fieldValue(bean: publicacionInstance, field: "usuarioCreador.nombre")}</td>
-						<td>${fieldValue(bean: publicacionInstance, field: "catedraRelacionada.materia.nombre")}</td>
-            <td>${fieldValue(bean: publicacionInstance, field: "catedraRelacionada.profesor.nombre")}</td>
-            <td>${fieldValue(bean: publicacionInstance, field: "estado")}</td>
+						<g:if test="${publicacionInstance.catedraRelacionada}">
+							<td>${fieldValue(bean: publicacionInstance, field: "catedraRelacionada.materia.nombre")}</td>
+							<td>${fieldValue(bean: publicacionInstance, field: "catedraRelacionada.profesor.nombre")}</td>
+						</g:if>
+						<g:else>
+							<td>Ninguna</td>
+							<td>Ninguna</td>
+						</g:else>
+						<td>${fieldValue(bean: publicacionInstance, field: "estado")}</td>
             <td><g:link action="verPublicacion" params="[idUsuario:"${usuarioInstance.id}", idPublicacion:"${publicacionInstance.id}"]">${"Ver"}</g:link></td>
 
 					</tr>
