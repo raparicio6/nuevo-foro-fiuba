@@ -15,7 +15,7 @@ class MensajePrivadoController {
   def verMensajesEnviados(long idUsuario){
     Usuario usuarioInstance = mensajePrivadoService.getUsuarioById(idUsuario)
     def mensajesEnviados = mensajePrivadoService.obtenerMensajesEnviados(usuarioInstance)
-    render (view:"listaMensajes", model:[usuarioInstance:usuarioInstance, mensajes:mensajesEnviados, title:"Enviados", enviadosRecibidos:"Enviados", dePara:"Para", mostrarResponder:false, action:"index", value:"Volver a la casilla"])
+    render (view:"listaMensajes", model:[usuarioInstance:usuarioInstance, mensajes:mensajesEnviados, title:"Enviados", enviadosRecibidos:"Enviados", dePara:"Para", mostrarResponder:false, action:"index", value:"Volver a recibidos"])
   }
 
   def crearMensaje(long idUsuario){

@@ -1,89 +1,81 @@
 <!doctype html>
 <html>
 
-<style>
-input[type=text], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type=submit]:hover {
-    background-color: #45a049;
-}
-
-div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-}
-</style>
-
 <head>
     <meta name="layout" content="mainPantallas"/>
-    <title>${title}</title>
+    <title>Mensajes privados</title>
 </head>
 
 <body>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="col-md-2">
-        <h3>
-            <span class="label label-default">Mensajes ${enviadosRecibidos}:</span>
-        </h3>
-      </div>
-      <div class="col-md-6">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>${dePara}</th>
-              <th>Texto</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <g:each in="${mensajes}" var="mensaje">
-              <tr>
-                <td>${mensaje.usuarioConElQueSeInteractua.nombre}</td>
-                <td>${mensaje.mensajePrivado.texto}</td>
-                <td>
-                  <g:link action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${mensaje.mensajePrivado.id}", idInformacion:"${mensaje.id}", mostrarResponder:"${mostrarResponder}"]" >
-                    Ver mensaje
-                  </g:link>
-                </td>
-              </tr>
-            </g:each>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
 
   <div class="container">
 
     <div class="row">
-      <div class="col-md-12 text-left">
-        <g:form action="crearMensaje" params="[idUsuario:"${usuarioInstance.id}"]" >
-          <g:actionSubmit  action="crearMensaje" value="Redactar nuevo mensaje" class="btn btn-warning"  />
-        </g:form>
-        <g:form action="verMensajesEnviados" params="[idUsuario:"${usuarioInstance.id}"]">
-          <g:actionSubmit  action="${action}" value="${value}" class="btn btn-warning"  />
-        </g:form>
+      <div class="col-md-12">
+        <div class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <ul class="nav navbar-nav">
+              <li><a class="home navbar-brand" href="${createLink(controller : 'usuario', action : 'inicioUsuario', params: [idUsuario : usuarioInstance.id])}">
+                Volver al inicio
+              </a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-3">
+          <h3>
+            <span class="label label-success">Mensajes ${enviadosRecibidos}:</span>
+          </h3>
+        </div>
+        <div class="col-md-6">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>${dePara}</th>
+                <th>Texto</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <g:each in="${mensajes}" var="mensaje">
+                <tr>
+                  <td>${mensaje.usuarioConElQueSeInteractua.nombre}</td>
+                  <td>${mensaje.mensajePrivado.texto}</td>
+                  <td>
+                    <g:form action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${mensaje.mensajePrivado.id}", idInformacion:"${mensaje.id}", mostrarResponder:"${mostrarResponder}"]" >
+                      <button type="submit" title="Ver" style="background-color: Transparent;border: none;font-size: 20px;">
+                        <span class="glyphicon glyphicon-zoom-in" ></span>
+                      </button>
+                    </g:form>
+                  </td>
+                </tr>
+              </g:each>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-3 col-md-offset-3">
+          <g:form action="crearMensaje" params="[idUsuario:"${usuarioInstance.id}"]" >
+            <g:actionSubmit  action="crearMensaje" value="Redactar nuevo mensaje" class="btn btn-danger"  />
+          </g:form>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+          <g:form action="verMensajesEnviados" params="[idUsuario:"${usuarioInstance.id}"]">
+            <g:actionSubmit action="${action}" value="${value}" class="btn btn-danger"  />
+          </g:form>
+        </div>
       </div>
     </div>
 

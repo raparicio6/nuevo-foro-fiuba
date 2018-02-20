@@ -2,42 +2,59 @@
 <html>
 	<head>
 		<meta name="layout" content="mainPantallas">
-		<g:set var="entityName" value="${message(code: 'cursada.label', default: 'Cursada')}" />
-		<title><g:message code="default.list.label" args="[entityName]" /></title>
+		<title>Ver materias cursadas</title>
 	</head>
 	<body>
 
-		<a href="#list-cursada" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
+		<div class="container">
 
-			<content tag="nav">
-	      <a><li>${usuario.nombre}</li></a>
-	    </content>
+			<div class="row">
+        <div class="col-md-12">
+          <div class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <ul class="nav navbar-nav">
+								<li><a class="home navbar-brand" href="${createLink(action : 'inicioUsuario', params: [idUsuario : usuario.id])}">
+									Volver al inicio
+								</a></li>
+								<li> <g:link action="listaUsuarios" params="[idUsuario:"${usuario.id}"]">Volver</g:link> </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="Volver al inicio"/></a></li>
-			</ul>
+			<br/>
+
+			<div class="row">
+				<div class="col-md-12">
+					<h1>
+							Materias cursadas
+					</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th class="text-center">C&aacute;tedra</th>
+								<th class="text-center">Materia</th>
+							</tr>
+						</thead>
+						<tbody>
+							<g:each in="${cursadas}" var="cursada">
+								<tr>
+									<td class="text-center">${cursada.catedra.profesor.nombre}</td>
+									<td class="text-center">${cursada.catedra.materia.nombre}</td>
+								</tr>
+							</g:each>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
 		</div>
 
-		<div>
-			<h1><g:message code="Ver cursadas" args="[entityName]" /></h1>
-
-			<table>
-				<thead>
-					<tr>
-            <g:sortableColumn property="catedra" title="${message(code: 'cursada.catedra.peofesor.nombre.label', default: 'Catedra')}" />
-            <g:sortableColumn property="materia" title="${message(code: 'cursada.catedra.materia.nombrelabel', default: 'Materia')}" />
-					</tr>
-				</thead>
-				<tbody>
-				<g:each in="${cursadas}" status="i" var="cursada">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						<td>${fieldValue(bean: cursada, field: "catedra.profesor.nombre")}</td>
-            <td>${fieldValue(bean: cursada, field: "catedra.materia.nombre")}</td>
-					</tr>
-				</g:each>
-				</tbody>
-			</table>
-		</div>
 	</body>
 </html>
