@@ -5,5 +5,4 @@ Temas para ver:
 
 *Tests
 *Darle estilo a las pantallas que les falta
-*Ver si se puede hacer que comentarios/calificaciones se muestren en pantalla odenados por fecha
-*Agregar archivos a mensajes/publicaciones
+*Agregar archivos a publicaciones

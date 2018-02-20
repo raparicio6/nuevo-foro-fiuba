@@ -142,7 +142,7 @@
                 </tr>
               </thead>
               <tbody>
-                <g:each in="${comentario.calificaciones}" var="calificacion">
+                <g:each in="${comentario.calificaciones.sort { it.id }}" var="calificacion">
                   <tr>
                     <td>${calificacion.usuario.nombre}</td>
                     <td>${calificacion.puntaje.tipo.toString().replace("_", " ")}</td>
@@ -174,7 +174,7 @@
                 </tr>
               </thead>
               <tbody>
-                <g:each in="${comentarios}" var="comentarioInstance">
+                <g:each in="${comentarios.sort { it.id }}" var="comentarioInstance">
                   <tr>
                     <td>${comentarioInstance.usuarioCreador.nombre}</td>
                     <td>${comentarioInstance.texto}</td>
