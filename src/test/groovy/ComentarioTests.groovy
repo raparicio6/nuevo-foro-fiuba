@@ -52,4 +52,12 @@ class ComentarioTests {
         assert !comentario.obtenerComentariosNoEliminados().contains(comentario2)
     }
 
+    @Test
+    void 'test se califica un comentario y esta aparece correctamente' () {
+        assert comentario.calificaciones.isEmpty()
+        Calificacion calificacion = new Calificacion(usuario, puntaje, null, comentario)
+        comentario.agregarCalificacion(calificacion)
+        assert comentario.calificaciones.contains(calificacion)
+    }
+
 }

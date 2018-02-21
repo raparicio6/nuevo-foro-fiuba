@@ -34,12 +34,14 @@ class PublicacionTests {
 
     @Test
     void 'test publicaion cambia de estado y confirma estar cerrada' () {
+        assert !publicacion.estaCerrada()
         publicacion.cambiarEstado()
         assert publicacion.estaCerrada()
     }
 
     @Test
     void 'test publicacion se elimina y confirma estar eliminada' () {
+        assert !publicacion.estaEliminada()
         publicacion.eliminar()
         assert publicacion.estaEliminada()
     }
