@@ -51,8 +51,7 @@
                   <td>${mensaje.usuarioConElQueSeInteractua.nombre}</td>
                   <td>${mensaje.mensajePrivado.texto}</td>
                   <td>
-                    <!-- DE ACA DEBERIAS PODER PASARLE LA ACCION AL CONTROLADOR -->
-                    <g:form action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${mensaje.mensajePrivado.id}", idInformacion:"${mensaje.id}", mostrarResponder:"${mostrarResponder}"]" >
+                    <g:form action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${mensaje.mensajePrivado.id}", idInformacion:"${mensaje.id}", mostrarResponder:"${mostrarResponder}"]" style="display: inline-block" >
                       <g:if test="${mostrarResponder}">
                       <button type="submit" title="Responder" style="background-color: Transparent;border: none;font-size: 20px;">
                         <span class="glyphicon glyphicon-pencil" ></span>
@@ -60,13 +59,13 @@
                       </g:if>
                       <g:else>
                         <button type="submit" title="Ver" style="background-color: Transparent;border: none;font-size: 20px;">
-                          <span class="glyphicon glyphicon-zoom-in" ></span>
+                          <span class="glyphicon glyphicon-zoom-in"></span>
                         </button>
                       </g:else>
                     </g:form>
-                    <g:form action="eliminarMensaje" params="[idUsuario:"${usuarioInstance.id}", idInformacionMensajeUsuario:"${mensaje.id}"]">
+                    <g:form action="eliminarMensaje" params="[idUsuario:"${usuarioInstance.id}", idInformacionMensajeUsuario:"${mensaje.id}"]" style="display: inline-block">
                       <button type="submit" title="Eliminar mensaje" style="background-color: Transparent;border: none;font-size: 20px;">
-                        <span class="glyphicon glyphicon-remove" ></span>
+                        <span class="glyphicon glyphicon-remove" style="color:#F78181" ></span>
                       </button>
                     </g:form>
                   </td>

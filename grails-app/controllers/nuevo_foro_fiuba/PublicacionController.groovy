@@ -22,7 +22,7 @@ class PublicacionController {
     def publicacionInstance = publicacionService.getPublicacionById(idPublicacion)
     def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
     def esDueño = publicacionService.usuarioEsDueñoDeLaPublicacion(usuarioInstance, publicacionInstance)
-    def comentarios = publicacionService.obtenerComentariosNoEliminados(publicacionInstance).sort { it.id }
+    def comentarios = publicacionService.obtenerComentariosNoEliminados(publicacionInstance).sort { it.fechaHoraCreacion }
     [publicacion: publicacionInstance, materias: publicacionService.getAllMaterias(), catedras: publicacionService.getAllCatedras(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios]
   }
 

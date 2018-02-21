@@ -45,7 +45,7 @@ class Publicacion {
 		encuesta nullable:true
 		calificaciones nullable:false
 		fechaHoraCreacion nullable:false
-    }
+  }
 // ------------------------------------------------------------------------- //
 
 	// Publicacion(String texto, Usuario usuarioCreador, Materia materiaRelacionada = null, Catedra catedraRelacionada = null, Float promedioRequeridoParaComentar = 0, Set <Materia> materiasNecesariasParaComentar = [], Archivo archivoAdjunto = null, Encuesta encuesta = null){

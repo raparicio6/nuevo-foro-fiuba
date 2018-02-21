@@ -5,7 +5,7 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class UsuarioService {
 
-  final Integer PROMEDIO_INICIAL_USUARIOS = 3
+  final Integer PUNTAJE_INICIAL_USUARIOS = 3
 
   def serviceMethod() {}
 
@@ -14,8 +14,8 @@ class UsuarioService {
     // publicacion.eliminar()
     // usuario.agregarPublicacion(publicacion)
 
-    Float primerCalificacion = this.obtenerPrimerCalificacion()
-    Usuario usuario = new Usuario(nombre, apellido, nombreUsuario, primerCalificacion)
+    Float primerPuntaje = this.obtenerPrimerPuntaje()
+    Usuario usuario = new Usuario(nombre, apellido, nombreUsuario, primerPuntaje)
     // Puntaje puntaje = new Puntaje(Puntaje.TipoPuntaje.ME_GUSTA, numeroPrimerPuntaje)
     // Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, null)
     // publicacion.agregarCalificacion(calificacion)
@@ -27,10 +27,12 @@ class UsuarioService {
     usuario
   }
 
-  Float obtenerPrimerCalificacion(){
+  Float obtenerPrimerPuntaje(){
+    // se generan decimales aleatorios para evitar que todos los usuarios tengan
+    // los mismos puntajes literalmente durante las primeras calificaciones
     // random entre 500 y 1000
     Integer decimalesASumar = Math.abs(new Random().nextInt() % 1000) + 500
-    String primerPuntaje = this.PROMEDIO_INICIAL_USUARIOS.toString() + ".0" + decimalesASumar.toString()
+    String primerPuntaje = this.PUNTAJE_INICIAL_USUARIOS.toString() + ".0" + decimalesASumar.toString()
     Float numeroPrimerPuntaje = primerPuntaje.toFloat()
     numeroPrimerPuntaje
   }

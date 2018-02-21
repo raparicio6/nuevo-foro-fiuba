@@ -12,6 +12,7 @@ class Calificacion {
 	Comentario comentario
 	Puntaje puntaje
 	EstadoCalificacion estado
+	Date fechaHoraCreacion
 
 	static embedded = ['puntaje']
 
@@ -21,6 +22,7 @@ class Calificacion {
 		comentario nullable:true
 		puntaje nullable:false
 		estado nullable:false
+		fechaHoraCreacion nullable:false
 	}
 
 	Calificacion(Usuario usuario, Puntaje puntaje, Publicacion publicacion, Comentario comentario) {
@@ -29,6 +31,8 @@ class Calificacion {
     this.comentario = comentario
 		this.puntaje = puntaje
 		this.estado = EstadoCalificacion.VIGENTE
+		String dia = new Date().format( 'dd/MM/yyyy hh:mm' )
+		this.fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', dia);
 	}
 
 	def eliminar(){

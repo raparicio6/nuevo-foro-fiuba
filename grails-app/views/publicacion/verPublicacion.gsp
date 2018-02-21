@@ -195,7 +195,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <g:each in="${publicacion.encuesta.opciones.sort { it.id }}" var="opcion">
+                  <g:each in="${publicacion.encuesta.opciones.sort { it.nombre }}" var="opcion">
                     <tr>
                       <td>${opcion.nombre}</td>
                       <td>${opcion.votos.size()}</td>
@@ -228,7 +228,7 @@
                 </tr>
               </thead>
               <tbody>
-                <g:each in="${publicacion.materiasNecesariasParaComentar.sort { it.id }}" var="materia">
+                <g:each in="${publicacion.materiasNecesariasParaComentar.sort { it.nombre }}" var="materia">
                   <tr>
                     <td>${materia.nombre}</td>
                   </tr>
@@ -256,7 +256,7 @@
                 </tr>
               </thead>
               <tbody>
-                <g:each in="${publicacion.calificaciones.sort { it.id }}" var="calificacion">
+                <g:each in="${publicacion.calificaciones.sort { it.fechaHoraCreacion }}" var="calificacion">
                   <tr>
                     <td>${calificacion.usuario.nombre}</td>
                     <td>${calificacion.puntaje.tipo.toString().replace("_", " ")}</td>

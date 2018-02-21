@@ -13,6 +13,7 @@ class Usuario {
 	Set <InformacionMensajeUsuario> mensajes
 	Set <Cursada> cursadas
 	Float promedioCalificaciones
+	// puntaje obtenido de las calificaciones
 
 	static hasMany = [
 		publicaciones: Publicacion,
