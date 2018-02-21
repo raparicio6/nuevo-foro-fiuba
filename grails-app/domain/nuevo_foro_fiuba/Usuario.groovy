@@ -50,13 +50,13 @@ class Usuario {
 // ------------------------------------------------------------------------- //
 	def comentarPublicacion(Comentario comentario, Publicacion publicacionAComentar){
 		if (publicacionAComentar.estaCerrada())
-			throw new PublicacionCerradaException()
+			throw new nuevo_foro_fiuba.PublicacionCerradaException()
 		if (publicacionAComentar.estaEliminada())
-			throw new PublicacionEliminadaException()
+			throw new nuevo_foro_fiuba.PublicacionEliminadaException()
 		if (publicacionAComentar.getPromedioRequeridoParaComentar() > this.promedioCalificaciones && !this.esDueñoDeLaPublicacion(publicacionAComentar))
-			throw new PromedioInsuficienteException()
+			throw new nuevo_foro_fiuba.PromedioInsuficienteException()
 		if (!this.poseeMateriasNecesariasParaComentar(publicacionAComentar) && !this.esDueñoDeLaPublicacion(publicacionAComentar))
-			throw new UsuarioNoPoseeMateriasNecesariasException()
+			throw new nuevo_foro_fiuba.UsuarioNoPoseeMateriasNecesariasException()
 		this.comentarios << comentario
 		publicacionAComentar.agregarComentario(comentario)
 	}
@@ -67,7 +67,7 @@ class Usuario {
 
 	def comentarComentario(Comentario comentario, Comentario comentarioAComentar){
 		if (comentarioAComentar.publicacionComentada.estaCerrada())
-			throw new PublicacionCerradaException()
+			throw new nuevo_foro_fiuba.PublicacionCerradaException()
 		this.comentarios << comentario
 		comentarioAComentar.agregarComentario(comentario)
 	}
@@ -104,7 +104,7 @@ class Usuario {
 		def calificaciones = calificable.calificaciones
 		def calificacionesUsuario = calificaciones.findAll {calificacionInstance -> calificacionInstance.getUsuario() == this}
 		if (calificacionesUsuario.size() >= 1)
-			throw new UsuarioYaCalificoException()
+			throw new nuevo_foro_fiuba.UsuarioYaCalificoException()
 		else
 			calificable.agregarCalificacion(calificacion)
 	}
@@ -173,11 +173,11 @@ class Usuario {
 
 	def votarOpcion(Publicacion publicacion,Opcion opcion, Voto voto){
 		if (publicacion.getUsuarioCreador() == this)
-			throw new CreadorEncuestaNoPuedeVotarException()
+			throw new nuevo_foro_fiuba.CreadorEncuestaNoPuedeVotarException()
 		if (publicacion.estaCerrada())
-			throw new PublicacionCerradaException()
+			throw new nuevo_foro_fiuba.PublicacionCerradaException()
 		if (this in publicacion.encuesta.obtenerUsuariosQueVotaron())
-			throw new UsuarioYaVotoException()
+			throw new nuevo_foro_fiuba.UsuarioYaVotoException()
 		opcion.agregarVoto(voto)
 	}
 
