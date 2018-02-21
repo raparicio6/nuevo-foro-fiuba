@@ -21,12 +21,13 @@ class Puntaje { // VALUE OBJECT
       numero nullable:false
       tipo nullable:false
     }
-// ------------------------------------------------------------------------- //
 
+// ------------------------------------------------------------------------- //
     Puntaje(final TipoPuntaje tipo, final Float numero) {
       this.tipo = tipo
       this.numero = numero
     }
+    
 // ------------------------------------------------------------------------- //
 
 

@@ -14,11 +14,13 @@ class Opcion {
     votos nullable: false
   }
 
+// ------------------------------------------------------------------------- //
   Opcion(String nombre){
   	this.nombre = nombre
 		this.votos = []
   }
 
+// ------------------------------------------------------------------------- //
 	def agregarVoto(Voto voto){
 		this.votos << voto
 	}

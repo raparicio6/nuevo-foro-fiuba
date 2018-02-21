@@ -46,8 +46,8 @@ class Publicacion {
 		calificaciones nullable:false
 		fechaHoraCreacion nullable:false
   }
-// ------------------------------------------------------------------------- //
 
+// ------------------------------------------------------------------------- //
 	// Publicacion(String texto, Usuario usuarioCreador, Materia materiaRelacionada = null, Catedra catedraRelacionada = null, Float promedioRequeridoParaComentar = 0, Set <Materia> materiasNecesariasParaComentar = [], Archivo archivoAdjunto = null, Encuesta encuesta = null){
 	// 	this.texto = texto
 	// 	this.usuarioCreador = usuarioCreador
@@ -79,13 +79,13 @@ class Publicacion {
 		String dia = new Date().format( 'dd/MM/yyyy hh:mm' )
 		this.fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', dia);
 	}
-// ------------------------------------------------------------------------- //
 
-	Boolean estaCerrada(){
+// ------------------------------------------------------------------------- //
+	def estaCerrada(){
 		this.estado==EstadoPublicacion.CERRADA
 	}
 
-	Boolean estaEliminada(){
+	def estaEliminada(){
 		this.estado==EstadoPublicacion.ELIMINADA
 	}
 

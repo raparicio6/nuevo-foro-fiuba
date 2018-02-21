@@ -10,7 +10,7 @@ class Usuario {
 	String nombreUsuario
 	Set <Publicacion> publicaciones
 	Set <Comentario> comentarios
-	Set <InformacionMensajeUsuario> mensajes
+	Set <InformacionMensajeUsuario> informacionMensajes
 	Set <Cursada> cursadas
 	Float promedioCalificaciones
 	// puntaje obtenido de las calificaciones
@@ -18,7 +18,7 @@ class Usuario {
 	static hasMany = [
 		publicaciones: Publicacion,
 		comentarios: Comentario,
-		mensajes: InformacionMensajeUsuario,
+		informacionMensajes: InformacionMensajeUsuario,
 		cursadas: Cursada
 	]
 
@@ -29,19 +29,18 @@ class Usuario {
 		publicaciones nullable: false
 		comentarios nullable: false
 		cursadas nullable: false
-		mensajes nullable: false
+		informacionMensajes nullable: false
 		promedioCalificaciones nullable: false, min:0F
 	}
 
 // ------------------------------------------------------------------------- //
-
 //CONSTRUCTOR
 	Usuario(String nombre, String apellido, String nombreUsuario, Float calificacionInicial) {
 		this.nombre = nombre
 		this.apellido = apellido
 		this.nombreUsuario = nombreUsuario
 		this.publicaciones = []
-		this.mensajes = []
+		this.informacionMensajes = []
 		this.comentarios = []
 		this.cursadas = []
 		this.promedioCalificaciones = calificacionInicial
@@ -76,11 +75,11 @@ class Usuario {
 		this.publicaciones << publicacion
 	}
 
-	Boolean esDueñoDeLaPublicacion(Publicacion publicacion){
+	def esDueñoDeLaPublicacion(Publicacion publicacion){
 		(publicacion.getUsuarioCreador() == this)
 	}
 
-	Boolean esDueñoDelComentario(Comentario comentario){
+	def esDueñoDelComentario(Comentario comentario){
 		(comentario.getUsuarioCreador() == this)
 	}
 
@@ -110,12 +109,12 @@ class Usuario {
 	}
 
 	def enviarMensaje(Usuario receptor, InformacionMensajeUsuario infoEmisor, InformacionMensajeUsuario infoReceptor){
-		this.guardarMensaje(infoEmisor)
-		receptor.guardarMensaje(infoReceptor)
+		this.guardarInformacionMensaje(infoEmisor)
+		receptor.guardarInformacionMensaje(infoReceptor)
 	}
 
-	def guardarMensaje(InformacionMensajeUsuario informacion){
-		this.mensajes << informacion
+	def guardarInformacionMensaje(InformacionMensajeUsuario informacion){
+		this.informacionMensajes << informacion
 	}
 
 	def agregarCursada(Cursada cursada){
@@ -185,7 +184,7 @@ class Usuario {
 		publicacion.eliminar()
 	}
 
-	def eliminarMensajePrivado(InformacionMensajeUsuario info){
+	def eliminarInformacionMensajePrivado(InformacionMensajeUsuario info){
 		info.eliminar()
 	}
 

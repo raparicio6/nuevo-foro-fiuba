@@ -14,11 +14,13 @@ class Encuesta {
 		opciones nullable: false
   }
 
+// ------------------------------------------------------------------------- //
 	Encuesta(String nombre, Set<Opcion> opciones){
 		this.nombre = nombre
 		this.opciones = opciones
 	}
 
+// ------------------------------------------------------------------------- //
 	def obtenerUsuariosQueVotaron(){
 		def todosLosVotos = this.opciones.collect {opcionInstance -> opcionInstance.getVotos() }
 		todosLosVotos.flatten().collect {voto -> voto.getUsuario()}

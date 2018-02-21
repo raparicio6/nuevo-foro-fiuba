@@ -10,9 +10,12 @@ class Materia {
 		descripcion blank: true, nullable: true
   }
 
+// ------------------------------------------------------------------------- //
 	Materia(String nombre, String descripcion){
 		this.nombre = nombre
 		this.descripcion = descripcion
 	}
+
+// ------------------------------------------------------------------------- //	
 
 }

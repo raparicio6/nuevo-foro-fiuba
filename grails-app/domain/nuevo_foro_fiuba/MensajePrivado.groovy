@@ -12,9 +12,12 @@ class MensajePrivado {
 		archivo nullable:true
 	}
 
+// ------------------------------------------------------------------------- //
   MensajePrivado(String texto, MensajePrivado mensajeAlCualSeResponde, Archivo archivo){
   	this.texto = texto
 		this.mensajeAlCualSeResponde = mensajeAlCualSeResponde
 		this.archivo = archivo
   }
+
+	// ------------------------------------------------------------------------- //	
 }

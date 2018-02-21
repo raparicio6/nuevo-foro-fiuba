@@ -26,6 +26,7 @@ class InformacionMensajeUsuario {
     estado nullable:false
   }
 
+// ------------------------------------------------------------------------- //
   InformacionMensajeUsuario(Usuario usuarioQueInteractua, Usuario usuarioConElQueSeInteractua, MensajePrivado mensajePrivado, RolUsuarioMensaje rolUsuario) {
     this.usuarioQueInteractua = usuarioQueInteractua
     this.usuarioConElQueSeInteractua = usuarioConElQueSeInteractua
@@ -34,6 +35,7 @@ class InformacionMensajeUsuario {
     this.estado = EstadoInformacionMensajeUsuario.VIGENTE
   }
 
+// ------------------------------------------------------------------------- //
   def eliminar(){
     this.setEstado(EstadoInformacionMensajeUsuario.ELIMINADA)
   }

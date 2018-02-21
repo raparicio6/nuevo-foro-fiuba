@@ -14,9 +14,12 @@ class Profesor {
     catedras nullable:false
   }
 
+// ------------------------------------------------------------------------- //
   Profesor(String nombre){
   	this.nombre = nombre
     this.catedras = []
   }
+
+// ------------------------------------------------------------------------- //
 
 }

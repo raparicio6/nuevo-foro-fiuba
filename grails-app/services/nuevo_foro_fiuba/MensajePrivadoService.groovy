@@ -16,8 +16,8 @@ class MensajePrivadoService {
     mensaje
   }
 
-  def obtenerMensajesRecibidos (Usuario usuario){
-    usuario.getMensajes().findAll {infoMensaje -> infoMensaje.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR && infoMensaje.getEstado() == InformacionMensajeUsuario.EstadoInformacionMensajeUsuario.VIGENTE }
+  def obtenerInformacionMensajesRecibidos (Usuario usuario){
+    usuario.getInformacionMensajes().findAll {infoMensaje -> infoMensaje.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.RECEPTOR && infoMensaje.getEstado() == InformacionMensajeUsuario.EstadoInformacionMensajeUsuario.VIGENTE }
   }
 
   MensajePrivado enviarMensaje(long idUsuarioCreador, long idUsuarioReceptor, String texto, long idMensajeAlCualResponde = 0, MultipartFile file = null){
@@ -42,8 +42,8 @@ class MensajePrivadoService {
     mensaje
   }
 
-  def obtenerMensajesEnviados(Usuario usuario){
-    usuario.getMensajes().findAll {infoMensaje -> infoMensaje.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR && infoMensaje.getEstado() == InformacionMensajeUsuario.EstadoInformacionMensajeUsuario.VIGENTE}
+  def obtenerInformacionMensajesEnviados(Usuario usuario){
+    usuario.getInformacionMensajes().findAll {infoMensaje -> infoMensaje.getRolUsuario() == InformacionMensajeUsuario.RolUsuarioMensaje.EMISOR && infoMensaje.getEstado() == InformacionMensajeUsuario.EstadoInformacionMensajeUsuario.VIGENTE}
   }
 
 

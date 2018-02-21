@@ -46,12 +46,12 @@
               </tr>
             </thead>
             <tbody>
-              <g:each in="${mensajes}" var="mensaje">
+              <g:each in="${informacionMensajes}" var="infoMensaje">
                 <tr>
-                  <td>${mensaje.usuarioConElQueSeInteractua.nombre}</td>
-                  <td>${mensaje.mensajePrivado.texto}</td>
+                  <td>${infoMensaje.usuarioConElQueSeInteractua.nombre}</td>
+                  <td>${infoMensaje.mensajePrivado.texto}</td>
                   <td>
-                    <g:form action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${mensaje.mensajePrivado.id}", idInformacion:"${mensaje.id}", mostrarResponder:"${mostrarResponder}"]" style="display: inline-block" >
+                    <g:form action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${infoMensaje.mensajePrivado.id}", idInformacion:"${infoMensaje.id}", mostrarResponder:"${mostrarResponder}"]" style="display: inline-block" >
                       <g:if test="${mostrarResponder}">
                       <button type="submit" title="Responder" style="background-color: Transparent;border: none;font-size: 20px;">
                         <span class="glyphicon glyphicon-pencil" ></span>
@@ -63,7 +63,7 @@
                         </button>
                       </g:else>
                     </g:form>
-                    <g:form action="eliminarMensaje" params="[idUsuario:"${usuarioInstance.id}", idInformacionMensajeUsuario:"${mensaje.id}"]" style="display: inline-block">
+                    <g:form action="eliminarMensaje" params="[idUsuario:"${usuarioInstance.id}", idInformacionMensajeUsuario:"${infoMensaje.id}"]" style="display: inline-block">
                       <button type="submit" title="Eliminar mensaje" style="background-color: Transparent;border: none;font-size: 20px;">
                         <span class="glyphicon glyphicon-remove" style="color:#F78181" ></span>
                       </button>

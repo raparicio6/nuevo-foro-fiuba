@@ -25,6 +25,7 @@ class Calificacion {
 		fechaHoraCreacion nullable:false
 	}
 
+// ------------------------------------------------------------------------- //
 	Calificacion(Usuario usuario, Puntaje puntaje, Publicacion publicacion, Comentario comentario) {
 		this.usuario = usuario
 		this.publicacion = publicacion
@@ -35,6 +36,7 @@ class Calificacion {
 		this.fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', dia);
 	}
 
+// ------------------------------------------------------------------------- //	
 	def eliminar(){
 		this.setEstado(EstadoCalificacion.ELIMINADA)
 	}

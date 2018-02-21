@@ -13,9 +13,12 @@ class Archivo {
 		path blank: false, nullable: false
   }
 
+// ------------------------------------------------------------------------- //
 	Archivo(String nombre, String path) {
 		this.nombre = nombre
 		this.nombreFinal = UUID.randomUUID().toString()
 		this.path = path
 	}
 }
+
+// ------------------------------------------------------------------------- //

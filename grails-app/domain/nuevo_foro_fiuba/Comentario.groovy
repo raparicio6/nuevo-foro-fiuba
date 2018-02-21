@@ -31,8 +31,8 @@ class Comentario {
 		fechaHoraCreacion nullable:false
 		estado nullable:false
 	}
-// ------------------------------------------------------------------------- //
 
+// ------------------------------------------------------------------------- //
 	Comentario(String texto, Usuario usuarioCreador, Publicacion publicacionComentada, Comentario comentarioComentado){
 		this.texto = texto
 		this.usuarioCreador = usuarioCreador
@@ -44,8 +44,8 @@ class Comentario {
 		this.fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', dia);
 		this.estado = EstadoComentario.VIGENTE
 	}
-// ------------------------------------------------------------------------- //
 
+// ------------------------------------------------------------------------- //
 	def modificarTexto(String nuevoTexto){
 		this.setTexto(nuevoTexto)
 	}

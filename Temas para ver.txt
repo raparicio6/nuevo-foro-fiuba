@@ -4,8 +4,6 @@
 
 *Tests (Germán)
 
-*Preparar correctamente la documentación, tanto la original como los cambios que fuimos haciendo. No es necesario perder tiempo editando el diagrama de clases ya que fueron cambios muy chicos y el software para hacerlo es malísimo! (Mariano)
-
 *Darle estilo a las pantallas que les falta (Rodrigo)
 
 *Atributos de las clases que tengan valor por defecto, y constructores que tengan parámetros optativos.

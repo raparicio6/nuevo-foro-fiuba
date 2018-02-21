@@ -10,9 +10,12 @@ class Cursada {
     catedra nullable:false
   }
 
+// ------------------------------------------------------------------------- //
   Cursada(Usuario usuario, Catedra catedra) {
     this.usuario = usuario
     this.catedra = catedra
   }
   
+// ------------------------------------------------------------------------- //
+
 }
