@@ -30,12 +30,28 @@ class PublicacionController {
     [publicacion: publicacionInstance, materias: materiaService.getAllMaterias(), catedras: catedraService.getAllCatedras(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios]
   }
 
+  def agregarMateria (long idUsuario, long idPublicacion) {
+    def publicacionInstance = publicacionService.getPublicacionById(idPublicacion)
+    def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
+    [publicacion: publicacionInstance, usuario: usuarioInstance, materias: materiaService.getAllMaterias()]
+  }
+
   def formarPublicacion (String texto, long idUsuario, long idCatedra, long idMateria, Float promedioCalificacionesMinimoParaComentar, String nombreEncuesta, String nombreOpciones) {
     final def file = request.getFile('archivo')
     if (! promedioCalificacionesMinimoParaComentar)
       promedioCalificacionesMinimoParaComentar = 0
-    publicacionService.formarPublicacion(idUsuario, idCatedra, texto, idMateria, promedioCalificacionesMinimoParaComentar, nombreEncuesta, nombreOpciones, file)
-    redirect (action: "listaPublicaciones", params:[idUsuario:idUsuario])
+    def publicacion = publicacionService.formarPublicacion(idUsuario, idCatedra, texto, idMateria, promedioCalificacionesMinimoParaComentar, nombreEncuesta, nombreOpciones, file)
+    def idPublicacion = publicacion.getId()
+    redirect(action: "agregarMateria", params:[idUsuario:idUsuario, idPublicacion: idPublicacion])
+  }
+
+  def agregarMateriaNecesaria (long idUsuario, long idPublicacion, long idMateria) {
+    publicacionService.agregarMateriaRequeridaParaComentar(idPublicacion, idUsuario, idMateria)
+    redirect(action: "agregarMateria", params:[idUsuario:idUsuario, idPublicacion: idPublicacion])
+  }
+
+  def dejarDeAgregarMaterias (long idUsuario) {
+    redirect(action: "listaPublicaciones", params:[idUsuario: idUsuario])
   }
 
   def cambiarEstado (long idPublicacion, long idUsuario){
