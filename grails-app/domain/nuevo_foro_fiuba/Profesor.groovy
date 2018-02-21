@@ -3,7 +3,7 @@ package nuevo_foro_fiuba
 class Profesor {
 
 	String nombre
-	Set<Catedra> catedras
+	Set<Catedra> catedras = []
 
 	static hasMany = [
 		catedras: Catedra
@@ -17,7 +17,6 @@ class Profesor {
 // ------------------------------------------------------------------------- //
   Profesor(String nombre){
   	this.nombre = nombre
-    this.catedras = []
   }
 
 // ------------------------------------------------------------------------- //

@@ -8,10 +8,10 @@ class Usuario {
 	String nombre
 	String apellido
 	String nombreUsuario
-	Set <Publicacion> publicaciones
-	Set <Comentario> comentarios
-	Set <InformacionMensajeUsuario> informacionMensajes
-	Set <Cursada> cursadas
+	Set <Publicacion> publicaciones = []
+	Set <Comentario> comentarios = []
+	Set <InformacionMensajeUsuario> informacionMensajes = []
+	Set <Cursada> cursadas = []
 	Float promedioCalificaciones
 	// puntaje obtenido de las calificaciones
 
@@ -39,10 +39,6 @@ class Usuario {
 		this.nombre = nombre
 		this.apellido = apellido
 		this.nombreUsuario = nombreUsuario
-		this.publicaciones = []
-		this.informacionMensajes = []
-		this.comentarios = []
-		this.cursadas = []
 		this.promedioCalificaciones = calificacionInicial
 	}
 

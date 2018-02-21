@@ -10,21 +10,21 @@ class Publicacion {
 
 	String texto
 	Usuario usuarioCreador
-	// Materia materiaRelacionada = null
-	Materia materiaRelacionada
-	// Catedra catedraRelacionada = null
-	Catedra catedraRelacionada
-	Float promedioRequeridoParaComentar
-	// Set <Materia> materiasNecesariasParaComentar = []
-	Set <Materia> materiasNecesariasParaComentar
-	Set <Comentario> comentarios
-	// Archivo archivoAdjunto = null
-	Archivo archivoAdjunto
-	EstadoPublicacion estado
-	// Encuesta encuesta = null
-	Encuesta encuesta
-	Set <Calificacion> calificaciones
-	Date fechaHoraCreacion
+	Materia materiaRelacionada = null
+	// Materia materiaRelacionada
+	Catedra catedraRelacionada = null
+	// Catedra catedraRelacionada
+	Float promedioRequeridoParaComentar = 0
+	Set <Materia> materiasNecesariasParaComentar = []
+	// Set <Materia> materiasNecesariasParaComentar
+	Set <Comentario> comentarios = []
+	Archivo archivoAdjunto = null
+	// Archivo archivoAdjunto
+	EstadoPublicacion estado = EstadoPublicacion.ABIERTA
+	Encuesta encuesta = null
+	// Encuesta encuesta
+	Set <Calificacion> calificaciones = []
+	Date fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', new Date().format( 'dd/MM/yyyy hh:mm' ));
 
 	static hasMany = [
 		comentarios: Comentario,
@@ -58,26 +58,18 @@ class Publicacion {
 	// 	this.fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', dia);
 	// 	this.materiaRelacionada = materiaRelacionada
 	// 	this.catedraRelacionada = catedraRelacionada
-	// 	this.promedioRequeridoParaComentar = 0
-	// 	this.materiasNecesariasParaComentar = []
+	// 	this.promedioRequeridoParaComentar = promedioRequeridoParaComentar
+	// 	this.materiasNecesariasParaComentar = materiasNecesariasParaComentar
 	// 	this.archivoAdjunto = archivoAdjunto
 	// 	this.encuesta = encuesta
 	// }
+	//
 
 	Publicacion(String texto, Usuario usuarioCreador, Materia materiaRelacionada, Catedra catedraRelacionada){
 		this.texto = texto
 		this.usuarioCreador = usuarioCreador
 		this.materiaRelacionada = materiaRelacionada
 		this.catedraRelacionada = catedraRelacionada
-		this.promedioRequeridoParaComentar = 0
-		this.materiasNecesariasParaComentar = []
-		this.comentarios = []
-		this.archivoAdjunto = null
-		this.estado = EstadoPublicacion.ABIERTA
-		this.encuesta = null
-		this.calificaciones = []
-		String dia = new Date().format( 'dd/MM/yyyy hh:mm' )
-		this.fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', dia);
 	}
 
 // ------------------------------------------------------------------------- //

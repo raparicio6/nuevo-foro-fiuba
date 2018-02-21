@@ -4,7 +4,7 @@ class Catedra {
 
 	Materia materia
 	Profesor profesor
-	String descripcion
+	String descripcion 
 
   static constraints = {
 		materia  nullable: false

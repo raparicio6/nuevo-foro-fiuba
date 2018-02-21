@@ -16,7 +16,7 @@ class InformacionMensajeUsuario {
   Usuario usuarioConElQueSeInteractua
   MensajePrivado mensajePrivado
   RolUsuarioMensaje rolUsuario
-  EstadoInformacionMensajeUsuario estado
+  EstadoInformacionMensajeUsuario estado = EstadoInformacionMensajeUsuario.VIGENTE
 
   static constraints = {
     usuarioQueInteractua nullable:false
@@ -32,7 +32,6 @@ class InformacionMensajeUsuario {
     this.usuarioConElQueSeInteractua = usuarioConElQueSeInteractua
     this.mensajePrivado = mensajePrivado
     this.rolUsuario = rolUsuario
-    this.estado = EstadoInformacionMensajeUsuario.VIGENTE
   }
 
 // ------------------------------------------------------------------------- //

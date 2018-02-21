@@ -5,11 +5,14 @@ class MensajePrivado {
 	String texto
 	MensajePrivado mensajeAlCualSeResponde
 	Archivo archivo
+	Date fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', new Date().format( 'dd/MM/yyyy hh:mm' ));
+
 
   static constraints = {
   	texto blank: true, nullable:false
 		mensajeAlCualSeResponde nullable:true
 		archivo nullable:true
+		fechaHoraCreacion nullable:false
 	}
 
 // ------------------------------------------------------------------------- //
@@ -19,5 +22,5 @@ class MensajePrivado {
 		this.archivo = archivo
   }
 
-	// ------------------------------------------------------------------------- //	
+	// ------------------------------------------------------------------------- //
 }

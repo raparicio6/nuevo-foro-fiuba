@@ -11,10 +11,10 @@ class Comentario {
 	Usuario usuarioCreador
 	Publicacion publicacionComentada
 	Comentario comentarioComentado
-	Set <Comentario> comentarios
-	Set <Calificacion> calificaciones
-	Date fechaHoraCreacion
-	EstadoComentario estado
+	Set <Comentario> comentarios = []
+	Set <Calificacion> calificaciones = []
+	Date fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', new Date().format( 'dd/MM/yyyy hh:mm' ));
+	EstadoComentario estado = EstadoComentario.VIGENTE
 
 	static hasMany = [
 		comentarios: Comentario,
@@ -38,11 +38,6 @@ class Comentario {
 		this.usuarioCreador = usuarioCreador
 		this.publicacionComentada = publicacionComentada
 		this.comentarioComentado =  comentarioComentado
-		this.comentarios = []
-		this.calificaciones = []
-		String dia = new Date().format( 'dd/MM/yyyy hh:mm' )
-		this.fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', dia);
-		this.estado = EstadoComentario.VIGENTE
 	}
 
 // ------------------------------------------------------------------------- //

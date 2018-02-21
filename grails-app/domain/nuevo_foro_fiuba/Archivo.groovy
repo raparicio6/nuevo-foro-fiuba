@@ -4,7 +4,7 @@ import java.util.UUID
 class Archivo {
 
 	String nombre
-	String nombreFinal
+	String nombreFinal = UUID.randomUUID().toString()
 	String path
 
   static constraints = {
@@ -16,7 +16,6 @@ class Archivo {
 // ------------------------------------------------------------------------- //
 	Archivo(String nombre, String path) {
 		this.nombre = nombre
-		this.nombreFinal = UUID.randomUUID().toString()
 		this.path = path
 	}
 }

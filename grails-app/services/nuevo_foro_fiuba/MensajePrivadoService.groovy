@@ -50,7 +50,7 @@ class MensajePrivadoService {
   def eliminarMensaje (long idUsuario, long idInformacionMensajeUsuario){
     def usuario = Usuario.get(idUsuario)
     def informacionMensajeUsuario = InformacionMensajeUsuario.get(idInformacionMensajeUsuario)
-    usuario.eliminarMensajePrivado (informacionMensajeUsuario)
+    usuario.eliminarInformacionMensajePrivado (informacionMensajeUsuario)
   }
 
   def getMensajePrivadoById(long idMensajePrivado){

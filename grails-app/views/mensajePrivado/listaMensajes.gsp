@@ -42,14 +42,16 @@
               <tr>
                 <th>${dePara}</th>
                 <th>Texto</th>
+                <th>Fecha y hora</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <g:each in="${informacionMensajes}" var="infoMensaje">
+              <g:each in="${informacionMensajes.sort { it.mensajePrivado.fechaHoraCreacion }}" var="infoMensaje">
                 <tr>
                   <td>${infoMensaje.usuarioConElQueSeInteractua.nombre}</td>
                   <td>${infoMensaje.mensajePrivado.texto}</td>
+                  <td>${infoMensaje.mensajePrivado.fechaHoraCreacion}</td>
                   <td>
                     <g:form action="verMensaje" params="[idUsuario:"${usuarioInstance.id}", idMensajePrivado:"${infoMensaje.mensajePrivado.id}", idInformacion:"${infoMensaje.id}", mostrarResponder:"${mostrarResponder}"]" style="display: inline-block" >
                       <g:if test="${mostrarResponder}">

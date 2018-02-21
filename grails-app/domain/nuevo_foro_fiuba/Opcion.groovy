@@ -3,7 +3,7 @@ package nuevo_foro_fiuba
 class Opcion {
 
 	String nombre
-	Set <Voto> votos
+	Set <Voto> votos = []
 
 	static hasMany = [
 		votos: Voto
@@ -17,7 +17,6 @@ class Opcion {
 // ------------------------------------------------------------------------- //
   Opcion(String nombre){
   	this.nombre = nombre
-		this.votos = []
   }
 
 // ------------------------------------------------------------------------- //
