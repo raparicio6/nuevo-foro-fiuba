@@ -189,4 +189,8 @@ class Usuario {
 		info.eliminar()
 	}
 
+	def adjuntarArchivo (Publicacion publicacion, Archivo archivoAdjunto){
+		publicacion.agregarArchivo (archivoAdjunto)
+	}
+
 }

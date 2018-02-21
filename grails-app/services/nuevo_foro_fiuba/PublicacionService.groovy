@@ -1,10 +1,14 @@
 package nuevo_foro_fiuba
+
 import grails.gorm.transactions.Transactional
+import org.springframework.web.multipart.MultipartFile
 
 @Transactional
 class PublicacionService {
 
   def serviceMethod() {}
+
+  final String PATH = "C:/Users/Mariano/nuevo_foro_fiuba/grails-app/files/"
 
   // Publicacion crearPublicacion(String texto, Usuario usuarioCreador, Float promedioRequeridoParaComentar = 0, Materia materiaRelacionada = null, Catedra catedraRelacionada = null, Set <Materia> materiasNecesariasParaComentar = [], Archivo archivoAdjunto = null, Encuesta encuesta = null){
   //  Publicacion publicacion = new Publicacion (texto, usuarioCreador, promedioRequeridoParaComentar, materiaRelacionada, catedraRelacionada, materiasNecesariasParaComentar, archivoAdjunto, encuesta)
@@ -30,7 +34,7 @@ class PublicacionService {
     publicacion.obtenerComentariosNoEliminados()
   }
 
-  Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateriaRequerida, Float promedioCalificacionesMinimoParaComentar = 0, String nombreEncuesta = null, String nombreOpciones = null){
+  Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateriaRequerida, Float promedioCalificacionesMinimoParaComentar = 0, String nombreEncuesta = null, String nombreOpciones = null, MultipartFile file = null){
     def usuario = getUsuarioById(idUsuario)
     def catedra = null
     def materia = null
@@ -40,6 +44,13 @@ class PublicacionService {
     }
     Publicacion publicacion = this.crearPublicacion(usuario, catedra, texto, materia)
     def materiaRequerida = null
+    def archivoAdjunto = null
+    if (file && !file.empty){
+      archivoAdjunto = new Archivo(file.originalFilename, this.PATH + file.originalFilename)
+      file.transferTo(new File(archivoAdjunto.path))
+      archivoAdjunto.save(failOnError:true)
+    }
+    adjuntarArchivo (usuario, publicacion, archivoAdjunto )
     if (idMateriaRequerida){
       materiaRequerida = getMateriaById(idMateriaRequerida)
       usuario.agregarMateriaRequeridaParaComentar(publicacion, materiaRequerida)
@@ -132,6 +143,10 @@ class PublicacionService {
     voto.save(failOnError:true)
   }
 
+  def adjuntarArchivo (Usuario usuario, Publicacion publicacion, Archivo archivoAdjunto){
+    usuario.adjuntarArchivo(publicacion, archivoAdjunto)
+  }
+
   def getUsuarioById(long idUsuario){
     Usuario.get(idUsuario)
   }
@@ -158,6 +173,10 @@ class PublicacionService {
 
   def getOpcionById(long idOpcion){
     Opcion.get(idOpcion)
+  }
+
+  def getArchivoById(long idArchivo){
+    Archivo.get(idArchivo)
   }
 
 }

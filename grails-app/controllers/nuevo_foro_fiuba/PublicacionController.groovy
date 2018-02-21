@@ -27,9 +27,10 @@ class PublicacionController {
   }
 
   def formarPublicacion (String texto, long idUsuario, long idCatedra, long idMateria, Float promedioCalificacionesMinimoParaComentar, String nombreEncuesta, String nombreOpciones) {
+    final def file = request.getFile('archivo')
     if (! promedioCalificacionesMinimoParaComentar)
       promedioCalificacionesMinimoParaComentar = 0
-    publicacionService.formarPublicacion(idUsuario, idCatedra, texto, idMateria, promedioCalificacionesMinimoParaComentar, nombreEncuesta, nombreOpciones)
+    publicacionService.formarPublicacion(idUsuario, idCatedra, texto, idMateria, promedioCalificacionesMinimoParaComentar, nombreEncuesta, nombreOpciones, file)
     redirect (action: "listaPublicaciones", params:[idUsuario:idUsuario])
   }
 
@@ -117,4 +118,22 @@ class PublicacionController {
     }
     redirect(controller:"publicacion", action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
+
+  def descargarArchivoAdjunto(long idArchivo) {
+    Archivo archivoInstance = publicacionService.getArchivoById(idArchivo)
+    response.setContentType("APPLICATION/OCTET-STREAM")
+    response.setHeader("Content-Disposition", "Attachment;Filename=\"${archivoInstance.nombre}\"")
+    def file = new File(archivoInstance.path)
+    def fileInputStream = new FileInputStream(file)
+    def outputStream = response.getOutputStream()
+    byte[] buffer = new byte[4096];
+    int len;
+    while ((len = fileInputStream.read(buffer)) > 0) {
+        outputStream.write(buffer, 0, len);
+    }
+    outputStream.flush()
+    outputStream.close()
+    fileInputStream.close()
+  }
+
 }

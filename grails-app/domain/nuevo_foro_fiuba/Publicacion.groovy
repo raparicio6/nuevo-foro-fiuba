@@ -135,4 +135,9 @@ class Publicacion {
 		this.setEncuesta(encuesta)
 	}
 
+	def agregarArchivo (Archivo archivoAdjunto){
+		this.setArchivoAdjunto(archivoAdjunto)
+	}
+
+
 }

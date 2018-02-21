@@ -177,6 +177,19 @@
         </div>
       </g:form>
 
+      <g:if test="${publicacion.archivoAdjunto}">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="col-md-2">
+              <h3>
+                  <span class="label label-default">Archivo adjunto:</span>
+              </h3>
+              <g:link action="descargarArchivoAdjunto" params="[idArchivo:"${publicacion.archivoAdjunto.id}"]"> Descargar ${publicacion.archivoAdjunto.nombre} </g:link>
+            </div>
+          </div>
+        </div>
+      </g:if>
+
       <g:if test="${publicacion.encuesta}">
         <div class="row">
           <div class="col-md-12">
