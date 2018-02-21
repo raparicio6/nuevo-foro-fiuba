@@ -39,7 +39,7 @@ class PublicacionTests {
     }
 
     @Test
-    void 'test publicaion se elimina y confirma estar eliminada' () {
+    void 'test publicacion se elimina y confirma estar eliminada' () {
         publicacion.eliminar()
         assert publicacion.estaEliminada()
     }
@@ -49,6 +49,69 @@ class PublicacionTests {
         assert publicacion.texto == 'un texto'
         publicacion.modificarTexto('texto modificado')
         assert publicacion.texto == 'texto modificado'
+    }
+
+    @Test
+    void 'test se cambia la catedra relacionada de una publicacion y esta se setea correctamente' () {
+        Catedra catedra2 = new Catedra(materia, profesor, 'catedra2')
+        publicacion.cambiarCatedra(catedra2)
+        assert publicacion.catedraRelacionada == catedra2
+    }
+
+    @Test
+    void 'test se cambia la materia relacionada de una publicacion y esta se setea correctamente' () {
+        Materia materia2 = new Materia('materia2', 'descripcion')
+        publicacion.cambiarMateria(materia2)
+        assert publicacion.materiaRelacionada == materia2
+    }
+
+    @Test
+    void 'test se modifica el promedio requerido para comentar sobre una publicacion y esta se modifica correctamente' () {
+        assert publicacion.promedioRequeridoParaComentar == 0
+        publicacion.modificarPromedioRequeridoParaComentar(4.5)
+        assert publicacion.promedioRequeridoParaComentar == 4.5
+    }
+
+    @Test
+    void 'test se agrega una encuesta a una publicacion y esta se agrega correctamente' () {
+        assert publicacion.encuesta == null
+        Opcion opcion = new Opcion('opcion')
+        Set<Opcion> opciones = [opcion]
+        Encuesta encuesta = new Encuesta('encuesta' , opciones)
+        publicacion.agregarEncuesta(encuesta)
+        assert publicacion.encuesta == encuesta
+    }
+
+    @Test
+    void 'test se agrega un archivo a una publicacion y esta se agrega correctamente' () {
+        assert publicacion.archivoAdjunto == null
+        Archivo archivo = new Archivo('nombre', '/path')
+        publicacion.agregarArchivo(archivo)
+        assert publicacion.archivoAdjunto == archivo
+    }
+
+    @Test
+    void 'test se agrega una calificacion y esta se agrega correctamente' () {
+        assert publicacion.calificaciones.isEmpty()
+        Puntaje puntaje = new Puntaje(Puntaje.TipoPuntaje.ME_GUSTA, 1)
+        Calificacion calificacion = new Calificacion(usuario, puntaje, publicacion, null)
+        publicacion.agregarCalificacion(calificacion)
+        assert publicacion.calificaciones.contains(calificacion)
+    }
+
+    @Test
+    void 'test se agrega un comentario a una publicacion y este se agrega correctamente' () {
+        assert publicacion.comentarios.isEmpty()
+        publicacion.agregarComentario(comentario)
+        assert publicacion.comentarios.contains(comentario)
+    }
+
+    @Test
+    void 'test se agrega un comentario y se elimina, este aparece correctamente eliminado' () {
+        assert publicacion.comentarios.isEmpty()
+        publicacion.agregarComentario(comentario)
+        comentario.eliminar()
+        assert !publicacion.obtenerComentariosNoEliminados().contains(comentario)
     }
 
 }

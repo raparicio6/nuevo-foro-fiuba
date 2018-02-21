@@ -7,16 +7,15 @@ import org.junit.*
 import nuevo_foro_fiuba.*
 
 @TestFor(UsuarioController)
-class UsuarioControllerTests {
+class UsuarioControllerTests extends Specification{
 
-    Usuario usuario
+    UsuarioController usuarioController
 
-    void setUp() {
-        usuario = new Usuario(nombre: 'Homero', apellido: 'Simpson', nombreUsuario: 'HSimpson')
+    void setup() {
+
     }
 
     void tearDown() {
     }
-
 
 }
