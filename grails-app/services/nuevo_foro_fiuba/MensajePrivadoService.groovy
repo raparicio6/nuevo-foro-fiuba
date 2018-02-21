@@ -21,8 +21,8 @@ class MensajePrivadoService {
   }
 
   MensajePrivado enviarMensaje(long idUsuarioCreador, long idUsuarioReceptor, String texto, long idMensajeAlCualResponde = 0, MultipartFile file = null){
-    def emisor = getUsuarioById(idUsuarioCreador)
-    def receptor = getUsuarioById(idUsuarioReceptor)
+    def emisor = Usuario.get(idUsuarioCreador)
+    def receptor = Usuario.get(idUsuarioReceptor)
     def mensajeAlCualResponde = null
     if (idMensajeAlCualResponde)
       mensajeAlCualResponde = getMensajePrivadoById(idMensajeAlCualResponde)
@@ -48,29 +48,13 @@ class MensajePrivadoService {
 
 
   def eliminarMensaje (long idUsuario, long idInformacionMensajeUsuario){
-    def usuario = getUsuarioById(idUsuario)
-    def informacionMensajeUsuario = getInformacionMensajeUsuarioById(idInformacionMensajeUsuario)
+    def usuario = Usuario.get(idUsuario)
+    def informacionMensajeUsuario = InformacionMensajeUsuario.get(idInformacionMensajeUsuario)
     usuario.eliminarMensajePrivado (informacionMensajeUsuario)
-  }
-
-  def getUsuarioById(long idUsuario){
-    Usuario.get(idUsuario)
-  }
-
-  def getAllUsuarios(){
-    Usuario.list()
   }
 
   def getMensajePrivadoById(long idMensajePrivado){
     MensajePrivado.get(idMensajePrivado)
-  }
-
-  def getInformacionMensajeUsuarioById(long idInformacionMensajeUsuario){
-    InformacionMensajeUsuario.get(idInformacionMensajeUsuario)
-  }
-
-  def getArchivoById(long idArchivo){
-    Archivo.get(idArchivo)
   }
 
 }

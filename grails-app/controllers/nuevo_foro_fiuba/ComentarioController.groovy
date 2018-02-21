@@ -3,12 +3,13 @@ package nuevo_foro_fiuba
 class ComentarioController {
 
   def comentarioService
+  def usuarioService
 
   def index() {}
 
   def verComentario (long idComentario, long idUsuario){
     def comentarioInstance = comentarioService.getComentarioById(idComentario)
-    def usuarioInstance = comentarioService.getUsuarioById(idUsuario)
+    def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
     def esDueño = comentarioService.usuarioEsDueñoDelComentario(usuarioInstance, comentarioInstance)
     def esSubComentario = comentarioService.esSubComentario(comentarioInstance)
     def comentarios = comentarioService.obtenerComentariosNoEliminados(comentarioInstance)

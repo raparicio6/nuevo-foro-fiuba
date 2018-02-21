@@ -12,9 +12,6 @@
 También hay constructores que le faltan variables como por ejemplo en Publicacion, Usuario. Cuando se crea alguno de estos ya pueden pasarle datos por constructor y no tener que hacerlo a mano apenas se crear con algun método por ejemplo usuario.agregarCursada.
 VER MAIL MAURO
 
-*Crear servicio para materia, catedra, y demás que se requieran, y poner ahí los GetById y GetAll de su clase en cuestión. Desde los controladores cuando se hacen esos GetAll ahora llamar al servicio de la clase en cuestión y no al propio. Por último eliminar esos GetById y GetAll de los servicios donde no se terminen usando ahí en el mismo.
-VER MAIL MAURO (Mariano)
-
 *Intentar reducir código de las vistas creando etiquetas personalizadas (Rodrigo)
 
 *Hacer todos los sort que sean necesarios en las pantallas (no por id!)

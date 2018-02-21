@@ -35,11 +35,11 @@ class PublicacionService {
   }
 
   Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateriaRequerida, Float promedioCalificacionesMinimoParaComentar = 0, String nombreEncuesta = null, String nombreOpciones = null, MultipartFile file = null){
-    def usuario = getUsuarioById(idUsuario)
+    def usuario = Usuario.get(idUsuario)
     def catedra = null
     def materia = null
     if (idCatedra){
-      catedra = getCatedraById(idCatedra)
+      catedra = Catedra.get(idCatedra)
       materia = catedra.materia
     }
     Publicacion publicacion = this.crearPublicacion(usuario, catedra, texto, materia)
@@ -52,7 +52,7 @@ class PublicacionService {
     }
     adjuntarArchivo (usuario, publicacion, archivoAdjunto )
     if (idMateriaRequerida){
-      materiaRequerida = getMateriaById(idMateriaRequerida)
+      materiaRequerida = Materia.get(idMateriaRequerida)
       usuario.agregarMateriaRequeridaParaComentar(publicacion, materiaRequerida)
     }
     def encuesta = null
@@ -69,46 +69,46 @@ class PublicacionService {
   }
 
   def cambiarEstado (long idUsuario, long idPublicacion){
-    def usuario = getUsuarioById(idUsuario)
+    def usuario = Usuario.get(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
     usuario.cambiarEstado(publicacion)
   }
 
   def modificarTextoPublicacion (long idUsuario,long idPublicacion, String nuevoTexto){
-    def usuario = getUsuarioById(idUsuario)
+    def usuario = Usuario.get(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
     publicacion.modificarTexto(nuevoTexto)
   }
 
   def modificarMateriaPublicacion (long idUsuario, long idPublicacion, long idMateria){
-    def usuario = getUsuarioById(idUsuario)
+    def usuario = Usuario.get(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
-    def materia = getMateriaById(idMateria)
+    def materia = Materia.get(idMateria)
     usuario.modificarMateriaPublicacion(publicacion, materia)
   }
 
   def modificarCatedraPublicacion (long idUsuario, long idPublicacion, long idCatedra){
-    def usuario = getUsuarioById(idUsuario)
+    def usuario = Usuario.get(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
-    def catedra = getCatedraById(idCatedra)
+    def catedra = Catedra.get(idCatedra)
     usuario.modificarCatedraPublicacion(publicacion, catedra)
     modificarMateriaPublicacion(idUsuario, idPublicacion, catedra.materia.id)
   }
 
   def modificarPromedioRequeridoParaComentar(long idUsuario, long idPublicacion, Float promedio){
-    def usuario = getUsuarioById(idUsuario)
+    def usuario = Usuario.get(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
     usuario.modificarPromedioRequeridoParaComentar(publicacion, promedio)
   }
 
   def eliminarPublicacion (long idUsuario, long idPublicacion){
-    def usuario = getUsuarioById(idUsuario)
+    def usuario = Usuario.get(idUsuario)
     def publicacion = getPublicacionById(idPublicacion)
     usuario.eliminarPublicacion(publicacion)
   }
 
   def calificarPublicacion(long idUsuario, long idPublicacion, Puntaje.TipoPuntaje tipo){
-     def usuario = getUsuarioById(idUsuario)
+     def usuario = Usuario.get(idUsuario)
      def publicacion = getPublicacionById(idPublicacion)
      def promedioCalificaciones = usuario.getPromedioCalificaciones()
      Puntaje puntaje = new Puntaje (tipo, promedioCalificaciones)
@@ -119,7 +119,7 @@ class PublicacionService {
    }
 
   Comentario comentarPublicacion (long idUsuario, String textoComentario, long idPublicacion){
-    def usuario = getUsuarioById(idUsuario)
+    def usuario = Usuario.get(idUsuario)
     def publicacionAComentar = getPublicacionById(idPublicacion)
     Comentario comentario = new Comentario(textoComentario, usuario, publicacionAComentar, null)
     usuario.comentarPublicacion(comentario, publicacionAComentar)
@@ -129,15 +129,15 @@ class PublicacionService {
 
   def agregarMateriaRequeridaParaComentar(long idPublicacion, long idUsuario, long idMateria){
     def publicacion = getPublicacionById(idPublicacion)
-    def usuario = getUsuarioById(idUsuario)
-    def materia = getMateriaById(idMateria)
+    def usuario = Usuario.get(idUsuario)
+    def materia = Materia.get(idMateria)
     usuario.agregarMateriaRequeridaParaComentar(publicacion, materia)
   }
 
   def votarOpcionEncuesta(long idPublicacion, long idUsuario, long idOpcion){
     Publicacion publicacion = getPublicacionById(idPublicacion)
-    Usuario usuario = getUsuarioById(idUsuario)
-    Opcion opcion = getOpcionById(idOpcion)
+    Usuario usuario = Usuario.get(idUsuario)
+    Opcion opcion = Opcion.get(idOpcion)
     Voto voto = new Voto (usuario)
     usuario.votarOpcion(publicacion, opcion, voto)
     voto.save(failOnError:true)
@@ -147,36 +147,8 @@ class PublicacionService {
     usuario.adjuntarArchivo(publicacion, archivoAdjunto)
   }
 
-  def getUsuarioById(long idUsuario){
-    Usuario.get(idUsuario)
-  }
-
   def getPublicacionById(long idPublicacion){
     Publicacion.get(idPublicacion)
-  }
-
-  def getMateriaById(long idMateria){
-    Materia.get(idMateria)
-  }
-
-  def getAllMaterias(){
-    Materia.list()
-  }
-
-  def getCatedraById(long idCatedra){
-    Catedra.get(idCatedra)
-  }
-
-  def getAllCatedras(){
-    Catedra.list()
-  }
-
-  def getOpcionById(long idOpcion){
-    Opcion.get(idOpcion)
-  }
-
-  def getArchivoById(long idArchivo){
-    Archivo.get(idArchivo)
   }
 
 }

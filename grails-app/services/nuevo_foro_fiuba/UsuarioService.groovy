@@ -37,40 +37,20 @@ class UsuarioService {
     numeroPrimerPuntaje
   }
 
-  def obtenerTodosLosUsuarios(){
-    Usuario.list()
-  }
-
-  def obtenerCantidadDeUsuariosTotal(){
-    Usuario.count()
-  }
-
   def filtrarPorPromedio(Float promedioMin, Float promedioMax){
     Usuario.list().findAll {usuario -> usuario.promedioCalificaciones >= promedioMin && usuario.promedioCalificaciones <= promedioMax}
   }
 
   def filtrarPorMateria(ArrayList usuarios, long idMateria){
-    usuarios.findAll { usuario -> getMateriaById(idMateria) in usuario.obtenerMateriasCursadas() }
-  }
-
-  def getMateriaById(long idMateria){
-    Materia.get(idMateria)
+    usuarios.findAll { usuario -> Materia.get(idMateria) in usuario.obtenerMateriasCursadas() }
   }
 
   def getUsuarioById(long idUsuario){
     Usuario.get(idUsuario)
   }
 
-  def getPublicacionById(long idPublicacion){
-    Publicacion.get(idPublicacion)
-  }
-
-  def getAllCatedras(){
-    Catedra.list()
-  }
-
-  def getAllMaterias(){
-    Materia.list()
+  def getAllUsuarios(){
+    Usuario.list()
   }
 
 }

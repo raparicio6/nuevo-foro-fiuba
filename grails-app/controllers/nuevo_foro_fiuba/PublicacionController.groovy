@@ -3,27 +3,31 @@ package nuevo_foro_fiuba
 class PublicacionController {
 
   def publicacionService
+  def usuarioService
+  def materiaService
+  def catedraService
+  def archivoService
 
   def index() {}
 
   def listaPublicaciones(long idUsuario, Integer idCatedra) {
     def publicacionesNoEliminadas = publicacionService.obtenerPublicacionesNoEliminadas()
     def publicaciones = (!idCatedra) ? publicacionesNoEliminadas : publicacionService.filtrarPublicacionesPorCatedra(publicacionesNoEliminadas, idCatedra)
-    def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
-    [publicacionInstanceList: publicaciones, usuarioInstance: usuarioInstance, materias: publicacionService.getAllMaterias(), catedras: publicacionService.getAllCatedras()]
+    def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
+    [publicacionInstanceList: publicaciones, usuarioInstance: usuarioInstance, materias: materiaService.getAllMaterias(), catedras: catedraService.getAllCatedras()]
   }
 
   def crearPublicacion (long idUsuario) {
-    def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
-    [usuario: usuarioInstance, catedras: publicacionService.getAllCatedras(), materias: publicacionService.getAllMaterias()]
+    def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
+    [usuario: usuarioInstance, catedras: catedraService.getAllCatedras(), materias: materiaService.getAllMaterias()]
   }
 
   def verPublicacion (long idPublicacion, long idUsuario){
     def publicacionInstance = publicacionService.getPublicacionById(idPublicacion)
-    def usuarioInstance = publicacionService.getUsuarioById(idUsuario)
+    def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
     def esDueño = publicacionService.usuarioEsDueñoDeLaPublicacion(usuarioInstance, publicacionInstance)
     def comentarios = publicacionService.obtenerComentariosNoEliminados(publicacionInstance).sort { it.fechaHoraCreacion }
-    [publicacion: publicacionInstance, materias: publicacionService.getAllMaterias(), catedras: publicacionService.getAllCatedras(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios]
+    [publicacion: publicacionInstance, materias: materiaService.getAllMaterias(), catedras: catedraService.getAllCatedras(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios]
   }
 
   def formarPublicacion (String texto, long idUsuario, long idCatedra, long idMateria, Float promedioCalificacionesMinimoParaComentar, String nombreEncuesta, String nombreOpciones) {
@@ -120,7 +124,7 @@ class PublicacionController {
   }
 
   def descargarArchivoAdjunto(long idArchivo) {
-    Archivo archivoInstance = publicacionService.getArchivoById(idArchivo)
+    Archivo archivoInstance = archivoService.getArchivoById(idArchivo)
     response.setContentType("APPLICATION/OCTET-STREAM")
     response.setHeader("Content-Disposition", "Attachment;Filename=\"${archivoInstance.nombre}\"")
     def file = new File(archivoInstance.path)

@@ -3,13 +3,15 @@ package nuevo_foro_fiuba
 class UsuarioController {
 
   def usuarioService
+  def materiaService
+  def catedraService
 
   def index() {
     redirect(action: "seleccionarUsuario")
   }
 
   def seleccionarUsuario(){
-    [usuarioInstanceList: usuarioService.obtenerTodosLosUsuarios()]
+    [usuarioInstanceList: usuarioService.getAllUsuarios()]
   }
 
   def inicioUsuario(long idUsuario){
@@ -26,7 +28,7 @@ class UsuarioController {
     if (idMateria)
       usuarios = usuarioService.filtrarPorMateria(usuarios, idMateria)
     Usuario usuarioInstance = usuarioService.getUsuarioById(idUsuario)
-    [usuarioInstanceList: usuarios, usuarioInstance: usuarioInstance, materias: usuarioService.getAllMaterias(), catedras: usuarioService.getAllCatedras()]
+    [usuarioInstanceList: usuarios, usuarioInstance: usuarioInstance, materias: materiaService.getAllMaterias(), catedras: catedraService.getAllCatedras()]
   }
 
   def verMateriasCursadas (long idUsuario){
