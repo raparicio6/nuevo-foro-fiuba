@@ -1,13 +1,10 @@
-Temas para ver (por orden de prioridad):
+﻿Temas para ver (por orden de prioridad):
 
 *Agregar para que se puedan poner muchas materias requeridas para comentar (Germán)
 
 *Tests (Germán)
 
 *Preparar correctamente la documentación, tanto la original como los cambios que fuimos haciendo. No es necesario perder tiempo editando el diagrama de clases ya que fueron cambios muy chicos y el software para hacerlo es malísimo! (Mariano)
-
-*Agregar archivos a publicaciones (intentar usar /files/ como path, pero no perder tiempo con eso que no es para nada grave)
-VER MAIL MAURO
 
 *Darle estilo a las pantallas que les falta (Rodrigo)
 
@@ -16,7 +13,7 @@ También hay constructores que le faltan variables como por ejemplo en Publicaci
 VER MAIL MAURO
 
 *Crear servicio para materia, catedra, y demás que se requieran, y poner ahí los GetById y GetAll de su clase en cuestión. Desde los controladores cuando se hacen esos GetAll ahora llamar al servicio de la clase en cuestión y no al propio. Por último eliminar esos GetById y GetAll de los servicios donde no se terminen usando ahí en el mismo.
-VER MAIL MAURO
+VER MAIL MAURO (Mariano)
 
 *Intentar reducir código de las vistas creando etiquetas personalizadas (Rodrigo)
 
