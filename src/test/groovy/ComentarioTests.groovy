@@ -23,9 +23,7 @@ class ComentarioTests {
         materia = new Materia('texto', 'desc')
         profesor = new Profesor('Mauro')
         catedra = new Catedra(materia, profesor, 'catedra')
-        publicacion = new Publicacion('un texto', usuario)
-        publicacion.modificarMateria(materia)
-        publicacion.modificarCatedra(catedra)
+        publicacion = new Publicacion('un texto', usuario, materia, catedra)
         comentario = new Comentario('un comentario', usuario, publicacion, null)
         puntaje = new Puntaje(Puntaje.TipoPuntaje.ME_GUSTA,3)
     }

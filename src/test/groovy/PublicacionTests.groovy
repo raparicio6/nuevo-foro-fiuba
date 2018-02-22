@@ -24,9 +24,7 @@ class PublicacionTests {
         materia = new Materia('texto', 'desc')
         profesor = new Profesor('Mauro')
         catedra = new Catedra(materia, profesor, 'catedra')
-        publicacion = new Publicacion('un texto', usuario)
-        publicacion.modificarMateria(materia)
-        publicacion.modificarCatedra(catedra)
+        publicacion = new Publicacion('un texto', usuario, materia, catedra)
         comentario = new Comentario('comentario', usuario, publicacion, null)
         puntaje = new Puntaje(Puntaje.TipoPuntaje.ME_GUSTA,3)
     }
@@ -35,7 +33,7 @@ class PublicacionTests {
     }
 
     @Test
-    void 'test publicacion cambia de estado y confirma estar cerrada' () {
+    void 'test publicaion cambia de estado y confirma estar cerrada' () {
         assert !publicacion.estaCerrada()
         publicacion.cambiarEstado()
         assert publicacion.estaCerrada()
@@ -58,14 +56,14 @@ class PublicacionTests {
     @Test
     void 'test se cambia la catedra relacionada de una publicacion y esta se setea correctamente' () {
         Catedra catedra2 = new Catedra(materia, profesor, 'catedra2')
-        publicacion.modificarCatedra(catedra2)
+        publicacion.cambiarCatedra(catedra2)
         assert publicacion.catedraRelacionada == catedra2
     }
 
     @Test
     void 'test se cambia la materia relacionada de una publicacion y esta se setea correctamente' () {
         Materia materia2 = new Materia('materia2', 'descripcion')
-        publicacion.modificarMateria(materia2)
+        publicacion.cambiarMateria(materia2)
         assert publicacion.materiaRelacionada == materia2
     }
 
