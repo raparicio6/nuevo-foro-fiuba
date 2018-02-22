@@ -65,7 +65,7 @@
 							Materia cursada:
 						</div>
 						<div class="col-md-2" style="margin-left:-60px">
-							<g:select name="idMateria" from="${materias}" optionValue ="nombre" optionKey = "id" noSelection="${['null':'Elegir materia...']}"/>
+							<g:select name="idMateria" from="${materias}" multiple="true" optionValue ="nombre" optionKey = "id" />
 						</div>
 					</div>
 				</div>
@@ -73,11 +73,18 @@
 				<br/>
 
 				<div class="row">
-					<div class="col-md-11 col-md-offset-1">
-						<g:submitButton name="Filtrar" value="Filtrar" class="btn btn-danger"/>
+					<div class="col-md-11 col-md-offset-0">
+						<h3>
+							<g:submitButton name="Filtrar" value="Filtrar" class="btn btn-danger"/>
+						</h3>
 					</div>
 				</div>
+
+
+
 			</g:form>
+
+
 
 
 			<div class="row">
@@ -85,7 +92,7 @@
 					<table class="table table-bordered">
 						<thead>
 							<tr>
-								<th class="text-center">Nombre</th>
+								<th class="text-center">Nombre usuario</th>
 								<th class="text-center">Promedio de calificaciones</th>
 								<th class="text-center">Materias cursadas</th>
 							</tr>
@@ -93,7 +100,7 @@
 						<tbody>
 							<g:each in="${usuarioInstanceList.sort { it.nombreUsuario  }}" var="usuarioInstance">
 								<tr>
-									<td class="text-center">${usuarioInstance.nombre}</td>
+									<td class="text-center">${usuarioInstance.nombreUsuario}</td>
 									<td class="text-center">${usuarioInstance.promedioCalificaciones.round(2)}</td>
 									<td class="text-center">
 										<g:form action="verMateriasCursadas" params="[idUsuario:"${usuarioInstance.id}"]">

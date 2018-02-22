@@ -30,26 +30,13 @@ class PublicacionController {
     [publicacion: publicacionInstance, materias: materiaService.getAllMaterias(), catedras: catedraService.getAllCatedras(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios]
   }
 
-  // DE MAS????
-  def agregarMateria (long idUsuario, long idPublicacion) {
-    def publicacionInstance = publicacionService.getPublicacionById(idPublicacion)
-    def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
-    [publicacion: publicacionInstance, usuario: usuarioInstance, materias: materiaService.getAllMaterias()]
-  }
-
-  def formarPublicacion (String texto, long idUsuario, long idCatedra, long idMateria, Float promedioCalificacionesMinimoParaComentar, String nombreEncuesta, String nombreOpciones) {
+  def formarPublicacion (String texto, long idUsuario, long idCatedra, Float promedioCalificacionesMinimoParaComentar, String nombreEncuesta, String nombreOpciones) {
     final def file = request.getFile('archivo')
     if (! promedioCalificacionesMinimoParaComentar)
       promedioCalificacionesMinimoParaComentar = 0
-    def publicacion = publicacionService.formarPublicacion(idUsuario, texto, idCatedra, idMateria, nombreEncuesta, nombreOpciones, promedioCalificacionesMinimoParaComentar, file)                                      
+    def publicacion = publicacionService.formarPublicacion(idUsuario, texto, idCatedra, params.idsMateriasRequeridas, nombreEncuesta, nombreOpciones, promedioCalificacionesMinimoParaComentar, file)
     def idPublicacion = publicacion.getId()
-    redirect(action: "agregarMateria", params:[idUsuario:idUsuario, idPublicacion: idPublicacion])
-  }
-
-  // SE REPITE CON EL METODO DE ABAJO, ELIMINAR ALGUNO
-  def agregarMateriaNecesaria (long idUsuario, long idPublicacion, long idMateria) {
-    publicacionService.agregarMateriaRequeridaParaComentar(idPublicacion, idMateria)
-    redirect(action: "agregarMateria", params:[idUsuario:idUsuario, idPublicacion: idPublicacion])
+    redirect(action: "listaPublicaciones", params:[idUsuario:idUsuario])
   }
 
   def dejarDeAgregarMaterias (long idUsuario) {
@@ -120,7 +107,6 @@ class PublicacionController {
     redirect(controller:"publicacion", action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
-  // SE REPITE CON EL METODO DE ARRIBA, ELIMINAR ALGUNO
   def agregarMateriaRequeridaParaComentar(long idPublicacion, long idUsuario, long idMateria){
     publicacionService.agregarMateriaRequeridaParaComentar(idPublicacion, idMateria)
     redirect(controller:"publicacion", action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])

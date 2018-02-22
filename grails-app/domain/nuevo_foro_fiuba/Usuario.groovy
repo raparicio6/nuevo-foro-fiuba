@@ -159,5 +159,9 @@ class Usuario {
 			throw new UsuarioYaVotoException()
 		opcion.agregarVoto(voto)
 	}
-	
+
+	def cursoEstasMaterias(def materiasFiltro){
+		return 	!(false in materiasFiltro.collect {materia -> materia in this.obtenerMateriasCursadas()})
+	}
+
 }

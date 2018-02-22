@@ -8,16 +8,16 @@ class PublicacionService {
 
   def serviceMethod() {}
 
-  //final String PATH = "C:/Users/Mariano/nuevo_foro_fiuba/grails-app/files/"
+  final String PATH = "C:/Users/Mariano/nuevo_foro_fiuba/grails-app/files/"
   //final String PATH = "/nuevo-foro-fiuba/grails-app/files/"
-  final String PATH = "/home/rodrigo/nuevo-foro-fiuba/grails-app/files/"
+  // final String PATH = "/home/rodrigo/nuevo-foro-fiuba/grails-app/files/"
 
-  Publicacion crearPublicacion(Usuario usuarioCreador, String texto, Catedra catedraRelacionada = null, Materia materiaRelacionada = null, Materia materiaRequerida = null, Float promedioCalificacionesMinimoParaComentar = 0, Encuesta encuesta = null, Archivo archivo = null){
+  Publicacion crearPublicacion(Usuario usuarioCreador, String texto, Catedra catedraRelacionada = null, Materia materiaRelacionada = null, def materiasRequeridas = null, Float promedioCalificacionesMinimoParaComentar = 0, Encuesta encuesta = null, Archivo archivo = null){
     Publicacion publicacion = new Publicacion (texto, usuarioCreador)
     publicacion.modificarCatedra(catedraRelacionada)
     publicacion.modificarMateria(materiaRelacionada)
-    if (materiaRequerida) // para que no agregue un null en la tabla muchos a muchos
-      publicacion.agregarMateriaRequeridaParaComentar(materiaRequerida)
+    if (materiasRequeridas) // para que no agregue un null en la tabla muchos a muchos
+      materiasRequeridas.collect { materiaRequerida -> publicacion.agregarMateriaRequeridaParaComentar(materiaRequerida) }
     publicacion.modificarPromedioRequeridoParaComentar(promedioCalificacionesMinimoParaComentar)
     publicacion.agregarEncuesta(encuesta)
     publicacion.agregarArchivo(archivo)
@@ -37,7 +37,7 @@ class PublicacionService {
     publicacion.obtenerComentariosNoEliminados()
   }
 
-  Publicacion formarPublicacion(long idUsuario, String texto, long idCatedra = 0, long idMateriaRequerida = 0, String nombreEncuesta = null, String nombreOpciones = null, Float promedioCalificacionesMinimoParaComentar = 0, MultipartFile file = null){
+  Publicacion formarPublicacion(long idUsuario, String texto, long idCatedra = 0, def idsMateriasRequeridas = [], String nombreEncuesta = null, String nombreOpciones = null, Float promedioCalificacionesMinimoParaComentar = 0, MultipartFile file = null){
     def usuario = this.getUsuarioById(idUsuario)
 
     def catedra = null
@@ -54,9 +54,9 @@ class PublicacionService {
       archivoAdjunto.save(failOnError:true)
     }
 
-    def materiaRequerida = null
-    if (idMateriaRequerida)
-      materiaRequerida = this.getMateriaById(idMateriaRequerida)
+    def materiasRequeridas = []
+    if (idsMateriasRequeridas)
+      materiasRequeridas = idsMateriasRequeridas.collect {idMateriaRequerida -> this.getMateriaById(idMateriaRequerida.toLong())}
 
     def encuesta = null
     if (nombreEncuesta && nombreOpciones) {
@@ -66,7 +66,7 @@ class PublicacionService {
       encuesta.save(failOnError:true)
     }
 
-    Publicacion publicacion = this.crearPublicacion(usuario, texto, catedra, materia, materiaRequerida, promedioCalificacionesMinimoParaComentar, encuesta, archivoAdjunto)
+    Publicacion publicacion = this.crearPublicacion(usuario, texto, catedra, materia, materiasRequeridas, promedioCalificacionesMinimoParaComentar, encuesta, archivoAdjunto)
     usuario.publicar(publicacion)
     publicacion
   }

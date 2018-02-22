@@ -41,8 +41,9 @@ class UsuarioService {
     this.getAllUsuarios().findAll {usuario -> usuario.promedioCalificaciones >= promedioMin && usuario.promedioCalificaciones <= promedioMax}
   }
 
-  def filtrarPorMateria(ArrayList usuarios, long idMateria){
-    usuarios.findAll { usuario -> this.getMateriaById(idMateria) in usuario.obtenerMateriasCursadas() }
+  def filtrarPorMateria(ArrayList usuarios, def idsMaterias){
+    def materiasFiltro = idsMaterias.collect {idMateria -> getMateriaById(idMateria.toLong())}
+    usuarios.findAll { usuario -> usuario.cursoEstasMaterias(materiasFiltro) }
   }
 
   Boolean usuarioEsDueñoDeLaPublicacion(Usuario usuario, Publicacion publicacion){
