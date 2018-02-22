@@ -7,6 +7,9 @@
 	<body>
 
 		<div class="container">
+
+
+
 			<div class="row">
 				<div class="col-md-12">
 					<div class="navbar navbar-inverse">
@@ -24,47 +27,89 @@
 				</div>
 			</div>
 
-		<h1>Buscar publicaciones:</h1>
-		<g:form action="listaPublicaciones" params="[idUsuario:"${usuarioInstance.id}"]">
-			<g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", " + "catedra " + it.profesor.nombre}}" optionKey="id" noSelection="${['null':'Elegir materia...']}"/>
-			<g:submitButton name="Buscar"/>
-		</g:form>
+			<br/>
 
-		<div>
-			<h1><g:message code="Ver publicaciones" args="[entityName]" /></h1>
-			<table>
+			<div class="row">
+				<div class="col-md-12">
+					<h1>
+						<span>
+							Buscar publicaciones
+						</span>
+					</h1>
+				</div>
+			</div>
+
+
+			<g:form action="listaPublicaciones" params="[idUsuario:"${usuarioInstance.id}"]">
+				<div class="row">
+					<div class="col-md-12">
+						<g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", " + "catedra " + it.profesor.nombre}}" optionKey="id" noSelection="${['null':'Elegir materia...']}"/>
+							<!-- <g:submitButton name="Buscar"/> -->
+							<g:form action="Buscar">
+								<button type="submit" title="Buscar" style="background-color: Transparent;border: none;font-size: 20px;">
+									<span class="glyphicon glyphicon-search" ></span>
+								</button>
+							</g:form>
+						</div>
+					</div>
+				</g:form>
+
+				<br/>
+
+				<div class="row">
+					<div class="col-md-12">
+						<h3>
+							<span class="label label-default">
+								Publicaciones
+							</span>
+						</h3>
+					</div>
+				</div>
+
+				<br/>
+
+
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1	">
+			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th>Fecha creacion</th>
 						<th>Autor</th>
 						<th>Materia</th>
 						<th>Catedra</th>
+						<th>Fecha creacion</th>
 						<th>Estado</th>
-						<th>Acciones<th>
+						<th>Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${publicacionInstanceList}" status="i" var="publicacionInstance">
+				<g:each in="${publicacionInstanceList}" var="publicacionInstance">
 					<tr>
-
-						<td>${fieldValue(bean: publicacionInstance, field: "fechaHoraCreacion")}</td>
-						<td>${fieldValue(bean: publicacionInstance, field: "usuarioCreador.nombre")}</td>
+						<td>${publicacionInstance.usuarioCreador.nombreUsuario} </td>
 						<g:if test="${publicacionInstance.catedraRelacionada}">
-							<td>${fieldValue(bean: publicacionInstance, field: "catedraRelacionada.materia.nombre")}</td>
-							<td>${fieldValue(bean: publicacionInstance, field: "catedraRelacionada.profesor.nombre")}</td>
+							<td>${publicacionInstance.catedraRelacionada.materia.nombre} </td>
+							<td>${publicacionInstance.catedraRelacionada.profesor.nombre} </td>
 						</g:if>
 						<g:else>
 							<td>Ninguna</td>
 							<td>Ninguna</td>
 						</g:else>
-						<td>${fieldValue(bean: publicacionInstance, field: "estado")}</td>
-            <td><g:link action="verPublicacion" params="[idUsuario:"${usuarioInstance.id}", idPublicacion:"${publicacionInstance.id}"]">${"Ver"}</g:link></td>
-
+						<td>${publicacionInstance.fechaHoraCreacion} </td>
+						<td>${publicacionInstance.estado} </td>
+            <td>
+							<g:form action="verPublicacion" params="[idUsuario:"${usuarioInstance.id}", idPublicacion:"${publicacionInstance.id}"]">
+								<button type="submit" title="Ver" style="background-color: Transparent;border: none;font-size: 20px;">
+									<span class="glyphicon glyphicon-zoom-in" ></span>
+								</button>
+							</g:form>
+						</td>
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
 		</div>
 	</div>
+
+
 	</body>
 </html>
