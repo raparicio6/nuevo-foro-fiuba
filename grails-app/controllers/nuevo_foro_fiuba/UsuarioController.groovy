@@ -20,7 +20,6 @@ class UsuarioController {
   }
 
   def listaUsuarios(long idUsuario, Float promedioMin, Float promedioMax){
-    println(params.idMateria)
     if (!promedioMin)
        promedioMin=0
     if (!promedioMax)
