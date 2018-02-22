@@ -64,8 +64,8 @@
 						<div class="col-md-2" style="padding-right:0px">
 							Materia cursada:
 						</div>
-						<div class="col-md-10" style="margin-left:-60px">
-							<g:select name="idMateria" from="${materias}" multiple="true" optionValue ="nombre" optionKey = "id" />
+						<div class="col-md-3" style="margin-left:-60px">
+							<g:select name="idMateria" from="${materias}" multiple="true" optionValue ="nombre" optionKey = "id" class="form-control" />
 						</div>
 					</div>
 				</div>

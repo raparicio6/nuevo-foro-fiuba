@@ -43,12 +43,14 @@
 			<g:form action="listaPublicaciones" params="[idUsuario:"${usuarioInstance.id}"]">
 				<div class="row">
 					<div class="col-md-12">
-						<g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", " + "catedra " + it.profesor.nombre}}" optionKey="id" noSelection="${['null':'Elegir materia...']}"/>
-							<!-- <g:submitButton name="Buscar"/> -->
-								<button type="submit" title="Buscar" style="background-color: Transparent;border: none;font-size: 20px;">
-									<span class="glyphicon glyphicon-search" ></span>
-								</button>
+					<div class="col-md-3">
+						<g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", " + "catedra " + it.profesor.nombre}}" optionKey="id" noSelection="${['null':'Elegir materia...']}" class="form-control"/>
 						</div>
+							<button type="submit" title="Buscar" style="background-color: Transparent;border: none;font-size: 20px;">
+								<span class="glyphicon glyphicon-search" ></span>
+							</button>
+
+					</div>
 					</div>
 				</g:form>
 

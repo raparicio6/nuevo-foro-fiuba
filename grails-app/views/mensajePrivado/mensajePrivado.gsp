@@ -143,8 +143,8 @@
         </div>
 
         <div class="row" style="padding-top:10px">
-          <div class="col-md-12">
-            <g:select name="idUsuarioReceptor" from="${usuarios}" optionValue ="nombre" optionKey = "id" />
+          <div class="col-md-3">
+            <g:select name="idUsuarioReceptor" from="${usuarios}" optionValue ="nombre" optionKey = "id" class="form-control"/>
           </div>
         </div>
 
