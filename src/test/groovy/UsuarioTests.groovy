@@ -32,7 +32,9 @@ class UsuarioTests {
         materia = new Materia('texto', 'desc')
         profesor = new Profesor('Mauro')
         catedra = new Catedra(materia, profesor, 'catedra')
-        publicacion = new Publicacion('un texto', usuario, materia, catedra)
+        publicacion = new Publicacion('un texto', usuario)
+        publicacion.modificarMateria(materia)
+        publicacion.modificarCatedra(catedra)
         comentario = new Comentario('comentario', usuario, publicacion, null)
         puntaje = new Puntaje(Puntaje.TipoPuntaje.ME_GUSTA,3)
     }
@@ -51,7 +53,7 @@ class UsuarioTests {
 
     @Test
     void 'test soy un usuario que quiere comentar en una publicacion cerrada lanza exception' () {
-        usuario.cambiarEstado(publicacion)
+        publicacion.cambiarEstado()
         shouldFail(PublicacionCerradaException) {
             assert usuario.comentarPublicacion(comentario, publicacion)
         }
