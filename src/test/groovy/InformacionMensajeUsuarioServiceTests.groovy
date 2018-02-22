@@ -21,7 +21,7 @@ class InformacionMensajeUsuarioServiceTests {
 
     }
 
-    /*@Test
+    @Test
     void 'test creo una informacion y la busco por id'() {
         mockDomain(Usuario)
         mockDomain(InformacionMensajeUsuario)
@@ -38,7 +38,7 @@ class InformacionMensajeUsuarioServiceTests {
         assert informacionMensajeUsuarioService.getInformacionMensajeUsuarioById(info.id) == info
     }
 
-    @Test
+    /*@Test
     void 'test busco los mensajes enviados de un usuario'() {
         mockDomain(Usuario)
         mockDomain(InformacionMensajeUsuario)
