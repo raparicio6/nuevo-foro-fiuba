@@ -11,18 +11,13 @@ class Publicacion {
 	String texto
 	Usuario usuarioCreador
 	Materia materiaRelacionada = null
-	// Materia materiaRelacionada
 	Catedra catedraRelacionada = null
-	// Catedra catedraRelacionada
 	Float promedioRequeridoParaComentar = 0
 	Set <Materia> materiasNecesariasParaComentar = []
-	// Set <Materia> materiasNecesariasParaComentar
 	Set <Comentario> comentarios = []
 	Archivo archivoAdjunto = null
-	// Archivo archivoAdjunto
 	EstadoPublicacion estado = EstadoPublicacion.ABIERTA
 	Encuesta encuesta = null
-	// Encuesta encuesta
 	Set <Calificacion> calificaciones = []
 	Date fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', new Date().format( 'dd/MM/yyyy hh:mm' ));
 
@@ -48,28 +43,9 @@ class Publicacion {
   }
 
 // ------------------------------------------------------------------------- //
-	// Publicacion(String texto, Usuario usuarioCreador, Materia materiaRelacionada = null, Catedra catedraRelacionada = null, Float promedioRequeridoParaComentar = 0, Set <Materia> materiasNecesariasParaComentar = [], Archivo archivoAdjunto = null, Encuesta encuesta = null){
-	// 	this.texto = texto
-	// 	this.usuarioCreador = usuarioCreador
-	// 	this.estado = EstadoPublicacion.ABIERTA
-	// 	this.comentarios = []
-	// 	this.calificaciones = []
-	// 	String dia = new Date().format( 'dd/MM/yyyy hh:mm' )
-	// 	this.fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', dia);
-	// 	this.materiaRelacionada = materiaRelacionada
-	// 	this.catedraRelacionada = catedraRelacionada
-	// 	this.promedioRequeridoParaComentar = promedioRequeridoParaComentar
-	// 	this.materiasNecesariasParaComentar = materiasNecesariasParaComentar
-	// 	this.archivoAdjunto = archivoAdjunto
-	// 	this.encuesta = encuesta
-	// }
-	//
-
-	Publicacion(String texto, Usuario usuarioCreador, Materia materiaRelacionada, Catedra catedraRelacionada){
+	Publicacion(String texto, Usuario usuarioCreador){
 		this.texto = texto
 		this.usuarioCreador = usuarioCreador
-		this.materiaRelacionada = materiaRelacionada
-		this.catedraRelacionada = catedraRelacionada
 	}
 
 // ------------------------------------------------------------------------- //
@@ -97,11 +73,11 @@ class Publicacion {
 		this.setTexto(nuevoTexto)
 	}
 
-	def cambiarMateria(Materia materia){
+	def modificarMateria(Materia materia){
 		this.setMateriaRelacionada(materia)
 	}
 
-	def cambiarCatedra(Catedra catedra){
+	def modificarCatedra(Catedra catedra){
 		this.setCatedraRelacionada(catedra)
 	}
 
@@ -130,6 +106,5 @@ class Publicacion {
 	def agregarArchivo (Archivo archivoAdjunto){
 		this.setArchivoAdjunto(archivoAdjunto)
 	}
-
 
 }

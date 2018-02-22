@@ -9,13 +9,13 @@ class MensajePrivadoController {
 
   def index(long idUsuario) {
     def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
-    def informacionMensajesRecibidos = mensajePrivadoService.obtenerInformacionMensajesRecibidos(usuarioInstance)
+    def informacionMensajesRecibidos = informacionMensajeUsuarioService.obtenerInformacionMensajesRecibidosUsuario(usuarioInstance)
     render (view:"listaMensajes", model:[usuarioInstance:usuarioInstance, informacionMensajes:informacionMensajesRecibidos, title:"Mensajes recibidos", enviadosRecibidos:"Recibidos", dePara:"De", mostrarResponder:true, action:"verMensajesEnviados", value:"Ver mensajes enviados"])
   }
 
   def verMensajesEnviados(long idUsuario){
     Usuario usuarioInstance = usuarioService.getUsuarioById(idUsuario)
-    def informacionMensajesEnviados = mensajePrivadoService.obtenerInformacionMensajesEnviados(usuarioInstance)
+    def informacionMensajesEnviados = informacionMensajeUsuarioService.obtenerInformacionMensajesEnviadosUsuario(usuarioInstance)
     render (view:"listaMensajes", model:[usuarioInstance:usuarioInstance, informacionMensajes:informacionMensajesEnviados, title:"Mensajes enviados", enviadosRecibidos:"Enviados", dePara:"Para", mostrarResponder:false, action:"index", value:"Volver a recibidos"])
   }
 
@@ -38,7 +38,7 @@ class MensajePrivadoController {
   }
 
   def eliminarMensaje (long idUsuario, long idInformacionMensajeUsuario){
-    mensajePrivadoService.eliminarMensaje(idUsuario, idInformacionMensajeUsuario)
+    informacionMensajeUsuarioService.eliminarMensaje(idUsuario, idInformacionMensajeUsuario)
     redirect (action:"index", params:[idUsuario:idUsuario])
   }
 
@@ -57,6 +57,6 @@ class MensajePrivadoController {
     outputStream.flush()
     outputStream.close()
     fileInputStream.close()
-}
+  }
 
 }

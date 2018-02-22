@@ -8,8 +8,8 @@ class Calificacion {
 	}
 
 	Usuario usuario
-	Publicacion publicacion = null
-	Comentario comentario = null
+	Publicacion publicacion
+	Comentario comentario
 	Puntaje puntaje
 	EstadoCalificacion estado = EstadoCalificacion.VIGENTE
 	Date fechaHoraCreacion = Date.parse('dd/MM/yyyy hh:mm', new Date().format( 'dd/MM/yyyy hh:mm' ));

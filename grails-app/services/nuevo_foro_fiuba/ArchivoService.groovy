@@ -5,11 +5,10 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class ArchivoService {
 
-    def serviceMethod() {
+  def serviceMethod() {}
 
-    }
-
-    def getArchivoById(long idArchivo){
-      Archivo.get(idArchivo)
-    }
+  def getArchivoById(long idArchivo){
+    Archivo.get(idArchivo)
+  }
+  
 }

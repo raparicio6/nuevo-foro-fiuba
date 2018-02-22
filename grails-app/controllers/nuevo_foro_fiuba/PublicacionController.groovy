@@ -10,7 +10,7 @@ class PublicacionController {
 
   def index() {}
 
-  def listaPublicaciones(long idUsuario, Integer idCatedra) {
+  def listaPublicaciones(long idUsuario, long idCatedra) {
     def publicacionesNoEliminadas = publicacionService.obtenerPublicacionesNoEliminadas()
     def publicaciones = (!idCatedra) ? publicacionesNoEliminadas : publicacionService.filtrarPublicacionesPorCatedra(publicacionesNoEliminadas, idCatedra)
     def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
@@ -25,11 +25,12 @@ class PublicacionController {
   def verPublicacion (long idPublicacion, long idUsuario){
     def publicacionInstance = publicacionService.getPublicacionById(idPublicacion)
     def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
-    def esDueño = publicacionService.usuarioEsDueñoDeLaPublicacion(usuarioInstance, publicacionInstance)
+    def esDueño = usuarioService.usuarioEsDueñoDeLaPublicacion(usuarioInstance, publicacionInstance)
     def comentarios = publicacionService.obtenerComentariosNoEliminados(publicacionInstance).sort { it.fechaHoraCreacion }
     [publicacion: publicacionInstance, materias: materiaService.getAllMaterias(), catedras: catedraService.getAllCatedras(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios]
   }
 
+  // DEMAS????
   def agregarMateria (long idUsuario, long idPublicacion) {
     def publicacionInstance = publicacionService.getPublicacionById(idPublicacion)
     def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
@@ -40,13 +41,14 @@ class PublicacionController {
     final def file = request.getFile('archivo')
     if (! promedioCalificacionesMinimoParaComentar)
       promedioCalificacionesMinimoParaComentar = 0
-    def publicacion = publicacionService.formarPublicacion(idUsuario, idCatedra, texto, idMateria, promedioCalificacionesMinimoParaComentar, nombreEncuesta, nombreOpciones, file)
+    def publicacion = publicacionService.formarPublicacion(idUsuario, texto, idCatedra, idMateria, promedioCalificacionesMinimoParaComentar, nombreEncuesta, nombreOpciones, file)
     def idPublicacion = publicacion.getId()
     redirect(action: "agregarMateria", params:[idUsuario:idUsuario, idPublicacion: idPublicacion])
   }
 
+  // SE REPITE CON EL METODO DE ABAJO, ELIMINAR ALGUNO
   def agregarMateriaNecesaria (long idUsuario, long idPublicacion, long idMateria) {
-    publicacionService.agregarMateriaRequeridaParaComentar(idPublicacion, idUsuario, idMateria)
+    publicacionService.agregarMateriaRequeridaParaComentar(idPublicacion, idMateria)
     redirect(action: "agregarMateria", params:[idUsuario:idUsuario, idPublicacion: idPublicacion])
   }
 
@@ -55,32 +57,32 @@ class PublicacionController {
   }
 
   def cambiarEstado (long idPublicacion, long idUsuario){
-    publicacionService.cambiarEstado(idUsuario, idPublicacion)
+    publicacionService.cambiarEstado(idPublicacion)
     redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
   def modificarTextoPublicacion(long idPublicacion, String nuevoTexto, long idUsuario){
-    publicacionService.modificarTextoPublicacion(idUsuario, idPublicacion, nuevoTexto)
+    publicacionService.modificarTextoPublicacion(idPublicacion, nuevoTexto)
     redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
   def modificarMateria(long idPublicacion, long idMateria, long idUsuario){
-    publicacionService.modificarMateriaPublicacion(idUsuario, idPublicacion, idMateria)
+    publicacionService.modificarMateriaPublicacion(idPublicacion, idMateria)
     redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
   def modificarCatedra(long idPublicacion, long idCatedra, long idUsuario){
-    publicacionService.modificarCatedraPublicacion(idUsuario, idPublicacion, idCatedra)
+    publicacionService.modificarCatedraPublicacion(idPublicacion, idCatedra)
     redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
   def modificarPromedioRequeridoParaComentar (long idPublicacion, long idUsuario, Float promedio){
-    publicacionService.modificarPromedioRequeridoParaComentar(idUsuario, idPublicacion, promedio)
+    publicacionService.modificarPromedioRequeridoParaComentar(idPublicacion, promedio)
     redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
   def eliminarPublicacion(long idPublicacion, long idUsuario){
-    publicacionService.eliminarPublicacion(idUsuario, idPublicacion)
+    publicacionService.eliminarPublicacion(idPublicacion)
     redirect(action: "listaPublicaciones", params: [idUsuario:idUsuario])
   }
 
@@ -118,14 +120,15 @@ class PublicacionController {
     redirect(controller:"publicacion", action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
+  // SE REPITE CON EL METODO DE ARRIBA, ELIMINAR ALGUNO
   def agregarMateriaRequeridaParaComentar(long idPublicacion, long idUsuario, long idMateria){
-    publicacionService.agregarMateriaRequeridaParaComentar(idPublicacion, idUsuario, idMateria)
+    publicacionService.agregarMateriaRequeridaParaComentar(idPublicacion, idMateria)
     redirect(controller:"publicacion", action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])
   }
 
   def votarOpcionEncuesta(long idPublicacion, long idUsuario, long idOpcion){
     try{
-      publicacionService.votarOpcionEncuesta(idPublicacion, idUsuario, idOpcion)
+      usuarioService.votarOpcionEncuesta(idPublicacion, idUsuario, idOpcion)
     }
     catch(PublicacionCerradaException e){
       flash.message = e.MENSAJE

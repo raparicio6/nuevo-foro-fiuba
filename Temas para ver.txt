@@ -1,20 +1,16 @@
 ﻿Temas para ver (por orden de prioridad):
 
-*Agregar para que se puedan poner muchas materias requeridas para comentar (Germán)
+*Agregar en la búsqueda de usuarios que se pueda filtrar por más de una materia si se desea
 
-*Tests (Germán)
+*Tests de servicios (Germán)
 
 *Darle estilo a las pantallas que les falta (Rodrigo)
 
-*Atributos de las clases que tengan valor por defecto, y constructores que tengan parámetros optativos.
-También hay constructores que le faltan variables como por ejemplo en Publicacion, Usuario. Cuando se crea alguno de estos ya pueden pasarle datos por constructor y no tener que hacerlo a mano apenas se crear con algun método por ejemplo usuario.agregarCursada.
-VER MAIL MAURO
+*Intentar reducir código de las vistas creando etiquetas personalizadas? (Rodrigo)
+SI ALCANZA EL TIEMPO
 
-*Intentar reducir código de las vistas creando etiquetas personalizadas (Rodrigo)
-
-*Hacer todos los sort que sean necesarios en las pantallas (no por id!)
-
-*Crear más pantallas? (por ejemplo el perfil del usuario) (si alcanza el tiempo) (Rodrigo)
+*Hacer todos los sort que sean necesarios en las pantallas? (no por id, usar algun atributo de la clase)
+SI ALCANZA EL TIEMPO
 
 
 EL DÍA JUEVES ES NECESARIO DEDICARLE TIEMPO A TESTEAR TODA LA APLICACION (ABSOLUTAMENTE TODOS LOS BOTONES Y FUNCIONALIDADES), PARA ARREGLAR CUALQUIER INCONVENIENTE

@@ -15,13 +15,9 @@ class ComentarioService {
   }
 
   def modificarTextoComentario (long idUsuario,long idComentario, String nuevoTexto){
-    def usuario = Usuario.get(idUsuario)
+    def usuario = this.getUsuarioById(idUsuario)
     def comentario = getComentarioById(idComentario)
     comentario.modificarTexto(nuevoTexto)
-  }
-
-  Boolean usuarioEsDueñoDelComentario(Usuario usuario, Comentario comentario){
-    usuario.esDueñoDelComentario(comentario)
   }
 
   def esSubComentario(Comentario comentario){
@@ -37,7 +33,7 @@ class ComentarioService {
   }
 
   def calificarComentario(long idUsuario, long idComentario, Puntaje.TipoPuntaje tipo){
-    def usuario = Usuario.get(idUsuario)
+    def usuario = this.getUsuarioById(idUsuario)
     def comentario = getComentarioById(idComentario)
     def promedioCalificaciones = usuario.getPromedioCalificaciones()
     Puntaje puntaje = new Puntaje (tipo, promedioCalificaciones)
@@ -48,7 +44,7 @@ class ComentarioService {
   }
 
   Comentario comentarComentario (long idUsuario, String textoComentario, long idComentario){
-    def usuario = Usuario.get(idUsuario)
+    def usuario = this.getUsuarioById(idUsuario)
     def comentarioAComentar = getComentarioById(idComentario)
     Comentario comentario = this.crearComentario(textoComentario, usuario, comentarioAComentar)
     usuario.comentarComentario(comentario, comentarioAComentar)
@@ -57,6 +53,10 @@ class ComentarioService {
 
   def getComentarioById(long idComentario){
     Comentario.get(idComentario)
+  }
+
+  def getUsuarioById(long idUsuario){
+    Usuario.get(idUsuario)
   }
 
 }

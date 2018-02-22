@@ -38,11 +38,32 @@ class UsuarioService {
   }
 
   def filtrarPorPromedio(Float promedioMin, Float promedioMax){
-    Usuario.list().findAll {usuario -> usuario.promedioCalificaciones >= promedioMin && usuario.promedioCalificaciones <= promedioMax}
+    this.getAllUsuarios().findAll {usuario -> usuario.promedioCalificaciones >= promedioMin && usuario.promedioCalificaciones <= promedioMax}
   }
 
   def filtrarPorMateria(ArrayList usuarios, long idMateria){
-    usuarios.findAll { usuario -> Materia.get(idMateria) in usuario.obtenerMateriasCursadas() }
+    usuarios.findAll { usuario -> this.getMateriaById(idMateria) in usuario.obtenerMateriasCursadas() }
+  }
+
+  Boolean usuarioEsDueñoDeLaPublicacion(Usuario usuario, Publicacion publicacion){
+    usuario.esDueñoDeLaPublicacion(publicacion)
+  }
+
+  Boolean usuarioEsDueñoDelComentario(Usuario usuario, Comentario comentario){
+    usuario.esDueñoDelComentario(comentario)
+  }
+
+  def votarOpcionEncuesta(long idPublicacion, long idUsuario, long idOpcion){
+    Publicacion publicacion = getPublicacionById(idPublicacion)
+    Usuario usuario = this.getUsuarioById(idUsuario)
+    Opcion opcion = this.getOpcionById(idOpcion)
+    Voto voto = new Voto (usuario)
+    usuario.votarOpcion(publicacion, opcion, voto)
+    voto.save(failOnError:true)
+  }
+
+  def getCursadas(Usuario usuario){
+    usuario.getCursadas()
   }
 
   def getUsuarioById(long idUsuario){
@@ -51,6 +72,14 @@ class UsuarioService {
 
   def getAllUsuarios(){
     Usuario.list()
+  }
+
+  def getMateriaById(long idMateria){
+    Materia.get(idMateria)
+  }
+
+  def getOpcionById(long idOpcion){
+    Opcion.get(idOpcion)
   }
 
 }

@@ -13,7 +13,7 @@ class Usuario {
 	Set <InformacionMensajeUsuario> informacionMensajes = []
 	Set <Cursada> cursadas = []
 	Float promedioCalificaciones
-	// puntaje obtenido de las calificaciones
+	// puntajeActual
 
 	static hasMany = [
 		publicaciones: Publicacion,
@@ -30,7 +30,7 @@ class Usuario {
 		comentarios nullable: false
 		cursadas nullable: false
 		informacionMensajes nullable: false
-		promedioCalificaciones nullable: false, min:0F
+		promedioCalificaciones nullable: false
 	}
 
 // ------------------------------------------------------------------------- //
@@ -45,13 +45,13 @@ class Usuario {
 // ------------------------------------------------------------------------- //
 	def comentarPublicacion(Comentario comentario, Publicacion publicacionAComentar){
 		if (publicacionAComentar.estaCerrada())
-			throw new nuevo_foro_fiuba.PublicacionCerradaException()
+			throw new PublicacionCerradaException()
 		if (publicacionAComentar.estaEliminada())
-			throw new nuevo_foro_fiuba.PublicacionEliminadaException()
+			throw new PublicacionEliminadaException()
 		if (publicacionAComentar.getPromedioRequeridoParaComentar() > this.promedioCalificaciones && !this.esDueñoDeLaPublicacion(publicacionAComentar))
-			throw new nuevo_foro_fiuba.PromedioInsuficienteException()
+			throw new PromedioInsuficienteException()
 		if (!this.poseeMateriasNecesariasParaComentar(publicacionAComentar) && !this.esDueñoDeLaPublicacion(publicacionAComentar))
-			throw new nuevo_foro_fiuba.UsuarioNoPoseeMateriasNecesariasException()
+			throw new UsuarioNoPoseeMateriasNecesariasException()
 		this.comentarios << comentario
 		publicacionAComentar.agregarComentario(comentario)
 	}
@@ -62,7 +62,7 @@ class Usuario {
 
 	def comentarComentario(Comentario comentario, Comentario comentarioAComentar){
 		if (comentarioAComentar.publicacionComentada.estaCerrada())
-			throw new nuevo_foro_fiuba.PublicacionCerradaException()
+			throw new PublicacionCerradaException()
 		this.comentarios << comentario
 		comentarioAComentar.agregarComentario(comentario)
 	}
@@ -79,27 +79,11 @@ class Usuario {
 		(comentario.getUsuarioCreador() == this)
 	}
 
-	def cambiarEstado(Publicacion publicacion){
-		publicacion.cambiarEstado()
-	}
-
-	def modificarMateriaPublicacion(Publicacion publicacion, Materia materia){
-		publicacion.cambiarMateria(materia)
-	}
-
-	def modificarCatedraPublicacion(Publicacion publicacion, Catedra catedra){
-		publicacion.cambiarCatedra(catedra)
-	}
-
-	def modificarPromedioRequeridoParaComentar(Publicacion publicacion, Float promedio){
-		publicacion.modificarPromedioRequeridoParaComentar(promedio)
-	}
-
 	def calificar(def calificable, Calificacion calificacion){
 		def calificaciones = calificable.calificaciones
 		def calificacionesUsuario = calificaciones.findAll {calificacionInstance -> calificacionInstance.getUsuario() == this}
 		if (calificacionesUsuario.size() >= 1)
-			throw new nuevo_foro_fiuba.UsuarioYaCalificoException()
+			throw new UsuarioYaCalificoException()
 		else
 			calificable.agregarCalificacion(calificacion)
 	}
@@ -151,6 +135,10 @@ class Usuario {
 
 		def promedio = this.promedioCalificaciones
 		promedio += Puntaje.TipoPuntaje.getProporcion(calificacion.puntaje.tipo) * calificacion.puntaje.numero
+		if (promedio > 5)
+			promedio = 5
+		if (promedio < 0)
+			promedio = 0
 		this.setPromedioCalificaciones(promedio.toFloat())
 	}
 
@@ -162,30 +150,14 @@ class Usuario {
 		this.cursadas.collect {cursada -> cursada.catedra.materia}
 	}
 
-	def agregarMateriaRequeridaParaComentar(Publicacion publicacionInstance, Materia materiaInstance){
-		publicacionInstance.agregarMateriaRequeridaParaComentar(materiaInstance)
-	}
-
 	def votarOpcion(Publicacion publicacion,Opcion opcion, Voto voto){
 		if (publicacion.getUsuarioCreador() == this)
-			throw new nuevo_foro_fiuba.CreadorEncuestaNoPuedeVotarException()
+			throw new CreadorEncuestaNoPuedeVotarException()
 		if (publicacion.estaCerrada())
-			throw new nuevo_foro_fiuba.PublicacionCerradaException()
+			throw new PublicacionCerradaException()
 		if (this in publicacion.encuesta.obtenerUsuariosQueVotaron())
-			throw new nuevo_foro_fiuba.UsuarioYaVotoException()
+			throw new UsuarioYaVotoException()
 		opcion.agregarVoto(voto)
 	}
-
-	def eliminarPublicacion(Publicacion publicacion){
-		publicacion.eliminar()
-	}
-
-	def eliminarInformacionMensajePrivado(InformacionMensajeUsuario info){
-		info.eliminar()
-	}
-
-	def adjuntarArchivo (Publicacion publicacion, Archivo archivoAdjunto){
-		publicacion.agregarArchivo (archivoAdjunto)
-	}
-
+	
 }

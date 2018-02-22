@@ -10,7 +10,7 @@ class ComentarioController {
   def verComentario (long idComentario, long idUsuario){
     def comentarioInstance = comentarioService.getComentarioById(idComentario)
     def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
-    def esDueño = comentarioService.usuarioEsDueñoDelComentario(usuarioInstance, comentarioInstance)
+    def esDueño = usuarioService.usuarioEsDueñoDelComentario(usuarioInstance, comentarioInstance)
     def esSubComentario = comentarioService.esSubComentario(comentarioInstance)
     def comentarios = comentarioService.obtenerComentariosNoEliminados(comentarioInstance)
     [comentario: comentarioInstance, usuario:usuarioInstance, modificar:esDueño, subComentario:esSubComentario, comentarios:comentarios]

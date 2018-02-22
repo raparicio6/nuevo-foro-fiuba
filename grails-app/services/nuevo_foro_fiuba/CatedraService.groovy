@@ -5,15 +5,14 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class CatedraService {
 
-    def serviceMethod() {
+  def serviceMethod() {}
 
-    }
+  def getAllCatedras(){
+    Catedra.list()
+  }
 
-    def getAllCatedras(){
-      Catedra.list()
-    }
-
-    def getCatedraById(long idCatedra){
-      Catedra.get(idCatedra)
-    }
+  def getCatedraById(long idCatedra){
+    Catedra.get(idCatedra)
+  }
+  
 }

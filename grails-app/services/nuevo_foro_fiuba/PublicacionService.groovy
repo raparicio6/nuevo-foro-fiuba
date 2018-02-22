@@ -8,107 +8,103 @@ class PublicacionService {
 
   def serviceMethod() {}
 
-  final String PATH = "C:/Users/Mariano/nuevo_foro_fiuba/grails-app/files/"
+  //final String PATH = "C:/Users/Mariano/nuevo_foro_fiuba/grails-app/files/"
+  final String PATH = "/nuevo_foro_fiuba/grails-app/files/"
 
-  // Publicacion crearPublicacion(String texto, Usuario usuarioCreador, Float promedioRequeridoParaComentar = 0, Materia materiaRelacionada = null, Catedra catedraRelacionada = null, Set <Materia> materiasNecesariasParaComentar = [], Archivo archivoAdjunto = null, Encuesta encuesta = null){
-  //  Publicacion publicacion = new Publicacion (texto, usuarioCreador, promedioRequeridoParaComentar, materiaRelacionada, catedraRelacionada, materiasNecesariasParaComentar, archivoAdjunto, encuesta)
-  Publicacion crearPublicacion(Usuario usuarioCreador, Catedra catedraRelacionada, String texto, Materia materiaRelacionada, Materia idMateriaRequerida = null, Float promedioCalificacionesMinimoParaComentar = 0, String nombreEncuesta = null, String nombreOpciones = null){
-    Publicacion publicacion = new Publicacion (texto, usuarioCreador, materiaRelacionada, catedraRelacionada)  //AMPLIAR CONSTRUCTOR
+  Publicacion crearPublicacion(Usuario usuarioCreador, String texto, Catedra catedraRelacionada = null, Materia materiaRelacionada = null, Materia materiaRequerida = null, Float promedioCalificacionesMinimoParaComentar = 0, Encuesta encuesta = null, Archivo archivo = null){
+    Publicacion publicacion = new Publicacion (texto, usuarioCreador)
+    publicacion.modificarCatedra(catedraRelacionada)
+    publicacion.modificarMateria(materiaRelacionada)
+    if (materiaRequerida) // para que no agregue un null en la tabla muchos a muchos
+      publicacion.agregarMateriaRequeridaParaComentar(materiaRequerida)
+    publicacion.modificarPromedioRequeridoParaComentar(promedioCalificacionesMinimoParaComentar)
+    publicacion.agregarEncuesta(encuesta)
+    publicacion.agregarArchivo(archivo)
     publicacion.save(failOnError: true)
     publicacion
   }
 
   def obtenerPublicacionesNoEliminadas(){
-    Publicacion.list().findAll {publicacionInstance -> publicacionInstance.getEstado() != Publicacion.EstadoPublicacion.ELIMINADA}
+    this.getAllPublicaciones().findAll {publicacionInstance -> publicacionInstance.getEstado() != Publicacion.EstadoPublicacion.ELIMINADA}
   }
 
   def filtrarPublicacionesPorCatedra(ArrayList publicaciones, long idCatedra){
     publicaciones.findAll {publicacion -> if (publicacion.catedraRelacionada) {publicacion.catedraRelacionada.id == idCatedra}}
   }
 
-  Boolean usuarioEsDueñoDeLaPublicacion(Usuario usuario, Publicacion publicacion){
-    usuario.esDueñoDeLaPublicacion(publicacion)
-  }
-
   def obtenerComentariosNoEliminados(Publicacion publicacion){
     publicacion.obtenerComentariosNoEliminados()
   }
 
-  Publicacion formarPublicacion(long idUsuario, long idCatedra, String texto, long idMateriaRequerida, Float promedioCalificacionesMinimoParaComentar = 0, String nombreEncuesta = null, String nombreOpciones = null, MultipartFile file = null){
-    def usuario = Usuario.get(idUsuario)
+  Publicacion formarPublicacion(long idUsuario, String texto, long idCatedra = 0, long idMateriaRequerida = 0, String nombreEncuesta = null, String nombreOpciones = null, Float promedioCalificacionesMinimoParaComentar = 0, MultipartFile file = null){
+    def usuario = this.getUsuarioById(idUsuario)
+
     def catedra = null
     def materia = null
     if (idCatedra){
-      catedra = Catedra.get(idCatedra)
+      catedra = this.getCatedraById(idCatedra)
       materia = catedra.materia
     }
-    Publicacion publicacion = this.crearPublicacion(usuario, catedra, texto, materia)
-    def materiaRequerida = null
+
     def archivoAdjunto = null
     if (file && !file.empty){
       archivoAdjunto = new Archivo(file.originalFilename, this.PATH + file.originalFilename)
       file.transferTo(new File(archivoAdjunto.path))
       archivoAdjunto.save(failOnError:true)
     }
-    adjuntarArchivo (usuario, publicacion, archivoAdjunto )
-    if (idMateriaRequerida){
-      materiaRequerida = Materia.get(idMateriaRequerida)
-      usuario.agregarMateriaRequeridaParaComentar(publicacion, materiaRequerida)
-    }
+
+    def materiaRequerida = null
+    if (idMateriaRequerida)
+      materiaRequerida = this.getMateriaById(idMateriaRequerida)
+
     def encuesta = null
     if (nombreEncuesta && nombreOpciones) {
       def opcionesSeparadas = nombreOpciones.tokenize(',')
       def listaDeOpciones = opcionesSeparadas.collect { opcion -> new Opcion (opcion).save(failOnError:true) }
       encuesta = new Encuesta(nombreEncuesta, listaDeOpciones.toSet())
-      publicacion.agregarEncuesta(encuesta)
       encuesta.save(failOnError:true)
     }
+
+    Publicacion publicacion = this.crearPublicacion(usuario, texto, catedra, materia, materiaRequerida, promedioCalificacionesMinimoParaComentar, encuesta, archivoAdjunto)
     usuario.publicar(publicacion)
-    usuario.modificarPromedioRequeridoParaComentar(publicacion, promedioCalificacionesMinimoParaComentar)
     publicacion
   }
 
-  def cambiarEstado (long idUsuario, long idPublicacion){
-    def usuario = Usuario.get(idUsuario)
+  def cambiarEstado (long idPublicacion){
     def publicacion = getPublicacionById(idPublicacion)
-    usuario.cambiarEstado(publicacion)
+    publicacion.cambiarEstado()
   }
 
-  def modificarTextoPublicacion (long idUsuario,long idPublicacion, String nuevoTexto){
-    def usuario = Usuario.get(idUsuario)
+  def modificarTextoPublicacion (long idPublicacion, String nuevoTexto){
     def publicacion = getPublicacionById(idPublicacion)
     publicacion.modificarTexto(nuevoTexto)
   }
 
-  def modificarMateriaPublicacion (long idUsuario, long idPublicacion, long idMateria){
-    def usuario = Usuario.get(idUsuario)
+  def modificarMateriaPublicacion (long idPublicacion, long idMateria){
     def publicacion = getPublicacionById(idPublicacion)
-    def materia = Materia.get(idMateria)
-    usuario.modificarMateriaPublicacion(publicacion, materia)
+    def materia = this.getMateriaById(idMateria)
+    publicacion.modificarMateria(materia)
   }
 
-  def modificarCatedraPublicacion (long idUsuario, long idPublicacion, long idCatedra){
-    def usuario = Usuario.get(idUsuario)
+  def modificarCatedraPublicacion (long idPublicacion, long idCatedra){
     def publicacion = getPublicacionById(idPublicacion)
-    def catedra = Catedra.get(idCatedra)
-    usuario.modificarCatedraPublicacion(publicacion, catedra)
-    modificarMateriaPublicacion(idUsuario, idPublicacion, catedra.materia.id)
+    def catedra = this.getCatedraById(idCatedra)
+    publicacion.modificarCatedra(catedra)
+    publicacion.modificarMateria(catedra.materia)
   }
 
-  def modificarPromedioRequeridoParaComentar(long idUsuario, long idPublicacion, Float promedio){
-    def usuario = Usuario.get(idUsuario)
+  def modificarPromedioRequeridoParaComentar(long idPublicacion, Float promedio){
     def publicacion = getPublicacionById(idPublicacion)
-    usuario.modificarPromedioRequeridoParaComentar(publicacion, promedio)
+    publicacion.modificarPromedioRequeridoParaComentar(promedio)
   }
 
-  def eliminarPublicacion (long idUsuario, long idPublicacion){
-    def usuario = Usuario.get(idUsuario)
+  def eliminarPublicacion (long idPublicacion){
     def publicacion = getPublicacionById(idPublicacion)
-    usuario.eliminarPublicacion(publicacion)
+    publicacion.eliminar()
   }
 
   def calificarPublicacion(long idUsuario, long idPublicacion, Puntaje.TipoPuntaje tipo){
-     def usuario = Usuario.get(idUsuario)
+     def usuario = this.getUsuarioById(idUsuario)
      def publicacion = getPublicacionById(idPublicacion)
      def promedioCalificaciones = usuario.getPromedioCalificaciones()
      Puntaje puntaje = new Puntaje (tipo, promedioCalificaciones)
@@ -119,7 +115,7 @@ class PublicacionService {
    }
 
   Comentario comentarPublicacion (long idUsuario, String textoComentario, long idPublicacion){
-    def usuario = Usuario.get(idUsuario)
+    def usuario = this.getUsuarioById(idUsuario)
     def publicacionAComentar = getPublicacionById(idPublicacion)
     Comentario comentario = new Comentario(textoComentario, usuario, publicacionAComentar, null)
     usuario.comentarPublicacion(comentario, publicacionAComentar)
@@ -127,28 +123,30 @@ class PublicacionService {
     comentario
   }
 
-  def agregarMateriaRequeridaParaComentar(long idPublicacion, long idUsuario, long idMateria){
+  def agregarMateriaRequeridaParaComentar(long idPublicacion, long idMateria){
     def publicacion = getPublicacionById(idPublicacion)
-    def usuario = Usuario.get(idUsuario)
-    def materia = Materia.get(idMateria)
-    usuario.agregarMateriaRequeridaParaComentar(publicacion, materia)
-  }
-
-  def votarOpcionEncuesta(long idPublicacion, long idUsuario, long idOpcion){
-    Publicacion publicacion = getPublicacionById(idPublicacion)
-    Usuario usuario = Usuario.get(idUsuario)
-    Opcion opcion = Opcion.get(idOpcion)
-    Voto voto = new Voto (usuario)
-    usuario.votarOpcion(publicacion, opcion, voto)
-    voto.save(failOnError:true)
-  }
-
-  def adjuntarArchivo (Usuario usuario, Publicacion publicacion, Archivo archivoAdjunto){
-    usuario.adjuntarArchivo(publicacion, archivoAdjunto)
+    def materia = this.getMateriaById(idMateria)
+    publicacion.agregarMateriaRequeridaParaComentar(materia)
   }
 
   def getPublicacionById(long idPublicacion){
     Publicacion.get(idPublicacion)
+  }
+
+  def getAllPublicaciones(){
+    Publicacion.list()
+  }
+
+  def getUsuarioById(long idUsuario){
+    Usuario.get(idUsuario)
+  }
+
+  def getMateriaById(long idMateria){
+    Materia.get(idMateria)
+  }
+
+  def getCatedraById(long idCatedra){
+    Catedra.get(idCatedra)
   }
 
 }

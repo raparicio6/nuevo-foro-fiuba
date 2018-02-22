@@ -33,7 +33,7 @@ class UsuarioController {
 
   def verMateriasCursadas (long idUsuario){
     def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
-    def cursadas = usuarioInstance.getCursadas()
+    def cursadas = usuarioService.getCursadas(usuarioInstance)
     [usuario:usuarioInstance, cursadas:cursadas]
   }
 

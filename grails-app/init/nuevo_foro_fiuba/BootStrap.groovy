@@ -58,8 +58,9 @@ class BootStrap {
 
 
       // PUBLICACIONES Y COMENTARIOS
-      Publicacion publicacion = publicacionService.formarPublicacion(usuario.id, catedra.id, "texto publicacion", materia.id, 0, "Qué opinan de la cátedra?", "Buena,Mala,Me es indiferente")
-      Publicacion publicacion2 = publicacionService.formarPublicacion(usuario2.id, catedra2.id, "texto publicacion aaaa", materia2.id, 0)
+      Publicacion publicacion = publicacionService.formarPublicacion(usuario.id, "texto publicacion", catedra.id, , materia.id, "Qué opinan de la cátedra?", "Buena,Mala,Me es indiferente")
+      Publicacion publicacion2 = publicacionService.formarPublicacion(usuario2.id, "texto publicacion aaaa", catedra2.id, , materia2.id)
+      Publicacion publicacion3 = publicacionService.formarPublicacion(usuario3.id, "Cuando arrancan las clases?")
       Comentario comentario = publicacionService.comentarPublicacion(usuario2.id, "Soy el usuario2", publicacion.id)
       Comentario comentario2 = comentarioService.comentarComentario(usuario2.id, "Soy el usuario2 otra vez", comentario.id)
 

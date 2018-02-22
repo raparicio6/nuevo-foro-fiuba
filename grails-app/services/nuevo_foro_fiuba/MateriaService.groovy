@@ -5,16 +5,14 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class MateriaService {
 
-    def serviceMethod() {
+  def serviceMethod() {}
 
-    }
+  def getMateriaById(long idMateria){
+    Materia.get(idMateria)
+  }
 
-    def getMateriaById(long idMateria){
-      Materia.get(idMateria)
-    }
-
-    def getAllMaterias(){
-      Materia.list()
-    }
-
+  def getAllMaterias(){
+    Materia.list()
+  }
+  
 }
