@@ -39,10 +39,6 @@ class PublicacionController {
     redirect(action: "listaPublicaciones", params:[idUsuario:idUsuario])
   }
 
-  def dejarDeAgregarMaterias (long idUsuario) {
-    redirect(action: "listaPublicaciones", params:[idUsuario: idUsuario])
-  }
-
   def cambiarEstado (long idPublicacion, long idUsuario){
     publicacionService.cambiarEstado(idPublicacion)
     redirect(action: "verPublicacion", params: [idUsuario:idUsuario, idPublicacion:idPublicacion])

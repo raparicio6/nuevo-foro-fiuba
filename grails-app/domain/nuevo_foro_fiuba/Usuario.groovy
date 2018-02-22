@@ -160,7 +160,7 @@ class Usuario {
 		opcion.agregarVoto(voto)
 	}
 
-	def cursoEstasMaterias(def materiasFiltro){
+	def cursaEstasMaterias(def materiasFiltro){
 		return 	!(false in materiasFiltro.collect {materia -> materia in this.obtenerMateriasCursadas()})
 	}
 

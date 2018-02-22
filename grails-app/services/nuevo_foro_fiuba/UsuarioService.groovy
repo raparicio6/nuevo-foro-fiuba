@@ -43,7 +43,7 @@ class UsuarioService {
 
   def filtrarPorMateria(ArrayList usuarios, def idsMaterias){
     def materiasFiltro = idsMaterias.collect {idMateria -> getMateriaById(idMateria.toLong())}
-    usuarios.findAll { usuario -> usuario.cursoEstasMaterias(materiasFiltro) }
+    usuarios.findAll { usuario -> usuario.cursaEstasMaterias(materiasFiltro) }
   }
 
   Boolean usuarioEsDueñoDeLaPublicacion(Usuario usuario, Publicacion publicacion){

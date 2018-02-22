@@ -33,7 +33,7 @@
               <h1>Agregar encuesta</h1>
               <g:textArea name="nombreEncuesta" style="height:50px" class="form-control" placeHolder="Ingrese una descripcion de la encuesta" />
               <g:textArea name="nombreOpciones" style="height:50px" class="form-control" placeHolder="Ingrese las opciones separadas por una coma ','" />
-              <h1>Materia requerida para comentar</h1>
+              <h1>Materias requeridas para comentar</h1>
               <g:select name="idsMateriasRequeridas" from="${materias}" optionValue="${{it.nombre}}" optionKey="id" multiple="true" />
               <h1>Promedio requerido para comentar</h1>
               <g:field type="number" step="0.01" name="promedioCalificacionesMinimoParaComentar" value="0" min="0" max="5"/>
