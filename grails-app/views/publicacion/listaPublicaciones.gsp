@@ -45,11 +45,9 @@
 					<div class="col-md-12">
 						<g:select name="idCatedra" from="${catedras}" optionValue="${{it.materia.nombre + ", " + "catedra " + it.profesor.nombre}}" optionKey="id" noSelection="${['null':'Elegir materia...']}"/>
 							<!-- <g:submitButton name="Buscar"/> -->
-							<g:form action="Buscar">
 								<button type="submit" title="Buscar" style="background-color: Transparent;border: none;font-size: 20px;">
 									<span class="glyphicon glyphicon-search" ></span>
 								</button>
-							</g:form>
 						</div>
 					</div>
 				</g:form>
