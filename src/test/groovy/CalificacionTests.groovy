@@ -10,7 +10,7 @@ import org.junit.*
 import nuevo_foro_fiuba.*
 
 @TestFor(Calificacion)
-class CalificacionTest {
+class CalificacionTests {
 
     Calificacion calificacion
     Usuario usuario

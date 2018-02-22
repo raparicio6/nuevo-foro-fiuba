@@ -66,7 +66,7 @@ class UsuarioServiceTests {
         assert usuarios.remove(0) == usuario2
     }
 
-    /* @Test
+    /*@Test
      void 'test busco usuarios con un filtro de materia' () {
          mockDomain(Usuario)
          mockDomain(Cursada)

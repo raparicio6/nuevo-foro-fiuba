@@ -40,7 +40,7 @@ class PublicacionServiceTests {
         Usuario usuario = new Usuario('Homero', 'Simpson', 'HSimpson', 4)
         usuario.save()
 
-        Publicacion publicacion = publicacionService.crearPublicacion(usuario, catedra, 'texto',  materia)
+        Publicacion publicacion = publicacionService.crearPublicacion(usuario, 'texto', catedra,  materia)
         assert publicacionService.getPublicacionById(publicacion.id) == publicacion
     }
 
@@ -60,7 +60,7 @@ class PublicacionServiceTests {
         catedra.save()
         Usuario usuario = new Usuario('Homero', 'Simpson', 'HSimpson', 4)
         usuario.save()
-        Publicacion publicacion = publicacionService.crearPublicacion(usuario, catedra, 'texto',  materia)
+        Publicacion publicacion = publicacionService.crearPublicacion(usuario,'texto')
         assert publicacionService.usuarioEsDueñoDeLaPublicacion(usuario, publicacion)
     }
 
@@ -82,9 +82,9 @@ class PublicacionServiceTests {
         Usuario usuario = new Usuario('Homero', 'Simpson', 'HSimpson', 4)
         usuario.save()
 
-        Publicacion publicacion = publicacionService.crearPublicacion(usuario, catedra, 'texto',  materia)
+        Publicacion publicacion = publicacionService.crearPublicacion(usuario, 'texto', catedra,  materia)
         assert publicacion.estado == Publicacion.EstadoPublicacion.ABIERTA
-        publicacionService.cambiarEstado(usuario.id, publicacion.id)
+        publicacionService.cambiarEstado(publicacion.id)
         assert publicacion.estado == Publicacion.EstadoPublicacion.CERRADA
     }
 
@@ -106,9 +106,9 @@ class PublicacionServiceTests {
         Usuario usuario = new Usuario('Homero', 'Simpson', 'HSimpson', 4)
         usuario.save()
 
-        Publicacion publicacion = publicacionService.crearPublicacion(usuario, catedra, 'texto',  materia)
+        Publicacion publicacion = publicacionService.crearPublicacion(usuario, 'texto', catedra,  materia)
         assert publicacion.estado == Publicacion.EstadoPublicacion.ABIERTA
-        publicacionService.eliminarPublicacion(usuario.id, publicacion.id)
+        publicacionService.eliminarPublicacion( publicacion.id)
         assert publicacion.estado == Publicacion.EstadoPublicacion.ELIMINADA
     }
 
@@ -131,7 +131,7 @@ class PublicacionServiceTests {
         Usuario usuario = new Usuario('Homero', 'Simpson', 'HSimpson', 4)
         usuario.save()
 
-        Publicacion publicacion = publicacionService.crearPublicacion(usuario, catedra, 'texto',  materia)
+        Publicacion publicacion = publicacionService.crearPublicacion(usuario, 'texto', catedra,  materia)
         assert publicacionService.obtenerComentariosNoEliminados(publicacion).size() == 0
         Comentario comentario = publicacionService.comentarPublicacion(usuario.id, 'texto', publicacion.id)
         List<Comentario> comentarios = publicacionService.obtenerComentariosNoEliminados(publicacion)
@@ -157,8 +157,8 @@ class PublicacionServiceTests {
         Usuario usuario = new Usuario('Homero', 'Simpson', 'HSimpson', 4)
         usuario.save()
 
-        Publicacion publicacion = publicacionService.crearPublicacion(usuario, catedra, 'texto',  materia)
-        publicacionService.agregarMateriaRequeridaParaComentar(publicacion.id, usuario.id, materia.id)
+        Publicacion publicacion = publicacionService.crearPublicacion(usuario,'texto', catedra,   materia)
+        publicacionService.agregarMateriaRequeridaParaComentar(publicacion.id, materia.id)
         assert publicacion.materiasNecesariasParaComentar.contains(materia)
     }
 
@@ -180,9 +180,9 @@ class PublicacionServiceTests {
         Usuario usuario = new Usuario('Homero', 'Simpson', 'HSimpson', 4)
         usuario.save()
 
-        Publicacion publicacion = publicacionService.crearPublicacion(usuario, catedra, 'texto',  materia)
+        Publicacion publicacion = publicacionService.crearPublicacion(usuario, 'texto', catedra,  materia)
         assert publicacion.texto == 'texto'
-        publicacionService.modificarTextoPublicacion(usuario.id, publicacion.id, 'otro texto')
+        publicacionService.modificarTextoPublicacion(publicacion.id, 'otro texto')
         assert publicacion.texto == 'otro texto'
     }
 
@@ -206,9 +206,9 @@ class PublicacionServiceTests {
         Usuario usuario = new Usuario('Homero', 'Simpson', 'HSimpson', 4)
         usuario.save()
 
-        Publicacion publicacion = publicacionService.crearPublicacion(usuario, catedra, 'texto',  materia)
+        Publicacion publicacion = publicacionService.crearPublicacion(usuario, 'texto', catedra,   materia)
         assert publicacion.catedraRelacionada == catedra
-        publicacionService.modificarCatedraPublicacion(usuario.id, publicacion.id, catedra2.id)
+        publicacionService.modificarCatedraPublicacion(publicacion.id, catedra2.id)
         assert publicacion.catedraRelacionada == catedra2
     }
 
@@ -232,9 +232,9 @@ class PublicacionServiceTests {
         Usuario usuario = new Usuario('Homero', 'Simpson', 'HSimpson', 4)
         usuario.save()
 
-        Publicacion publicacion = publicacionService.crearPublicacion(usuario, catedra, 'texto',  materia)
+        Publicacion publicacion = publicacionService.crearPublicacion(usuario, 'texto', catedra,  materia)
         assert publicacion.promedioRequeridoParaComentar == 0
-        publicacionService.modificarPromedioRequeridoParaComentar(usuario.id, publicacion.id, 4)
+        publicacionService.modificarPromedioRequeridoParaComentar(publicacion.id, 4)
         assert publicacion.promedioRequeridoParaComentar == 4
     }
 
@@ -261,12 +261,12 @@ class PublicacionServiceTests {
         Archivo archivo = new Archivo('nombre', 'path')
         archivo.save()
 
-        Publicacion publicacion = new Publicacion('texto', usuario,  materia, catedra)
+        Publicacion publicacion = new Publicacion('texto', usuario)
         publicacion.save()
         assert publicacion.archivoAdjunto == null
         publicacionService.adjuntarArchivo(usuario, publicacion, archivo)
         assert publicacion.archivoAdjunto == archivo
-    }
-    */
+    }*/
+
 
 }
