@@ -28,7 +28,11 @@
       </div>
 
       <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="message" role="status">${flash.message}</div>
+          </div>
+        </div>
       </g:if>
 
       <div class="row">
@@ -179,26 +183,30 @@
 
       <g:if test="${publicacion.archivoAdjunto}">
         <div class="row">
-          <div class="col-md-12">
-            <div class="col-md-2">
-              <h3>
-                  <span class="label label-default">Archivo adjunto:</span>
-              </h3>
-              <g:link action="descargarArchivoAdjunto" params="[idArchivo:"${publicacion.archivoAdjunto.id}"]"> Descargar ${publicacion.archivoAdjunto.nombre} </g:link>
-            </div>
+          <div class="col-md-11 col-md-offset-1" >
+            <h3>
+              <span class="label label-default">Archivo adjunto:</span>
+            </h3>
           </div>
         </div>
+        <div class="row" style="padding-top:5px">
+          <div class="col-md-11 col-md-offset-1">
+              <g:link action="descargarArchivoAdjunto" params="[idArchivo:"${publicacion.archivoAdjunto.id}"]"> Descargar ${publicacion.archivoAdjunto.nombre} </g:link>
+          </div>
+        </div>
+        <br/>
       </g:if>
 
       <g:if test="${publicacion.encuesta}">
         <div class="row">
-          <div class="col-md-12">
-            <div class="col-md-2">
-              <h3>
-                  <span class="label label-default">Encuesta: ${publicacion.encuesta.nombre}</span>
-              </h3>
-            </div>
-            <div class="col-md-6">
+          <div class="col-md-11 col-md-offset-1">
+            <h3>
+              <span class="label label-default">Encuesta: ${publicacion.encuesta.nombre}</span>
+            </h3>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
               <table class="table table-bordered">
                 <thead>
                   <tr>
@@ -214,8 +222,14 @@
                       <td>${opcion.votos.size()}</td>
                       <td>
                         <g:form action="votarOpcionEncuesta" params="[idUsuario:"${usuario.id}", idOpcion:"${opcion.id}", idPublicacion:"${publicacion.id}"]" >
+    											<button type="submit" title="Votar" style="background-color: Transparent;border: none;font-size: 20px;">
+    												<span class="glyphicon glyphicon-thumbs-up" ></span>
+    											</button>
+    										</g:form>
+
+                        <!-- <g:form action="votarOpcionEncuesta" params="[idUsuario:"${usuario.id}", idOpcion:"${opcion.id}", idPublicacion:"${publicacion.id}"]" >
                           <g:submitButton name="Votar" value="Votar"/>
-                        </g:form>
+                        </g:form> -->
                       </td>
                     </tr>
                   </g:each>
@@ -223,17 +237,20 @@
               </table>
             </div>
           </div>
-        </div>
+
       </g:if>
 
       <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-2">
+        <div class="col-md-12 col-md-offset-1">
+
             <h3>
                 <span class="label label-default">Materias necesarias para comentar:</span>
             </h3>
           </div>
-          <div class="col-md-6">
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
             <table class="table table-bordered">
               <thead>
                 <tr>
@@ -250,16 +267,18 @@
             </table>
           </div>
         </div>
-      </div>
+
 
       <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-2">
+        <div class="col-md-11 col-md-offset-1">
+
             <h3>
                 <span class="label label-default">Calificaciones:</span>
             </h3>
           </div>
-          <div class="col-md-6">
+        </div>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
             <table class="table table-bordered">
               <thead>
                 <tr>
@@ -280,59 +299,60 @@
             </table>
           </div>
         </div>
-      </div>
 
       <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-2">
-            <h3>
-                <span class="label label-default">Comentarios:</span>
-            </h3>
-          </div>
-          <div class="col-md-6">
-            <table class="table table-bordered">
-              <thead>
+        <div class="col-md-11 col-md-offset-1">
+          <h3>
+            <span class="label label-default">Comentarios:</span>
+          </h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Nombre usuario</th>
+                <th>Mensaje</th>
+                <th>Fecha y hora de creaci&oacute;n</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <g:each in="${comentarios}" var="comentario">
                 <tr>
-                  <th>Nombre usuario</th>
-                  <th>Mensaje</th>
-                  <th>Fecha y hora de creaci&oacute;n</th>
-                  <th>Acciones</th>
+                  <td>${comentario.usuarioCreador.nombre}</td>
+                  <td>${comentario.texto}</td>
+                  <td>${comentario.fechaHoraCreacion}</td>
+                  <td>
+                    <g:form controller="comentario" action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.id}"]">
+  										<button type="submit" title="Ver" style="background-color: Transparent;border: none;font-size: 20px;">
+  											<span class="glyphicon glyphicon-zoom-in" ></span>
+  										</button>
+  									</g:form>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                <g:each in="${comentarios}" var="comentario">
-                  <tr>
-                    <td>${comentario.usuarioCreador.nombre}</td>
-                    <td>${comentario.texto}</td>
-                    <td>${comentario.fechaHoraCreacion}</td>
-                    <td>
-                      <g:form controller="comentario" action="verComentario" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.id}"]">
-  											<button type="submit" title="Ver" style="background-color: Transparent;border: none;font-size: 20px;">
-  												<span class="glyphicon glyphicon-zoom-in" ></span>
-  											</button>
-  										</g:form>
-                    </td>
-                  </tr>
-                </g:each>
-              </tbody>
-            </table>
-          </div>
+              </g:each>
+            </tbody>
+          </table>
         </div>
       </div>
 
       <br/>
 
       <div class="row">
-        <div class="col-md-5 col-md-offset-2">
+        <div class="col-md-5 col-md-offset-3">
           <g:form action="comentar" params="[idUsuario:"${usuario.id}", idPublicacion:"${publicacion.id}"]">
             <g:textArea name="textoComentario" style="height:50px" class="form-control" placeHolder="Ingrese un comentario" />
             <g:submitButton name="Comentar" class="btn btn-danger pull-right" style="margin-top:5px;" />
           </g:form>
         </div>
       </div>
-      <!-- NAME TIENE QUE SER IGUAL AL NOMBRE DEL PARAMETRO DEL METODO -->
+
+      <br/>
+      <br/>
+      <br/>
 
     </div>
   </body>
-
   </html>

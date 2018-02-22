@@ -66,6 +66,10 @@ class UsuarioService {
     usuario.getCursadas()
   }
 
+  def getPublicacionById(long idPublicacion){
+    Publicacion.get(idPublicacion)
+  }
+
   def getUsuarioById(long idUsuario){
     Usuario.get(idUsuario)
   }

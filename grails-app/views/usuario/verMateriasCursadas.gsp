@@ -46,7 +46,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<g:each in="${cursadas}" var="cursada">
+							<g:each in="${cursadas.sort { it.catedra.materia.nombre  }}" var="cursada">
 								<tr>
 									<td class="text-center">${cursada.catedra.profesor.nombre}</td>
 									<td class="text-center">${cursada.catedra.materia.nombre}</td>

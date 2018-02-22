@@ -38,7 +38,11 @@
       <br/>
 
       <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="message" role="status">${flash.message}</div>
+          </div>
+        </div>
       </g:if>
 
       <div class="row">
@@ -125,14 +129,18 @@
         </div>
       </g:form>
 
+      <br/>
+      <br/>
+
       <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-2">
+        <div class="col-md-12 col-md-offset-1">
             <h3>
                 <span class="label label-default">Calificaciones:</span>
             </h3>
           </div>
-          <div class="col-md-6">
+      </div>
+      <div class="row">
+          <div class="col-md-8 col-md-offset-2">
             <table class="table table-bordered">
               <thead>
                 <tr>
@@ -153,17 +161,20 @@
             </table>
           </div>
         </div>
-      </div>
+
 
     <g:if test="${!subComentario}">
+      <br/>
       <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-2">
+        <div class="col-md-11 col-md-offset-1">
+
             <h3>
                 <span class="label label-default">Comentarios:</span>
             </h3>
           </div>
-          <div class="col-md-6">
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
             <table class="table table-bordered">
               <thead>
                 <tr>
@@ -191,13 +202,12 @@
               </tbody>
             </table>
           </div>
-        </div>
       </div>
 
       <br/>
 
       <div class="row">
-        <div class="col-md-5 col-md-offset-2">
+        <div class="col-md-5 col-md-offset-3">
           <g:form action="comentar" params="[idUsuario:"${usuario.id}", idComentario:"${comentario.id}"]">
             <g:textArea style="height:50px" class="form-control" name="textoComentario" placeholder="Ingrese un comentario" />
             <g:submitButton name="Comentar" value="Comentar" class="btn btn-danger pull-right" style="margin-top:5px;" />
