@@ -9,7 +9,7 @@ class PublicacionService {
   def serviceMethod() {}
 
   //final String PATH = "C:/Users/Mariano/nuevo_foro_fiuba/grails-app/files/"
-  final String PATH = "/nuevo_foro_fiuba/grails-app/files/"
+  final String PATH = "/nuevo-foro-fiuba/grails-app/files/"
 
   Publicacion crearPublicacion(Usuario usuarioCreador, String texto, Catedra catedraRelacionada = null, Materia materiaRelacionada = null, Materia materiaRequerida = null, Float promedioCalificacionesMinimoParaComentar = 0, Encuesta encuesta = null, Archivo archivo = null){
     Publicacion publicacion = new Publicacion (texto, usuarioCreador)
@@ -48,7 +48,7 @@ class PublicacionService {
 
     def archivoAdjunto = null
     if (file && !file.empty){
-      archivoAdjunto = new Archivo(file.originalFilename, this.PATH + file.originalFilename)
+      archivoAdjunto = new Archivo(file.originalFilename, this.PATH)
       file.transferTo(new File(archivoAdjunto.path))
       archivoAdjunto.save(failOnError:true)
     }

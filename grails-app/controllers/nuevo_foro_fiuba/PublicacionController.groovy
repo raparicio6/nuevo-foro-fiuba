@@ -30,7 +30,7 @@ class PublicacionController {
     [publicacion: publicacionInstance, materias: materiaService.getAllMaterias(), catedras: catedraService.getAllCatedras(), usuario: usuarioInstance, modificar:esDueño, comentarios:comentarios]
   }
 
-  // DEMAS????
+  // DE MAS????
   def agregarMateria (long idUsuario, long idPublicacion) {
     def publicacionInstance = publicacionService.getPublicacionById(idPublicacion)
     def usuarioInstance = usuarioService.getUsuarioById(idUsuario)
@@ -41,7 +41,7 @@ class PublicacionController {
     final def file = request.getFile('archivo')
     if (! promedioCalificacionesMinimoParaComentar)
       promedioCalificacionesMinimoParaComentar = 0
-    def publicacion = publicacionService.formarPublicacion(idUsuario, texto, idCatedra, idMateria, promedioCalificacionesMinimoParaComentar, nombreEncuesta, nombreOpciones, file)
+    def publicacion = publicacionService.formarPublicacion(idUsuario, texto, idCatedra, idMateria, nombreEncuesta, nombreOpciones, promedioCalificacionesMinimoParaComentar, file)                                      
     def idPublicacion = publicacion.getId()
     redirect(action: "agregarMateria", params:[idUsuario:idUsuario, idPublicacion: idPublicacion])
   }

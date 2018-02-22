@@ -9,8 +9,5 @@
 *Intentar reducir código de las vistas creando etiquetas personalizadas? (Rodrigo)
 SI ALCANZA EL TIEMPO
 
-*Hacer todos los sort que sean necesarios en las pantallas? (no por id, usar algun atributo de la clase)
-SI ALCANZA EL TIEMPO
-
 
 EL DÍA JUEVES ES NECESARIO DEDICARLE TIEMPO A TESTEAR TODA LA APLICACION (ABSOLUTAMENTE TODOS LOS BOTONES Y FUNCIONALIDADES), PARA ARREGLAR CUALQUIER INCONVENIENTE

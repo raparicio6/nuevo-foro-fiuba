@@ -91,7 +91,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<g:each in="${usuarioInstanceList}" var="usuarioInstance">
+							<g:each in="${usuarioInstanceList.sort { it.nombreUsuario  }}" var="usuarioInstance">
 								<tr>
 									<td class="text-center">${usuarioInstance.nombre}</td>
 									<td class="text-center">${usuarioInstance.promedioCalificaciones.round(2)}</td>

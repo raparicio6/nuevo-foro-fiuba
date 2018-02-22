@@ -8,7 +8,8 @@ class MensajePrivadoService {
 
   def serviceMethod() {}
 
-  final String PATH = "C:/Users/Mariano/nuevo_foro_fiuba/grails-app/files/"
+  //final String PATH = "C:/Users/Mariano/nuevo_foro_fiuba/grails-app/files/"
+  final String PATH = "/nuevo-foro-fiuba/grails-app/files/"
 
   MensajePrivado crearMensaje (String texto, MensajePrivado mensajeAlCualSeResponde, Archivo archivo){
     MensajePrivado mensaje = new MensajePrivado(texto, mensajeAlCualSeResponde, archivo)
@@ -24,7 +25,7 @@ class MensajePrivadoService {
       mensajeAlCualResponde = getMensajePrivadoById(idMensajeAlCualResponde)
     def archivo = null
     if (file && !file.empty){
-       archivo = new Archivo(file.originalFilename, this.PATH + file.originalFilename)
+       archivoAdjunto = new Archivo(file.originalFilename, this.PATH)
        file.transferTo(new File(archivo.path))
        archivo.save(failOnError:true)
     }
