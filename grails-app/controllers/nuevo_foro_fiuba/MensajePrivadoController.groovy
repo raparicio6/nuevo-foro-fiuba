@@ -38,7 +38,7 @@ class MensajePrivadoController {
   }
 
   def eliminarMensaje (long idUsuario, long idInformacionMensajeUsuario){
-    informacionMensajeUsuarioService.eliminarMensaje(idUsuario, idInformacionMensajeUsuario)
+    informacionMensajeUsuarioService.eliminarMensaje(idInformacionMensajeUsuario)
     redirect (action:"index", params:[idUsuario:idUsuario])
   }
 
