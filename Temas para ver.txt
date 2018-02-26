@@ -1,13 +1,3 @@
 ﻿Temas para ver (por orden de prioridad):
 
-*Agregar en la búsqueda de usuarios que se pueda filtrar por más de una materia si se desea
-
-*Tests de servicios (Germán)
-
-*Darle estilo a las pantallas que les falta (Rodrigo)
-
-*Intentar reducir código de las vistas creando etiquetas personalizadas? (Rodrigo)
-SI ALCANZA EL TIEMPO
-
-
-EL DÍA JUEVES ES NECESARIO DEDICARLE TIEMPO A TESTEAR TODA LA APLICACION (ABSOLUTAMENTE TODOS LOS BOTONES Y FUNCIONALIDADES), PARA ARREGLAR CUALQUIER INCONVENIENTE
+*Intentar reducir código de las vistas creando etiquetas personalizadas (Rodrigo)
